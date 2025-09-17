@@ -2,7 +2,7 @@
 &lt;p>A &lt;code>bigquery-analyze-contribution&lt;/code> tool performs contribution analysis in BigQuery by creating a temporary &lt;code>CONTRIBUTION_ANALYSIS&lt;/code> model and then querying it with &lt;code>ML.GET_INSIGHTS&lt;/code> to find top contributors for a given metric.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-analyze-contribution&lt;/code> takes the following parameters:&lt;/p>
 &lt;ul>
@@ -32,7 +32,7 @@ retrieved, and the final text answer.&lt;/p></description></item><item><title>bi
 &lt;p>A &lt;code>bigquery-execute-sql&lt;/code> tool executes a SQL statement against BigQuery.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-execute-sql&lt;/code> takes a required &lt;code>sql&lt;/code> input parameter and runs the SQL
 statement against the configured &lt;code>source&lt;/code>. It also supports an optional &lt;code>dry_run&lt;/code>
@@ -77,7 +77,7 @@ parameter to validate a query without executing it.&lt;/p>
 &lt;p>A &lt;code>bigquery-forecast&lt;/code> tool forecasts time series data in BigQuery.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-forecast&lt;/code> constructs and executes a &lt;code>SELECT * FROM AI.FORECAST(...)&lt;/code> query based on the provided parameters:&lt;/p>
 &lt;ul>
@@ -98,7 +98,7 @@ It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>bigquery-get-dataset-info&lt;/code> tool retrieves metadata for a BigQuery dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-get-dataset-info&lt;/code> takes a &lt;code>dataset&lt;/code> parameter to specify the dataset
 on the given source. It also optionally accepts a &lt;code>project&lt;/code> parameter to
@@ -144,7 +144,7 @@ the tool defaults to using the project defined in the source configuration.&lt;/
 &lt;p>A &lt;code>bigquery-get-table-info&lt;/code> tool retrieves metadata for a BigQuery table.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-get-table-info&lt;/code> takes &lt;code>dataset&lt;/code> and &lt;code>table&lt;/code> parameters to specify
 the target table. It also optionally accepts a &lt;code>project&lt;/code> parameter to define
@@ -190,7 +190,7 @@ tool defaults to using the project defined in the source configuration.&lt;/p>
 &lt;p>A &lt;code>bigquery-list-dataset-ids&lt;/code> tool returns all dataset IDs from the source.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-list-dataset-ids&lt;/code> optionally accepts a &lt;code>project&lt;/code> parameter to define
 the Google Cloud project ID. If the &lt;code>project&lt;/code> parameter is not provided, the
@@ -235,7 +235,7 @@ tool defaults to using the project defined in the source configuration.&lt;/p>
 &lt;p>A &lt;code>bigquery-list-table-ids&lt;/code> tool returns table IDs in a given BigQuery dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-list-table-ids&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -248,7 +248,7 @@ the tool defaults to the project from the source configuration.&lt;/li>
 &lt;p>A &lt;code>bigquery-sql&lt;/code> tool executes a pre-defined SQL statement. It&amp;rsquo;s compatible with
 the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="googlesql">GoogleSQL&lt;/h3>
 &lt;p>BigQuery uses &lt;a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/">GoogleSQL&lt;/a> for querying data. The integration

@@ -13,7 +13,7 @@ does not match any documents (i.e., the deleted count is 0), the tool will
 return an error.&lt;/p>
 &lt;p>This tool is compatible with the following source kind:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -35,7 +35,7 @@ results (&lt;strong>sorting&lt;/strong>), and restricting the number of document
 &lt;p>The tool returns a JSON array of the documents found.&lt;/p>
 &lt;p>This tool is compatible with the following source kind:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;p>Here&amp;rsquo;s an example that finds up to 10 users from the &lt;code>customers&lt;/code> collection who
@@ -49,7 +49,7 @@ returned. Otherwise, the selection is not guaranteed.&lt;/p>
 JSON array.&lt;/p>
 &lt;p>This tool is compatible with the following source kind:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -70,7 +70,7 @@ containing the JSON object you want to insert. Upon successful insertion, the
 tool returns the unique &lt;code>_id&lt;/code> of the newly created document.&lt;/p>
 &lt;p>This tool is compatible with the following source kind:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;p>Here is an example configuration for a tool that adds a new user to a &lt;code>users&lt;/code>
@@ -81,7 +81,7 @@ MongoDB collection that match a given filter. It locates the documents using a
 &lt;p>The tool returns an array of three integers: &lt;code>[ModifiedCount, UpsertedCount, MatchedCount]&lt;/code>.&lt;/p>
 &lt;p>This tool is compatible with the following source kind:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -93,7 +93,7 @@ applies modifications defined in an &lt;code>updatePayload&lt;/code>. If the fil
 multiple documents, only the first one found will be updated.&lt;/p>
 &lt;p>This tool is compatible with the following source kind:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../../genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>

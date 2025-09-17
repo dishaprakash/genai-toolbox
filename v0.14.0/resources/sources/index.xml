@@ -8,15 +8,15 @@ cluster&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/alloydbainl/alloydb-ai-nl/">&lt;code>alloydb-ai-nl&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/alloydbainl/alloydb-ai-nl/">&lt;code>alloydb-ai-nl&lt;/code>&lt;/a>
 Use natural language queries on AlloyDB, powered by AlloyDB AI.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in AlloyDB Postgres.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in AlloyDB Postgres.&lt;/p></description></item><item><title>BigQuery</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/bigquery/</guid><description>&lt;h1 id="bigquery-source">BigQuery Source&lt;/h1>
 &lt;p>&lt;a href="https://cloud.google.com/bigquery/docs">BigQuery&lt;/a> is Google Cloud&amp;rsquo;s fully managed, petabyte-scale,
 and cost-effective analytics data warehouse that lets you run analytics
@@ -37,11 +37,11 @@ with the cbt CLI&lt;/a>.&lt;/p></description></item><item><title>ClickHouse</tit
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/clickhouse/clickhouse-execute-sql/">&lt;code>clickhouse-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/clickhouse/clickhouse-execute-sql/">&lt;code>clickhouse-execute-sql&lt;/code>&lt;/a>&lt;br>
 Execute parameterized SQL queries in ClickHouse with query logging.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/clickhouse/clickhouse-sql/">&lt;code>clickhouse-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/clickhouse/clickhouse-sql/">&lt;code>clickhouse-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in ClickHouse.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -99,15 +99,15 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined prepared SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL queries in Cloud SQL for MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>&lt;br>
 List tables in a Cloud SQL for MySQL database.&lt;/p></description></item><item><title>Cloud SQL for PostgreSQL</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/cloud-sql-pg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/cloud-sql-pg/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://cloud.google.com/sql/docs/postgres">Cloud SQL for PostgreSQL&lt;/a> is a fully-managed database service
 that helps you set up, maintain, manage, and administer your PostgreSQL
@@ -117,15 +117,15 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
 List tables in a PostgreSQL database.&lt;/p></description></item><item><title>Cloud SQL for SQL Server</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/cloud-sql-mssql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/cloud-sql-mssql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://cloud.google.com/sql/docs/sqlserver">Cloud SQL for SQL Server&lt;/a> is a managed database service that
 helps you set up, maintain, manage, and administer your SQL Server databases on
@@ -135,11 +135,11 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined SQL Server queries with placeholder parameters.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL Server queries in Cloud SQL for SQL Server.&lt;/p></description></item><item><title>Cloud SQL Admin</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/cloud-sql-admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/cloud-sql-admin/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>cloud-sql-admin&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/sql/docs/mysql/admin-api/v1">Google Cloud SQL Admin API&lt;/a>. This allows tools to perform administrative tasks on Cloud SQL instances, such as creating users and databases.&lt;/p>
 &lt;p>Authentication can be handled in two ways:&lt;/p>
@@ -184,7 +184,7 @@ Run parameterized SQL Server queries in Cloud SQL for SQL Server.&lt;/p></descri
 allowing tools to execute SQL queries against it.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/couchbase/couchbase-sql/">&lt;code>couchbase-sql&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/couchbase/couchbase-sql/">&lt;code>couchbase-sql&lt;/code>&lt;/a>&lt;br>
 Run SQL++ statements on Couchbase with parameterized input.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -221,7 +221,7 @@ Dgraph Cloud. If you&amp;rsquo;re new to Dgraph, the fastest way to get started 
 &lt;a href="https://cloud.dgraph.io/login">sign up for Dgraph Cloud&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/dgraph/dgraph-dql/">&lt;code>dgraph-dql&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/dgraph/dgraph-dql/">&lt;code>dgraph-dql&lt;/code>&lt;/a>&lt;br>
 Run DQL (Dgraph Query Language) queries.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -233,11 +233,11 @@ the namespace and user credentials for that namespace.&lt;/p></description></ite
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/firebird/firebird-sql/">&lt;code>firebird-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/firebird/firebird-sql/">&lt;code>firebird-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in Firebird.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/firebird/firebird-execute-sql/">&lt;code>firebird-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/firebird/firebird-execute-sql/">&lt;code>firebird-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL statements in Firebird.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -262,7 +262,7 @@ endpoints. This enables Generative AI applications to access data from web APIs
 and other HTTP-accessible resources.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/http/http/">&lt;code>http&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/http/http/">&lt;code>http&lt;/code>&lt;/a>&lt;br>
 Make HTTP requests to REST APIs or other web services.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -344,15 +344,15 @@ reliability, performance, and ease of use.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined prepared SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>&lt;br>
 List tables in a MySQL database.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -365,7 +365,7 @@ MySQL user&lt;/a> to login to the database with.&lt;/p></description></item><ite
 reliability, feature robustness, and performance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/neo4j/neo4j-cypher/">&lt;code>neo4j-cypher&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/neo4j/neo4j-cypher/">&lt;code>neo4j-cypher&lt;/code>&lt;/a>&lt;br>
 Run Cypher queries against your Neo4j graph database.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -383,23 +383,23 @@ reputation for reliability, feature robustness, and performance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
 List tables in a PostgreSQL database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-active-queries/">&lt;code>postgres-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-active-queries/">&lt;code>postgres-list-active-queries&lt;/code>&lt;/a>
 List active queries in a PostgreSQL database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-available-extensions/">&lt;code>postgres-list-available-extensions&lt;/code>&lt;/a>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/postgres/postgres-list-available-extensions/">&lt;code>postgres-list-available-extensions&lt;/code>&lt;/a>
 List available extensions for installation in a PostgreSQL database.&lt;/p></description></item><item><title>Redis</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/redis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/redis/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>Redis is a in-memory data structure store, used as a database,
 cache, and message broker. It supports data structures such as strings, hashes,
@@ -409,7 +409,7 @@ geospatial indexes with radius queries.&lt;/p>
 the &lt;a href="https://redis.io/docs/getting-started/">official Redis website&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/redis/redis/">&lt;code>redis&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/redis/redis/">&lt;code>redis&lt;/code>&lt;/a>&lt;br>
 Run Redis commands and interact with key-value pairs.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -427,7 +427,7 @@ the Google Cloud console&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/spanner/spanner-sql/">&lt;code>spanner-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/spanner/spanner-sql/">&lt;code>spanner-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL on Google Cloud Spanner.&lt;/p></description></item><item><title>SQL Server</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mssql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/mssql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://www.microsoft.com/en-us/sql-server">SQL Server&lt;/a> is a relational database management system (RDBMS)
 developed by Microsoft that allows users to store, retrieve, and manage large
@@ -435,15 +435,15 @@ amount of data through a structured format.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined SQL Server queries with placeholder parameters.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL Server queries in SQL Server.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/mssql/mssql-list-tables/">&lt;code>mssql-list-tables&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/mssql/mssql-list-tables/">&lt;code>mssql-list-tables&lt;/code>&lt;/a>&lt;br>
 List tables in a SQL Server database.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -465,7 +465,7 @@ setup, database administration, and required resources.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/sqlite/sqlite-sql/">&lt;code>sqlite-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/sqlite/sqlite-sql/">&lt;code>sqlite-sql&lt;/code>&lt;/a>&lt;br>
 Run SQL queries against a local SQLite database.&lt;/p></description></item><item><title>TiDB</title><link>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/tidb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/sources/tidb/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://docs.pingcap.com/tidb/stable">TiDB&lt;/a> is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL-compatible and features horizontal scalability, strong consistency, and high availability.&lt;/p>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -480,11 +480,11 @@ Run SQL queries against a local SQLite database.&lt;/p></description></item><ite
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/trino/trino-sql/">&lt;code>trino-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/trino/trino-sql/">&lt;code>trino-sql&lt;/code>&lt;/a>&lt;br>
 Execute parameterized SQL queries against Trino.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="../../genai-toolbox/v0.14.0/resources/tools/trino/trino-execute-sql/">&lt;code>trino-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/resources/tools/trino/trino-execute-sql/">&lt;code>trino-execute-sql&lt;/code>&lt;/a>&lt;br>
 Execute arbitrary SQL queries against Trino.&lt;/p>
 &lt;/li>
 &lt;/ul>

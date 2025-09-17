@@ -4,8 +4,8 @@ multitude of environments. For convenience, we release &lt;a href="https://githu
 docker images&lt;/a> (but you can always compile yourself as well!).&lt;/p>
 &lt;p>For detailed instructions, check out these resources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../genai-toolbox/v0.14.0/getting-started/local_quickstart/">Quickstart: How to Run Locally&lt;/a>&lt;/li>
-&lt;li>&lt;a href="../genai-toolbox/v0.14.0/how-to/deploy_toolbox/">Deploy to Cloud Run&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/getting-started/local_quickstart/">Quickstart: How to Run Locally&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dishaprakash.github.io/genai-toolbox/v0.14.0/how-to/deploy_toolbox/">Deploy to Cloud Run&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="do-i-need-a-google-cloud-accountproject-to-get-started-with-toolbox">Do I need a Google Cloud account/project to get started with Toolbox?&lt;/h2>
 &lt;p>Nope! While some of the sources Toolbox connects to may require GCP credentials,

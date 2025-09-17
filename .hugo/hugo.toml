@@ -1,5 +1,5 @@
 title = 'MCP Toolbox for Databases'
-relativeURLs = true
+relativeURLs = false
 
 languageCode = 'en-us'
 defaultContentLanguage = "en"
@@ -46,12 +46,12 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
 
 [[params.versions]]
   version = "Dev"
-  url = "/getting-started/introduction/"
+  url = "/genai-toolbox/getting-started/introduction/"
   weight = 50
 
 [[params.versions]]
   version = "v0.14.0"
-  url = "/v0.14.0/getting-started/introduction/"
+  url = "/genai-toolbox/v0.14.0/getting-started/introduction/"
   weight = 40
 
 

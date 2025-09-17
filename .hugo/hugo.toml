@@ -1,4 +1,5 @@
 title = 'MCP Toolbox for Databases'
+baseURL = "https://dishaprakash.github.io/genai-toolbox/"
 relativeURLs = false
 
 languageCode = 'en-us'

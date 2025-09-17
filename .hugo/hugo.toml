@@ -22,7 +22,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
     min = "0.146.0"
   [[module.mounts]]
     source = "../docs/en"
-    target = 'content'
+    target = "content"
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
@@ -36,12 +36,24 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   github_project_repo = "https://github.com/googleapis/genai-toolbox"
   github_subdir = "docs"
   offlineSearch = true
+  version_menu = "Releases"
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true
     breadcrumb_disable = true
     sidebar_menu_foldable = true
     sidebar_menu_compact = false
+
+[[params.versions]]
+  version = "Dev"
+  url = "/getting-started/introduction/"
+  weight = 50
+
+[[params.versions]]
+  version = "v0.14.0"
+  url = "/v0.14.0/getting-started/introduction/"
+  weight = 40
+
 
 [[menu.main]]
   name = "GitHub"

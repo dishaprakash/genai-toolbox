@@ -65,7 +65,7 @@ jobs:
       - run: npm ci
       - run: hugo --minify
         env:
-          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest
           HUGO_RELATIVEURLS: false
 
       - name: Get Latest Release Tag
@@ -88,6 +88,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .hugo/staging
+          publish_dir: ./.hugo/staging
           keep_files: true
           commit_message: "deploy: ${{ github.event.head_commit.message }}"

@@ -1,5 +1,5 @@
 title = 'MCP Toolbox for Databases'
-relativeURLs = true
+relativeURLs = false
 
 languageCode = 'en-us'
 defaultContentLanguage = "en"
@@ -36,12 +36,17 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   github_project_repo = "https://github.com/googleapis/genai-toolbox"
   github_subdir = "docs"
   offlineSearch = true
+  version_menu = "Releases"
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true
     breadcrumb_disable = true
     sidebar_menu_foldable = true
     sidebar_menu_compact = false
+
+[[params.versions]]
+  version = "Latest (Dev)"
+  url = "https://dishaprakash.github.io/genai-toolbox/latest/"
 
 [[menu.main]]
   name = "GitHub"
@@ -67,6 +72,14 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
     baseName = "llms-full"
     isPlainText = true
     root = true
+  [outputFormats.releases]
+    baseName = 'releases'
+    isPlainText = true
+    mediaType = 'text/releases'
+
+[mediaTypes."text/releases"]
+  suffixes = ["releases"]
 
 [outputs]
-  home = ["HTML", "RSS", "LLMS", "LLMS-FULL"]
+  home = ["HTML", "RSS", "LLMS", "LLMS-FULL", "releases"]
+

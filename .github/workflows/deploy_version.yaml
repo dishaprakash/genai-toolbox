@@ -1,0 +1,52 @@
+name: "Deploy Versioned Docs"
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Triggers on any tag like v0.11.0
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Code at Tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }} # Checks out the code from the tag that triggered the run
+
+      - name: Get Version from Tag
+        run: echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.145.0"
+          extended: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: .hugo
+
+      - name: Build Hugo Site
+        run: hugo --minify --baseURL="https://dishaprakash.github.io/genai-toolbox/${{ env.VERSION }}/"
+        working-directory: .hugo
+
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .hugo/public
+          # Deploy ONLY to the new versioned subdirectory
+          destination_dir: ./${{ env.VERSION }}
+          keep_files: true
+          commit_message: "deploy: docs for ${{ env.VERSION }}"
+

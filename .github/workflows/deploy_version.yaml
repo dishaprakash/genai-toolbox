@@ -36,9 +36,11 @@ jobs:
         working-directory: .hugo
 
       - name: Build Hugo Site
-        run: hugo --minify --baseURL="https://dishaprakash.github.io/genai-toolbox/${{ env.VERSION }}/"
+        run: hugo --minify
         working-directory: .hugo
-
+        env:
+          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ env.VERSION }}/
+          HUGO_RELATIVEURLS: false
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
@@ -47,6 +49,20 @@ jobs:
           publish_dir: .hugo/public
           # Deploy ONLY to the new versioned subdirectory
           destination_dir: ./${{ env.VERSION }}
+          keep_files: true
+          commit_message: "deploy: docs for ${{ env.VERSION }}"
+
+      - name: Build Hugo Site
+        run: hugo --minify
+        env:
+          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          HUGO_RELATIVEURLS: false
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .hugo/public
           keep_files: true
           commit_message: "deploy: docs for ${{ env.VERSION }}"
 

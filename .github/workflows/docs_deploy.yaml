@@ -68,21 +68,11 @@ jobs:
           HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest
           HUGO_RELATIVEURLS: false
 
-      - name: Get Latest Release Tag
-        id: get_latest_tag
-        run: |
-          # Gets all tags matching v*.*.*, sorts them by version (newest first),
-          # and grabs the top one.
-          LATEST_TAG=$(git tag -l 'v*.*.*' | sort -V -r | head -n 1)
-          echo "Latest tag found: $LATEST_TAG"
-          echo "tag_name=$LATEST_TAG" >> $GITHUB_OUTPUT
-
       - name: Create Staging Directory
         run: |
           mkdir staging
           mv public staging/latest
           mv staging/latest/releases.releases staging/releases.releases
-          echo '<meta http-equiv="refresh" content="0; url=./latest/" />' > staging/index.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4

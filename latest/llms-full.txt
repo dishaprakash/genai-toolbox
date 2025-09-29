@@ -10693,7 +10693,7 @@ client.
 
 
 # SDKs
-Client SDKs to connect to the MCP Toolbox server.
+Client SDKs to connect to the MCP Toolbox server. Check 1
 
 
 # Go SDK

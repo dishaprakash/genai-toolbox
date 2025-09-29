@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     tags:
-      - 'v*.*.*' # Triggers on any tag like v0.11.0
+      - 'v*.*.*-test' # Triggers on any tag like v0.11.0
 
 jobs:
   deploy:
@@ -16,6 +16,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }} # Checks out the code from the tag that triggered the run
+
+      - name: Determine Latest Stable Version
+        id: get_stable
+        run: echo "LATEST_STABLE_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Get Version from Tag
         run: echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
@@ -41,12 +45,15 @@ jobs:
         env:
           HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ env.VERSION }}/
           HUGO_RELATIVEURLS: false
+          HUGO_PARAMS_CURRENT_VERSION: ${{ github.ref_name }}
+          HUGO_PARAMS_LATEST_STABLE_VERSION: ${{ env.LATEST_STABLE_TAG }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public
+          publish_branch: gh-pages-testing 
           # Deploy ONLY to the new versioned subdirectory
           destination_dir: ./${{ env.VERSION }}
           keep_files: true
@@ -57,12 +64,15 @@ jobs:
         env:
           HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           HUGO_RELATIVEURLS: false
+          HUGO_PARAMS_CURRENT_VERSION: ${{ github.ref_name }}
+          HUGO_PARAMS_LATEST_STABLE_VERSION: ${{ env.LATEST_STABLE_TAG }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public
+          publish_branch: gh-pages-testing 
           keep_files: true
           commit_message: "deploy: docs for ${{ env.VERSION }}"
 

@@ -20,7 +20,7 @@ permissions:
 on:
   push:
     branches:
-      - main
+      - test-banner-workflow
     paths:
       - 'docs/**'
       - 'github/workflows/docs**'
@@ -42,6 +42,10 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Determine Latest Stable Version
+        id: get_stable
+        run: echo "LATEST_STABLE_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
@@ -67,6 +71,8 @@ jobs:
         env:
           HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/latest
           HUGO_RELATIVEURLS: false
+          HUGO_PARAMS_CURRENT_VERSION: latest
+          HUGO_PARAMS_LATEST_STABLE_VERSION: ${{ env.LATEST_STABLE_TAG }}
 
       - name: Create Staging Directory
         run: |
@@ -79,5 +85,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.hugo/staging
+          publish_branch: gh-pages-testing 
           keep_files: true
           commit_message: "deploy: ${{ github.event.head_commit.message }}"

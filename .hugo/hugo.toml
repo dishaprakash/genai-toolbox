@@ -37,6 +37,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   github_subdir = "docs"
   offlineSearch = true
   version_menu = "Releases"
+  repo_path = "genai-toolbox"
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true

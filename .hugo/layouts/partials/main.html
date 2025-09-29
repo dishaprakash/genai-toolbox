@@ -1,0 +1,22 @@
+<main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+  
+  {{ $current := .Site.Params.current_version }}
+  {{ $stable := .Site.Params.latest_stable_version }}
+
+  {{ if and $current $stable }}
+    {{ if eq $current "latest" }}
+      <div class="version-banner banner-dev">
+        <p>
+          🚧 This is the in-development documentation. For the current stable release, see 
+          <a href="/{{ .Site.Params.repo_path }}/{{ $stable }}/">{{ $stable }}</a>.
+        </p>
+      </div>
+    {{ else if ne $current $stable }}
+      <div class="version-banner banner-archived">
+        <p>
+          ⚠️ This is an older version of the documentation. We recommend the 
+          <a href="/{{ .Site.Params.repo_path }}/{{ $stable }}/">{{ $stable }}</a>.
+        </p>
+      </div>
+    {{ end }}
+  {{ end }}

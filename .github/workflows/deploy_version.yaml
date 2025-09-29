@@ -52,6 +52,9 @@ jobs:
           keep_files: true
           commit_message: "deploy: docs for ${{ env.VERSION }}"
 
+      - name: Clean Build Directory
+        run: rm -rf .hugo/public
+
       - name: Build Hugo Site
         run: hugo --minify
         env:

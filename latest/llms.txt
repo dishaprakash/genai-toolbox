@@ -131,7 +131,7 @@ A list of other information related to Toolbox.
 - [FAQ](https://dishaprakash.github.io/genai-toolbox/latest/about/faq/): Frequently asked questions about Toolbox.
 ### SDKs
 
-Client SDKs to connect to the MCP Toolbox server.
+Client SDKs to connect to the MCP Toolbox server. Small change
 - [Go SDK](https://dishaprakash.github.io/genai-toolbox/latest/sdks/go-sdk/): Go lang client SDK- [JS SDK](https://dishaprakash.github.io/genai-toolbox/latest/sdks/js-sdk/): Javascript client SDK- [Python SDK](https://dishaprakash.github.io/genai-toolbox/latest/sdks/python-sdk/): Python client SDK
 ### Reference
 

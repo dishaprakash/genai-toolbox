@@ -50,4 +50,5 @@ jobs:
           publish_dir: .hugo/public
           destination_dir: ./${{ github.event.inputs.version_tag }}
           keep_files: true
+          allow_empty_commit: true
           commit_message: "docs(backport): deploy docs for ${{ github.event.inputs.version_tag }}"

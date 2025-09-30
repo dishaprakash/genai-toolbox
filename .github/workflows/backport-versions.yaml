@@ -1,0 +1,53 @@
+name: "Backport Documentation"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'The old version tag to build docs for (e.g., v0.15.0)'
+        required: true
+        type: string
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to push to the gh-pages branch
+
+    steps:
+      - name: Checkout Code at Specified Tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version_tag }} # Checks out the user-provided tag
+          submodules: 'recursive'
+          fetch-depth: 0 # Needed to find the latest stable tag
+
+      - name: Setup Hugo and Node
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.125.4" # Use a real, recent Hugo version
+          extended: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+        working-directory: .hugo
+
+      - name: Build Hugo Site for Archived Version
+        run: hugo --minify
+        working-directory: .hugo
+        env:
+          HUGO_RELATIVEURLS: false
+          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.event.inputs.version_tag }}/
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .hugo/public
+          destination_dir: ./${{ github.event.inputs.version_tag }}
+          keep_files: true
+          commit_message: "docs(backport): deploy docs for ${{ github.event.inputs.version_tag }}"

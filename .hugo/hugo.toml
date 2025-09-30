@@ -72,6 +72,30 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   version = "v0.16.0"
   url = "https://dishaprakash.github.io/genai-toolbox/v0.16.0/"
 
+[[params.versions]]
+  version = "v0.15.0"
+  url = "https://dishaprakash.github.io/genai-toolbox/v0.15.0/"
+
+[[params.versions]]
+  version = "v0.14.0"
+  url = "https://dishaprakash.github.io/genai-toolbox/v0.14.0/"
+
+[[params.versions]]
+  version = "v0.13.0"
+  url = "https://dishaprakash.github.io/genai-toolbox/v0.13.0/"
+
+[[params.versions]]
+  version = "v0.12.0"
+  url = "https://dishaprakash.github.io/genai-toolbox/v0.12.0/"
+
+[[params.versions]]
+  version = "v0.11.0"
+  url = "https://dishaprakash.github.io/genai-toolbox/v0.11.0/"
+
+[[params.versions]]
+  version = "v0.10.0"
+  url = "https://dishaprakash.github.io/genai-toolbox/v0.10.0/"
+
 [[menu.main]]
   name = "GitHub"
   weight = 50

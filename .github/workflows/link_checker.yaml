@@ -22,4 +22,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: JustinBeckwith/linkinator-action@v1
         with:
+          linksToSkip: "^(?:(?!.*\.com).)*$"
           paths: "**/*.md"

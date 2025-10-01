@@ -1,0 +1,27 @@
+name: link check
+on:
+  pull_request:
+  # pull_request_target:
+  #   types: [labeled]
+  push:
+    branches:
+      test-linkinator
+
+# Declare default permissions as read only.
+permissions: read-all
+
+jobs:
+  lint:
+    if: "${{ github.event.action != 'labeled' || github.event.label.name == 'tests: run' }}"
+    name: lint
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    permissions:
+      contents: "read"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: JustinBeckwith/linkinator-action@v1
+        with:
+          paths: "**/*.md"

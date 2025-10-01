@@ -91,6 +91,7 @@ func getAlloyDBToolsConfig() map[string]any {
 				"description": "Tool to list clusters",
 			},
 			// Tool for MCP test that fails
+			// Change
 			"my-fail-tool": map[string]any{
 				"kind":        "alloydb-list-clusters",
 				"source":      "alloydb-admin-source",

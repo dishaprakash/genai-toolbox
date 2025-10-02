@@ -1,26 +1,43 @@
-name: link checker
-on:
-  pull_request:
-  # pull_request_target:
-  #   types: [labeled]
-  push:
+# name: link checker
+# on:
+#   pull_request:
+#   # pull_request_target:
+#   #   types: [labeled]
+#   push:
 
-# Declare default permissions as read only.
-permissions: read-all
+# # Declare default permissions as read only.
+# permissions: read-all
+
+# jobs:
+#   lint:
+#     if: "${{ github.event_name == 'push' || github.event.action != 'labeled' || github.event.label.name == 'tests: run' }}"
+#     name: lint
+#     runs-on: ubuntu-latest
+#     concurrency:
+#       group: ${{ github.workflow }}-${{ github.ref }}
+#       cancel-in-progress: true
+#     permissions:
+#       contents: "read"
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: JustinBeckwith/linkinator-action@v1
+#         with:
+#           # linksToSkip: ^(?:(?!.*\.com).)*$
+#           paths: "**/*.md"
+
+name: Check Markdown links
+
+on: push
 
 jobs:
-  lint:
-    if: "${{ github.event_name == 'push' || github.event.action != 'labeled' || github.event.label.name == 'tests: run' }}"
-    name: lint
+  markdown-link-check:
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
-    permissions:
-      contents: "read"
     steps:
-      - uses: actions/checkout@v2
-      - uses: JustinBeckwith/linkinator-action@v1
-        with:
-          # linksToSkip: ^(?:(?!.*\.com).)*$
-          paths: "**/*.md"
+    - uses: actions/checkout@v4
+    - uses: tcort/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        use-verbose-mode: 'yes'
+        config-file: 'mlc_config.json'
+        folder-path: '"**/*.md"'
+        max-depth: -1

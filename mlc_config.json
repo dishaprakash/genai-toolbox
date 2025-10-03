@@ -24,6 +24,9 @@
       "pattern": "http://127.0.0.1"
     },
     {
+      "pattern": "https://cloud-run-url.app"
+    },
+    {
       "pattern": "5000"
     },
     {

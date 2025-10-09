@@ -1,5 +1,5 @@
 title = 'MCP Toolbox for Databases'
-relativeURLs = false
+relativeURLs = true
 
 languageCode = 'en-us'
 defaultContentLanguage = "en"
@@ -37,6 +37,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   github_subdir = "docs"
   offlineSearch = true
   version_menu = "Releases"
+  version_menu_pagelinks = true 
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true

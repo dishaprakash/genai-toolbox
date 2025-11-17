@@ -56,6 +56,7 @@ func TestParseFromYamlLooker(t *testing.T) {
 					ShowHiddenFields:   true,
 					Location:           "us",
 					SessionLength:      1200,
+					AccessTokenHeader:  "Authorization",
 				},
 			},
 		},

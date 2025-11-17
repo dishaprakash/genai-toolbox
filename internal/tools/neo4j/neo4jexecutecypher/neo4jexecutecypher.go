@@ -233,3 +233,7 @@ func addPlanChildren(p neo4j.Plan) []map[string]any {
 func (t Tool) ToConfig() tools.ToolConfig {
 	return t.Config
 }
+
+func (t Tool) AccessTokenHeader() string {
+	return "Authorization"
+}

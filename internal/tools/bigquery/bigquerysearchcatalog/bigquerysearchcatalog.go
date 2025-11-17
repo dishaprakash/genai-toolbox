@@ -287,3 +287,7 @@ func (t Tool) McpManifest() tools.McpManifest {
 	// Returns the tool MCP manifest
 	return t.mcpManifest
 }
+
+func (t Tool) AccessTokenHeader() string {
+	return "Authorization"
+}

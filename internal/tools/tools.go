@@ -84,6 +84,7 @@ type Tool interface {
 	Authorized([]string) bool
 	RequiresClientAuthorization() bool
 	ToConfig() ToolConfig
+	AccessTokenHeader() string
 }
 
 // Manifest is the representation of tools sent to Client SDKs.

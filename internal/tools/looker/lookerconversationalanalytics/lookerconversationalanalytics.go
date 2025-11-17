@@ -203,14 +203,15 @@ var _ tools.Tool = Tool{}
 
 type Tool struct {
 	Config
-	ApiSettings    *rtl.ApiSettings
-	UseClientOAuth bool                  `yaml:"useClientOAuth"`
-	Parameters     parameters.Parameters `yaml:"parameters"`
-	Project        string
-	Location       string
-	TokenSource    oauth2.TokenSource
-	manifest       tools.Manifest
-	mcpManifest    tools.McpManifest
+	ApiSettings           *rtl.ApiSettings
+	UseClientOAuth        bool `yaml:"useClientOAuth"`
+	AccessTokenHeaderName string
+	Parameters            parameters.Parameters `yaml:"parameters"`
+	Project               string
+	Location              string
+	TokenSource           oauth2.TokenSource
+	manifest              tools.Manifest
+	mcpManifest           tools.McpManifest
 }
 
 func (t Tool) ToConfig() tools.ToolConfig {
@@ -548,4 +549,8 @@ func appendMessage(messages []map[string]any, newMessage map[string]any) []map[s
 		}
 	}
 	return append(messages, newMessage)
+}
+
+func (t Tool) AccessTokenHeader() string {
+	return t.AccessTokenHeaderName
 }

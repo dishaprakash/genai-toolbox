@@ -52,6 +52,7 @@ func newConfig(ctx context.Context, name string, decoder *yaml.Decoder) (sources
 		ShowHiddenFields:   true,
 		Location:           "us",
 		SessionLength:      1200,
+		AccessTokenHeader:  "Authorization",
 	} // Default Ssl,timeout, ShowHidden
 	if err := decoder.DecodeContext(ctx, &actual); err != nil {
 		return nil, err
@@ -74,6 +75,7 @@ type Config struct {
 	Project            string `yaml:"project"`
 	Location           string `yaml:"location"`
 	SessionLength      int64  `yaml:"sessionLength"`
+	AccessTokenHeader  string `yaml:"access_token_header"`
 }
 
 func (r Config) SourceConfigKind() string {
@@ -129,6 +131,8 @@ func (r Config) Initialize(ctx context.Context, tracer trace.Tracer) (sources.So
 			return nil, fmt.Errorf("incorrect settings: %w", err)
 		}
 		logger.DebugContext(ctx, fmt.Sprintf("logged in as %s %s", *resp.FirstName, *resp.LastName))
+	} else {
+		logger.DebugContext(ctx, fmt.Sprintf("Using AccessTokenHeader %s", r.AccessTokenHeader))
 	}
 
 	return s, nil
@@ -158,6 +162,10 @@ func (s *Source) GetApiSettings() *rtl.ApiSettings {
 
 func (s *Source) UseClientAuthorization() bool {
 	return s.UseClientOAuth
+}
+
+func (s *Source) GetAccessTokenHeader() string {
+	return s.AccessTokenHeader
 }
 
 func (s *Source) GoogleCloudProject() string {

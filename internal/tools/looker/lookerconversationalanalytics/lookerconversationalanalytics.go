@@ -61,6 +61,7 @@ type compatibleSource interface {
 	GoogleCloudProject() string
 	GoogleCloudLocation() string
 	UseClientAuthorization() bool
+	GetAccessTokenHeader() string
 }
 
 // Structs for building the JSON payload
@@ -185,15 +186,16 @@ func (cfg Config) Initialize(srcs map[string]sources.Source) (tools.Tool, error)
 
 	// finish tool setup
 	t := Tool{
-		Config:         cfg,
-		ApiSettings:    s.GetApiSettings(),
-		Project:        s.GoogleCloudProject(),
-		Location:       s.GoogleCloudLocation(),
-		Parameters:     params,
-		UseClientOAuth: s.UseClientAuthorization(),
-		TokenSource:    ts,
-		manifest:       tools.Manifest{Description: cfg.Description, Parameters: params.Manifest(), AuthRequired: cfg.AuthRequired},
-		mcpManifest:    mcpManifest,
+		Config:                cfg,
+		ApiSettings:           s.GetApiSettings(),
+		Project:               s.GoogleCloudProject(),
+		Location:              s.GoogleCloudLocation(),
+		Parameters:            params,
+		UseClientOAuth:        s.UseClientAuthorization(),
+		AccessTokenHeaderName: s.GetAccessTokenHeader(),
+		TokenSource:           ts,
+		manifest:              tools.Manifest{Description: cfg.Description, Parameters: params.Manifest(), AuthRequired: cfg.AuthRequired},
+		mcpManifest:           mcpManifest,
 	}
 	return t, nil
 }

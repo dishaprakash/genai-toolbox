@@ -35,11 +35,13 @@
           "type": "json",
           "path": ".registry/server.json",
           "jsonpath": "$.packages[0].identifier"
-        },
+        }
+      ],
+      "replacers": [
         {
-          "type": "generic",
-          "path": ".hugo/hugo.toml",
-          "search": "# ADD_NEW_HUGO_VERSION",
+          "file": ".hugo/hugo.toml",
+          "type": "regex",
+          "search": "# ADD_NEW_HUGO_VERSION\\s*",
           "replace": "# ADD_NEW_HUGO_VERSION\n\n[[params.versions]]\n  version = \"v${version}\"\n  url = \"https://googleapis.github.io/genai-toolbox/v${version}/\""
         }
       ]

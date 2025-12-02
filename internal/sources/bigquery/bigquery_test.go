@@ -130,6 +130,26 @@ func TestParseFromYamlBigQuery(t *testing.T) {
 				},
 			},
 		},
+		{
+			desc: "with max query result rows example",
+			in: `
+			sources:
+				my-instance:
+					kind: bigquery
+					project: my-project
+					location: us
+					maxQueryResultRows: 100
+			`,
+			want: server.SourceConfigs{
+				"my-instance": bigquery.Config{
+					Name:               "my-instance",
+					Kind:               bigquery.SourceKind,
+					Project:            "my-project",
+					Location:           "us",
+					MaxQueryResultRows: 100,
+				},
+			},
+		},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.desc, func(t *testing.T) {

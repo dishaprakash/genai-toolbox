@@ -66,11 +66,12 @@ var _ compatibleSource = &bigqueryds.Source{}
 var compatibleSources = [...]string{bigqueryds.SourceKind}
 
 type Config struct {
-	Name         string   `yaml:"name" validate:"required"`
-	Kind         string   `yaml:"kind" validate:"required"`
-	Source       string   `yaml:"source" validate:"required"`
-	Description  string   `yaml:"description" validate:"required"`
-	AuthRequired []string `yaml:"authRequired"`
+	Name               string   `yaml:"name" validate:"required"`
+	Kind               string   `yaml:"kind" validate:"required"`
+	Source             string   `yaml:"source" validate:"required"`
+	Description        string   `yaml:"description" validate:"required"`
+	AuthRequired       []string `yaml:"authRequired"`
+	MaxQueryResultRows int      `yaml:"maxQueryResultRows" validate:"gte=0"`
 }
 
 // validate interface
@@ -136,18 +137,19 @@ func (cfg Config) Initialize(srcs map[string]sources.Source) (tools.Tool, error)
 
 	// finish tool setup
 	t := Tool{
-		Config:           cfg,
-		Parameters:       params,
-		UseClientOAuth:   s.UseClientAuthorization(),
-		ClientCreator:    s.BigQueryClientCreator(),
-		Client:           s.BigQueryClient(),
-		RestService:      s.BigQueryRestService(),
-		WriteMode:        s.BigQueryWriteMode(),
-		SessionProvider:  s.BigQuerySession(),
-		IsDatasetAllowed: s.IsDatasetAllowed,
-		AllowedDatasets:  allowedDatasets,
-		manifest:         tools.Manifest{Description: cfg.Description, Parameters: params.Manifest(), AuthRequired: cfg.AuthRequired},
-		mcpManifest:      mcpManifest,
+		Config:             cfg,
+		Parameters:         params,
+		UseClientOAuth:     s.UseClientAuthorization(),
+		ClientCreator:      s.BigQueryClientCreator(),
+		Client:             s.BigQueryClient(),
+		RestService:        s.BigQueryRestService(),
+		WriteMode:          s.BigQueryWriteMode(),
+		SessionProvider:    s.BigQuerySession(),
+		IsDatasetAllowed:   s.IsDatasetAllowed,
+		AllowedDatasets:    allowedDatasets,
+		MaxQueryResultRows: cfg.MaxQueryResultRows,
+		manifest:           tools.Manifest{Description: cfg.Description, Parameters: params.Manifest(), AuthRequired: cfg.AuthRequired},
+		mcpManifest:        mcpManifest,
 	}
 	return t, nil
 }
@@ -157,8 +159,9 @@ var _ tools.Tool = Tool{}
 
 type Tool struct {
 	Config
-	UseClientOAuth bool                  `yaml:"useClientOAuth"`
-	Parameters     parameters.Parameters `yaml:"parameters"`
+	UseClientOAuth     bool                  `yaml:"useClientOAuth"`
+	Parameters         parameters.Parameters `yaml:"parameters"`
+	MaxQueryResultRows int
 
 	Client           *bigqueryapi.Client
 	RestService      *bigqueryrestapi.Service
@@ -326,6 +329,9 @@ func (t Tool) Invoke(ctx context.Context, params parameters.ParamValues, accessT
 		return nil, fmt.Errorf("unable to read query results: %w", err)
 	}
 	for {
+		if t.MaxQueryResultRows > 0 && len(out) >= t.MaxQueryResultRows {
+			break
+		}
 		var val []bigqueryapi.Value
 		err = it.Next(&val)
 		if err == iterator.Done {

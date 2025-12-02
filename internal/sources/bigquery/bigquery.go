@@ -80,6 +80,7 @@ type Config struct {
 	AllowedDatasets           []string `yaml:"allowedDatasets"`
 	UseClientOAuth            bool     `yaml:"useClientOAuth"`
 	ImpersonateServiceAccount string   `yaml:"impersonateServiceAccount"`
+	MaxQueryResultRows        int      `yaml:"maxQueryResultRows"`
 }
 
 func (r Config) SourceConfigKind() string {
@@ -114,8 +115,12 @@ func (r Config) Initialize(ctx context.Context, tracer trace.Tracer) (sources.So
 		Client:             client,
 		RestService:        restService,
 		TokenSource:        tokenSource,
-		MaxQueryResultRows: 50,
 		ClientCreator:      clientCreator,
+	}
+	if r.MaxQueryResultRows > 0 {
+		s.MaxQueryResultRows = r.MaxQueryResultRows
+	} else {
+		s.MaxQueryResultRows = 50
 	}
 
 	if r.UseClientOAuth {

@@ -55,6 +55,7 @@ type compatibleSource interface {
 	BigQueryRestService() *bigqueryrestapi.Service
 	BigQueryClientCreator() bigqueryds.BigqueryClientCreator
 	UseClientAuthorization() bool
+	GetMaxQueryResultRows() int
 }
 
 // validate compatible sources are still compatible
@@ -102,15 +103,16 @@ func (cfg Config) Initialize(srcs map[string]sources.Source) (tools.Tool, error)
 
 	// finish tool setup
 	t := Tool{
-		Config:          cfg,
-		AllParams:       allParameters,
-		UseClientOAuth:  s.UseClientAuthorization(),
-		Client:          s.BigQueryClient(),
-		RestService:     s.BigQueryRestService(),
-		SessionProvider: s.BigQuerySession(),
-		ClientCreator:   s.BigQueryClientCreator(),
-		manifest:        tools.Manifest{Description: cfg.Description, Parameters: paramManifest, AuthRequired: cfg.AuthRequired},
-		mcpManifest:     mcpManifest,
+		Config:             cfg,
+		AllParams:          allParameters,
+		UseClientOAuth:     s.UseClientAuthorization(),
+		Client:             s.BigQueryClient(),
+		RestService:        s.BigQueryRestService(),
+		SessionProvider:    s.BigQuerySession(),
+		ClientCreator:      s.BigQueryClientCreator(),
+		maxQueryResultRows: s.GetMaxQueryResultRows(),
+		manifest:           tools.Manifest{Description: cfg.Description, Parameters: paramManifest, AuthRequired: cfg.AuthRequired},
+		mcpManifest:        mcpManifest,
 	}
 	return t, nil
 }
@@ -120,8 +122,9 @@ var _ tools.Tool = Tool{}
 
 type Tool struct {
 	Config
-	UseClientOAuth bool                  `yaml:"useClientOAuth"`
-	AllParams      parameters.Parameters `yaml:"allParams"`
+	UseClientOAuth     bool                  `yaml:"useClientOAuth"`
+	AllParams          parameters.Parameters `yaml:"allParams"`
+	maxQueryResultRows int
 
 	Client          *bigqueryapi.Client
 	RestService     *bigqueryrestapi.Service
@@ -225,6 +228,10 @@ func (t Tool) Invoke(ctx context.Context, params parameters.ParamValues, accessT
 		if err != nil {
 			return nil, fmt.Errorf("error creating client from OAuth access token: %w", err)
 		}
+	}
+
+	if t.maxQueryResultRows > 0 {
+		newStatement = fmt.Sprintf("%s LIMIT %d", newStatement, t.maxQueryResultRows)
 	}
 
 	query := bqClient.Query(newStatement)

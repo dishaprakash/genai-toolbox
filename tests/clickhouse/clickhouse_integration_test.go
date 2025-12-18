@@ -350,6 +350,7 @@ func getClickHouseWants() (string, string, string, string, string) {
 }
 
 
+
 func TestClickHouseSQLTool(t *testing.T) {
 	_ = getClickHouseVars(t)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)

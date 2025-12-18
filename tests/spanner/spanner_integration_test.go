@@ -277,7 +277,7 @@ func setupSpannerTable(t *testing.T, ctx context.Context, adminClient *database.
 		// tear down test
 		op, err = adminClient.UpdateDatabaseDdl(ctx, &databasepb.UpdateDatabaseDdlRequest{
 			Database:   dbString,
-			Statements: []string{fmt.Sprintf("DROP TABLE %s", tableName)},
+			Statements: []string{fmt.Sprintf("DROP TABLE IF EXISTS %s", tableName)},
 		})
 		if err != nil {
 			t.Errorf("unable to start drop %s operation: %s", tableName, err)

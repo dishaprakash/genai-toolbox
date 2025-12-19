@@ -1,0 +1,13 @@
+{{- /* Get the current page's relative path (e.g., /genai-toolbox/how-to/guide/) */ -}}
+{{- $currentPath := .Page.RelPermalink -}}
+
+{{- /* Define the prefix to strip. This should match the path part of your BaseURL.
+   If your BaseURL is "https://googleapis.github.io/genai-toolbox/", the prefix is "/genai-toolbox"
+*/ -}}
+{{- $projectPrefix := "/genai-toolbox" -}}
+{{- $cleanPath := strings.TrimPrefix $projectPrefix $currentPath -}}
+
+{{- range .Site.Params.versions -}}
+  {{- /* Construct the deep link: Version URL + Clean Path */ -}}
+  <a class="dropdown-item" href="{{ .url }}{{ $cleanPath }}">{{ .version }}</a>
+{{- end -}}

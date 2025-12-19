@@ -3,10 +3,30 @@
    {{ .Site.Params.version_menu }}
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-   <div w3-include-html="/genai-toolbox/releases.releases" w3-include-html-default='<a class="dropdown-item" href="/genai-toolbox/dev/">Dev</a>'></div>
+   <div id="version-menu-container"></div>
    <script>
-     // This must run after the w3.js script has loaded.
-     w3.includeHTML();
+     (function() {
+        const currentPath = window.location.pathname;
+        const projectRoot = "/genai-toolbox/";
+
+        // 3. Logic to convert Current Path -> Target "Latest" Path
+        // We want to strip the version segment (/v0.19.1/ or /dev/) to get the path on the 'latest' site.
+        // Regex explanation: Match projectRoot, then optionally a version folder (v followed by digits or 'dev'), then the rest.
+        // This effectively transforms "/genai-toolbox/v0.19.1/foo" -> "/genai-toolbox/foo"
+        let targetPath = currentPath.replace(new RegExp("^" + projectRoot + "(v[0-9.]+|dev)/"), projectRoot);
+
+        // 4. Append the metadata filename
+        // Ensure we don't end up with double slashes if at root
+        if (targetPath.endsWith("/")) {
+            targetPath += "releases.releases";
+        } else {
+            targetPath += "/releases.releases";
+        }
+
+        // 5. Set the include attribute and trigger W3.js
+        document.getElementById("version-menu-container").setAttribute("w3-include-html", targetPath);
+        w3.includeHTML();
+     })();
    </script>
 </div>
 {{ end -}}

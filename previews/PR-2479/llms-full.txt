@@ -1119,12 +1119,12 @@ from Toolbox.
     ```
 
 1. In a new terminal, install the Go SDK Module:
-    {{< notice warning >}}
+    {{% notice warning %}}
     **Breaking Change Notice**: As of version `0.6.0`, this SDK has transitioned to a multi-module structure.
     * **For new versions (`v0.6.0`+)**: You must import specific modules (e.g., `go get github.com/googleapis/mcp-toolbox-sdk-go/core`).
     * **For older versions (`v0.5.1` and below)**: The SDK remains a single-module library (`go get github.com/googleapis/mcp-toolbox-sdk-go`).
     * Please update your imports and `go.mod` accordingly when upgrading.
-    {{< /notice >}}
+    {{% /notice %}}
 
    {{< tabpane persist=header >}}
     {{< tab header="LangChain Go" lang="bash" >}}
@@ -5601,7 +5601,6 @@ You can connect to Toolbox Cloud Run instances directly through the SDK.
 {{< tab header="Python" lang="python" >}}
 import asyncio
 from toolbox_core import ToolboxClient, auth_methods
-from toolbox_core.protocol import Protocol
 
 # Replace with the Cloud Run service URL generated in the previous step
 URL = "https://cloud-run-url.app"
@@ -5612,7 +5611,6 @@ async def main():
   async with ToolboxClient(
       URL,
       client_headers={"Authorization": auth_token_provider},
-      protocol=Protocol.TOOLBOX,
   ) as toolbox:
     toolset = await toolbox.load_toolset()
     # ...

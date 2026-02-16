@@ -55,7 +55,7 @@ to expose your developer assistant tools to a Looker instance:&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Have the base URL of your Looker instance available. It is likely
-something like &lt;code>https://looker.example.com&lt;/code>. In some cases the API is
+something like &lt;code>https://loer.example.com&lt;/code>. In some cases the API is
 listening at a different port, and you will need to use
 &lt;code>https://looker.example.com:19999&lt;/code> instead.&lt;/p></description></item><item><title>MySQL using MCP</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2457/how-to/connect-ide/mysql_mcp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2457/how-to/connect-ide/mysql_mcp/</guid><description>&lt;p>&lt;a href="https://modelcontextprotocol.io/introduction">Model Context Protocol (MCP)&lt;/a> is
 an open protocol for connecting Large Language Models (LLMs) to data sources

@@ -97,7 +97,7 @@ expose your developer assistant tools to a Neo4j instance:&lt;/p>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
-&lt;li>&lt;a href="https://neo4j.com/cloud/platform/aura-graph-databae/">Create or select a Neo4j
+&lt;li>&lt;a href="https://neo4j.com/cloud/platform/aura-graph-database/">Create or select a Neo4j
 instance.&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;h2 id="install-mcp-toolbox">Install MCP Toolbox&lt;/h2>

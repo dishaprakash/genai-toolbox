@@ -15091,6 +15091,31 @@ It is helpful to understand how tool-level processing differs from other scopes:
 - **Model Level**: Intercepts individual calls to the LLM (prompts and responses). Unlike tool-level, this applies globally to all text sent/received, making it better for global PII redaction or token tracking.
 - **Agent Level**: Wraps the high-level execution loop (e.g., a "turn" in the conversation). Unlike tool-level, this envelopes the entire turn (user input to final response), making it suitable for session management or end-to-end auditing.
 
+## Best Practices
+
+### Security & Guardrails
+
+- **Principle of Least Privilege**: Ensure that tools run with the minimum necessary permissions. Middleware is an excellent place to enforce "read-only" modes or verify user identity before executing sensitive actions.
+- **Input Sanitization**: Actively strip potential PII (like credit card numbers or raw emails) from tool arguments before logging them.
+- **Prompt Injection Defense**: Use pre-processing hooks to scan user inputs for known jailbreak patterns or malicious directives before they reach the model or tools.
+
+### Observability & Debugging
+
+- **Structured Logging**: Instead of simple print statements, use structured JSON logging with correlation IDs. This allows you to trace a single user request through multiple agent turns and tool calls.
+- **Logging for Testability**: LLM responses are non-deterministic and may summarize away key details.
+  - **Pattern**: Add explicit logging markers in your post-processing middleware (e.g., `logger.info("ACTION_SUCCESS: <id>")`).
+  - **Benefit**: Your integration tests can grep logs for these stable markers to verify tool success, rather than painfully parsing variable natural language responses.
+
+### Performance & Cost Optimization
+
+- **Token Economy**: Tools often return verbose JSON. Use post-processing to strip unnecessary fields or summarize large datasets *before* returning the result to the LLM's context window. This saves tokens and reduces latency.
+- **Caching**: For read-heavy tools (like "search_knowledge_base"), implement caching middleware to return previous results for identical queries, saving both time and API costs.
+
+### Error Handling
+
+- **Graceful Degradation**: If a tool fails (e.g., API timeout), catch the exception in middleware and return a structured error message to the LLM (e.g., `Error: Database timeout, please try again`).
+- **Self-Correction**: Well-formatted error messages often allow the LLM to understand *why* a call failed and retry it with corrected parameters automatically.
+
 
 ## Samples
 
@@ -15101,7 +15126,7 @@ How to add pre- and post- processing to your Agents using Python.
 
 ## Prerequisites
 
-This tutorial assumes that you have set up Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart.md).
+This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart.md).
 
 This guide demonstrates how to implement these patterns in your Toolbox applications.
 
@@ -15124,7 +15149,51 @@ You can also add model-level (`wrap_model`) and agent-level (`before_agent`, `af
 
 ## Results
 
-The output should look similar to the following. Note that exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+The output should look similar to the following.
+
+{{< notice note >}}
+The exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+{{< /notice >}}
+
+```
+AI: Booking Confirmed! You earned 500 Loyalty Points with this stay.
+
+AI: Error: Maximum stay duration is 14 days.
+```
+
+
+# Go
+How to add pre- and post- processing to your Agents using Go.
+
+
+## Prerequisites
+
+This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart_go.md).
+
+This guide demonstrates how to implement these patterns in your Toolbox applications.
+
+## Implementation
+
+{{< tabpane persist=header >}}
+{{% tab header="ADK" text=true %}}
+The following example demonstrates how to use the `beforeToolCallback` and `afterToolCallback` hooks in the ADK `LlmAgent` to implement pre and post processing logic.
+
+```go
+{{< include "go/adk/agent.go" >}}
+```
+
+You can also add model-level (`beforeModelCallback`, `afterModelCallback`) and agent-level (`beforeAgentCallback`, `afterAgentCallback`) hooks to intercept messages at different stages of the execution loop.
+
+For more information, see the [ADK Callbacks documentation](https://google.github.io/adk-docs/callbacks/types-of-callbacks/).{{% /tab %}}
+{{< /tabpane >}}
+
+## Results
+
+The output should look similar to the following.
+
+{{< notice note >}}
+The exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+{{< /notice >}}
 
 ```
 AI: Booking Confirmed! You earned 500 Loyalty Points with this stay.

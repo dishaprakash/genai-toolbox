@@ -34,15 +34,13 @@ import (
 	"google.golang.org/genai"
 )
 
-const systemPrompt = `
-  You're a helpful hotel assistant. You handle hotel searching, booking and
-  cancellations. When the user searches for a hotel, mention it's name, id,
-  location and price tier. Always mention hotel ids while performing any
-  searches. This is very important for any operations. For any bookings or
-  cancellations, please provide the appropriate confirmation. Be sure to
-  update checkin or checkout dates if mentioned by the user.
-  Don't ask for confirmations from the user.
-`
+const systemPrompt = `You're a helpful hotel assistant. You handle hotel searching, booking and
+cancellations. When the user searches for a hotel, mention it's name, id,
+location and price tier. Always mention hotel ids while performing any
+searches. This is very important for any operations. For any bookings or
+cancellations, please provide the appropriate confirmation. Be sure to
+update checkin or checkout dates if mentioned by the user.
+Don't ask for confirmations from the user.`
 
 var queries = []string{
 	"Book hotel with id 3.",
@@ -50,7 +48,7 @@ var queries = []string{
 }
 
 // Pre-processing
-func beforeToolCallback(ctx tool.Context, tool tool.Tool, args map[string]any) (map[string]any, error) {
+func enforceBusinessRules(ctx tool.Context, tool tool.Tool, args map[string]any) (map[string]any, error) {
 
 	fmt.Printf("POLICY CHECK: Intercepting '%s'\n", tool.Name())
 	if tool.Name() == "update-hotel" {
@@ -75,7 +73,7 @@ func beforeToolCallback(ctx tool.Context, tool tool.Tool, args map[string]any) (
 }
 
 // Post-processing
-func afterToolCallback(ctx tool.Context, tool tool.Tool, args, result map[string]any, err error) (map[string]any, error) {
+func enrichResponse(ctx tool.Context, tool tool.Tool, args, result map[string]any, err error) (map[string]any, error) {
 	resultStr := fmt.Sprintf("%v", result)
 
 	if tool.Name() == "book-hotel" {
@@ -119,14 +117,14 @@ func main() {
 		tools[i] = &mcpTools[i]
 	}
 	llmagent, err := llmagent.New(llmagent.Config{
-		Name:                "hotel_assistant",
-		Model:               model,
-		Description:         "Agent to answer questions about hotels.",
-		Instruction:         systemPrompt,
-		Tools:               tools,
+		Name:        "hotel_assistant",
+		Model:       model,
+		Description: "Agent to answer questions about hotels.",
+		Instruction: systemPrompt,
+		Tools:       tools,
 		// Add pre- and post- processing hooks
-		BeforeToolCallbacks: []llmagent.BeforeToolCallback{beforeToolCallback},
-		AfterToolCallbacks:  []llmagent.AfterToolCallback{afterToolCallback},
+		BeforeToolCallbacks: []llmagent.BeforeToolCallback{enforceBusinessRules},
+		AfterToolCallbacks:  []llmagent.AfterToolCallback{enrichResponse},
 	})
 	if err != nil {
 		log.Fatalf("Failed to create agent: %v", err)
@@ -164,9 +162,9 @@ func main() {
 
 		fmt.Print("AI: ")
 		for event := range runIter {
-			if event != nil && event.LLMResponse.Content != nil {
-				for _, p := range event.LLMResponse.Content.Parts {
-						fmt.Print(p.Text)
+			if event != nil && event.Content != nil {
+				for _, p := range event.Content.Parts {
+					fmt.Print(p.Text)
 				}
 			}
 		}

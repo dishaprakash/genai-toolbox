@@ -10238,15 +10238,18 @@ to expose your developer assistant tools to a Postgres instance:&lt;/p>
  &lt;path d="M551.281 252.36c0-3.32-1.172-6.641-3.515-8.985l-17.774-17.578c-2.344-2.344-5.469-3.711-8.789-3.711-3.32 0-6.445 1.367-8.789 3.71l-79.687 79.493-44.141-44.14c-2.344-2.344-5.469-3.712-8.79-3.712-3.32 0-6.444 1.368-8.788 3.711l-17.774 17.579c-2.343 2.343-3.515 5.664-3.515 8.984 0 3.32 1.172 6.445 3.515 8.789l70.704 70.703c2.343 2.344 5.664 3.711 8.789 3.711 3.32 0 6.64-1.367 8.984-3.71l106.055-106.056c2.343-2.343 3.515-5.468 3.515-8.789ZM600.5 284c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
 &lt;/svg>
 
- &lt;/span>Tip&lt;/p></description></item><item><title>Python Quickstart (Local)</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2504/getting-started/local_quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2504/getting-started/local_quickstart/</guid><description>&lt;p>&lt;a href="https://colab.research.google.com/github/googleapis/genai-toolbox/blob/main/docs/en/getting-started/colab_quickstart.ipynb">&lt;img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">&lt;/a>&lt;/p>
+ &lt;/span>Tip&lt;/p></description></item><item><title>Python Quickstart (Local)</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2504/getting-started/local_quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2504/getting-started/local_quickstart/</guid><description>&lt;p>&lt;a href="https://colab.research.google.com/github/googleapis/genai-toolbox/blob/main/docs/en/getting-started/colab_quickstart.ipynb">![Open In Colab](https://colab.research.google.com/assets/ colab-badge.svg)&lt;/a>&lt;/p>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;p>This guide assumes you have already done the following:&lt;/p>
 &lt;ol>
 &lt;li>Installed &lt;a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 3.10+&lt;/a> (including &lt;a href="https://pip.pypa.io/en/stable/installation/">pip&lt;/a> and
 your preferred virtual environment tool for managing dependencies e.g.
-&lt;a href="https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments">venv&lt;/a>).&lt;/li>
-&lt;li>Installed &lt;a href="https://www.postgresql.org/download/">PostgreSQL 16+ and the &lt;code>psql&lt;/code> client&lt;/a>.&lt;/li>
+[venv][install-venv]).&lt;/li>
+&lt;li>Installed [PostgreSQL 16+ and the &lt;code>psql&lt;/code> client][install-postgres].&lt;/li>
 &lt;/ol>
+&lt;p>[install-venv]:
+&lt;a href="https://packaging.python.org/en/lates">https://packaging.python.org/en/lates&lt;/a> t/tutorials/installing-packages/#creating-virtual-environments
+[install-postgres]: &lt;a href="https://www.postgresql.org/download/">https://www.postgresql.org/download/&lt;/a>&lt;/p>
 &lt;h3 id="cloud-setup-optional">Cloud Setup (Optional)&lt;/h3>
 
 
@@ -10368,10 +10371,7 @@ your preferred virtual environment tool for managing dependencies e.g.
 
  &lt;p>If you plan to use &lt;strong>Google Cloud’s Vertex AI&lt;/strong> with your agent (e.g., using
 &lt;code>vertexai=True&lt;/code> or a Google GenAI model), follow these one-time setup steps for
-local development:&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;a href="https://cloud.google.com/sdk/docs/install">Install the Google Cloud CLI&lt;/a>&lt;/p></description></item><item><title>Python SDK</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2504/sdks/python-sdk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2504/sdks/python-sdk/</guid><description>&lt;html>
+local development:&lt;/p></description></item><item><title>Python SDK</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2504/sdks/python-sdk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2504/sdks/python-sdk/</guid><description>&lt;html>
  &lt;head>
  &lt;link rel="canonical" href="https://github.com/googleapis/mcp-toolbox-sdk-python"/>
  &lt;meta http-equiv="refresh" content="0;url=https://github.com/googleapis/mcp-toolbox-sdk-python"/>

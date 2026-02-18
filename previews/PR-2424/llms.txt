@@ -8,9 +8,9 @@
 
 How to get started with Toolbox.
 - [Introduction](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/introduction/): An introduction to MCP Toolbox for Databases.
-- [Python Quickstart (Local)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/local_quickstart/): How to get started running Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
-- [JS Quickstart (Local)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/local_quickstart_js/): How to get started running Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
-- [Go Quickstart (Local)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/local_quickstart_go/): How to get started running Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
+- [Python Quickstart (Local)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/local_quickstart/): How to get started running MCP Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
+- [JS Quickstart (Local)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/local_quickstart_js/): How to get started running MCP Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
+- [Go Quickstart (Local)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/local_quickstart_go/): How to get started running MCP Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
 - [Prompts using Gemini CLI](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/prompts_quickstart_gemini_cli/): How to get started using Toolbox prompts locally with PostgreSQL and [Gemini CLI](https://pypi.org/project/gemini-cli/).
 - [Quickstart (MCP)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/mcp_quickstart/): How to get started running Toolbox locally with MCP Inspector.
 - [Configuration](https://googleapis.github.io/genai-toolbox/previews/PR-2424/getting-started/configure/): How to configure Toolbox's tools.yaml file.
@@ -47,6 +47,7 @@ List of guides detailing how to do different things with Toolbox.
 - [Deploy to Kubernetes](https://googleapis.github.io/genai-toolbox/previews/PR-2424/how-to/deploy_gke/): How to set up and configure Toolbox to deploy on Kubernetes with Google Kubernetes Engine (GKE).
 - [Deploy using Docker Compose](https://googleapis.github.io/genai-toolbox/previews/PR-2424/how-to/deploy_docker/): How to deploy Toolbox using Docker Compose.
 - [Export Telemetry](https://googleapis.github.io/genai-toolbox/previews/PR-2424/how-to/export_telemetry/): How to set up and configure Toolbox to use the Otel Collector.
+- [Generate Agent Skills](https://googleapis.github.io/genai-toolbox/previews/PR-2424/how-to/generate_skill/): How to generate agent skills from a toolset.
 - [Invoke Tools via CLI](https://googleapis.github.io/genai-toolbox/previews/PR-2424/how-to/invoke_tool/): Learn how to invoke your tools directly from the command line using the `invoke` command.
 
 ### Resources
@@ -68,6 +69,7 @@ List of reference documentation for resources in Toolbox.
   - [Cloud SQL for PostgreSQL](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/cloud-sql-pg/): Cloud SQL for PostgreSQL is a fully-managed database service for Postgres.
   - [Cloud SQL for SQL Server](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/cloud-sql-mssql/): Cloud SQL for SQL Server is a fully-managed database service for SQL Server.
   - [Cloud SQL Admin](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/cloud-sql-admin/): A "cloud-sql-admin" source provides a client for the Cloud SQL Admin API.
+  - [CockroachDB](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/cockroachdb/): CockroachDB is a distributed SQL database built for cloud applications.
   - [Couchbase](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/couchbase/): A "couchbase" source connects to a Couchbase database.
   - [Dataplex](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/dataplex/): Dataplex Universal Catalog is a unified, intelligent governance solution for data and AI assets in Google Cloud. Dataplex Universal Catalog powers AI, analytics, and business intelligence at scale.
   - [Dgraph](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/sources/dgraph/): Dgraph is fully open-source, built-for-scale graph database for Gen AI workloads
@@ -106,8 +108,13 @@ List of reference documentation for resources in Toolbox.
   - [Cassandra](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cassandra/): Tools that work with Cassandra Sources.
   - [ClickHouse](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/clickhouse/): Tools for interacting with ClickHouse databases and tables.
   - [Cloud Healthcare API](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudhealthcare/): Tools that work with Cloud Healthcare Sources.
+  - [Cloud Logging Admin](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudloggingadmin/): Tools that work with Cloud Logging Admin Sources.
   - [Cloud Monitoring](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudmonitoring/): Tools that work with Cloud Monitoring source.
   - [Cloud SQL](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudsql/): Tools that work with Cloud SQL. 
+  - [cockroachdb-execute-sql](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cockroachdb/cockroachdb-execute-sql/): Execute ad-hoc SQL statements against a CockroachDB database.
+  - [cockroachdb-list-schemas](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cockroachdb/cockroachdb-list-schemas/): List schemas in a CockroachDB database.
+  - [cockroachdb-list-tables](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cockroachdb/cockroachdb-list-tables/): List tables in a CockroachDB database with schema details.
+  - [cockroachdb-sql](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cockroachdb/cockroachdb-sql/): Execute parameterized SQL queries in CockroachDB.
   - [Couchbase](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/couchbase/): Tools that work with Couchbase Sources.
   - [Dataform](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/dataform/): Tools that work with Dataform.
   - [Dataplex](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/dataplex/): Tools that work with Dataplex Sources.
@@ -137,9 +144,6 @@ List of reference documentation for resources in Toolbox.
   - [Utility tools](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/utility/): Tools that provide utility.
   - [Valkey](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/valkey/): Tools that work with Valkey Sources.
   - [YugabyteDB](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/yuagbytedb/): Tools that work with Valkey Sources.
-  - [cloud-logging-admin-list-log-names](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudloggingadmin/cloud-logging-admin-list-log-names/): A "cloud-logging-admin-list-log-names" tool lists the log names in the project.
-  - [cloud-logging-admin-list-resource-types](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudloggingadmin/cloud-logging-admin-list-resource-types/): A "cloud-logging-admin-list-resource-types" tool lists the monitored resource types.
-  - [cloud-logging-admin-query-logs](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/tools/cloudloggingadmin/cloud-logging-admin-query-logs/): A "cloud-logging-admin-query-logs" tool queries log entries.
 - [Prompts](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/prompts/): Prompts allow servers to provide structured messages and instructions for interacting with language models.
   - [Custom](https://googleapis.github.io/genai-toolbox/previews/PR-2424/resources/prompts/custom/): Custom prompts defined by the user.
 
@@ -158,9 +162,10 @@ Samples and guides for using Toolbox.
   - [Quickstart (MCP with Looker)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/looker/looker_mcp_inspector/): How to get started running Toolbox with MCP Inspector and Looker as the source.
 - [Neo4j](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/neo4j/): How to get started with Toolbox using Neo4j.
   - [Quickstart (MCP with Neo4j)](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/neo4j/mcp_quickstart/): How to get started running Toolbox with MCP Inspector and Neo4j as the source.
-- [Pre and Post processing](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/): Pre and Post processing in GenAI applications.
-  - [(Python) Pre and post processing](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/python/): How to add pre and post processing to your Python toolbox applications.
-  - [(JS) Pre and post processing](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/js/): How to add pre and post processing to your JS toolbox applications.
+- [Pre- and Post- Processing](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/): Intercept and modify interactions between the agent and its tools either before or after a tool is executed.
+  - [Python](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/python/): How to add pre- and post- processing to your Agents using Python.
+  - [Javascript](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/js/): How to add pre- and post- processing to your Agents using JS.
+  - [Go](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/pre_post_processing/go/): How to add pre- and post- processing to your Agents using Go.
 - [Snowflake](https://googleapis.github.io/genai-toolbox/previews/PR-2424/samples/snowflake/): How to get started running Toolbox with MCP Inspector and Snowflake as the source.
 
 ### About

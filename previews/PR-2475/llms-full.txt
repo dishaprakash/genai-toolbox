@@ -456,12 +456,11 @@ README.](https://github.com/googleapis/mcp-toolbox-sdk-js/tree/main/packages/too
 
 #### Go
 
-Once you've installed the [Toolbox Go
-SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/core), you can load
-tools:
-
 {{< tabpane text=true persist=header >}}
 {{% tab header="Core" lang="en" %}}
+
+Once you've installed the [Go Core SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/core), you can load
+tools:
 
 {{< highlight go >}}
 package main
@@ -493,6 +492,9 @@ func main() {
 
 {{% /tab %}}
 {{% tab header="LangChain Go" lang="en" %}}
+
+Once you've installed the [Go Core SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/core), you can load
+tools:
 
 {{< highlight go >}}
 package main
@@ -543,11 +545,14 @@ func main() {
 	}
 }
 {{< /highlight >}}
-For end-to-end samples on using the Toolbox Go SDK with LangChain Go, see the [project's
-samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/core/samples)
+
+For end-to-end samples on using the Toolbox Go SDK with LangChain Go, see the [module's samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/core/samples)
 
 {{% /tab %}}
 {{% tab header="Genkit Go" lang="en" %}}
+
+Once you've installed the [Go TBGenkit SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/tbgenkit), you can load
+tools:
 
 {{< highlight go >}}
 package main
@@ -589,11 +594,13 @@ func main() {
 	}
 }
 {{< /highlight >}}
-For end-to-end samples on using the Toolbox Go SDK with Genkit Go, see the [project's
-samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/tbgenkit/samples)
+For end-to-end samples on using the Toolbox Go SDK with Genkit Go, see the [module's samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/tbgenkit/samples)
 
 {{% /tab %}}
 {{% tab header="Go GenAI" lang="en" %}}
+
+Once you've installed the [Go Core SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/core), you can load
+tools:
 
 {{< highlight go >}}
 package main
@@ -645,12 +652,14 @@ func main() {
 	}
 }
 {{< /highlight >}}
-For end-to-end samples on using the Toolbox Go SDK with Go GenAI, see the [project's
-samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/core/samples)
+For end-to-end samples on using the Toolbox Go SDK with Go GenAI, see the [module's samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/core/samples)
 
 {{% /tab %}}
 
 {{% tab header="OpenAI Go" lang="en" %}}
+
+Once you've installed the [Go Core SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/core), you can load
+tools:
 
 {{< highlight go >}}
 package main
@@ -700,12 +709,14 @@ func main() {
 	}
 }
 {{< /highlight >}}
-For end-to-end samples on using the Toolbox Go SDK with OpenAI Go, see the [project's
-samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/core/samples)
+For end-to-end samples on using the Toolbox Go SDK with OpenAI Go, see the [module's samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/core/samples)
 
 {{% /tab %}}
 
 {{% tab header="ADK Go" lang="en" %}}
+
+Once you've installed the [Go TBADK SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go/tbadk), you can load
+tools:
 
 {{< highlight go >}}
 package main
@@ -735,8 +746,7 @@ func main() {
 
 {{< /highlight >}}
 
-For end-to-end samples on using the Toolbox Go SDK with ADK Go, see the [project's
-samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/tbadk/samples)
+For end-to-end samples on using the Toolbox Go SDK with ADK Go, see the [module's samples](https://github.com/googleapis/mcp-toolbox-sdk-go/tree/main/tbadk/samples)
 
 {{% /tab %}}
 {{< /tabpane >}}
@@ -747,7 +757,7 @@ README](https://github.com/googleapis/mcp-toolbox-sdk-go/blob/main/core/README.m
 
 
 # Python Quickstart (Local)
-How to get started running Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
+How to get started running MCP Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
 
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googleapis/genai-toolbox/blob/main/docs/en/getting-started/colab_quickstart.ipynb)
@@ -775,14 +785,14 @@ This guide assumes you have already done the following:
 
 {{< regionInclude "quickstart/shared/database_setup.md" "database_setup" >}}
 
-## Step 2: Install and configure Toolbox
+## Step 2: Install and configure MCP Toolbox
 
 {{< regionInclude "quickstart/shared/configure_toolbox.md" "configure_toolbox" >}}
 
-## Step 3: Connect your agent to Toolbox
+## Step 3: Connect your agent to MCP Toolbox
 
 In this section, we will write and run an agent that will load the Tools
-from Toolbox.
+from MCP Toolbox.
 
 {{< notice tip>}}
 If you prefer to experiment within a Google Colab environment, you can connect
@@ -856,7 +866,7 @@ pip install google-genai
     ```
     <br/>
 
-1. Update `my_agent/agent.py` with the following content to connect to Toolbox:
+1. Update `my_agent/agent.py` with the following content to connect to MCP Toolbox:
     ```py
     {{< regionInclude "quickstart/python/adk/quickstart.py" "quickstart" >}}
     ```
@@ -947,7 +957,7 @@ repo](https://github.com/googleapis/mcp-toolbox-sdk-python).
 
 
 # JS Quickstart (Local)
-How to get started running Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
+How to get started running MCP Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
 
 
 ## Before you begin
@@ -968,14 +978,14 @@ This guide assumes you have already done the following:
 
 {{< regionInclude "quickstart/shared/database_setup.md" "database_setup" >}}
 
-## Step 2: Install and configure Toolbox
+## Step 2: Install and configure MCP Toolbox
 
 {{< regionInclude "quickstart/shared/configure_toolbox.md" "configure_toolbox" >}}
 
-## Step 3: Connect your agent to Toolbox
+## Step 3: Connect your agent to MCP Toolbox
 
 In this section, we will write and run an agent that will load the Tools
-from Toolbox.
+from MCP Toolbox.
 
 1. (Optional) Initialize a Node.js project:
 
@@ -1072,7 +1082,7 @@ repo](https://github.com/googleapis/mcp-toolbox-sdk-js).
 
 
 # Go Quickstart (Local)
-How to get started running Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
+How to get started running MCP Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
 
 
 ## Before you begin
@@ -1093,14 +1103,14 @@ This guide assumes you have already done the following:
 
 {{< regionInclude "quickstart/shared/database_setup.md" "database_setup" >}}
 
-## Step 2: Install and configure Toolbox
+## Step 2: Install and configure MCP Toolbox
 
 {{< regionInclude "quickstart/shared/configure_toolbox.md" "configure_toolbox" >}}
 
-## Step 3: Connect your agent to Toolbox
+## Step 3: Connect your agent to MCP Toolbox
 
 In this section, we will write and run an agent that will load the Tools
-from Toolbox.
+from MCP Toolbox.
 
 1. Initialize a go module:
 
@@ -1108,14 +1118,39 @@ from Toolbox.
     go mod init main
     ```
 
-1. In a new terminal, install the
-   [SDK](https://pkg.go.dev/github.com/googleapis/mcp-toolbox-sdk-go).
+1. In a new terminal, install the Go SDK Module:
+    {{< notice warning >}}
+    Breaking Change Notice: As of version `0.6.0`, this SDK has transitioned to a multi-module structure.
+    * For new versions (`v0.6.0`+): You must import specific modules (e.g., `go get github.com/googleapis/mcp-toolbox-sdk-go/core`).
+    * For older versions (`v0.5.1` and below): The SDK remains a single-module library (`go get github.com/googleapis/mcp-toolbox-sdk-go`).
+    * Please update your imports and `go.mod` accordingly when upgrading.
+    {{< /notice >}}
 
-    ```bash
-    go get github.com/googleapis/mcp-toolbox-sdk-go
-    ```
+   {{< tabpane persist=header >}}
+    {{< tab header="LangChain Go" lang="bash" >}}
+    go get github.com/googleapis/mcp-toolbox-sdk-go/core
+    {{< /tab >}}
 
-1. Create a new file named `hotelagent.go` and copy the following code to create
+    {{< tab header="Genkit Go" lang="bash" >}}
+    go get github.com/googleapis/mcp-toolbox-sdk-go/core
+    go get github.com/googleapis/mcp-toolbox-sdk-go/tbgenkit
+    {{< /tab >}}
+
+    {{< tab header="Go GenAI" lang="bash" >}}
+    go get github.com/googleapis/mcp-toolbox-sdk-go/core
+    {{< /tab >}}
+
+    {{< tab header="OpenAI Go" lang="bash" >}}
+    go get github.com/googleapis/mcp-toolbox-sdk-go/core
+    {{< /tab >}}
+
+    {{< tab header="ADK Go" lang="bash" >}}
+    go get github.com/googleapis/mcp-toolbox-sdk-go/core
+    go get github.com/googleapis/mcp-toolbox-sdk-go/tbadk
+    {{< /tab >}}
+    {{< /tabpane >}}
+
+2. Create a new file named `hotelagent.go` and copy the following code to create
    an agent:
 
     {{< tabpane persist=header >}}
@@ -5566,7 +5601,6 @@ You can connect to Toolbox Cloud Run instances directly through the SDK.
 {{< tab header="Python" lang="python" >}}
 import asyncio
 from toolbox_core import ToolboxClient, auth_methods
-from toolbox_core.protocol import Protocol
 
 # Replace with the Cloud Run service URL generated in the previous step
 URL = "https://cloud-run-url.app"
@@ -5577,7 +5611,6 @@ async def main():
   async with ToolboxClient(
       URL,
       client_headers={"Authorization": auth_token_provider},
-      protocol=Protocol.TOOLBOX,
   ) as toolbox:
     toolset = await toolbox.load_toolset()
     # ...
@@ -10241,6 +10274,7 @@ instead of hardcoding your secrets into the configuration file.
 | user        |       string       |     true     | Name of the Postgres user to connect as (e.g. "my-pg-user").           |
 | password    |       string       |     true     | Password of the Postgres user (e.g. "my-password").                    |
 | queryParams |  map[string]string |     false    | Raw query to be added to the db connection string.                     |
+| queryExecMode | string | false | pgx query execution mode. Valid values: `cache_statement` (default), `cache_describe`, `describe_exec`, `exec`, `simple_protocol`. Useful with connection poolers that don't support prepared statement caching. |
 
 
 # Redis
@@ -10283,6 +10317,9 @@ password: ${MY_AUTH_STRING} # Omit this field if you don't have a password.
 # database: 0
 # clusterEnabled: false
 # useGCPIAM: false
+# tls:
+#   enabled: false
+#   insecureSkipVerify: false
 ```
 
 {{< notice tip >}}
@@ -10300,7 +10337,7 @@ Here is an example tools.yaml config with [AUTH][auth] enabled:
 ```yaml
 kind: sources
 name: my-redis-cluster-instance
-type: memorystore-redis
+type: redis
 address:
   - 127.0.0.1:6379
 password: ${MY_AUTH_STRING}
@@ -10317,7 +10354,7 @@ using IAM authentication:
 ```yaml
 kind: sources
 name: my-redis-cluster-instance
-type: memorystore-redis
+type: redis
 address:
   - 127.0.0.1:6379
 useGCPIAM: true
@@ -10328,15 +10365,17 @@ clusterEnabled: true
 
 ## Reference
 
-| **field**      | **type** | **required** | **description**                                                                                                                 |
-|----------------|:--------:|:------------:|---------------------------------------------------------------------------------------------------------------------------------|
-| type           |  string  |     true     | Must be "memorystore-redis".                                                                                                    |
-| address        |  string  |     true     | Primary endpoint for the Memorystore Redis instance to connect to.                                                              |
-| username       |  string  |    false     | If you are using a non-default user, specify the user name here. If you are using Memorystore for Redis, leave this field blank |
-| password       |  string  |    false     | If you have [Redis AUTH][auth] enabled, specify the AUTH string here                                                            |
-| database       |   int    |    false     | The Redis database to connect to. Not applicable for cluster enabled instances. The default database is `0`.                    |
-| clusterEnabled |   bool   |    false     | Set it to `true` if using a Redis Cluster instance. Defaults to `false`.                                                        |
-| useGCPIAM      |  string  |    false     | Set it to `true` if you are using GCP's IAM authentication. Defaults to `false`.                                                |
+| **field**              | **type** | **required** | **description**                                                                                                                               |
+|------------------------|:--------:|:------------:|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| type                   |  string  |     true     | Must be "redis".                                                                                                                              |
+| address                |  string  |     true     | Primary endpoint for the Memorystore Redis instance to connect to.                                                                            |
+| username               |  string  |    false     | If you are using a non-default user, specify the user name here. If you are using Memorystore for Redis, leave this field blank               |
+| password               |  string  |    false     | If you have [Redis AUTH][auth] enabled, specify the AUTH string here                                                                          |
+| database               |   int    |    false     | The Redis database to connect to. Not applicable for cluster enabled instances. The default database is `0`.                                  |
+| tls.enabled            |   bool   |    false     | Set it to `true` to enable TLS for the Redis connection. Defaults to `false`.                                                                 |
+| tls.insecureSkipVerify |   bool   |    false     | Set it to `true` to skip TLS certificate verification. **Warning:** This is insecure and not recommended for production. Defaults to `false`. |
+| clusterEnabled         |   bool   |    false     | Set it to `true` if using a Redis Cluster instance. Defaults to `false`.                                                                      |
+| useGCPIAM              |   bool   |    false     | Set it to `true` if you are using GCP's IAM authentication. Defaults to `false`.                                                              |
 
 [auth]: https://cloud.google.com/memorystore/docs/redis/about-redis-auth
 
@@ -15058,6 +15097,31 @@ It is helpful to understand how tool-level processing differs from other scopes:
 - **Model Level**: Intercepts individual calls to the LLM (prompts and responses). Unlike tool-level, this applies globally to all text sent/received, making it better for global PII redaction or token tracking.
 - **Agent Level**: Wraps the high-level execution loop (e.g., a "turn" in the conversation). Unlike tool-level, this envelopes the entire turn (user input to final response), making it suitable for session management or end-to-end auditing.
 
+## Best Practices
+
+### Security & Guardrails
+
+- **Principle of Least Privilege**: Ensure that tools run with the minimum necessary permissions. Middleware is an excellent place to enforce "read-only" modes or verify user identity before executing sensitive actions.
+- **Input Sanitization**: Actively strip potential PII (like credit card numbers or raw emails) from tool arguments before logging them.
+- **Prompt Injection Defense**: Use pre-processing hooks to scan user inputs for known jailbreak patterns or malicious directives before they reach the model or tools.
+
+### Observability & Debugging
+
+- **Structured Logging**: Instead of simple print statements, use structured JSON logging with correlation IDs. This allows you to trace a single user request through multiple agent turns and tool calls.
+- **Logging for Testability**: LLM responses are non-deterministic and may summarize away key details.
+  - **Pattern**: Add explicit logging markers in your post-processing middleware (e.g., `logger.info("ACTION_SUCCESS: <id>")`).
+  - **Benefit**: Your integration tests can grep logs for these stable markers to verify tool success, rather than painfully parsing variable natural language responses.
+
+### Performance & Cost Optimization
+
+- **Token Economy**: Tools often return verbose JSON. Use post-processing to strip unnecessary fields or summarize large datasets *before* returning the result to the LLM's context window. This saves tokens and reduces latency.
+- **Caching**: For read-heavy tools (like "search_knowledge_base"), implement caching middleware to return previous results for identical queries, saving both time and API costs.
+
+### Error Handling
+
+- **Graceful Degradation**: If a tool fails (e.g., API timeout), catch the exception in middleware and return a structured error message to the LLM (e.g., `Error: Database timeout, please try again`).
+- **Self-Correction**: Well-formatted error messages often allow the LLM to understand *why* a call failed and retry it with corrected parameters automatically.
+
 
 ## Samples
 
@@ -15068,7 +15132,7 @@ How to add pre- and post- processing to your Agents using Python.
 
 ## Prerequisites
 
-This tutorial assumes that you have set up Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart.md).
+This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart.md).
 
 This guide demonstrates how to implement these patterns in your Toolbox applications.
 
@@ -15091,7 +15155,96 @@ You can also add model-level (`wrap_model`) and agent-level (`before_agent`, `af
 
 ## Results
 
-The output should look similar to the following. Note that exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+The output should look similar to the following.
+
+{{< notice note >}}
+The exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+{{< /notice >}}
+
+```
+AI: Booking Confirmed! You earned 500 Loyalty Points with this stay.
+
+AI: Error: Maximum stay duration is 14 days.
+```
+
+
+# Javascript
+How to add pre- and post- processing to your Agents using JS.
+
+
+## Prerequisites
+
+This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart_js.md).
+
+This guide demonstrates how to implement these patterns in your Toolbox applications.
+
+## Implementation
+
+{{< tabpane persist=header >}}
+{{% tab header="ADK" text=true %}}
+Coming soon.
+{{% /tab %}}
+{{% tab header="Langchain" text=true %}}
+The following example demonstrates how to use `ToolboxClient` with LangChain's middleware to implement pre- and post- processing for tool calls.
+
+```js
+{{< include "js/langchain/agent.js" >}}
+```
+
+You can also use the `wrapModelCall` hook to intercept messages before and after model calls.
+You can also use [node-style hooks](https://docs.langchain.com/oss/javascript/langchain/middleware/custom#node-style-hooks) to intercept messages at the agent and model level.
+See the [LangChain Middleware documentation](https://docs.langchain.com/oss/javascript/langchain/middleware/custom#tool-call-monitoring) for details on these additional hook types.
+
+{{% /tab %}}
+{{< /tabpane >}}
+
+## Results
+
+The output should look similar to the following.
+
+{{< notice note >}}
+The exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+{{< /notice >}}
+
+```
+AI: Booking Confirmed! You earned 500 Loyalty Points with this stay.
+
+AI: Error: Maximum stay duration is 14 days.
+```
+
+
+# Go
+How to add pre- and post- processing to your Agents using Go.
+
+
+## Prerequisites
+
+This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart_go.md).
+
+This guide demonstrates how to implement these patterns in your Toolbox applications.
+
+## Implementation
+
+{{< tabpane persist=header >}}
+{{% tab header="ADK" text=true %}}
+The following example demonstrates how to use the `beforeToolCallback` and `afterToolCallback` hooks in the ADK `LlmAgent` to implement pre and post processing logic.
+
+```go
+{{< include "go/adk/agent.go" >}}
+```
+
+You can also add model-level (`beforeModelCallback`, `afterModelCallback`) and agent-level (`beforeAgentCallback`, `afterAgentCallback`) hooks to intercept messages at different stages of the execution loop.
+
+For more information, see the [ADK Callbacks documentation](https://google.github.io/adk-docs/callbacks/types-of-callbacks/).{{% /tab %}}
+{{< /tabpane >}}
+
+## Results
+
+The output should look similar to the following.
+
+{{< notice note >}}
+The exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+{{< /notice >}}
 
 ```
 AI: Booking Confirmed! You earned 500 Loyalty Points with this stay.

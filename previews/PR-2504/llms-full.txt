@@ -757,7 +757,7 @@ README](https://github.com/googleapis/mcp-toolbox-sdk-go/blob/main/core/README.m
 
 
 # Python Quickstart (Local)
-How to get started running Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
+How to get started running MCP Toolbox locally with [Python](https://github.com/googleapis/mcp-toolbox-sdk-python), PostgreSQL, and  [Agent Development Kit](https://google.github.io/adk-docs/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) or [GoogleGenAI](https://pypi.org/project/google-genai/).
 
 
 [![Open In Colab](https://colab.research.google.com/assets/ colab-badge.svg)](https://colab.research.google.com/github/googleapis/genai-toolbox/blob/main/docs/en/getting-started/colab_quickstart.ipynb)
@@ -785,14 +785,14 @@ This guide assumes you have already done the following:
 
 {{< regionInclude "quickstart/shared/database_setup.md" "database_setup" >}}
 
-## Step 2: Install and configure Toolbox
+## Step 2: Install and configure MCP Toolbox
 
 {{< regionInclude "quickstart/shared/configure_toolbox.md" "configure_toolbox" >}}
 
-## Step 3: Connect your agent to Toolbox
+## Step 3: Connect your agent to MCP Toolbox
 
 In this section, we will write and run an agent that will load the Tools
-from Toolbox.
+from MCP Toolbox.
 
 {{< notice tip>}}
 If you prefer to experiment within a Google Colab environment, you can connect
@@ -866,7 +866,7 @@ pip install google-genai
     ```
     <br/>
 
-1. Update `my_agent/agent.py` with the following content to connect to Toolbox:
+1. Update `my_agent/agent.py` with the following content to connect to MCP Toolbox:
     ```py
     {{< regionInclude "quickstart/python/adk/quickstart.py" "quickstart" >}}
     ```
@@ -957,7 +957,7 @@ repo](https://github.com/googleapis/mcp-toolbox-sdk-python).
 
 
 # JS Quickstart (Local)
-How to get started running Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
+How to get started running MCP Toolbox locally with [JavaScript](https://github.com/googleapis/mcp-toolbox-sdk-js), PostgreSQL, and orchestration frameworks such as [LangChain](https://js.langchain.com/docs/introduction/), [GenkitJS](https://genkit.dev/docs/get-started/),  [LlamaIndex](https://ts.llamaindex.ai/) and [GoogleGenAI](https://github.com/googleapis/js-genai).
 
 
 ## Before you begin
@@ -978,14 +978,14 @@ This guide assumes you have already done the following:
 
 {{< regionInclude "quickstart/shared/database_setup.md" "database_setup" >}}
 
-## Step 2: Install and configure Toolbox
+## Step 2: Install and configure MCP Toolbox
 
 {{< regionInclude "quickstart/shared/configure_toolbox.md" "configure_toolbox" >}}
 
-## Step 3: Connect your agent to Toolbox
+## Step 3: Connect your agent to MCP Toolbox
 
 In this section, we will write and run an agent that will load the Tools
-from Toolbox.
+from MCP Toolbox.
 
 1. (Optional) Initialize a Node.js project:
 
@@ -1082,7 +1082,7 @@ repo](https://github.com/googleapis/mcp-toolbox-sdk-js).
 
 
 # Go Quickstart (Local)
-How to get started running Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
+How to get started running MCP Toolbox locally with [Go](https://github.com/googleapis/mcp-toolbox-sdk-go), PostgreSQL, and orchestration frameworks such as [LangChain Go](https://tmc.github.io/langchaingo/docs/), [GenkitGo](https://genkit.dev/go/docs/get-started-go/), [Go GenAI](https://github.com/googleapis/go-genai) and [OpenAI Go](https://github.com/openai/openai-go).
 
 
 ## Before you begin
@@ -1103,14 +1103,14 @@ This guide assumes you have already done the following:
 
 {{< regionInclude "quickstart/shared/database_setup.md" "database_setup" >}}
 
-## Step 2: Install and configure Toolbox
+## Step 2: Install and configure MCP Toolbox
 
 {{< regionInclude "quickstart/shared/configure_toolbox.md" "configure_toolbox" >}}
 
-## Step 3: Connect your agent to Toolbox
+## Step 3: Connect your agent to MCP Toolbox
 
 In this section, we will write and run an agent that will load the Tools
-from Toolbox.
+from MCP Toolbox.
 
 1. Initialize a go module:
 
@@ -10274,6 +10274,7 @@ instead of hardcoding your secrets into the configuration file.
 | user        |       string       |     true     | Name of the Postgres user to connect as (e.g. "my-pg-user").           |
 | password    |       string       |     true     | Password of the Postgres user (e.g. "my-password").                    |
 | queryParams |  map[string]string |     false    | Raw query to be added to the db connection string.                     |
+| queryExecMode | string | false | pgx query execution mode. Valid values: `cache_statement` (default), `cache_describe`, `describe_exec`, `exec`, `simple_protocol`. Useful with connection poolers that don't support prepared statement caching. |
 
 
 # Redis
@@ -10316,6 +10317,9 @@ password: ${MY_AUTH_STRING} # Omit this field if you don't have a password.
 # database: 0
 # clusterEnabled: false
 # useGCPIAM: false
+# tls:
+#   enabled: false
+#   insecureSkipVerify: false
 ```
 
 {{< notice tip >}}
@@ -10333,7 +10337,7 @@ Here is an example tools.yaml config with [AUTH][auth] enabled:
 ```yaml
 kind: sources
 name: my-redis-cluster-instance
-type: memorystore-redis
+type: redis
 address:
   - 127.0.0.1:6379
 password: ${MY_AUTH_STRING}
@@ -10350,7 +10354,7 @@ using IAM authentication:
 ```yaml
 kind: sources
 name: my-redis-cluster-instance
-type: memorystore-redis
+type: redis
 address:
   - 127.0.0.1:6379
 useGCPIAM: true
@@ -10361,15 +10365,17 @@ clusterEnabled: true
 
 ## Reference
 
-| **field**      | **type** | **required** | **description**                                                                                                                 |
-|----------------|:--------:|:------------:|---------------------------------------------------------------------------------------------------------------------------------|
-| type           |  string  |     true     | Must be "memorystore-redis".                                                                                                    |
-| address        |  string  |     true     | Primary endpoint for the Memorystore Redis instance to connect to.                                                              |
-| username       |  string  |    false     | If you are using a non-default user, specify the user name here. If you are using Memorystore for Redis, leave this field blank |
-| password       |  string  |    false     | If you have [Redis AUTH][auth] enabled, specify the AUTH string here                                                            |
-| database       |   int    |    false     | The Redis database to connect to. Not applicable for cluster enabled instances. The default database is `0`.                    |
-| clusterEnabled |   bool   |    false     | Set it to `true` if using a Redis Cluster instance. Defaults to `false`.                                                        |
-| useGCPIAM      |  string  |    false     | Set it to `true` if you are using GCP's IAM authentication. Defaults to `false`.                                                |
+| **field**              | **type** | **required** | **description**                                                                                                                               |
+|------------------------|:--------:|:------------:|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| type                   |  string  |     true     | Must be "redis".                                                                                                                              |
+| address                |  string  |     true     | Primary endpoint for the Memorystore Redis instance to connect to.                                                                            |
+| username               |  string  |    false     | If you are using a non-default user, specify the user name here. If you are using Memorystore for Redis, leave this field blank               |
+| password               |  string  |    false     | If you have [Redis AUTH][auth] enabled, specify the AUTH string here                                                                          |
+| database               |   int    |    false     | The Redis database to connect to. Not applicable for cluster enabled instances. The default database is `0`.                                  |
+| tls.enabled            |   bool   |    false     | Set it to `true` to enable TLS for the Redis connection. Defaults to `false`.                                                                 |
+| tls.insecureSkipVerify |   bool   |    false     | Set it to `true` to skip TLS certificate verification. **Warning:** This is insecure and not recommended for production. Defaults to `false`. |
+| clusterEnabled         |   bool   |    false     | Set it to `true` if using a Redis Cluster instance. Defaults to `false`.                                                                      |
+| useGCPIAM              |   bool   |    false     | Set it to `true` if you are using GCP's IAM authentication. Defaults to `false`.                                                              |
 
 [auth]: https://cloud.google.com/memorystore/docs/redis/about-redis-auth
 
@@ -15144,6 +15150,51 @@ The following example demonstrates how to use `ToolboxClient` with LangChain's m
 ```
 
 You can also add model-level (`wrap_model`) and agent-level (`before_agent`, `after_agent`) hooks to intercept messages at different stages of the execution loop. See the [LangChain Middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware/custom#wrap-style-hooks) for details on these additional hook types.
+{{% /tab %}}
+{{< /tabpane >}}
+
+## Results
+
+The output should look similar to the following.
+
+{{< notice note >}}
+The exact responses may vary due to the non-deterministic nature of LLMs and differences between orchestration frameworks.
+{{< /notice >}}
+
+```
+AI: Booking Confirmed! You earned 500 Loyalty Points with this stay.
+
+AI: Error: Maximum stay duration is 14 days.
+```
+
+
+# Javascript
+How to add pre- and post- processing to your Agents using JS.
+
+
+## Prerequisites
+
+This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the [local quickstart](../../getting-started/local_quickstart_js.md).
+
+This guide demonstrates how to implement these patterns in your Toolbox applications.
+
+## Implementation
+
+{{< tabpane persist=header >}}
+{{% tab header="ADK" text=true %}}
+Coming soon.
+{{% /tab %}}
+{{% tab header="Langchain" text=true %}}
+The following example demonstrates how to use `ToolboxClient` with LangChain's middleware to implement pre- and post- processing for tool calls.
+
+```js
+{{< include "js/langchain/agent.js" >}}
+```
+
+You can also use the `wrapModelCall` hook to intercept messages before and after model calls.
+You can also use [node-style hooks](https://docs.langchain.com/oss/javascript/langchain/middleware/custom#node-style-hooks) to intercept messages at the agent and model level.
+See the [LangChain Middleware documentation](https://docs.langchain.com/oss/javascript/langchain/middleware/custom#tool-call-monitoring) for details on these additional hook types.
+
 {{% /tab %}}
 {{< /tabpane >}}
 

@@ -9945,7 +9945,21 @@ with database and analytics services and popular open-source databases.&lt;/p>
 &lt;p>Gemini CLI is highly extensible, allowing for the addition of new tools and
 capabilities through extensions. You can load the extensions from a GitHub URL,
 a local directory, or a configurable registry. They provide new tools, slash
-commands, and prompts to assist with your workflow.&lt;/p></description></item><item><title>elasticsearch-esql</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/elasticsearch/elasticsearch-esql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/elasticsearch/elasticsearch-esql/</guid><description>&lt;h1 id="elasticsearch-esql">elasticsearch-esql&lt;/h1>
+commands, and prompts to assist with your workflow.&lt;/p></description></item><item><title>Core</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2408/sdks/js-sdk/core/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2408/sdks/js-sdk/core/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>The &lt;code>@toolbox-sdk/core&lt;/code> package provides a Javascript interface to the MCP Toolbox service, enabling you to load and invoke tools from your own applications.&lt;/p>
+&lt;h2 id="supported-environments">Supported Environments&lt;/h2>
+&lt;p>This SDK is a standard Node.js package built with TypeScript, ensuring broad compatibility with the modern JavaScript ecosystem.&lt;/p>
+&lt;ul>
+&lt;li>Node.js: Actively supported on Node.js v18.x and higher. The package is compatible with both modern ES Module (import) and legacy CommonJS (require).&lt;/li>
+&lt;li>TypeScript: The SDK is written in TypeScript and ships with its own type declarations, providing a first-class development experience with autocompletion and type-checking out of the box.&lt;/li>
+&lt;li>JavaScript: Fully supports modern JavaScript in Node.js environments.&lt;/li>
+&lt;/ul>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm install @toolbox-sdk/core
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="quickstart">Quickstart&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Start the Toolbox Service&lt;/strong>&lt;/p></description></item><item><title>elasticsearch-esql</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/elasticsearch/elasticsearch-esql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/elasticsearch/elasticsearch-esql/</guid><description>&lt;h1 id="elasticsearch-esql">elasticsearch-esql&lt;/h1>
 &lt;p>Execute ES|QL queries.&lt;/p>
 &lt;p>This tool allows you to execute ES|QL queries against your Elasticsearch
 cluster. You can use this to perform complex searches and aggregations.&lt;/p>
@@ -11541,21 +11555,7 @@ have multiple files, you can tell toolbox which to load with the &lt;code>--tool
 etc., you could use environment variables instead with the format &lt;code>${ENV_NAME}&lt;/code>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">user&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${USER_NAME}&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">password&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${PASSWORD}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A default value can be specified like &lt;code>${ENV_NAME:default}&lt;/code>.&lt;/p></description></item><item><title>Core</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2408/sdks/js-sdk/core/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2408/sdks/js-sdk/core/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
-&lt;p>The &lt;code>@toolbox-sdk/core&lt;/code> package provides a Javascript interface to the MCP Toolbox service, enabling you to load and invoke tools from your own applications.&lt;/p>
-&lt;h2 id="supported-environments">Supported Environments&lt;/h2>
-&lt;p>This SDK is a standard Node.js package built with TypeScript, ensuring broad compatibility with the modern JavaScript ecosystem.&lt;/p>
-&lt;ul>
-&lt;li>Node.js: Actively supported on Node.js v18.x and higher. The package is compatible with both modern ES Module (import) and legacy CommonJS (require).&lt;/li>
-&lt;li>TypeScript: The SDK is written in TypeScript and ships with its own type declarations, providing a first-class development experience with autocompletion and type-checking out of the box.&lt;/li>
-&lt;li>JavaScript: Fully supports modern JavaScript in Node.js environments.&lt;/li>
-&lt;/ul>
-&lt;h2 id="installation">Installation&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm install @toolbox-sdk/core
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="quickstart">Quickstart&lt;/h2>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;strong>Start the Toolbox Service&lt;/strong>&lt;/p></description></item><item><title>alloydb-wait-for-operation</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/alloydb/alloydb-wait-for-operation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/alloydb/alloydb-wait-for-operation/</guid><description>&lt;p>The &lt;code>alloydb-wait-for-operation&lt;/code> tool is a utility tool that waits for a
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A default value can be specified like &lt;code>${ENV_NAME:default}&lt;/code>.&lt;/p></description></item><item><title>alloydb-wait-for-operation</title><link>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/alloydb/alloydb-wait-for-operation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://googleapis.github.io/genai-toolbox/previews/PR-2408/resources/tools/alloydb/alloydb-wait-for-operation/</guid><description>&lt;p>The &lt;code>alloydb-wait-for-operation&lt;/code> tool is a utility tool that waits for a
 long-running AlloyDB operation to complete. It does this by polling the AlloyDB
 Admin API operation status endpoint until the operation is finished, using
 exponential backoff. It is compatible with

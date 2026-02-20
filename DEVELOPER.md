@@ -371,7 +371,7 @@ for instructions on developing Toolbox SDKs.
 Team `@googleapis/senseai-eco` has been set as
 [CODEOWNERS](.github/CODEOWNERS). The GitHub TeamSync tool is used to create
 this team from MDB Group, `senseai-eco`. Additionally, database-specific GitHub
-teams (e.g., `@googleapis/toolbox-alloydb`) have been created from MDB groups to
+teams (e.g., `@googleapis/toolbox-alloydb-team`) have been created from MDB groups to
 manage code ownership and review for individual database products.
 
 Team `@googleapis/toolbox-contributors` has write access to this repo. They

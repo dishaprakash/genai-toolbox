@@ -50,10 +50,12 @@ func NewCommand(opts *internal.ToolboxOptions) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&cmd.name, "name", "", "Name of the generated skill.")
-	cmd.Flags().StringVar(&cmd.description, "description", "", "Description of the generated skill")
-	cmd.Flags().StringVar(&cmd.toolset, "toolset", "", "Name of the toolset to convert into a skill. If not provided, all tools will be included.")
-	cmd.Flags().StringVar(&cmd.outputDir, "output-dir", "skills", "Directory to output generated skills")
+	flags := cmd.Flags()
+	internal.ConfigFileFlags(flags, opts)
+	flags.StringVar(&cmd.name, "name", "", "Name of the generated skill.")
+	flags.StringVar(&cmd.description, "description", "", "Description of the generated skill")
+	flags.StringVar(&cmd.toolset, "toolset", "", "Name of the toolset to convert into a skill. If not provided, all tools will be included.")
+	flags.StringVar(&cmd.outputDir, "output-dir", "skills", "Directory to output generated skills")
 
 	_ = cmd.MarkFlagRequired("name")
 	_ = cmd.MarkFlagRequired("description")

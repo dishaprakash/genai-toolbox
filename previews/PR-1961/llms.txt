@@ -184,7 +184,10 @@ Client SDKs to connect to the MCP Toolbox server.
   - [ADK](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/js-sdk/adk/): MCP Toolbox SDK for integrating functionalities of MCP Toolbox into your ADK apps.
   - [Core](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/js-sdk/core/): MCP Toolbox Core SDK for integrating functionalities of MCP Toolbox into your Agentic apps.
 - [Go](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/): Go SDKs to connect to the MCP Toolbox server.
-  - [ADK Package](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/tbadk/):   - [Core Package](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/core/):   - [Genkit Package](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/tbgenkit/): 
+  - [ADK Package](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/tbadk/): MCP Toolbox ADK for integrating functionalities of MCP Toolbox into your Agentic apps.
+  - [Core Package](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/core/): MCP Toolbox Core SDK for integrating functionalities of MCP Toolbox into your Agentic apps.
+  - [Genkit Package](https://googleapis.github.io/genai-toolbox/previews/PR-1961/sdks/go-sdk/tbgenkit/): MCP Toolbox Genkit for integrating functionalities of MCP Toolbox into your Agentic apps.
+
 ### Reference
 
 This section contains reference documentation.

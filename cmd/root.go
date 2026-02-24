@@ -327,7 +327,7 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 				}
 			}
 			if changed {
-				logger.DebugContext(ctx, "NFS remote change detected via polling")
+				logger.DebugContext(ctx, "File change detected via polling")
 				// once this timer runs out, it will trigger debounce.C
 				debounce.Reset(debounceDelay)
 			}

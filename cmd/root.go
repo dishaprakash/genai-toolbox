@@ -197,12 +197,7 @@ func validateReloadEdits(
 }
 
 // Helper to check if a file has a newer ModTime than stored in the map
-func checkModTime(path string, lastSeen map[string]time.Time) bool {
-	info, err := os.Stat(path)
-	if err != nil {
-		return false
-	}
-	mTime := info.ModTime()
+func checkModTime(path string, mTime time.Time, lastSeen map[string]time.Time) bool {
 	if mTime.After(lastSeen[path]) {
 		lastSeen[path] = mTime
 		return true
@@ -219,7 +214,7 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 
 	w, err := fsnotify.NewWatcher()
 	if err != nil {
-		logger.WarnContext(ctx, "error setting up new watcher %s", err)
+		logger.WarnContext(ctx, fmt.Sprintf("error setting up new watcher %s", err))
 		return
 	}
 
@@ -265,7 +260,7 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 		if watchingFolder {
 			files, err := os.ReadDir(folderToWatch)
 			if err != nil {
-				logger.WarnContext(ctx, "error reading tools folder on initial scan %s", err)
+				logger.WarnContext(ctx, fmt.Sprintf("error reading tools folder on initial scan %s", err))
 			} else {
 				for _, f := range files {
 					if !f.IsDir() && (strings.HasSuffix(f.Name(), ".yaml") || strings.HasSuffix(f.Name(), ".yml")) {
@@ -306,27 +301,25 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 			if watchingFolder {
 				files, err := os.ReadDir(folderToWatch)
 				if err != nil {
-					logger.WarnContext(ctx, "error reading tools folder %s", err)
+					logger.WarnContext(ctx, fmt.Sprintf("error reading tools folder %s", err))
 					continue
 				}
 				for _, f := range files {
 					if !f.IsDir() && (strings.HasSuffix(f.Name(), ".yaml") || strings.HasSuffix(f.Name(), ".yml")) {
 						fullPath := filepath.Join(folderToWatch, f.Name())
 						currentDiskFiles[fullPath] = true
-
-						if checkModTime(fullPath, lastSeen) {
-							changed = true
+						if info, err := f.Info(); err == nil {
+							if checkModTime(fullPath, info.ModTime(), lastSeen) {
+								changed = true
+							}
 						}
 					}
 				}
 			} else {
 				for f := range watchedFiles {
-					// We must explicitly check existence here because checkModTime
-					// swallows errors (returns false), making it impossible to
-					// distinguish between "no change" and "file deleted".
-					if _, err := os.Stat(f); err == nil {
+					if info, err := os.Stat(f); err == nil {
 						currentDiskFiles[f] = true
-						if checkModTime(f, lastSeen) {
+						if checkModTime(f, info.ModTime(), lastSeen) {
 							changed = true
 						}
 					}
@@ -354,7 +347,7 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 				return
 			}
 			if err != nil {
-				logger.WarnContext(ctx, "file watcher error %s", err)
+				logger.WarnContext(ctx, fmt.Sprintf("file watcher error %s", err))
 				return
 			}
 
@@ -389,14 +382,14 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 				logger.DebugContext(ctx, "Reloading tools folder.")
 				reloadedToolsFile, err = internal.LoadAndMergeToolsFolder(ctx, folderToWatch)
 				if err != nil {
-					logger.WarnContext(ctx, "error loading tools folder %s", err)
+					logger.WarnContext(ctx, fmt.Sprintf("error loading tools folder %s", err))
 					continue
 				}
 			} else {
 				logger.DebugContext(ctx, "Reloading tools file(s).")
 				reloadedToolsFile, err = internal.LoadAndMergeToolsFiles(ctx, slices.Collect(maps.Keys(watchedFiles)))
 				if err != nil {
-					logger.WarnContext(ctx, "error loading tools files %s", err)
+					logger.WarnContext(ctx, fmt.Sprintf("error loading tools files %s", err))
 					continue
 				}
 			}

@@ -15519,7 +15519,7 @@ used at a time.
 ### Hot Reload
 
 Toolbox supports two methods for detecting configuration changes: **Push**
-(event-drive) and **Poll** (interval-based). To completely disable all hot
+(event-driven) and **Poll** (interval-based). To completely disable all hot
 reloading, use the `--disable-reload` flag.
 
 * **Push (Default):** Toolbox uses a highly efficient push system that listens

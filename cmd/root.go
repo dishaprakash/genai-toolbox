@@ -205,6 +205,39 @@ func checkModTime(path string, mTime time.Time, lastSeen map[string]time.Time) b
 	return false
 }
 
+// Helper to scan watched files and check their modification times in polling system
+func scanWatchedFiles(watchingFolder bool, folderToWatch string, watchedFiles map[string]bool, lastSeen map[string]time.Time) (map[string]bool, bool, error) {
+	changed := false
+	currentDiskFiles := make(map[string]bool)
+	if watchingFolder {
+		files, err := os.ReadDir(folderToWatch)
+		if err != nil {
+			return nil, changed, fmt.Errorf("error reading tools folder %w", err)
+		}
+		for _, f := range files {
+			if !f.IsDir() && (strings.HasSuffix(f.Name(), ".yaml") || strings.HasSuffix(f.Name(), ".yml")) {
+				fullPath := filepath.Join(folderToWatch, f.Name())
+				currentDiskFiles[fullPath] = true
+				if info, err := f.Info(); err == nil {
+					if checkModTime(fullPath, info.ModTime(), lastSeen) {
+						changed = true
+					}
+				}
+			}
+		}
+	} else {
+		for f := range watchedFiles {
+			if info, err := os.Stat(f); err == nil {
+				currentDiskFiles[f] = true
+				if checkModTime(f, info.ModTime(), lastSeen) {
+					changed = true
+				}
+			}
+		}
+	}
+	return currentDiskFiles, changed, nil
+}
+
 // watchChanges checks for changes in the provided yaml tools file(s) or folder.
 func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles map[string]bool, s *server.Server, pollTickerSecond int) {
 	logger, err := util.LoggerFromContext(ctx)
@@ -257,28 +290,9 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 		logger.DebugContext(ctx, fmt.Sprintf("NFS polling enabled every %v", pollTickerSecond))
 
 		// Pre-populate lastSeen to avoid an initial spurious reload
-		if watchingFolder {
-			files, err := os.ReadDir(folderToWatch)
-			if err != nil {
-				logger.WarnContext(ctx, fmt.Sprintf("error reading tools folder on initial scan %s", err))
-			} else {
-				for _, f := range files {
-					if !f.IsDir() && (strings.HasSuffix(f.Name(), ".yaml") || strings.HasSuffix(f.Name(), ".yml")) {
-						fullPath := filepath.Join(folderToWatch, f.Name())
-						info, err := os.Stat(fullPath)
-						if err == nil {
-							lastSeen[fullPath] = info.ModTime()
-						}
-					}
-				}
-			}
-		} else {
-			for f := range watchedFiles {
-				info, err := os.Stat(f)
-				if err == nil {
-					lastSeen[f] = info.ModTime()
-				}
-			}
+		_, _, err = scanWatchedFiles(watchingFolder, folderToWatch, watchedFiles, lastSeen)
+		if err != nil {
+			logger.WarnContext(ctx, err.Error())
 		}
 	} else {
 		logger.DebugContext(ctx, "NFS polling disabled (interval is 0)")
@@ -295,35 +309,11 @@ func watchChanges(ctx context.Context, watchDirs map[string]bool, watchedFiles m
 			logger.DebugContext(ctx, "file watcher context cancelled")
 			return
 		case <-pollTickerChan:
-			changed := false
-			currentDiskFiles := make(map[string]bool)
 			// Get files that are currently on disk
-			if watchingFolder {
-				files, err := os.ReadDir(folderToWatch)
-				if err != nil {
-					logger.WarnContext(ctx, fmt.Sprintf("error reading tools folder %s", err))
-					continue
-				}
-				for _, f := range files {
-					if !f.IsDir() && (strings.HasSuffix(f.Name(), ".yaml") || strings.HasSuffix(f.Name(), ".yml")) {
-						fullPath := filepath.Join(folderToWatch, f.Name())
-						currentDiskFiles[fullPath] = true
-						if info, err := f.Info(); err == nil {
-							if checkModTime(fullPath, info.ModTime(), lastSeen) {
-								changed = true
-							}
-						}
-					}
-				}
-			} else {
-				for f := range watchedFiles {
-					if info, err := os.Stat(f); err == nil {
-						currentDiskFiles[f] = true
-						if checkModTime(f, info.ModTime(), lastSeen) {
-							changed = true
-						}
-					}
-				}
+			currentDiskFiles, changed, err := scanWatchedFiles(watchingFolder, folderToWatch, watchedFiles, lastSeen)
+			if err != nil {
+				logger.WarnContext(ctx, err.Error())
+				continue
 			}
 
 			// Check for Deletions

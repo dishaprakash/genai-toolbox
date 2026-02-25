@@ -269,7 +269,11 @@ steps:
     name: "bash"
     script: |
         #!/usr/bin/env bash
-        export VERSION=v$(cat ./cmd/version.txt)
+        VERSION_RAW=$(cat ./cmd/version.txt)
+        # Sanitize version to allow only alphanumeric, '.', and '-' to prevent path traversal.
+        VERSION_CLEAN=$(echo "$VERSION_RAW" | tr -dc 'a-zA-Z0-9.-')
+        export VERSION="v${VERSION_CLEAN}"
+
         mkdir -p artifacts/$VERSION/linux/amd64
         mkdir -p artifacts/geminicli/$VERSION/linux/amd64
         mkdir -p artifacts/$VERSION/darwin/arm64
@@ -282,7 +286,7 @@ steps:
         # Move files into the versioned folders
         mv toolbox.linux.amd64 artifacts/$VERSION/linux/amd64/toolbox
         mv toolbox.geminicli.linux.amd64 artifacts/geminicli/$VERSION/linux/amd64/toolbox
-        mv toolbox.darwin.arm64 artifacts/$VERSION/arm64/toolbox
+        mv toolbox.darwin.arm64 artifacts/$VERSION/darwin/arm64/toolbox
         mv toolbox.geminicli.darwin.arm64 artifacts/geminicli/$VERSION/darwin/arm64/toolbox
         mv toolbox.darwin.amd64 artifacts/$VERSION/darwin/amd64/toolbox
         mv toolbox.geminicli.darwin.amd64 artifacts/geminicli/$VERSION/darwin/amd64/toolbox
@@ -312,7 +316,7 @@ options:
 substitutions:
   _REGION: us-central1
   _AR_HOSTNAME: ${_REGION}-docker.pkg.dev
-  _AR_REPO_NAME: toolbox
-  _BUCKET_NAME: genai-toolbox
+  _AR_REPO_NAME: test
+  _BUCKET_NAME: test-cross-comp
   _DOCKER_URI: ${_AR_HOSTNAME}/${PROJECT_ID}/${_AR_REPO_NAME}/toolbox
   _PUSH_LATEST: "false" # Substituted in trigger

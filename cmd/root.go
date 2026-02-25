@@ -364,7 +364,7 @@ func run(cmd *cobra.Command, opts *internal.ToolboxOptions) error {
 		_ = shutdown(ctx)
 	}()
 
-	isCustomConfigured, err := opts.LoadConfig(ctx)
+	isCustomConfigured, err := opts.LoadConfig(ctx, false)
 	if err != nil {
 		return err
 	}

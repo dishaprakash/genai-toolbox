@@ -35,6 +35,7 @@ func NewCommand(opts *internal.ToolboxOptions) *cobra.Command {
 	}
 	flags := cmd.Flags()
 	internal.ServeFlags(flags, opts)
+	internal.ConfigFileFlags(flags, opts)
 	cmd.RunE = func(*cobra.Command, []string) error { return runServe(cmd, opts) }
 	return cmd
 }
@@ -70,6 +71,11 @@ func runServe(cmd *cobra.Command, opts *internal.ToolboxOptions) error {
 	defer func() {
 		_ = shutdown(ctx)
 	}()
+
+	_, err = opts.LoadConfig(ctx, true)
+	if err != nil {
+		return err
+	}
 
 	// start server
 	s, err := server.NewServer(ctx, opts.Cfg)

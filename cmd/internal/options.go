@@ -131,7 +131,7 @@ func (opts *ToolboxOptions) Setup(ctx context.Context) (context.Context, func(co
 }
 
 // LoadConfig checks and merge files that should be loaded into the server
-func (opts *ToolboxOptions) LoadConfig(ctx context.Context) (bool, error) {
+func (opts *ToolboxOptions) LoadConfig(ctx context.Context, allowMissingConfig bool) (bool, error) {
 	// Determine if Custom Files should be loaded
 	// Check for explicit custom flags
 	isCustomConfigured := opts.ToolsFile != "" || len(opts.ToolsFiles) > 0 || opts.ToolsFolder != ""
@@ -203,6 +203,10 @@ func (opts *ToolboxOptions) LoadConfig(ctx context.Context) (bool, error) {
 			// Use single file (tools-file or default `tools.yaml`)
 			buf, readFileErr := os.ReadFile(opts.ToolsFile)
 			if readFileErr != nil {
+				// allowing Toolbox to run without configuration file
+				if allowMissingConfig {
+					return false, nil
+				}
 				errMsg := fmt.Errorf("unable to read tool file at %q: %w", opts.ToolsFile, readFileErr)
 				logger.ErrorContext(ctx, errMsg.Error())
 				return isCustomConfigured, errMsg

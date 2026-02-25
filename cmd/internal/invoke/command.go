@@ -56,7 +56,7 @@ func runInvoke(cmd *cobra.Command, args []string, opts *internal.ToolboxOptions)
 		_ = shutdown(ctx)
 	}()
 
-	_, err = opts.LoadConfig(ctx)
+	_, err = opts.LoadConfig(ctx, false)
 	if err != nil {
 		return err
 	}

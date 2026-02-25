@@ -74,7 +74,7 @@ func run(cmd *skillsCmd, opts *internal.ToolboxOptions) error {
 		_ = shutdown(ctx)
 	}()
 
-	_, err = opts.LoadConfig(ctx)
+	_, err = opts.LoadConfig(ctx, false)
 	if err != nil {
 		return err
 	}

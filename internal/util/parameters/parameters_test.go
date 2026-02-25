@@ -1383,7 +1383,6 @@ func TestParametersParse(t *testing.T) {
 	})
 }
 
-
 func TestAuthParametersParse(t *testing.T) {
 	authServices := []parameters.ParamAuthService{
 		{
@@ -2367,5 +2366,3 @@ func TestCheckParamRequired(t *testing.T) {
 		})
 	}
 }
-
-

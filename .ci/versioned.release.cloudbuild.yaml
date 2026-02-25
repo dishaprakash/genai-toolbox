@@ -24,7 +24,7 @@ steps:
         if [[ $_PUSH_LATEST == 'true' ]]; then
           export TAGS="$TAGS -t ${_DOCKER_URI}:latest"
         fi
-        docker buildx build --platform linux/amd64,linux/arm64 --build-arg BUILD_TYPE=container.release --build-arg COMMIT_SHA=$(git rev-parse --short HEAD) $TAGS --push .
+        docker buildx build --platform linux/amd64,linux/arm64 --build-arg BUILD_TYPE=container.release --build-arg COMMIT_SHA=$(git rev-parse --short HEAD) $TAGS --load .
 
   - id: "install-dependencies"
     name: golang:1

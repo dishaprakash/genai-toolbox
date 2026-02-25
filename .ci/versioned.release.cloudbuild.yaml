@@ -26,7 +26,9 @@ steps:
         fi
         docker buildx build --platform linux/amd64,linux/arm64 --build-arg BUILD_TYPE=container.release --build-arg COMMIT_SHA=$(git rev-parse --short HEAD) $TAGS --push .
 
+        // Pull the image to ensure it's available for provenance generation.
         docker pull ${_DOCKER_URI}:${VERSION}
+        docker tag ${_DOCKER_URI}:${VERSION} ${_DOCKER_URI}:latest
 
   - id: "install-dependencies"
     name: golang:1

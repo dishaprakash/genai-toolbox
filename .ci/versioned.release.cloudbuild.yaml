@@ -24,7 +24,9 @@ steps:
         if [[ $_PUSH_LATEST == 'true' ]]; then
           export TAGS="$TAGS -t ${_DOCKER_URI}:latest"
         fi
-        docker buildx build --platform linux/amd64,linux/arm64 --build-arg BUILD_TYPE=container.release --build-arg COMMIT_SHA=$(git rev-parse --short HEAD) $TAGS --load .
+        docker buildx build --platform linux/amd64,linux/arm64 --build-arg BUILD_TYPE=container.release --build-arg COMMIT_SHA=$(git rev-parse --short HEAD) $TAGS --push .
+
+        docker pull ${_DOCKER_URI}:${VERSION}
 
   - id: "install-dependencies"
     name: golang:1
@@ -294,7 +296,7 @@ steps:
         mv toolbox.geminicli.windows.amd64.exe artifacts/geminicli/$VERSION/windows/amd64/toolbox.exe
 
 images:
-  - '${_DOCKER_URI}'
+  - '${_DOCKER_URI}:latest'
 
 # Cloud Build uploads the files and generates 
 # a signed provenance record in the same bucket.

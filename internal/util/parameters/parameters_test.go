@@ -1362,7 +1362,27 @@ func TestParametersParse(t *testing.T) {
 			}
 		})
 	}
+	t.Run("CheckNullForRequiredParam", func(t *testing.T) {
+		// Define a required string parameter
+		params := parameters.Parameters{
+			parameters.NewStringParameter("required_param", "this is required"),
+		}
+
+		// Input map with explicit nil
+		input := map[string]any{
+			"required_param": nil,
+		}
+
+		// Call ParseParams
+		_, err := parameters.ParseParams(params, input, nil)
+
+		// Expect an error because the parameter is required
+		if err == nil {
+			t.Errorf("ParseParams allowed explicit nil for required parameter, expected error")
+		}
+	})
 }
+
 
 func TestAuthParametersParse(t *testing.T) {
 	authServices := []parameters.ParamAuthService{
@@ -2348,22 +2368,4 @@ func TestCheckParamRequired(t *testing.T) {
 	}
 }
 
-func TestParseParams_ExplicitNullForRequiredParam(t *testing.T) {
-	// Define a required string parameter
-	params := parameters.Parameters{
-		parameters.NewStringParameter("required_param", "this is required"),
-	}
 
-	// Input map with explicit nil
-	input := map[string]any{
-		"required_param": nil,
-	}
-
-	// Call ParseParams
-	_, err := parameters.ParseParams(params, input, nil)
-
-	// Expect an error because the parameter is required
-	if err == nil {
-		t.Errorf("ParseParams allowed explicit nil for required parameter, expected error")
-	}
-}

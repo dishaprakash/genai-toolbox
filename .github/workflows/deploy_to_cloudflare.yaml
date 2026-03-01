@@ -20,8 +20,11 @@ jobs:
       - name: Remove .git folder
         run: rm -rf .git
 
-      - name: Create .cfignore
-        run: echo "**/edit-headers.gif" > .cfignore
+      - name: Force delete all oversized files
+        run: |
+          echo "Finding and deleting files over 24MB..."
+          find . -type f -size +24M -delete
+          echo "Oversized files destroyed."
           
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

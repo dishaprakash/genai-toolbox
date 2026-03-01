@@ -1,0 +1,27 @@
+name: "POC: Deploy Existing Docs to Cloudflare"
+
+permissions:
+  contents: read
+  deployments: write
+
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-existing-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Built Docs Branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'versioned-gh-pages'
+          
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # The '.' means deploy the current directory (the root of the checked-out branch)
+          # Make sure to update 'hugo-docs-poc' to your actual Cloudflare project name!
+          command: pages deploy . --project-name=yoolbox-docs --branch=main

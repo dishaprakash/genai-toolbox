@@ -16,6 +16,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: 'versioned-gh-pages'
+
+      - name: Find files over 25MB
+        run: |
+          echo "Scanning for files larger than 25MB..."
+          find . -type f -size +25M -exec ls -lh {} + || echo "No files over 25MB found!"
           
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

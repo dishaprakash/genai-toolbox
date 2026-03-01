@@ -24,4 +24,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # The '.' means deploy the current directory (the root of the checked-out branch)
           # Make sure to update 'hugo-docs-poc' to your actual Cloudflare project name!
-          command: pages deploy . --project-name=yoolbox-docs --branch=main
+          command: pages deploy . --project-name=toolbox-docs --branch=main

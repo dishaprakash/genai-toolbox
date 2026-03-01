@@ -20,6 +20,14 @@ jobs:
       - name: Remove .git folder
         run: rm -rf .git
 
+      - name: Remove unused previews to reduce file count
+        run: |
+          echo "Deleting old PR previews..."
+          rm -rf previews/
+          
+          echo "Remaining file count:"
+          find . -type f | wc -l
+
       - name: Force delete all oversized files
         run: |
           echo "Finding and deleting files over 24MB..."

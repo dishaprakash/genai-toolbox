@@ -17,10 +17,11 @@ jobs:
         with:
           ref: 'versioned-gh-pages'
 
-      - name: Find files over 25MB
-        run: |
-          echo "Scanning for files larger than 25MB..."
-          find . -type f -size +25M -exec ls -lh {} + || echo "No files over 25MB found!"
+      - name: Remove .git folder
+        run: rm -rf .git
+
+      - name: Create .cfignore
+        run: echo "**/edit-headers.gif" > .cfignore
           
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

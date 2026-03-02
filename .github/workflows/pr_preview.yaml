@@ -64,4 +64,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy staging --project-name=hugo-docs-poc --branch=${{ github.head_ref }}
+          command: pages deploy staging --project-name=toolbox-docs --branch=${{ github.head_ref }}

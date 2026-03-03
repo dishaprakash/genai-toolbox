@@ -1,6 +1,5 @@
 title = 'MCP Toolbox for Databases'
-# baseURL should be set to your root domain or handled via CI environment variables
-baseURL = ""
+baseURL = "https://go.mcp-toolbox.dev/"
 relativeURLs = true
 
 languageCode = 'en-us'

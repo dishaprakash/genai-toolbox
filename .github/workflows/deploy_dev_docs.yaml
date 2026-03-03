@@ -23,7 +23,7 @@ on:
       - main
     paths:
       - 'docs/**'
-      - 'github/workflows/docs**'
+      - '.github/workflows/deploy_dev_docs.yaml'
       - '.hugo/**'
 
   # Allow triggering manually.
@@ -59,14 +59,15 @@ jobs:
         uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/.hugo/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: hugo --minify
+
+      - name: Build Hugo
+        run: hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/"
         env:
-          HUGO_BASEURL: ""
           HUGO_RELATIVEURLS: true
 
       - name: Create Staging Directory
@@ -75,11 +76,11 @@ jobs:
           mv public staging/dev
           mv staging/dev/releases.releases staging/releases.releases
 
-      - name: Deploy
+      - name: Push build to v1-docsite branch
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.hugo/staging
-          publish_branch: versioned-gh-pages
+          publish_branch: v1-docsite
           keep_files: true
           commit_message: "deploy: ${{ github.event.head_commit.message }}"

@@ -15,9 +15,10 @@
 name: "Sync v1-docsite to Cloudflare"
 
 on:
-  push:
-    branches:
-      - v1-docsite
+  workflow_run:
+    workflows: ["Deploy In-development docs", "Deploy Versioned Docs", "Deploy Previous Version Docs"]
+    types:
+      - completed
 
 jobs:
   deploy:

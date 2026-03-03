@@ -20,6 +20,10 @@ on:
     types:
       - completed
 
+concurrency:
+  group: cloudflare-sync
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

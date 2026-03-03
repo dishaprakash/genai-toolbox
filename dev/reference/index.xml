@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reference on MCP Toolbox for Databases</title><link>/dev/reference/</link><description>Recent content in Reference on MCP Toolbox for Databases</description><generator>Hugo</generator><language>en</language><atom:link href="/dev/reference/index.xml" rel="self" type="application/rss+xml"/><item><title>CLI</title><link>/dev/reference/cli/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/dev/reference/cli/</guid><description>&lt;h2 id="reference">Reference&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reference on MCP Toolbox for Databases</title><link>/reference/</link><description>Recent content in Reference on MCP Toolbox for Databases</description><generator>Hugo</generator><language>en</language><atom:link href="/reference/index.xml" rel="self" type="application/rss+xml"/><item><title>CLI</title><link>/reference/cli/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/cli/</guid><description>&lt;h2 id="reference">Reference&lt;/h2>
 &lt;table>
  &lt;thead>
  &lt;tr>
@@ -48,7 +48,7 @@
  &lt;tr>
  &lt;td>&lt;/td>
  &lt;td>&lt;code>--prebuilt&lt;/code>&lt;/td>
- &lt;td>Use one or more prebuilt tool configuration by source type. See &lt;a href="/dev/reference/prebuilt-tools/">Prebuilt Tools Reference&lt;/a> for allowed values.&lt;/td>
+ &lt;td>Use one or more prebuilt tool configuration by source type. See &lt;a href="/reference/prebuilt-tools/">Prebuilt Tools Reference&lt;/a> for allowed values.&lt;/td>
  &lt;td>&lt;/td>
  &lt;/tr>
  &lt;tr>
@@ -128,10 +128,10 @@
 &lt;h2 id="sub-commands">Sub Commands&lt;/h2>
 &lt;details>
 &lt;summary>&lt;code>invoke&lt;/code>&lt;/summary>
-&lt;p>Executes a tool directly with the provided parameters. This is useful for testing tool configurations and parameters without needing a full client setup.&lt;/p></description></item><item><title>Prebuilt Tools</title><link>/dev/reference/prebuilt-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/dev/reference/prebuilt-tools/</guid><description>&lt;p>Prebuilt tools are reusable, pre-packaged toolsets that are designed to extend
+&lt;p>Executes a tool directly with the provided parameters. This is useful for testing tool configurations and parameters without needing a full client setup.&lt;/p></description></item><item><title>Prebuilt Tools</title><link>/reference/prebuilt-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/prebuilt-tools/</guid><description>&lt;p>Prebuilt tools are reusable, pre-packaged toolsets that are designed to extend
 the capabilities of agents. These tools are built to be generic and adaptable,
 allowing developers to interact with and take action on databases.&lt;/p>
-&lt;p>See guides, &lt;a href="/dev/how-to/connect-ide/">Connect from your IDE&lt;/a>, for
+&lt;p>See guides, &lt;a href="/how-to/connect-ide/">Connect from your IDE&lt;/a>, for
 details on how to connect your AI tools (IDEs) to databases via Toolbox and MCP.&lt;/p>
 &lt;style type="text/css">
  

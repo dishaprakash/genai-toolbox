@@ -3,8 +3,8 @@
    {{ .Site.Params.version_menu }}
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-   <div w3-include-html="{{ "releases.releases" | relURL }}"
-        w3-include-html-default='<a class="dropdown-item" href="{{ "dev/" | relURL }}">Dev</a>'>
+   <div w3-include-html="{{ "releases.releases" | relURL }}" 
+        w3-include-html-default='<a class="dropdown-item" href="{{ "/dev/" | absURL }}">Dev</a>'>
    </div>
    <script>
      w3.includeHTML();

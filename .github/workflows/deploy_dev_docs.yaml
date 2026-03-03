@@ -66,7 +66,7 @@ jobs:
       - run: npm ci
       - run: hugo --minify
         env:
-          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/dev
+          HUGO_BASEURL: /dev/
           HUGO_RELATIVEURLS: false
 
       - name: Create Staging Directory

@@ -67,7 +67,7 @@ jobs:
       - run: hugo --minify
         env:
           HUGO_BASEURL: ""
-          HUGO_RELATIVEURLS: false
+          HUGO_RELATIVEURLS: true
 
       - name: Create Staging Directory
         run: |

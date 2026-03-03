@@ -1,7 +1,7 @@
 title = 'MCP Toolbox for Databases'
 # baseURL should be set to your root domain or handled via CI environment variables
-baseURL = "/"
-relativeURLs = false
+baseURL = ""
+relativeURLs = true
 
 languageCode = 'en-us'
 defaultContentLanguage = "en"

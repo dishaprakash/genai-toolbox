@@ -33,6 +33,16 @@ jobs:
         with:
           ref: 'v1-docsite'
 
+      - name: Remove Git metadata
+        run: rm -rf .git
+
+      - name: Force delete oversized files
+        run: |
+          echo "Finding and deleting files over 25MB..."
+          # Changed to +25M to match your requirement precisely
+          find . -type f -size +25M -delete
+          echo "Cleanup complete."
+
       - name: Deploy Entire Site to Cloudflare
         uses: cloudflare/wrangler-action@v3
         with:

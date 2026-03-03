@@ -48,7 +48,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
 
 [[params.versions]]
   version = "Dev"
-  url = "/dev/"
+  url = "dev/"
 
 # Add a new version block here before every release
 # The order of versions in this file is mirrored into the dropdown

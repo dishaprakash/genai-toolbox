@@ -66,7 +66,7 @@ jobs:
       - run: npm ci
       - run: hugo --minify
         env:
-          HUGO_BASEURL: /dev/
+          HUGO_BASEURL: ""
           HUGO_RELATIVEURLS: false
 
       - name: Create Staging Directory

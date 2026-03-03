@@ -2,16 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Documentation Moved</title>
-    <link rel="canonical" href="https://toolbox-docs.pages.dev/">
-    <meta http-equiv="refresh" content="0; url=https://go.mcp-toolbox.dev/">
-    <script>
-      // Forces any deep link path to go to the main homepage
-      window.location.replace("https://go.mcp-toolbox.dev/");
-    </script>
+    <title>Redirecting to New Documentation</title>
+    <style>
+      body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f9f9f9; color: #333; }
+      .container { text-align: center; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+      a { color: #007bff; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      #timer { font-weight: bold; font-size: 1.2rem; color: #d93025; }
+    </style>
   </head>
   <body>
-    <h1>Documentation has moved</h1>
-    <p>Please visit our new site: <a href="https://go.mcp-toolbox.dev/">mcp-toolbox.dev</a></p>
+    <div class="container">
+      <h1>Documentation has moved</h1>
+      <p>You are now being redirected to our new <strong>v1 docsite</strong>.</p>
+      <p>Redirecting in <span id="timer">5</span> seconds...</p>
+      <p>If you are not redirected, <a href="https://go.mcp-toolbox.dev/">click here to visit go.mcp-toolbox.dev</a>.</p>
+    </div>
+
+    <script>
+      let seconds = 5;
+      const display = document.getElementById('timer');
+      const destination = "https://go.mcp-toolbox.dev/";
+
+      const countdown = setInterval(() => {
+        seconds--;
+        display.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(countdown);
+          window.location.replace(destination);
+        }
+      }, 1000);
+    </script>
   </body>
 </html>

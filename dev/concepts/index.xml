@@ -5,6 +5,6 @@ telemetry and observability available in Toolbox.&lt;/p>
 &lt;p>Toolbox exports telemetry data of logs via standard out/err, and traces/metrics
 through &lt;a href="https://opentelemetry.io/">OpenTelemetry&lt;/a>. Additional flags can be
 passed to Toolbox to enable different logging behavior, or to export metrics
-through a specific &lt;a href="/concepts/telemetry/#exporter">exporter&lt;/a>.&lt;/p>
+through a specific &lt;a href="../concepts/telemetry/#exporter">exporter&lt;/a>.&lt;/p>
 &lt;h2 id="logging">Logging&lt;/h2>
 &lt;p>The following flags can be used to customize Toolbox logging:&lt;/p></description></item></channel></rss>

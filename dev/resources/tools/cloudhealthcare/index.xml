@@ -2,7 +2,7 @@
 &lt;p>A &lt;code>cloud-healthcare-fhir-fetch-page&lt;/code> tool fetches a page of FHIR resources from
 a given URL. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-fhir-fetch-page&lt;/code> can be used for pagination when a previous
 tool call (like &lt;code>cloud-healthcare-fhir-patient-search&lt;/code> or
@@ -67,7 +67,7 @@ response bundle.&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-fhir-patient-everything&lt;/code> tool retrieves resources related to
 a given patient from a FHIR store. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-fhir-patient-everything&lt;/code> returns all the information available
 for a given patient ID. It can be configured to only return certain resource
@@ -151,7 +151,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-fhir-patient-search&lt;/code> tool searches for patients in a FHIR
 store based on a set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-fhir-patient-search&lt;/code> returns a list of patients that match the
 given criteria.&lt;/p>
@@ -330,7 +330,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-get-dataset&lt;/code> tool retrieves metadata for a Healthcare dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-dataset&lt;/code> returns the metadata of the healthcare dataset
 configured in the source. It takes no extra parameters.&lt;/p>
@@ -374,7 +374,7 @@ configured in the source. It takes no extra parameters.&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-get-dicom-store&lt;/code> tool retrieves information about a DICOM store. It&amp;rsquo;s
 compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-dicom-store&lt;/code> returns the details of a DICOM store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -437,7 +437,7 @@ compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-get-dicom-store-metrics&lt;/code> tool retrieves metrics for a DICOM
 store. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-dicom-store-metrics&lt;/code> returns the metrics of a DICOM store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -502,7 +502,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 from a FHIR store.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-fhir-resource&lt;/code> returns a single FHIR resource, identified
 by its type and ID.&lt;/p>
@@ -579,7 +579,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-get-fhir-store&lt;/code> tool retrieves information about a FHIR store. It&amp;rsquo;s
 compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-fhir-store&lt;/code> returns the details of a FHIR store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -642,7 +642,7 @@ compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-get-fhir-store-metrics&lt;/code> tool retrieves metrics for a FHIR store. It&amp;rsquo;s
 compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-fhir-store-metrics&lt;/code> returns the metrics of a FHIR store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -706,7 +706,7 @@ compatible with the following sources:&lt;/p>
 healthcare dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-list-dicom-stores&lt;/code> returns the details of the available DICOM
 stores in the dataset of the healthcare source. It takes no extra parameters.&lt;/p>
@@ -751,7 +751,7 @@ stores in the dataset of the healthcare source. It takes no extra parameters.&lt
 healthcare dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-list-fhir-stores&lt;/code> returns the details of the available FHIR
 stores in the dataset of the healthcare source. It takes no extra parameters.&lt;/p>
@@ -796,7 +796,7 @@ stores in the dataset of the healthcare source. It takes no extra parameters.&lt
 DICOM instance from a DICOM store.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-retrieve-rendered-dicom-instance&lt;/code> returns a base64 encoded
 string of the image in JPEG format.&lt;/p>
@@ -886,7 +886,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 a DICOM store based on a set of criteria. It&amp;rsquo;s compatible with the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>search-dicom-instances&lt;/code> returns a list of DICOM instances that match the given
 criteria.&lt;/p>
@@ -1017,7 +1017,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-search-dicom-series&lt;/code> tool searches for DICOM series in a DICOM store based on a
 set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-search-dicom-series&lt;/code> returns a list of DICOM series that match the given criteria.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -1140,7 +1140,7 @@ set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-search-dicom-studies&lt;/code> tool searches for DICOM studies in a DICOM store based on a
 set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-search-dicom-studies&lt;/code> returns a list of DICOM studies that match the given criteria.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>

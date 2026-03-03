@@ -51,9 +51,9 @@ for more information.&lt;/p>
  &lt;/tr>
  &lt;tr>
  &lt;td>parameters&lt;/td>
- &lt;td style="text-align: center">&lt;a href="/resources/tools/#specifying-parameters">parameters&lt;/a>&lt;/td>
+ &lt;td style="text-align: center">&lt;a href="../../../resources/tools/#specifying-parameters">parameters&lt;/a>&lt;/td>
  &lt;td style="text-align: center">false&lt;/td>
- &lt;td>List of &lt;a href="/resources/tools/#specifying-parameters">parameters&lt;/a> that will be used with the ES|QL query.&lt;br/>Only supports “string”, “integer”, “float”, “boolean”.&lt;/td>
+ &lt;td>List of &lt;a href="../../../resources/tools/#specifying-parameters">parameters&lt;/a> that will be used with the ES|QL query.&lt;br/>Only supports “string”, “integer”, “float”, “boolean”.&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table></description></item></channel></rss>

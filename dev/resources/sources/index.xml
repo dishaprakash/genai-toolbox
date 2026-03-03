@@ -8,15 +8,15 @@ cluster&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/alloydbainl/alloydb-ai-nl/">&lt;code>alloydb-ai-nl&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/alloydbainl/alloydb-ai-nl/">&lt;code>alloydb-ai-nl&lt;/code>&lt;/a>
 Use natural language queries on AlloyDB, powered by AlloyDB AI.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in AlloyDB Postgres.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in AlloyDB Postgres.&lt;/p></description></item><item><title>AlloyDB Admin</title><link>/resources/sources/alloydb-admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/alloydb-admin/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-admin&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/alloydb/docs/reference/rest">Google
 AlloyDB API&lt;/a>. This allows
@@ -91,7 +91,7 @@ distributed. Counted among their strengths are horizontal scalability,
 distributed architectures, and a flexible approach to schema definition.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/cassandra/cassandra-cql/">&lt;code>cassandra-cql&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="../../resources/tools/cassandra/cassandra-cql/">&lt;code>cassandra-cql&lt;/code>&lt;/a>&lt;br>
 Run parameterized CQL queries in Cassandra.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -234,11 +234,11 @@ Run parameterized CQL queries in Cassandra.&lt;/li>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/clickhouse/clickhouse-execute-sql/">&lt;code>clickhouse-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/clickhouse/clickhouse-execute-sql/">&lt;code>clickhouse-execute-sql&lt;/code>&lt;/a>&lt;br>
 Execute parameterized SQL queries in ClickHouse with query logging.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/clickhouse/clickhouse-sql/">&lt;code>clickhouse-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/clickhouse/clickhouse-sql/">&lt;code>clickhouse-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in ClickHouse.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -273,7 +273,7 @@ browser) for each request.&lt;/li>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/cloudloggingadmin/cloud-logging-admin-list-log-names/">&lt;code>cloud-logging-admin-list-log-names&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/cloudloggingadmin/cloud-logging-admin-list-log-names/">&lt;code>cloud-logging-admin-list-log-names&lt;/code>&lt;/a>
 Lists the log names in the project.&lt;/p></description></item><item><title>Cloud Monitoring</title><link>/resources/sources/cloud-monitoring/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-monitoring/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>cloud-monitoring&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/monitoring/api">Google
 Cloud Monitoring API&lt;/a>. This allows
@@ -328,11 +328,11 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in Cloud SQL for MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in Cloud SQL for MySQL.&lt;/p></description></item><item><title>Cloud SQL for PostgreSQL</title><link>/resources/sources/cloud-sql-pg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-sql-pg/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://cloud.google.com/sql/docs/postgres">Cloud SQL for PostgreSQL&lt;/a> is a fully-managed database service
 that helps you set up, maintain, manage, and administer your PostgreSQL
@@ -342,15 +342,15 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
 List tables in a PostgreSQL database.&lt;/p></description></item><item><title>Cloud SQL for SQL Server</title><link>/resources/sources/cloud-sql-mssql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-sql-mssql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://cloud.google.com/sql/docs/sqlserver">Cloud SQL for SQL Server&lt;/a> is a managed database service that
 helps you set up, maintain, manage, and administer your SQL Server databases on
@@ -360,11 +360,11 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined SQL Server queries with placeholder parameters.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL Server queries in Cloud SQL for SQL Server.&lt;/p></description></item><item><title>Cloud SQL Admin</title><link>/resources/sources/cloud-sql-admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-sql-admin/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>cloud-sql-admin&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/sql/docs/mysql/admin-api">Google
 Cloud SQL Admin API&lt;/a>. This
@@ -423,13 +423,13 @@ browser) for each request.&lt;/li>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/cockroachdb/cockroachdb-sql/">&lt;code>cockroachdb-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/cockroachdb/cockroachdb-sql/">&lt;code>cockroachdb-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in CockroachDB (alias for execute-sql).&lt;/p></description></item><item><title>Couchbase</title><link>/resources/sources/couchbase/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/couchbase/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>couchbase&lt;/code> source establishes a connection to a Couchbase database cluster,
 allowing tools to execute SQL queries against it.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/couchbase/couchbase-sql/">&lt;code>couchbase-sql&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="../../resources/tools/couchbase/couchbase-sql/">&lt;code>couchbase-sql&lt;/code>&lt;/a>&lt;br>
 Run SQL++ statements on Couchbase with parameterized input.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -710,11 +710,11 @@ maintenance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/firebird/firebird-sql/">&lt;code>firebird-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/firebird/firebird-sql/">&lt;code>firebird-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in Firebird.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/firebird/firebird-execute-sql/">&lt;code>firebird-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/firebird/firebird-execute-sql/">&lt;code>firebird-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL statements in Firebird.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -788,7 +788,7 @@ endpoints. This enables Generative AI applications to access data from web APIs
 and other HTTP-accessible resources.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/http/http/">&lt;code>http&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="../../resources/tools/http/http/">&lt;code>http&lt;/code>&lt;/a>&lt;br>
 Make HTTP requests to REST APIs or other web services.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -1062,23 +1062,23 @@ features with a focus on performance and reliability.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in MariaDB.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in MariaDB.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
 List active queries in MariaDB.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
 List tables in a MariaDB database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-tables-missing-unique-indexes/">&lt;code>mysql-list-tables-missing-unique-indexes&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-list-tables-missing-unique-indexes/">&lt;code>mysql-list-tables-missing-unique-indexes&lt;/code>&lt;/a>
 List tables in a MariaDB database that do not have primary or unique indices.&lt;/p></description></item><item><title>MindsDB</title><link>/resources/sources/mindsdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/mindsdb/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://docs.mindsdb.com/">MindsDB&lt;/a> is an AI federated database in the world. It allows you
 to combine information from hundreds of datasources as if they were SQL,
@@ -1127,30 +1127,30 @@ reliability, performance, and ease of use.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
 List active queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-get-query-plan/">&lt;code>mysql-get-query-plan&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-get-query-plan/">&lt;code>mysql-get-query-plan&lt;/code>&lt;/a>
 Provide information about how MySQL executes a SQL statement (EXPLAIN).&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
 List tables in a MySQL database.&lt;/p></description></item><item><title>Neo4j</title><link>/resources/sources/neo4j/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/neo4j/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://neo4j.com/docs">Neo4j&lt;/a> is a powerful, open source graph database system with over
 15 years of active development that has earned it a strong reputation for
 reliability, feature robustness, and performance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/neo4j/neo4j-cypher/">&lt;code>neo4j-cypher&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="../../resources/tools/neo4j/neo4j-cypher/">&lt;code>neo4j-cypher&lt;/code>&lt;/a>&lt;br>
 Run Cypher queries against your Neo4j graph database.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -1175,11 +1175,11 @@ DW) database workloads.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/oracle/oracle-sql/">&lt;code>oracle-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/oracle/oracle-sql/">&lt;code>oracle-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in Oracle.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/oracle/oracle-execute-sql/">&lt;code>oracle-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/oracle/oracle-execute-sql/">&lt;code>oracle-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in Oracle.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -1193,23 +1193,23 @@ reputation for reliability, feature robustness, and performance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
 List tables in a PostgreSQL database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-active-queries/">&lt;code>postgres-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-list-active-queries/">&lt;code>postgres-list-active-queries&lt;/code>&lt;/a>
 List active queries in a PostgreSQL database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-available-extensions/">&lt;code>postgres-list-available-extensions&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/postgres/postgres-list-available-extensions/">&lt;code>postgres-list-available-extensions&lt;/code>&lt;/a>
 List available extensions for installation in a PostgreSQL database.&lt;/p></description></item><item><title>Redis</title><link>/resources/sources/redis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/redis/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>Redis is a in-memory data structure store, used as a database,
 cache, and message broker. It supports data structures such as strings, hashes,
@@ -1219,7 +1219,7 @@ geospatial indexes with radius queries.&lt;/p>
 the &lt;a href="https://redis.io/docs/">official Redis website&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/redis/redis/">&lt;code>redis&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="../../resources/tools/redis/redis/">&lt;code>redis&lt;/code>&lt;/a>&lt;br>
 Run Redis commands and interact with key-value pairs.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -1233,15 +1233,15 @@ Toolbox to interact with Spark batches hosted on Google Cloud Serverless for
 Apache Spark.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-list-batches/">&lt;code>serverless-spark-list-batches&lt;/code>&lt;/a>
+&lt;li>&lt;a href="../../resources/tools/serverless-spark/serverless-spark-list-batches/">&lt;code>serverless-spark-list-batches&lt;/code>&lt;/a>
 List and filter Serverless Spark batches.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-get-batch/">&lt;code>serverless-spark-get-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="../../resources/tools/serverless-spark/serverless-spark-get-batch/">&lt;code>serverless-spark-get-batch&lt;/code>&lt;/a>
 Get a Serverless Spark batch.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-cancel-batch/">&lt;code>serverless-spark-cancel-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="../../resources/tools/serverless-spark/serverless-spark-cancel-batch/">&lt;code>serverless-spark-cancel-batch&lt;/code>&lt;/a>
 Cancel a running Serverless Spark batch operation.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-create-pyspark-batch/">&lt;code>serverless-spark-create-pyspark-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="../../resources/tools/serverless-spark/serverless-spark-create-pyspark-batch/">&lt;code>serverless-spark-create-pyspark-batch&lt;/code>&lt;/a>
 Create a Serverless Spark PySpark batch operation.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-create-spark-batch/">&lt;code>serverless-spark-create-spark-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="../../resources/tools/serverless-spark/serverless-spark-create-spark-batch/">&lt;code>serverless-spark-create-spark-batch&lt;/code>&lt;/a>
 Create a Serverless Spark Java batch operation.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -1258,21 +1258,21 @@ optimized to handle both transactional and analytical workloads.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/singlestore/singlestore-sql/">&lt;code>singlestore-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/singlestore/singlestore-sql/">&lt;code>singlestore-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in SingleStore.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/singlestore/singlestore-execute-sql/">&lt;code>singlestore-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="../../resources/tools/singlestore/singlestore-execute-sql/">&lt;code>singlestore-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in SingleStore.&lt;/p></description></item><item><title>Snowflake</title><link>/resources/sources/snowflake/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/snowflake/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://docs.snowflake.com/">Snowflake&lt;/a> is a cloud data platform that provides a data warehouse-as-a-service designed for the cloud.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/snowflake/snowflake-sql/">&lt;code>snowflake-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/snowflake/snowflake-sql/">&lt;code>snowflake-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in Snowflake.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/snowflake/snowflake-execute-sql/">&lt;code>snowflake-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/snowflake/snowflake-execute-sql/">&lt;code>snowflake-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL statements in Snowflake.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -1423,7 +1423,7 @@ the Google Cloud console&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/spanner/spanner-sql/">&lt;code>spanner-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/spanner/spanner-sql/">&lt;code>spanner-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL on Google Cloud Spanner.&lt;/p></description></item><item><title>SQL Server</title><link>/resources/sources/mssql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/mssql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://www.microsoft.com/en-us/sql-server">SQL Server&lt;/a> is a relational database management system (RDBMS)
 developed by Microsoft that allows users to store, retrieve, and manage large
@@ -1431,15 +1431,15 @@ amount of data through a structured format.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined SQL Server queries with placeholder parameters.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL Server queries in SQL Server.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-list-tables/">&lt;code>mssql-list-tables&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/mssql/mssql-list-tables/">&lt;code>mssql-list-tables&lt;/code>&lt;/a>&lt;br>
 List tables in a SQL Server database.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -1461,7 +1461,7 @@ setup, database administration, and required resources.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/sqlite/sqlite-sql/">&lt;code>sqlite-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/sqlite/sqlite-sql/">&lt;code>sqlite-sql&lt;/code>&lt;/a>&lt;br>
 Run SQL queries against a local SQLite database.&lt;/p></description></item><item><title>TiDB</title><link>/resources/sources/tidb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/tidb/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://docs.pingcap.com/tidb/stable">TiDB&lt;/a> is an open-source distributed SQL database that supports
 Hybrid Transactional and Analytical Processing (HTAP) workloads. It is
@@ -1483,11 +1483,11 @@ including Hive, Cassandra, relational databases or even proprietary data stores.
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/trino/trino-sql/">&lt;code>trino-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/trino/trino-sql/">&lt;code>trino-sql&lt;/code>&lt;/a>&lt;br>
 Execute parameterized SQL queries against Trino.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/trino/trino-execute-sql/">&lt;code>trino-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="../../resources/tools/trino/trino-execute-sql/">&lt;code>trino-execute-sql&lt;/code>&lt;/a>&lt;br>
 Execute arbitrary SQL queries against Trino.&lt;/p>
 &lt;/li>
 &lt;/ul>

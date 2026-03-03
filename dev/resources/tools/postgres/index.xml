@@ -2,9 +2,9 @@
 &lt;p>The &lt;code>postgres-database-overview&lt;/code> fetches the current state of the PostgreSQL
 server. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-database-overview&lt;/code> fetches the current state of the PostgreSQL server
 This tool does not take any input parameters.&lt;/p>
@@ -19,9 +19,9 @@ This tool does not take any input parameters.&lt;/p>
 &lt;p>A &lt;code>postgres-execute-sql&lt;/code> tool executes a SQL statement against a Postgres
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -69,9 +69,9 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 (cardinality) for one or all columns in a specific PostgreSQL table by using the
 database&amp;rsquo;s internal statistics. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-get-column-cardinality&lt;/code> returns detailed information as JSON about column
 cardinality values, ordered by estimated cardinality in descending order. The tool takes
@@ -93,9 +93,9 @@ If not provided, cardinality for all columns will be returned. Default: &lt;code
 active queries in a Postgres database. It&amp;rsquo;s compatible with any of the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-active-queries&lt;/code> lists detailed information as JSON for currently
 active queries. The tool takes the following input parameters:&lt;/p>
@@ -120,9 +120,9 @@ handled. If this parameter is omitted, no applications are excluded.&lt;/li>
 extensions available for installation on a Postgres database. It&amp;rsquo;s compatible
 with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-available-extensions&lt;/code> lists all PostgreSQL extensions available
 for installation (extension name, default version description) as JSON. The does
@@ -168,9 +168,9 @@ not support any input parameter.&lt;/p>
 &lt;p>The &lt;code>postgres-list-database-stats&lt;/code> lists the key performance and activity statistics for each PostgreSQL database in the instance, offering insights into cache efficiency, transaction throughput, row-level activity, temporary file usage, and contention. It&amp;rsquo;s compatible with
 any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-database-stats&lt;/code> lists detailed information as JSON for each database. The tool
 takes the following input parameters:&lt;/p>
@@ -213,9 +213,9 @@ takes the following input parameters:&lt;/p>
 excluding those in &lt;code>pg_catalog&lt;/code> and &lt;code>information_schema&lt;/code>. It&amp;rsquo;s compatible with
 any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-indexes&lt;/code> lists detailed information as JSON for indexes. The tool
 takes the following input parameters:&lt;/p>
@@ -244,9 +244,9 @@ takes the following input parameters:&lt;/p>
 extensions installed on a Postgres database. It&amp;rsquo;s compatible with any of the
 following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-installed-extensions&lt;/code> lists all installed PostgreSQL extensions
 (extension name, version, schema, owner, description) as JSON. The does not
@@ -291,18 +291,18 @@ support any input parameter.&lt;/p>
 &lt;p>The &lt;code>postgres-list-locks&lt;/code> tool displays information about active locks by joining pg_stat_activity with pg_locks. This is useful to find transactions holding or waiting for locks and to troubleshoot contention.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool identifies all locks held by active processes showing the process ID, user, query text, and an aggregated list of all transactions and specific locks (relation, mode, grant status) associated with each process.&lt;/p>
 &lt;h2 id="query">Query&lt;/h2>
 &lt;p>The tool aggregates locks per backend (process) and returns the concatenated transaction ids and lock entries. The SQL used by the tool looks like:&lt;/p></description></item><item><title>postgres-list-pg-settings</title><link>/resources/tools/postgres/postgres-list-pg-settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-pg-settings/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-pg-settings&lt;/code> tool lists the configuration parameters for the postgres server, their current values, and related information. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-pg-settings&lt;/code> lists detailed information as JSON for each setting. The tool
 takes the following input parameters:&lt;/p>
@@ -324,9 +324,9 @@ takes the following input parameters:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The response is a json array with the following elements:&lt;/p></description></item><item><title>postgres-list-publication-tables</title><link>/resources/tools/postgres/postgres-list-publication-tables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-publication-tables/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-publication-tables&lt;/code> tool lists all publication tables in the database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-publication-tables&lt;/code> lists detailed information as JSON for publication tables. A publication table in PostgreSQL is a
 table that is explicitly included as a source for replication within a publication (a set of changes generated from a table or group
@@ -336,9 +336,9 @@ of tables) as part of the logical replication feature. The tool takes the follow
 performance metrics for executed queries. It&amp;rsquo;s compatible with any of the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-query-stats&lt;/code> lists detailed query statistics as JSON, ordered by
 total execution time in descending order. The tool takes the following input parameters:&lt;/p>
@@ -357,9 +357,9 @@ used within a LIKE clause. Default: &lt;code>&amp;quot;&amp;quot;&lt;/code> (all
 &lt;p>The &lt;code>postgres-list-roles&lt;/code> tool lists all the user-created roles in the instance, excluding system roles (like &lt;code>cloudsql%&lt;/code> or &lt;code>pg_%&lt;/code>). It provides details about each role&amp;rsquo;s attributes and memberships. It&amp;rsquo;s compatible with
 any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-roles&lt;/code> lists detailed information as JSON for each role. The tool
 takes the following input parameters:&lt;/p>
@@ -386,9 +386,9 @@ takes the following input parameters:&lt;/p>
 database excluding system and temporary schemas. It&amp;rsquo;s compatible with any of
 the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-schemas&lt;/code> lists detailed information as JSON for each schema. The
 tool takes the following input parameters:&lt;/p>
@@ -407,9 +407,9 @@ tool takes the following input parameters:&lt;/p>
 &lt;p>The &lt;code>postgres-list-sequences&lt;/code> tool retrieves information about sequences in a
 Postgres database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-sequences&lt;/code> lists detailed information as JSON for all sequences.
 The tool takes the following input parameters:&lt;/p>
@@ -435,26 +435,26 @@ used within a LIKE clause. Default: &lt;code>&amp;quot;&amp;quot;&lt;/code>&lt;/
 &lt;p>The &lt;code>postgres-list-stored-procedure&lt;/code> tool queries PostgreSQL system catalogs (&lt;code>pg_proc&lt;/code>, &lt;code>pg_namespace&lt;/code>, &lt;code>pg_roles&lt;/code>, and &lt;code>pg_language&lt;/code>) to retrieve comprehensive metadata about stored procedures in the database. It filters for procedures (kind = &amp;lsquo;p&amp;rsquo;) and provides the full procedure definition along with ownership and language information.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The tool returns a JSON array where each element represents a stored procedure with its schema, name, owner, language, complete definition, and optional description. Results are sorted by schema name and procedure name, with a default limit of 20 procedures.&lt;/p></description></item><item><title>postgres-list-table-stats</title><link>/resources/tools/postgres/postgres-list-table-stats/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-table-stats/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-table-stats&lt;/code> tool queries &lt;code>pg_stat_all_tables&lt;/code> to provide comprehensive statistics about tables in the database. It calculates useful metrics like index scan ratio and dead row ratio to help identify performance issues and table bloat.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The tool returns a JSON array where each element represents statistics for a table, including scan metrics, row counts, and vacuum history. Results are sorted by sequential scans by default and limited to 50 rows.&lt;/p></description></item><item><title>postgres-list-tables</title><link>/resources/tools/postgres/postgres-list-tables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-tables/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-tables&lt;/code> tool retrieves schema information for all or
 specified tables in a Postgres database. It&amp;rsquo;s compatible with any of the
 following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-tables&lt;/code> lists detailed schema information (object type, columns,
 constraints, indexes, triggers, owner, comment) as JSON for user-created tables
@@ -466,9 +466,9 @@ table names, &lt;code>detailed&lt;/code> will return the full table information.
 &lt;code>detailed&lt;/code>.&lt;/p></description></item><item><title>postgres-list-tablespaces</title><link>/resources/tools/postgres/postgres-list-tablespaces/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-tablespaces/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-tablespaces&lt;/code> tool lists available tablespaces in the database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-tablespaces&lt;/code> lists detailed information as JSON for tablespaces. The tool takes the following input parameters:&lt;/p>
 &lt;ul>
@@ -489,9 +489,9 @@ table names, &lt;code>detailed&lt;/code> will return the full table information.
 &lt;p>The &lt;code>postgres-list-triggers&lt;/code> tool lists available non-internal triggers in the
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-triggers&lt;/code> lists detailed information as JSON for triggers. The
 tool takes the following input parameters:&lt;/p>
@@ -516,9 +516,9 @@ used within a LIKE clause. Default: &lt;code>&amp;quot;&amp;quot;&lt;/code>&lt;/
 a Postgres database, excluding those in system schemas (&lt;code>pg_catalog&lt;/code>,
 &lt;code>information_schema&lt;/code>). It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-views&lt;/code> lists detailed view information (schemaname, viewname,
 ownername, definition) as JSON for views in a database. The tool takes the following input
@@ -567,17 +567,17 @@ parameters:&lt;/p>
 &lt;p>The &lt;code>postgres-long-running-transactions&lt;/code> tool reports transactions that exceed a configured duration threshold by scanning &lt;code>pg_stat_activity&lt;/code> for sessions where &lt;code>xact_start&lt;/code> is set and older than the configured interval.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The tool returns a JSON array with one object per matching session (non-idle). Each object contains the process id, database and user, application name, client address, session state, several age intervals (connection, transaction, query, and last activity), wait event info, and the SQL text currently associated with the session.&lt;/p></description></item><item><title>postgres-replication-stats</title><link>/resources/tools/postgres/postgres-replication-stats/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-replication-stats/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-replication-stats&lt;/code> tool queries pg_stat_replication to surface the status of connected replicas. It reports application_name, client address, connection and sync state, and human-readable lag sizes (sent, write, flush, replay, and total) computed using WAL LSN differences.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool takes no parameters. It returns a JSON array; each element represents a replication connection on the primary and includes lag metrics formatted by pg_size_pretty.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -590,9 +590,9 @@ parameters:&lt;/p>
 &lt;p>A &lt;code>postgres-sql&lt;/code> tool executes a pre-defined SQL statement against a Postgres
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://www.postgresql.org/docs/current/sql-prepare.html">prepared statement&lt;/a>,
 and specified parameters will be inserted according to their position: e.g. &lt;code>$1&lt;/code>

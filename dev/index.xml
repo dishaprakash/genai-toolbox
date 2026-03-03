@@ -149,15 +149,15 @@ cluster&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/alloydbainl/alloydb-ai-nl/">&lt;code>alloydb-ai-nl&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/alloydbainl/alloydb-ai-nl/">&lt;code>alloydb-ai-nl&lt;/code>&lt;/a>
 Use natural language queries on AlloyDB, powered by AlloyDB AI.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in AlloyDB Postgres.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in AlloyDB Postgres.&lt;/p></description></item><item><title>AlloyDB Admin</title><link>/resources/sources/alloydb-admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/alloydb-admin/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-admin&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/alloydb/docs/reference/rest">Google
 AlloyDB API&lt;/a>. This allows
@@ -219,7 +219,7 @@ converting natural language to SQL from the application layer to the database
 layer.&lt;/p>
 &lt;p>This tool is compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>AlloyDB AI Natural Language delivers secure and accurate responses for
 application end user natural language questions. Natural language streamlines
@@ -228,7 +228,7 @@ of converting natural language to SQL from the application layer to the
 database layer.&lt;/p></description></item><item><title>alloydb-create-cluster</title><link>/resources/tools/alloydb/alloydb-create-cluster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-create-cluster/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-create-cluster&lt;/code> tool creates a new AlloyDB for PostgreSQL cluster
 in a specified project and location. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.
 This tool provisions a cluster with a &lt;strong>private IP address&lt;/strong> within the specified VPC network.&lt;/p>
 &lt;p>&lt;strong>Permissions &amp;amp; APIs Required:&lt;/strong>
 Before using, ensure the following on your GCP project:&lt;/p>
@@ -251,7 +251,7 @@ roles:&lt;/p>
 &lt;p>The tool takes the following input parameters:&lt;/p></description></item><item><title>alloydb-create-instance</title><link>/resources/tools/alloydb/alloydb-create-instance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-create-instance/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-create-instance&lt;/code> tool creates a new AlloyDB instance (PRIMARY or
 READ_POOL) within a specified cluster. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.
 This tool provisions a new instance with a &lt;strong>public IP address&lt;/strong>.&lt;/p>
 &lt;p>&lt;strong>Permissions &amp;amp; APIs Required:&lt;/strong>
 Before using, ensure the following on your GCP project:&lt;/p>
@@ -274,7 +274,7 @@ roles:&lt;/p>
 &lt;p>The tool takes the following input parameters:&lt;/p></description></item><item><title>alloydb-get-cluster</title><link>/resources/tools/alloydb/alloydb-get-cluster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-get-cluster/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-get-cluster&lt;/code> tool retrieves detailed information for a single,
 specified AlloyDB cluster. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;table>
  &lt;thead>
  &lt;tr>
@@ -344,7 +344,7 @@ specified AlloyDB cluster. It is compatible with
 &lt;/table></description></item><item><title>alloydb-get-instance</title><link>/resources/tools/alloydb/alloydb-get-instance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-get-instance/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-get-instance&lt;/code> tool retrieves detailed information for a single,
 specified AlloyDB instance. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;table>
  &lt;thead>
  &lt;tr>
@@ -420,7 +420,7 @@ specified AlloyDB instance. It is compatible with
 &lt;/table></description></item><item><title>alloydb-get-user</title><link>/resources/tools/alloydb/alloydb-get-user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-get-user/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-get-user&lt;/code> tool retrieves detailed information for a single,
 specified AlloyDB user. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;table>
  &lt;thead>
  &lt;tr>
@@ -496,7 +496,7 @@ specified AlloyDB user. It is compatible with
 &lt;/table></description></item><item><title>alloydb-list-clusters</title><link>/resources/tools/alloydb/alloydb-list-clusters/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-list-clusters/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-list-clusters&lt;/code> tool retrieves AlloyDB cluster information for all
 or specified locations in a given project. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;p>&lt;code>alloydb-list-clusters&lt;/code> tool lists the detailed information of AlloyDB
 cluster(cluster name, state, configuration, etc) for a given project and
 location. The tool takes the following input parameters:&lt;/p>
@@ -563,7 +563,7 @@ location. The tool takes the following input parameters:&lt;/p>
 &lt;/table></description></item><item><title>alloydb-list-instances</title><link>/resources/tools/alloydb/alloydb-list-instances/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-list-instances/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-list-instances&lt;/code> tool retrieves AlloyDB instance information for all
 or specified clusters and locations in a given project. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;p>&lt;code>alloydb-list-instances&lt;/code> tool lists the detailed information of AlloyDB
 instances (instance name, type, IP address, state, configuration, etc) for a
 given project, cluster and location. The tool takes the following input
@@ -636,7 +636,7 @@ parameters:&lt;/p>
  &lt;/tbody>
 &lt;/table></description></item><item><title>alloydb-list-users</title><link>/resources/tools/alloydb/alloydb-list-users/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-list-users/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-list-users&lt;/code> tool lists all database users within an AlloyDB
-cluster. It is compatible with &lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a>
+cluster. It is compatible with &lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a>
 source.
 The tool takes the following input parameters:&lt;/p>
 &lt;table>
@@ -719,7 +719,7 @@ BigQuery by creating a temporary &lt;code>CONTRIBUTION_ANALYSIS&lt;/code> model 
 it with &lt;code>ML.GET_INSIGHTS&lt;/code> to find top contributors for a given metric.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-analyze-contribution&lt;/code> takes the following parameters:&lt;/p>
 &lt;ul>
@@ -756,7 +756,7 @@ SQL or Python code, the data retrieved, and the final text answer.&lt;/p></descr
 &lt;p>A &lt;code>bigquery-execute-sql&lt;/code> tool executes a SQL statement against BigQuery.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-execute-sql&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -782,7 +782,7 @@ layer of security by controlling which datasets can be accessed:&lt;/p></descrip
 &lt;p>A &lt;code>bigquery-forecast&lt;/code> tool forecasts time series data in BigQuery.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-forecast&lt;/code> constructs and executes a &lt;code>SELECT * FROM AI.FORECAST(...)&lt;/code>
 query based on the provided parameters:&lt;/p>
@@ -807,7 +807,7 @@ predict. It defaults to 10 if not specified.&lt;/li>
 &lt;p>A &lt;code>bigquery-get-dataset-info&lt;/code> tool retrieves metadata for a BigQuery dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-get-dataset-info&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -865,7 +865,7 @@ list, it will be used as the default value for the &lt;code>dataset&lt;/code> pa
 &lt;p>A &lt;code>bigquery-get-table-info&lt;/code> tool retrieves metadata for a BigQuery table.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-get-table-info&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -879,7 +879,7 @@ tool defaults to the project from the source configuration.&lt;/li>
 &lt;p>A &lt;code>bigquery-list-dataset-ids&lt;/code> tool returns all dataset IDs from the source.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-list-dataset-ids&lt;/code> accepts the following parameter:&lt;/p>
 &lt;ul>
@@ -935,7 +935,7 @@ parameter is ignored.&lt;/li>
 &lt;p>A &lt;code>bigquery-list-table-ids&lt;/code> tool returns table IDs in a given BigQuery dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-list-table-ids&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -949,7 +949,7 @@ the tool defaults to the project from the source configuration.&lt;/li>
 tables, views, models) with system=bigquery that matches given user query.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-search-catalog&lt;/code> takes a required &lt;code>query&lt;/code> parameter based on which
 entries are filtered and returned to the user. It also optionally accepts
@@ -970,7 +970,7 @@ interacting with [Dataplex][dataplex-docs].&lt;/p></description></item><item><ti
 &lt;p>A &lt;code>bigquery-sql&lt;/code> tool executes a pre-defined SQL statement. It&amp;rsquo;s compatible with
 the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The behavior of this tool is influenced by the &lt;code>writeMode&lt;/code> setting on its
 &lt;code>bigquery&lt;/code> source:&lt;/p>
@@ -999,7 +999,7 @@ with the cbt CLI&lt;/a>.&lt;/p></description></item><item><title>bigtable-sql</t
 &lt;p>A &lt;code>bigtable-sql&lt;/code> tool executes a pre-defined SQL statement against a Bigtable
 instance. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigtable/">bigtable&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/bigtable/">bigtable&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="googlesql">GoogleSQL&lt;/h3>
 &lt;p>Bigtable supports SQL queries. The integration with Toolbox supports &lt;code>googlesql&lt;/code>
@@ -1134,7 +1134,7 @@ distributed. Counted among their strengths are horizontal scalability,
 distributed architectures, and a flexible approach to schema definition.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/cassandra/cassandra-cql/">&lt;code>cassandra-cql&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="./resources/tools/cassandra/cassandra-cql/">&lt;code>cassandra-cql&lt;/code>&lt;/a>&lt;br>
 Run parameterized CQL queries in Cassandra.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -1276,7 +1276,7 @@ Run parameterized CQL queries in Cassandra.&lt;/li>
 &lt;p>A &lt;code>cassandra-cql&lt;/code> tool executes a pre-defined CQL statement against a Cassandra
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cassandra/">cassandra&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cassandra/">cassandra&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified CQL statement is executed as a &lt;a href="https://docs.datastax.com/en/datastax-drivers/developing/prepared-statements.html">prepared
 statement&lt;/a>, and expects parameters in the CQL query to be in
@@ -1336,7 +1336,7 @@ names, or other parts of the query.&lt;/p></description></item><item><title>CLI<
  &lt;tr>
  &lt;td>&lt;/td>
  &lt;td>&lt;code>--prebuilt&lt;/code>&lt;/td>
- &lt;td>Use one or more prebuilt tool configuration by source type. See &lt;a href="/reference/prebuilt-tools/">Prebuilt Tools Reference&lt;/a> for allowed values.&lt;/td>
+ &lt;td>Use one or more prebuilt tool configuration by source type. See &lt;a href="./reference/prebuilt-tools/">Prebuilt Tools Reference&lt;/a> for allowed values.&lt;/td>
  &lt;td>&lt;/td>
  &lt;/tr>
  &lt;tr>
@@ -1421,11 +1421,11 @@ names, or other parts of the query.&lt;/p></description></item><item><title>CLI<
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/clickhouse/clickhouse-execute-sql/">&lt;code>clickhouse-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/clickhouse/clickhouse-execute-sql/">&lt;code>clickhouse-execute-sql&lt;/code>&lt;/a>&lt;br>
 Execute parameterized SQL queries in ClickHouse with query logging.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/clickhouse/clickhouse-sql/">&lt;code>clickhouse-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/clickhouse/clickhouse-sql/">&lt;code>clickhouse-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in ClickHouse.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -1438,7 +1438,7 @@ appropriate permissions for the operations you plan to perform.&lt;/p>
 &lt;h3 id="network-access">Network Access&lt;/h3>
 &lt;p>ClickHouse supports multiple protocols:&lt;/p></description></item><item><title>clickhouse-execute-sql</title><link>/resources/tools/clickhouse/clickhouse-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/clickhouse/clickhouse-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>clickhouse-execute-sql&lt;/code> tool executes a SQL statement against a ClickHouse
-database. It&amp;rsquo;s compatible with the &lt;a href="/resources/sources/clickhouse/">clickhouse&lt;/a>
+database. It&amp;rsquo;s compatible with the &lt;a href="./resources/sources/clickhouse/">clickhouse&lt;/a>
 source.&lt;/p>
 &lt;p>&lt;code>clickhouse-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the SQL
 statement against the specified &lt;code>source&lt;/code>. This tool includes query logging
@@ -1525,7 +1525,7 @@ browser) for each request.&lt;/li>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/cloudloggingadmin/cloud-logging-admin-list-log-names/">&lt;code>cloud-logging-admin-list-log-names&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/cloudloggingadmin/cloud-logging-admin-list-log-names/">&lt;code>cloud-logging-admin-list-log-names&lt;/code>&lt;/a>
 Lists the log names in the project.&lt;/p></description></item><item><title>Cloud Monitoring</title><link>/resources/sources/cloud-monitoring/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-monitoring/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>cloud-monitoring&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/monitoring/api">Google
 Cloud Monitoring API&lt;/a>. This allows
@@ -1580,11 +1580,11 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in Cloud SQL for MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in Cloud SQL for MySQL.&lt;/p></description></item><item><title>Cloud SQL for PostgreSQL</title><link>/resources/sources/cloud-sql-pg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-sql-pg/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://cloud.google.com/sql/docs/postgres">Cloud SQL for PostgreSQL&lt;/a> is a fully-managed database service
 that helps you set up, maintain, manage, and administer your PostgreSQL
@@ -1594,15 +1594,15 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
 List tables in a PostgreSQL database.&lt;/p></description></item><item><title>Cloud SQL for SQL Server</title><link>/resources/sources/cloud-sql-mssql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-sql-mssql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://cloud.google.com/sql/docs/sqlserver">Cloud SQL for SQL Server&lt;/a> is a managed database service that
 helps you set up, maintain, manage, and administer your SQL Server databases on
@@ -1612,11 +1612,11 @@ to a database by following these instructions&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined SQL Server queries with placeholder parameters.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL Server queries in Cloud SQL for SQL Server.&lt;/p></description></item><item><title>Cloud SQL Admin</title><link>/resources/sources/cloud-sql-admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/cloud-sql-admin/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>cloud-sql-admin&lt;/code> source provides a client to interact with the &lt;a href="https://cloud.google.com/sql/docs/mysql/admin-api">Google
 Cloud SQL Admin API&lt;/a>. This
@@ -1796,7 +1796,7 @@ Google Cloud project.&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-fhir-fetch-page&lt;/code> tool fetches a page of FHIR resources from
 a given URL. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-fhir-fetch-page&lt;/code> can be used for pagination when a previous
 tool call (like &lt;code>cloud-healthcare-fhir-patient-search&lt;/code> or
@@ -1861,7 +1861,7 @@ response bundle.&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-fhir-patient-everything&lt;/code> tool retrieves resources related to
 a given patient from a FHIR store. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-fhir-patient-everything&lt;/code> returns all the information available
 for a given patient ID. It can be configured to only return certain resource
@@ -1945,7 +1945,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-fhir-patient-search&lt;/code> tool searches for patients in a FHIR
 store based on a set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-fhir-patient-search&lt;/code> returns a list of patients that match the
 given criteria.&lt;/p>
@@ -2124,7 +2124,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-get-dataset&lt;/code> tool retrieves metadata for a Healthcare dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-dataset&lt;/code> returns the metadata of the healthcare dataset
 configured in the source. It takes no extra parameters.&lt;/p>
@@ -2168,7 +2168,7 @@ configured in the source. It takes no extra parameters.&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-get-dicom-store&lt;/code> tool retrieves information about a DICOM store. It&amp;rsquo;s
 compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-dicom-store&lt;/code> returns the details of a DICOM store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -2231,7 +2231,7 @@ compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-get-dicom-store-metrics&lt;/code> tool retrieves metrics for a DICOM
 store. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-dicom-store-metrics&lt;/code> returns the metrics of a DICOM store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -2296,7 +2296,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 from a FHIR store.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-fhir-resource&lt;/code> returns a single FHIR resource, identified
 by its type and ID.&lt;/p>
@@ -2373,7 +2373,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-get-fhir-store&lt;/code> tool retrieves information about a FHIR store. It&amp;rsquo;s
 compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-fhir-store&lt;/code> returns the details of a FHIR store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -2436,7 +2436,7 @@ compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-get-fhir-store-metrics&lt;/code> tool retrieves metrics for a FHIR store. It&amp;rsquo;s
 compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-get-fhir-store-metrics&lt;/code> returns the metrics of a FHIR store.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -2500,7 +2500,7 @@ compatible with the following sources:&lt;/p>
 healthcare dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-list-dicom-stores&lt;/code> returns the details of the available DICOM
 stores in the dataset of the healthcare source. It takes no extra parameters.&lt;/p>
@@ -2545,7 +2545,7 @@ stores in the dataset of the healthcare source. It takes no extra parameters.&lt
 healthcare dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-list-fhir-stores&lt;/code> returns the details of the available FHIR
 stores in the dataset of the healthcare source. It takes no extra parameters.&lt;/p>
@@ -2590,7 +2590,7 @@ stores in the dataset of the healthcare source. It takes no extra parameters.&lt
 DICOM instance from a DICOM store.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-retrieve-rendered-dicom-instance&lt;/code> returns a base64 encoded
 string of the image in JPEG format.&lt;/p>
@@ -2680,7 +2680,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 a DICOM store based on a set of criteria. It&amp;rsquo;s compatible with the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>search-dicom-instances&lt;/code> returns a list of DICOM instances that match the given
 criteria.&lt;/p>
@@ -2811,7 +2811,7 @@ parameter is not needed.&lt;/p></description></item><item><title>cloud-healthcar
 &lt;p>A &lt;code>cloud-healthcare-search-dicom-series&lt;/code> tool searches for DICOM series in a DICOM store based on a
 set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-search-dicom-series&lt;/code> returns a list of DICOM series that match the given criteria.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -2934,7 +2934,7 @@ set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>A &lt;code>cloud-healthcare-search-dicom-studies&lt;/code> tool searches for DICOM studies in a DICOM store based on a
 set of criteria. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-healthcare/">cloud-healthcare&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>cloud-healthcare-search-dicom-studies&lt;/code> returns a list of DICOM studies that match the given criteria.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -3049,7 +3049,7 @@ available in Google Cloud Monitoring using the Prometheus Query Language
 (PromQL).
 It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-monitoring/">cloud-monitoring&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-monitoring/">cloud-monitoring&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
 &lt;p>To use this tool, you need to have the following IAM role on your Google Cloud
@@ -3215,12 +3215,12 @@ Google Cloud project and instance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/cockroachdb/cockroachdb-sql/">&lt;code>cockroachdb-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/cockroachdb/cockroachdb-sql/">&lt;code>cockroachdb-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in CockroachDB (alias for execute-sql).&lt;/p></description></item><item><title>cockroachdb-execute-sql</title><link>/resources/tools/cockroachdb/cockroachdb-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/cockroachdb/cockroachdb-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>cockroachdb-execute-sql&lt;/code> tool executes ad-hoc SQL statements against a CockroachDB database. This tool is designed for interactive workflows where the SQL query is provided dynamically at runtime, making it ideal for developer assistance and exploratory data analysis.&lt;/p>
 &lt;p>The tool takes a single &lt;code>sql&lt;/code> parameter containing the SQL statement to execute and returns the query results.&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Note:&lt;/strong> This tool is intended for developer assistant workflows with human-in-the-loop and shouldn&amp;rsquo;t be used for production agents. For production use cases with predefined queries, use &lt;a href="/resources/tools/cockroachdb/cockroachdb-sql/">cockroachdb-sql&lt;/a> instead.&lt;/p></description></item><item><title>cockroachdb-list-schemas</title><link>/resources/tools/cockroachdb/cockroachdb-list-schemas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/cockroachdb/cockroachdb-list-schemas/</guid><description>&lt;h2 id="about">About&lt;/h2>
+&lt;p>&lt;strong>Note:&lt;/strong> This tool is intended for developer assistant workflows with human-in-the-loop and shouldn&amp;rsquo;t be used for production agents. For production use cases with predefined queries, use &lt;a href="./resources/tools/cockroachdb/cockroachdb-sql/">cockroachdb-sql&lt;/a> instead.&lt;/p></description></item><item><title>cockroachdb-list-schemas</title><link>/resources/tools/cockroachdb/cockroachdb-list-schemas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/cockroachdb/cockroachdb-list-schemas/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>cockroachdb-list-schemas&lt;/code> tool retrieves a list of schemas (namespaces) in a CockroachDB database. Schemas are used to organize database objects such as tables, views, and functions into logical groups.&lt;/p>
 &lt;p>This tool is useful for:&lt;/p>
 &lt;ul>
@@ -3466,7 +3466,7 @@ The native SDKs can be combined with MCP clients in many cases.&lt;/p>
 allowing tools to execute SQL queries against it.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/couchbase/couchbase-sql/">&lt;code>couchbase-sql&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="./resources/tools/couchbase/couchbase-sql/">&lt;code>couchbase-sql&lt;/code>&lt;/a>&lt;br>
 Run SQL++ statements on Couchbase with parameterized input.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -3603,7 +3603,7 @@ Run SQL++ statements on Couchbase with parameterized input.&lt;/li>
 &lt;p>A &lt;code>couchbase-sql&lt;/code> tool executes a pre-defined SQL statement against a Couchbase
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/couchbase/">couchbase&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/couchbase/">couchbase&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a parameterized statement, and specified
 parameters will be used according to their name: e.g. &lt;code>$id&lt;/code>.&lt;/p>
@@ -3639,7 +3639,7 @@ applying artificial intelligence and machine learning.&lt;/p></description></ite
 &lt;p>A &lt;code>dataplex-lookup-entry&lt;/code> tool returns details of a particular entry in Dataplex
 Catalog. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/dataplex/">dataplex&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/dataplex/">dataplex&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>dataplex-lookup-entry&lt;/code> takes a required &lt;code>name&lt;/code> parameter which contains the
 project and location to which the request should be attributed in the following
@@ -3668,7 +3668,7 @@ interacting with [Dataplex][dataplex-docs].&lt;/p></description></item><item><ti
 aspect types based on search query.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/dataplex/">dataplex&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/dataplex/">dataplex&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>dataplex-search-aspect-types&lt;/code> accepts following parameters optionally:&lt;/p>
 &lt;ul>
@@ -3688,7 +3688,7 @@ interacting with &lt;a href="https://cloud.google.com/dataplex">Dataplex&lt;/a>.
 tables, views, models) that matches given user query.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/dataplex/">dataplex&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/dataplex/">dataplex&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>dataplex-search-entries&lt;/code> takes a required &lt;code>query&lt;/code> parameter based on which
 entries are filtered and returned to the user. It also optionally accepts
@@ -3964,11 +3964,11 @@ maintenance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/firebird/firebird-sql/">&lt;code>firebird-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/firebird/firebird-sql/">&lt;code>firebird-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in Firebird.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/firebird/firebird-execute-sql/">&lt;code>firebird-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/firebird/firebird-execute-sql/">&lt;code>firebird-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL statements in Firebird.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -3979,7 +3979,7 @@ user&lt;/a> to login to the database with.&lt;/p></description></item><item><tit
 &lt;p>A &lt;code>firebird-execute-sql&lt;/code> tool executes a SQL statement against a Firebird
 database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/firebird/">firebird&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/firebird/">firebird&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>firebird-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -4026,7 +4026,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>firebird-sql&lt;/code> tool executes a pre-defined SQL statement against a Firebird
 database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/firebird/">firebird&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/firebird/">firebird&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://firebirdsql.org/refdocs/langrefupd25-psql-execstat.html">prepared statement&lt;/a>,
 and supports both positional parameters (&lt;code>?&lt;/code>) and named parameters (&lt;code>:param_name&lt;/code>).
@@ -4093,7 +4093,7 @@ each new document.&lt;/p>
 their paths.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/firestore/">firestore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/firestore/">firestore&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>firestore-delete-documents&lt;/code> takes one input parameter &lt;code>documentPaths&lt;/code> which is
 an array of document paths to delete. The tool uses Firestore&amp;rsquo;s BulkWriter for
@@ -4139,7 +4139,7 @@ efficient batch deletion and returns the success status for each document.&lt;/p
 their paths.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/firestore/">firestore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/firestore/">firestore&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>firestore-get-documents&lt;/code> takes one input parameter &lt;code>documentPaths&lt;/code> which is an
 array of document paths, and returns the documents&amp;rsquo; data along with metadata
@@ -4186,7 +4186,7 @@ rules&lt;/a> for the
 current project.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/firestore/">firestore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/firestore/">firestore&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>firestore-get-rules&lt;/code> takes no input parameters and returns the security rules
 content along with metadata such as the ruleset name, and timestamps.&lt;/p>
@@ -4234,7 +4234,7 @@ in Firestore, either at the root level or as
 of a specific document.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/firestore/">firestore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/firestore/">firestore&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>firestore-list-collections&lt;/code> takes an optional &lt;code>parentPath&lt;/code> parameter to specify
 a document path. If provided, it lists all subcollections of that document. If
@@ -4527,7 +4527,7 @@ application and retrieved a &lt;a href="https://developers.google.com/identity/s
 in with the &lt;code>Client ID&lt;/code>.&lt;/p>
 &lt;h2 id="behavior">Behavior&lt;/h2>
 &lt;h3 id="authorized-invocations">Authorized Invocations&lt;/h3>
-&lt;p>When using &lt;a href="/resources/tools/#authorized-invocations">Authorized Invocations&lt;/a>, a tool will be
+&lt;p>When using &lt;a href="./resources/tools/#authorized-invocations">Authorized Invocations&lt;/a>, a tool will be
 considered authorized if it has a valid Oauth 2.0 token that matches the Client
 ID.&lt;/p></description></item><item><title>http</title><link>/resources/tools/http/http/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/http/http/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>http&lt;/code> tool allows you to make HTTP requests to APIs to retrieve data.
@@ -4543,7 +4543,7 @@ endpoints. This enables Generative AI applications to access data from web APIs
 and other HTTP-accessible resources.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/http/http/">&lt;code>http&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="./resources/tools/http/http/">&lt;code>http&lt;/code>&lt;/a>&lt;br>
 Make HTTP requests to REST APIs or other web services.&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
@@ -4820,7 +4820,7 @@ Tiles are added in the order this tool is called for a given &lt;code>dashboard_
 &lt;/ol>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -4893,7 +4893,7 @@ Tiles are added in the order this tool is called for a given &lt;code>dashboard_
 &lt;/ol>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="parameters">Parameters&lt;/h2>
 &lt;table>
@@ -5040,7 +5040,7 @@ Tiles are added in the order this tool is called for a given &lt;code>dashboard_
 Looker data.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-conversational-analytics&lt;/code> accepts two parameters:&lt;/p>
 &lt;ol>
@@ -5093,7 +5093,7 @@ answer the question. The form of the entry is &lt;code>[{&amp;quot;model&amp;quo
 &lt;p>A &lt;code>looker-create-project-directory&lt;/code> tool creates a new directory within a specified LookML project.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -5144,7 +5144,7 @@ answer the question. The form of the entry is &lt;code>[{&amp;quot;model&amp;quo
 &lt;p>A &lt;code>looker-create-project-file&lt;/code> tool creates a new LookML file in a project&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-create-project-file&lt;/code> accepts a project_id parameter and a file_path parameter
 as well as the file content.&lt;/p>
@@ -5200,7 +5200,7 @@ as well as the file content.&lt;/p>
 &lt;p>A &lt;code>looker-delete-project-directory&lt;/code> tool deletes a directory from a specified LookML project.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -5251,7 +5251,7 @@ as well as the file content.&lt;/p>
 &lt;p>A &lt;code>looker-delete-project-file&lt;/code> tool deletes a LookML file in a project&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-delete-project-file&lt;/code> accepts a project_id parameter and a file_path parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5305,7 +5305,7 @@ as well as the file content.&lt;/p>
 &lt;p>A &lt;code>looker-dev-mode&lt;/code> tool changes the session into and out of dev mode.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-dev-mode&lt;/code> accepts a boolean parameter, true to enter dev mode and false
 to exit dev mode.&lt;/p>
@@ -5359,7 +5359,7 @@ to the Looker source. When opened in the browser it will create a Looker Embed
 session.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-generate-embed-url&lt;/code> takes two parameters:&lt;/p>
 &lt;ol>
@@ -5372,7 +5372,7 @@ supplied to this tool.&lt;/p></description></item><item><title>looker-get-connec
 &lt;p>A &lt;code>looker-get-connection-databases&lt;/code> tool returns all the databases in a connection.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-connection-databases&lt;/code> accepts a &lt;code>conn&lt;/code> parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5425,7 +5425,7 @@ supplied to this tool.&lt;/p></description></item><item><title>looker-get-connec
 &lt;p>A &lt;code>looker-get-connection-schemas&lt;/code> tool returns all the schemas in a connection.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-connection-schemas&lt;/code> accepts a &lt;code>conn&lt;/code> parameter and an optional &lt;code>db&lt;/code> parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5478,7 +5478,7 @@ supplied to this tool.&lt;/p></description></item><item><title>looker-get-connec
 &lt;p>A &lt;code>looker-get-connection-table-columns&lt;/code> tool returns all the columnes for each table specified.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-connection-table-columns&lt;/code> accepts a &lt;code>conn&lt;/code> parameter, a &lt;code>schema&lt;/code> parameter, a &lt;code>tables&lt;/code> parameter with a comma separated list of tables, and an optional &lt;code>db&lt;/code> parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5535,7 +5535,7 @@ supplied to this tool.&lt;/p></description></item><item><title>looker-get-connec
 &lt;p>A &lt;code>looker-get-connection-tables&lt;/code> tool returns all the tables in a connection.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-connection-tables&lt;/code> accepts a &lt;code>conn&lt;/code> parameter, a &lt;code>schema&lt;/code> parameter,
 and an optional &lt;code>db&lt;/code> parameter.&lt;/p>
@@ -5590,7 +5590,7 @@ and an optional &lt;code>db&lt;/code> parameter.&lt;/p>
 &lt;p>A &lt;code>looker-get-connections&lt;/code> tool returns all the connections in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-connections&lt;/code> accepts no parameters.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5646,7 +5646,7 @@ and an optional &lt;code>db&lt;/code> parameter.&lt;/p>
 name or description.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-dashboards&lt;/code> takes four parameters, the &lt;code>title&lt;/code>, &lt;code>desc&lt;/code>, &lt;code>limit&lt;/code>
 and &lt;code>offset&lt;/code>.&lt;/p>
@@ -5713,7 +5713,7 @@ default to 100 and 0.&lt;/p>
 in a given model in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-dimensions&lt;/code> accepts two parameters, the &lt;code>model&lt;/code> and the &lt;code>explore&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5741,7 +5741,7 @@ in a given model in the source.&lt;/p>
 for a given model from the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-explores&lt;/code> accepts one parameter, the
 &lt;code>model&lt;/code> id.&lt;/p>
@@ -5800,7 +5800,7 @@ for a given model from the source.&lt;/p>
 in a given model in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-filters&lt;/code> accepts two parameters, the &lt;code>model&lt;/code> and the &lt;code>explore&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5826,7 +5826,7 @@ in a given model in the source.&lt;/p>
 name or description.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-looks&lt;/code> takes four parameters, the &lt;code>title&lt;/code>, &lt;code>desc&lt;/code>, &lt;code>limit&lt;/code>
 and &lt;code>offset&lt;/code>.&lt;/p>
@@ -5894,7 +5894,7 @@ default to 100 and 0.&lt;/p>
 in a given model in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-measures&lt;/code> accepts two parameters, the &lt;code>model&lt;/code> and the &lt;code>explore&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5920,7 +5920,7 @@ in a given model in the source.&lt;/p>
 &lt;p>A &lt;code>looker-get-models&lt;/code> tool returns all the models in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-models&lt;/code> accepts no parameters.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5970,7 +5970,7 @@ in a given model in the source.&lt;/p>
 in a given model in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-parameters&lt;/code> accepts two parameters, the &lt;code>model&lt;/code> and the &lt;code>explore&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -5992,7 +5992,7 @@ in a given model in the source.&lt;/p>
 &lt;p>A &lt;code>looker-get-project-directories&lt;/code> tool retrieves the directories within a specified LookML project.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -6042,7 +6042,7 @@ in a given model in the source.&lt;/p>
 &lt;p>A &lt;code>looker-get-project-file&lt;/code> tool returns the contents of a LookML file.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-project-file&lt;/code> accepts a project_id parameter and a file_path parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -6094,7 +6094,7 @@ in a given model in the source.&lt;/p>
 &lt;p>A &lt;code>looker-get-project-files&lt;/code> tool returns all the lookml files in a project in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-project-files&lt;/code> accepts a project_id parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -6146,7 +6146,7 @@ in a given model in the source.&lt;/p>
 &lt;p>A &lt;code>looker-get-projects&lt;/code> tool returns all the projects in the source.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-get-projects&lt;/code> accepts no parameters.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -6492,7 +6492,7 @@ and joins in the &lt;code>order_items&lt;/code> explore and &lt;code>thelook&lt;
 Looker personal folder.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-make-dashboard&lt;/code> takes three parameters:&lt;/p>
 &lt;ol>
@@ -6554,7 +6554,7 @@ Looker personal folder.&lt;/p>
 Looker personal folder.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-make-look&lt;/code> takes twelve parameters:&lt;/p>
 &lt;ol>
@@ -6630,7 +6630,7 @@ Looker personal folder.&lt;/p>
 semantic model.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-query&lt;/code> takes eight parameters:&lt;/p>
 &lt;ol>
@@ -6650,7 +6650,7 @@ to find MCP Toolbox queries.&lt;/p></description></item><item><title>looker-quer
 semantic model.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-query-sql&lt;/code> takes eight parameters:&lt;/p>
 &lt;ol>
@@ -6670,7 +6670,7 @@ to find MCP Toolbox queries.&lt;/p></description></item><item><title>looker-quer
 Looker so the query can be investigated further.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-query-url&lt;/code> takes nine parameters:&lt;/p>
 &lt;ol>
@@ -7173,7 +7173,7 @@ Looker so the query can be investigated further.&lt;/p>
 dashboard.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-run-dashboard&lt;/code> takes one parameter, the &lt;code>dashboard_id&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7226,7 +7226,7 @@ dashboard.&lt;/p>
 saved Look.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-run-look&lt;/code> takes one parameter, the &lt;code>look_id&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7278,7 +7278,7 @@ saved Look.&lt;/p>
 &lt;p>A &lt;code>looker-update-project-file&lt;/code> tool updates the content of a LookML file.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-update-project-file&lt;/code> accepts a project_id parameter and a file_path parameter
 as well as the new file content.&lt;/p>
@@ -7333,7 +7333,7 @@ as well as the new file content.&lt;/p>
 &lt;p>A &amp;ldquo;looker-validate-project&amp;rdquo; tool checks the syntax of a LookML project and reports any errors&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/looker/">looker&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/looker/">looker&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>looker-validate-project&lt;/code> accepts a project_id parameter.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7390,23 +7390,23 @@ features with a focus on performance and reliability.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in MariaDB.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in MariaDB.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
 List active queries in MariaDB.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
 List tables in a MariaDB database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-tables-missing-unique-indexes/">&lt;code>mysql-list-tables-missing-unique-indexes&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-list-tables-missing-unique-indexes/">&lt;code>mysql-list-tables-missing-unique-indexes&lt;/code>&lt;/a>
 List tables in a MariaDB database that do not have primary or unique indices.&lt;/p></description></item><item><title>MindsDB</title><link>/resources/sources/mindsdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/sources/mindsdb/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>&lt;a href="https://docs.mindsdb.com/">MindsDB&lt;/a> is an AI federated database in the world. It allows you
 to combine information from hundreds of datasources as if they were SQL,
@@ -7420,7 +7420,7 @@ datasources.&lt;/p></description></item><item><title>mindsdb-execute-sql</title>
 &lt;p>A &lt;code>mindsdb-execute-sql&lt;/code> tool executes a SQL statement against a MindsDB
 federated database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mindsdb/">mindsdb&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mindsdb/">mindsdb&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mindsdb-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the SQL
 statement against the &lt;code>source&lt;/code>. This tool enables you to:&lt;/p>
@@ -7486,7 +7486,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p><
 &lt;p>A &lt;code>mindsdb-sql&lt;/code> tool executes a pre-defined SQL statement against a MindsDB
 federated database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mindsdb/">mindsdb&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mindsdb/">mindsdb&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://dev.mysql.com/doc/refman/8.4/en/sql-prepared-statements.html">prepared statement&lt;/a>,
 and expects parameters in the SQL query to be in the form of placeholders &lt;code>?&lt;/code>.&lt;/p>
@@ -7593,7 +7593,7 @@ does not match any documents (i.e., the deleted count is 0), the tool will
 return an error.&lt;/p>
 &lt;p>This tool is compatible with the following source type:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7615,7 +7615,7 @@ results (&lt;strong>sorting&lt;/strong>), and restricting the number of document
 &lt;p>The tool returns a JSON array of the documents found.&lt;/p>
 &lt;p>This tool is compatible with the following source type:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;p>Here&amp;rsquo;s an example that finds up to 10 users from the &lt;code>customers&lt;/code> collection who
@@ -7629,7 +7629,7 @@ returned. Otherwise, the selection is not guaranteed.&lt;/p>
 JSON array.&lt;/p>
 &lt;p>This tool is compatible with the following source type:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7650,7 +7650,7 @@ containing the JSON object you want to insert. Upon successful insertion, the
 tool returns the unique &lt;code>_id&lt;/code> of the newly created document.&lt;/p>
 &lt;p>This tool is compatible with the following source type:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;p>Here is an example configuration for a tool that adds a new user to a &lt;code>users&lt;/code>
@@ -7661,7 +7661,7 @@ MongoDB collection that match a given filter. It locates the documents using a
 &lt;p>The tool returns an array of three integers: &lt;code>[ModifiedCount, UpsertedCount, MatchedCount]&lt;/code>.&lt;/p>
 &lt;p>This tool is compatible with the following source type:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7673,7 +7673,7 @@ applies modifications defined in an &lt;code>updatePayload&lt;/code>. If the fil
 multiple documents, only the first one found will be updated.&lt;/p>
 &lt;p>This tool is compatible with the following source type:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mongodb/">&lt;code>mongodb&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h2 id="example">Example&lt;/h2>
@@ -7684,8 +7684,8 @@ document is found, the &lt;code>upsert: true&lt;/code> option will create a new 
 &lt;p>A &lt;code>mssql-execute-sql&lt;/code> tool executes a SQL statement against a SQL Server
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mssql/">cloud-sql-mssql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mssql/">mssql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mssql/">cloud-sql-mssql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mssql/">mssql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mssql-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -7733,8 +7733,8 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 tables in a SQL server database. It is compatible with any of the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mssql/">cloud-sql-mssql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mssql/">mssql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mssql/">cloud-sql-mssql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mssql/">mssql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mssql-list-tables&lt;/code> lists detailed schema information (object type, columns,
 constraints, indexes, triggers, owner, comment) as JSON for user-created tables
@@ -7787,8 +7787,8 @@ full table information. Default: &lt;code>detailed&lt;/code>.&lt;/li>
 &lt;p>A &lt;code>mssql-sql&lt;/code> tool executes a pre-defined SQL statement against a SQL Server
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mssql/">cloud-sql-mssql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mssql/">mssql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mssql/">cloud-sql-mssql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mssql/">mssql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>Toolbox supports the &lt;a href="https://learn.microsoft.com/sql/relational-databases/system-stored-procedures/sp-prepare-transact-sql?view=sql-server-ver16">prepare statement syntax&lt;/a> of MS SQL
 Server and expects parameters in the SQL query to be in the form of either
@@ -7806,29 +7806,29 @@ reliability, performance, and ease of use.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-sql/">&lt;code>mysql-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-execute-sql/">&lt;code>mysql-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-list-active-queries/">&lt;code>mysql-list-active-queries&lt;/code>&lt;/a>
 List active queries in MySQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-get-query-plan/">&lt;code>mysql-get-query-plan&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-get-query-plan/">&lt;code>mysql-get-query-plan&lt;/code>&lt;/a>
 Provide information about how MySQL executes a SQL statement (EXPLAIN).&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/mysql/mysql-list-tables/">&lt;code>mysql-list-tables&lt;/code>&lt;/a>
 List tables in a MySQL database.&lt;/p></description></item><item><title>mysql-execute-sql</title><link>/resources/tools/mysql/mysql-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/mysql/mysql-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>mysql-execute-sql&lt;/code> tool executes a SQL statement against a MySQL
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mysql-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -7875,8 +7875,8 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>mysql-get-query-plan&lt;/code> tool gets the execution plan for a SQL statement against a MySQL
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mysql-get-query-plan&lt;/code> takes one input parameter &lt;code>sql_statement&lt;/code> and gets the execution plan for the SQL
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -7920,8 +7920,8 @@ statement against the &lt;code>source&lt;/code>.&lt;/p>
 &lt;p>A &lt;code>mysql-list-active-queries&lt;/code> tool retrieves information about active queries in
 a MySQL database. It&amp;rsquo;s compatible with:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mysql-list-active-queries&lt;/code> outputs detailed information as JSON for current
 active queries, ordered by execution time in descending order.
@@ -7944,8 +7944,8 @@ comparing with free space allocated to each table. This tool calculates
 &lt;code>fragmentation_percentage&lt;/code> which represents the proportion of free space
 relative to the total data and index size. It&amp;rsquo;s compatible with&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mysql-list-table-fragmentation&lt;/code> outputs detailed information as JSON , ordered
 by the fragmentation percentage in descending order.
@@ -7953,8 +7953,8 @@ This tool takes 4 optional input parameters:&lt;/p></description></item><item><t
 &lt;p>The &lt;code>mysql-list-tables&lt;/code> tool retrieves schema information for all or specified
 tables in a MySQL database. It is compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mysql-list-tables&lt;/code> lists detailed schema information (object type, columns,
 constraints, indexes, triggers, owner, comment) as JSON for user-created tables
@@ -7965,8 +7965,8 @@ default.&lt;/p></description></item><item><title>mysql-list-tables-missing-uniqu
 &lt;p>A &lt;code>mysql-list-tables-missing-unique-indexes&lt;/code> tool searches tables that do not
 have primary or unique indices in a MySQL database. It&amp;rsquo;s compatible with:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>mysql-list-tables-missing-unique-indexes&lt;/code> outputs table names, including
 &lt;code>table_schema&lt;/code> and &lt;code>table_name&lt;/code> in JSON format. It takes 2 optional input
@@ -7986,8 +7986,8 @@ Search all visible tables in all visible databases if not specified.&lt;/li>
 &lt;p>A &lt;code>mysql-sql&lt;/code> tool executes a pre-defined SQL statement against a MySQL
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/mysql/">mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-mysql/">cloud-sql-mysql&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/mysql/">mysql&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://dev.mysql.com/doc/refman/8.4/en/sql-prepared-statements.html">prepared statement&lt;/a>,
 and expects parameters in the SQL query to be in the form of placeholders &lt;code>?&lt;/code>.&lt;/p>
@@ -8002,7 +8002,7 @@ names, or other parts of the query.&lt;/p></description></item><item><title>Neo4
 reliability, feature robustness, and performance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/neo4j/neo4j-cypher/">&lt;code>neo4j-cypher&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="./resources/tools/neo4j/neo4j-cypher/">&lt;code>neo4j-cypher&lt;/code>&lt;/a>&lt;br>
 Run Cypher queries against your Neo4j graph database.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -8013,7 +8013,7 @@ user if available.&lt;/p></description></item><item><title>neo4j-cypher</title><
 &lt;p>A &lt;code>neo4j-cypher&lt;/code> tool executes a pre-defined Cypher statement against a Neo4j
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/neo4j/">neo4j&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/neo4j/">neo4j&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified Cypher statement is executed as a &lt;a href="https://neo4j.com/docs/cypher-manual/current/syntax/parameters/">parameterized
 statement&lt;/a>, and specified parameters will be used according to
@@ -8028,7 +8028,7 @@ string parameter against a Neo4j database. It&amp;rsquo;s designed to be a flexi
 for interacting with the database when a pre-defined query is not sufficient.
 This tool is compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/neo4j/">neo4j&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/neo4j/">neo4j&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>For security, the tool can be configured to be read-only. If the &lt;code>readOnly&lt;/code> flag
 is set to &lt;code>true&lt;/code>, the tool will analyze the incoming Cypher query and reject any
@@ -8053,7 +8053,7 @@ MySQL-compatible user management syntax.&lt;/p></description></item><item><title
 &lt;p>An &lt;code>oceanbase-execute-sql&lt;/code> tool executes a SQL statement against an OceanBase
 database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/oceanbase/">oceanbase&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/oceanbase/">oceanbase&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>oceanbase-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -8100,7 +8100,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>An &lt;code>oceanbase-sql&lt;/code> tool executes a pre-defined SQL statement against an
 OceanBase database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/oceanbase/">oceanbase&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/oceanbase/">oceanbase&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://dev.mysql.com/doc/refman/8.4/en/sql-prepared-statements.html">prepared
 statement&lt;/a>, and expects parameters in the SQL query to be in the
@@ -8118,11 +8118,11 @@ DW) database workloads.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/oracle/oracle-sql/">&lt;code>oracle-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/oracle/oracle-sql/">&lt;code>oracle-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in Oracle.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/oracle/oracle-execute-sql/">&lt;code>oracle-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/oracle/oracle-execute-sql/">&lt;code>oracle-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in Oracle.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -8133,7 +8133,7 @@ user&lt;/a> to log in to the database with the necessary permissions.&lt;/p></de
 &lt;p>An &lt;code>oracle-execute-sql&lt;/code> tool executes a SQL statement against an Oracle
 database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/oracle/">oracle&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/oracle/">oracle&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>oracle-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -8150,7 +8150,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>An &lt;code>oracle-sql&lt;/code> tool executes a pre-defined SQL statement against an
 Oracle database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/oracle/">oracle&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/oracle/">oracle&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed using &lt;a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html">prepared statements&lt;/a>
 for security and performance. It expects parameter placeholders in the SQL query
@@ -8161,9 +8161,9 @@ field to &lt;code>false&lt;/code>.&lt;/p></description></item><item><title>postg
 &lt;p>The &lt;code>postgres-database-overview&lt;/code> fetches the current state of the PostgreSQL
 server. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-database-overview&lt;/code> fetches the current state of the PostgreSQL server
 This tool does not take any input parameters.&lt;/p>
@@ -8178,9 +8178,9 @@ This tool does not take any input parameters.&lt;/p>
 &lt;p>A &lt;code>postgres-execute-sql&lt;/code> tool executes a SQL statement against a Postgres
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -8228,9 +8228,9 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 (cardinality) for one or all columns in a specific PostgreSQL table by using the
 database&amp;rsquo;s internal statistics. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-get-column-cardinality&lt;/code> returns detailed information as JSON about column
 cardinality values, ordered by estimated cardinality in descending order. The tool takes
@@ -8252,9 +8252,9 @@ If not provided, cardinality for all columns will be returned. Default: &lt;code
 active queries in a Postgres database. It&amp;rsquo;s compatible with any of the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-active-queries&lt;/code> lists detailed information as JSON for currently
 active queries. The tool takes the following input parameters:&lt;/p>
@@ -8279,9 +8279,9 @@ handled. If this parameter is omitted, no applications are excluded.&lt;/li>
 extensions available for installation on a Postgres database. It&amp;rsquo;s compatible
 with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-available-extensions&lt;/code> lists all PostgreSQL extensions available
 for installation (extension name, default version description) as JSON. The does
@@ -8327,9 +8327,9 @@ not support any input parameter.&lt;/p>
 &lt;p>The &lt;code>postgres-list-database-stats&lt;/code> lists the key performance and activity statistics for each PostgreSQL database in the instance, offering insights into cache efficiency, transaction throughput, row-level activity, temporary file usage, and contention. It&amp;rsquo;s compatible with
 any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-database-stats&lt;/code> lists detailed information as JSON for each database. The tool
 takes the following input parameters:&lt;/p>
@@ -8372,9 +8372,9 @@ takes the following input parameters:&lt;/p>
 excluding those in &lt;code>pg_catalog&lt;/code> and &lt;code>information_schema&lt;/code>. It&amp;rsquo;s compatible with
 any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-indexes&lt;/code> lists detailed information as JSON for indexes. The tool
 takes the following input parameters:&lt;/p>
@@ -8403,9 +8403,9 @@ takes the following input parameters:&lt;/p>
 extensions installed on a Postgres database. It&amp;rsquo;s compatible with any of the
 following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-installed-extensions&lt;/code> lists all installed PostgreSQL extensions
 (extension name, version, schema, owner, description) as JSON. The does not
@@ -8450,18 +8450,18 @@ support any input parameter.&lt;/p>
 &lt;p>The &lt;code>postgres-list-locks&lt;/code> tool displays information about active locks by joining pg_stat_activity with pg_locks. This is useful to find transactions holding or waiting for locks and to troubleshoot contention.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool identifies all locks held by active processes showing the process ID, user, query text, and an aggregated list of all transactions and specific locks (relation, mode, grant status) associated with each process.&lt;/p>
 &lt;h2 id="query">Query&lt;/h2>
 &lt;p>The tool aggregates locks per backend (process) and returns the concatenated transaction ids and lock entries. The SQL used by the tool looks like:&lt;/p></description></item><item><title>postgres-list-pg-settings</title><link>/resources/tools/postgres/postgres-list-pg-settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-pg-settings/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-pg-settings&lt;/code> tool lists the configuration parameters for the postgres server, their current values, and related information. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-pg-settings&lt;/code> lists detailed information as JSON for each setting. The tool
 takes the following input parameters:&lt;/p>
@@ -8483,9 +8483,9 @@ takes the following input parameters:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The response is a json array with the following elements:&lt;/p></description></item><item><title>postgres-list-publication-tables</title><link>/resources/tools/postgres/postgres-list-publication-tables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-publication-tables/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-publication-tables&lt;/code> tool lists all publication tables in the database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-publication-tables&lt;/code> lists detailed information as JSON for publication tables. A publication table in PostgreSQL is a
 table that is explicitly included as a source for replication within a publication (a set of changes generated from a table or group
@@ -8495,9 +8495,9 @@ of tables) as part of the logical replication feature. The tool takes the follow
 performance metrics for executed queries. It&amp;rsquo;s compatible with any of the following
 sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-query-stats&lt;/code> lists detailed query statistics as JSON, ordered by
 total execution time in descending order. The tool takes the following input parameters:&lt;/p>
@@ -8516,9 +8516,9 @@ used within a LIKE clause. Default: &lt;code>&amp;quot;&amp;quot;&lt;/code> (all
 &lt;p>The &lt;code>postgres-list-roles&lt;/code> tool lists all the user-created roles in the instance, excluding system roles (like &lt;code>cloudsql%&lt;/code> or &lt;code>pg_%&lt;/code>). It provides details about each role&amp;rsquo;s attributes and memberships. It&amp;rsquo;s compatible with
 any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-roles&lt;/code> lists detailed information as JSON for each role. The tool
 takes the following input parameters:&lt;/p>
@@ -8545,9 +8545,9 @@ takes the following input parameters:&lt;/p>
 database excluding system and temporary schemas. It&amp;rsquo;s compatible with any of
 the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-schemas&lt;/code> lists detailed information as JSON for each schema. The
 tool takes the following input parameters:&lt;/p>
@@ -8566,9 +8566,9 @@ tool takes the following input parameters:&lt;/p>
 &lt;p>The &lt;code>postgres-list-sequences&lt;/code> tool retrieves information about sequences in a
 Postgres database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-sequences&lt;/code> lists detailed information as JSON for all sequences.
 The tool takes the following input parameters:&lt;/p>
@@ -8594,26 +8594,26 @@ used within a LIKE clause. Default: &lt;code>&amp;quot;&amp;quot;&lt;/code>&lt;/
 &lt;p>The &lt;code>postgres-list-stored-procedure&lt;/code> tool queries PostgreSQL system catalogs (&lt;code>pg_proc&lt;/code>, &lt;code>pg_namespace&lt;/code>, &lt;code>pg_roles&lt;/code>, and &lt;code>pg_language&lt;/code>) to retrieve comprehensive metadata about stored procedures in the database. It filters for procedures (kind = &amp;lsquo;p&amp;rsquo;) and provides the full procedure definition along with ownership and language information.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The tool returns a JSON array where each element represents a stored procedure with its schema, name, owner, language, complete definition, and optional description. Results are sorted by schema name and procedure name, with a default limit of 20 procedures.&lt;/p></description></item><item><title>postgres-list-table-stats</title><link>/resources/tools/postgres/postgres-list-table-stats/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-table-stats/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-table-stats&lt;/code> tool queries &lt;code>pg_stat_all_tables&lt;/code> to provide comprehensive statistics about tables in the database. It calculates useful metrics like index scan ratio and dead row ratio to help identify performance issues and table bloat.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The tool returns a JSON array where each element represents statistics for a table, including scan metrics, row counts, and vacuum history. Results are sorted by sequential scans by default and limited to 50 rows.&lt;/p></description></item><item><title>postgres-list-tables</title><link>/resources/tools/postgres/postgres-list-tables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-tables/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-tables&lt;/code> tool retrieves schema information for all or
 specified tables in a Postgres database. It&amp;rsquo;s compatible with any of the
 following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-tables&lt;/code> lists detailed schema information (object type, columns,
 constraints, indexes, triggers, owner, comment) as JSON for user-created tables
@@ -8625,9 +8625,9 @@ table names, &lt;code>detailed&lt;/code> will return the full table information.
 &lt;code>detailed&lt;/code>.&lt;/p></description></item><item><title>postgres-list-tablespaces</title><link>/resources/tools/postgres/postgres-list-tablespaces/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-list-tablespaces/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-list-tablespaces&lt;/code> tool lists available tablespaces in the database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-tablespaces&lt;/code> lists detailed information as JSON for tablespaces. The tool takes the following input parameters:&lt;/p>
 &lt;ul>
@@ -8648,9 +8648,9 @@ table names, &lt;code>detailed&lt;/code> will return the full table information.
 &lt;p>The &lt;code>postgres-list-triggers&lt;/code> tool lists available non-internal triggers in the
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-triggers&lt;/code> lists detailed information as JSON for triggers. The
 tool takes the following input parameters:&lt;/p>
@@ -8675,9 +8675,9 @@ used within a LIKE clause. Default: &lt;code>&amp;quot;&amp;quot;&lt;/code>&lt;/
 a Postgres database, excluding those in system schemas (&lt;code>pg_catalog&lt;/code>,
 &lt;code>information_schema&lt;/code>). It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>postgres-list-views&lt;/code> lists detailed view information (schemaname, viewname,
 ownername, definition) as JSON for views in a database. The tool takes the following input
@@ -8726,17 +8726,17 @@ parameters:&lt;/p>
 &lt;p>The &lt;code>postgres-long-running-transactions&lt;/code> tool reports transactions that exceed a configured duration threshold by scanning &lt;code>pg_stat_activity&lt;/code> for sessions where &lt;code>xact_start&lt;/code> is set and older than the configured interval.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The tool returns a JSON array with one object per matching session (non-idle). Each object contains the process id, database and user, application name, client address, session state, several age intervals (connection, transaction, query, and last activity), wait event info, and the SQL text currently associated with the session.&lt;/p></description></item><item><title>postgres-replication-stats</title><link>/resources/tools/postgres/postgres-replication-stats/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/postgres/postgres-replication-stats/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>postgres-replication-stats&lt;/code> tool queries pg_stat_replication to surface the status of connected replicas. It reports application_name, client address, connection and sync state, and human-readable lag sizes (sent, write, flush, replay, and total) computed using WAL LSN differences.&lt;/p>
 &lt;p>Compatible sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool takes no parameters. It returns a JSON array; each element represents a replication connection on the primary and includes lag metrics formatted by pg_size_pretty.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -8749,9 +8749,9 @@ parameters:&lt;/p>
 &lt;p>A &lt;code>postgres-sql&lt;/code> tool executes a pre-defined SQL statement against a Postgres
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/resources/sources/postgres/">postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/alloydb-pg/">alloydb-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-sql-pg/">cloud-sql-postgres&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/postgres/">postgres&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://www.postgresql.org/docs/current/sql-prepare.html">prepared statement&lt;/a>,
 and specified parameters will be inserted according to their position: e.g. &lt;code>$1&lt;/code>
@@ -8764,27 +8764,27 @@ reputation for reliability, feature robustness, and performance.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-sql/">&lt;code>postgres-sql&lt;/code>&lt;/a>
 Execute SQL queries as prepared statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-execute-sql/">&lt;code>postgres-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL statements in PostgreSQL.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-list-tables/">&lt;code>postgres-list-tables&lt;/code>&lt;/a>
 List tables in a PostgreSQL database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-active-queries/">&lt;code>postgres-list-active-queries&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-list-active-queries/">&lt;code>postgres-list-active-queries&lt;/code>&lt;/a>
 List active queries in a PostgreSQL database.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/postgres/postgres-list-available-extensions/">&lt;code>postgres-list-available-extensions&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/postgres/postgres-list-available-extensions/">&lt;code>postgres-list-available-extensions&lt;/code>&lt;/a>
 List available extensions for installation in a PostgreSQL database.&lt;/p></description></item><item><title>Prebuilt Tools</title><link>/reference/prebuilt-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/prebuilt-tools/</guid><description>&lt;p>Prebuilt tools are reusable, pre-packaged toolsets that are designed to extend
 the capabilities of agents. These tools are built to be generic and adaptable,
 allowing developers to interact with and take action on databases.&lt;/p>
-&lt;p>See guides, &lt;a href="/how-to/connect-ide/">Connect from your IDE&lt;/a>, for
+&lt;p>See guides, &lt;a href="./how-to/connect-ide/">Connect from your IDE&lt;/a>, for
 details on how to connect your AI tools (IDEs) to databases via Toolbox and MCP.&lt;/p>
 &lt;style type="text/css">
  
@@ -8908,7 +8908,7 @@ details on how to connect your AI tools (IDEs) to databases via Toolbox and MCP.
 &lt;/svg>
 
  &lt;/span>Tip&lt;/p></description></item><item><title>Python</title><link>/samples/pre_post_processing/python/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/samples/pre_post_processing/python/</guid><description>&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
-&lt;p>This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the &lt;a href="/getting-started/local_quickstart/">local quickstart&lt;/a>.&lt;/p>
+&lt;p>This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the &lt;a href="./getting-started/local_quickstart/">local quickstart&lt;/a>.&lt;/p>
 &lt;p>This guide demonstrates how to implement these patterns in your Toolbox applications.&lt;/p>
 &lt;h2 id="implementation">Implementation&lt;/h2>
 
@@ -8960,7 +8960,7 @@ actual project ID):&lt;/p>
 overridden in configurations.&lt;/p></description></item><item><title>Quickstart (MCP with AlloyDB)</title><link>/samples/alloydb/mcp_quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/samples/alloydb/mcp_quickstart/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>&lt;a href="https://modelcontextprotocol.io">Model Context Protocol&lt;/a> is an open protocol
 that standardizes how applications provide context to LLMs. Check out this page
-on how to &lt;a href="/how-to/connect_via_mcp/">connect to Toolbox via MCP&lt;/a>.&lt;/p>
+on how to &lt;a href="./how-to/connect_via_mcp/">connect to Toolbox via MCP&lt;/a>.&lt;/p>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;p>This guide assumes you have already done the following:&lt;/p>
 &lt;ol>
@@ -8980,7 +8980,7 @@ other PostgreSQL client.&lt;/p>
 &lt;a href="https://cloud.google.com/alloydb/docs/ai">extensions&lt;/a>. These are required
 for Semantic Search and Natural Language to SQL tools. Run the following SQL
 commands:&lt;/p></description></item><item><title>Quickstart (MCP with Neo4j)</title><link>/samples/neo4j/mcp_quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/samples/neo4j/mcp_quickstart/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
-&lt;p>&lt;a href="https://modelcontextprotocol.io">Model Context Protocol&lt;/a> is an open protocol that standardizes how applications provide context to LLMs. Check out this page on how to &lt;a href="/how-to/connect_via_mcp/">connect to Toolbox via MCP&lt;/a>.&lt;/p>
+&lt;p>&lt;a href="https://modelcontextprotocol.io">Model Context Protocol&lt;/a> is an open protocol that standardizes how applications provide context to LLMs. Check out this page on how to &lt;a href="./how-to/connect_via_mcp/">connect to Toolbox via MCP&lt;/a>.&lt;/p>
 &lt;h2 id="step-1-set-up-your-neo4j-database-and-data">Step 1: Set up your Neo4j Database and Data&lt;/h2>
 &lt;p>In this section, you&amp;rsquo;ll set up a database and populate it with sample data for a movies-related agent. This guide assumes you have a running Neo4j instance, either locally or in the cloud.&lt;/p>
 &lt;p>. &lt;strong>Populate the database with data.&lt;/strong>
@@ -9002,7 +9002,7 @@ geospatial indexes with radius queries.&lt;/p>
 the &lt;a href="https://redis.io/docs/">official Redis website&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/redis/redis/">&lt;code>redis&lt;/code>&lt;/a>&lt;br>
+&lt;li>&lt;a href="./resources/tools/redis/redis/">&lt;code>redis&lt;/code>&lt;/a>&lt;br>
 Run Redis commands and interact with key-value pairs.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -9016,15 +9016,15 @@ Toolbox to interact with Spark batches hosted on Google Cloud Serverless for
 Apache Spark.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-list-batches/">&lt;code>serverless-spark-list-batches&lt;/code>&lt;/a>
+&lt;li>&lt;a href="./resources/tools/serverless-spark/serverless-spark-list-batches/">&lt;code>serverless-spark-list-batches&lt;/code>&lt;/a>
 List and filter Serverless Spark batches.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-get-batch/">&lt;code>serverless-spark-get-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="./resources/tools/serverless-spark/serverless-spark-get-batch/">&lt;code>serverless-spark-get-batch&lt;/code>&lt;/a>
 Get a Serverless Spark batch.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-cancel-batch/">&lt;code>serverless-spark-cancel-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="./resources/tools/serverless-spark/serverless-spark-cancel-batch/">&lt;code>serverless-spark-cancel-batch&lt;/code>&lt;/a>
 Cancel a running Serverless Spark batch operation.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-create-pyspark-batch/">&lt;code>serverless-spark-create-pyspark-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="./resources/tools/serverless-spark/serverless-spark-create-pyspark-batch/">&lt;code>serverless-spark-create-pyspark-batch&lt;/code>&lt;/a>
 Create a Serverless Spark PySpark batch operation.&lt;/li>
-&lt;li>&lt;a href="/resources/tools/serverless-spark/serverless-spark-create-spark-batch/">&lt;code>serverless-spark-create-spark-batch&lt;/code>&lt;/a>
+&lt;li>&lt;a href="./resources/tools/serverless-spark/serverless-spark-create-spark-batch/">&lt;code>serverless-spark-create-spark-batch&lt;/code>&lt;/a>
 Create a Serverless Spark Java batch operation.&lt;/li>
 &lt;/ul>
 &lt;h2 id="requirements">Requirements&lt;/h2>
@@ -9035,7 +9035,7 @@ and group access to serverless Spark resources like batches and sessions.&lt;/p>
 &lt;p>The &lt;code>serverless-spark-get-batch&lt;/code> tool allows you to retrieve a specific
 Serverless Spark batch job. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>serverless-spark-list-batches&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -9058,7 +9058,7 @@ detailed information.&lt;/p></description></item><item><title>serverless-spark-l
 Google Cloud Serverless for Apache Spark source. It&amp;rsquo;s compatible with the
 following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>serverless-spark-list-batches&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -9081,16 +9081,16 @@ optimized to handle both transactional and analytical workloads.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/singlestore/singlestore-sql/">&lt;code>singlestore-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/singlestore/singlestore-sql/">&lt;code>singlestore-sql&lt;/code>&lt;/a>
 Execute pre-defined prepared SQL queries in SingleStore.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/singlestore/singlestore-execute-sql/">&lt;code>singlestore-execute-sql&lt;/code>&lt;/a>
+&lt;p>&lt;a href="./resources/tools/singlestore/singlestore-execute-sql/">&lt;code>singlestore-execute-sql&lt;/code>&lt;/a>
 Run parameterized SQL queries in SingleStore.&lt;/p></description></item><item><title>singlestore-execute-sql</title><link>/resources/tools/singlestore/singlestore-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/singlestore/singlestore-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>singlestore-execute-sql&lt;/code> tool executes a SQL statement against a SingleStore
 database. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/singlestore/">singlestore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/singlestore/">singlestore&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>singlestore-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and runs the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -9137,7 +9137,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>singlestore-execute-sql&lt;/code> tool executes a SQL statement against a SingleStore
 database. It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/singlestore/">singlestore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/singlestore/">singlestore&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement expects parameters in the SQL query to be in the
 form of placeholders &lt;code>?&lt;/code>.&lt;/p>
@@ -9151,11 +9151,11 @@ names, or other parts of the query.&lt;/p></description></item><item><title>Snow
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/snowflake/snowflake-sql/">&lt;code>snowflake-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/snowflake/snowflake-sql/">&lt;code>snowflake-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL queries as prepared statements in Snowflake.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/snowflake/snowflake-execute-sql/">&lt;code>snowflake-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/snowflake/snowflake-execute-sql/">&lt;code>snowflake-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL statements in Snowflake.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -9299,7 +9299,7 @@ Snowflake user to login to the database with.&lt;/p>
 &lt;p>A &lt;code>snowflake-execute-sql&lt;/code> tool executes a SQL statement against a Snowflake
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/snowflake/">snowflake&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/snowflake/">snowflake&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>snowflake-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -9352,7 +9352,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>snowflake-sql&lt;/code> tool executes a pre-defined SQL statement against a Snowflake
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/snowflake/">snowflake&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/snowflake/">snowflake&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a prepared statement, and specified
 parameters will be inserted according to their position: e.g. &lt;code>:1&lt;/code> will be the
@@ -9372,12 +9372,12 @@ the Google Cloud console&lt;/a>.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/spanner/spanner-sql/">&lt;code>spanner-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/spanner/spanner-sql/">&lt;code>spanner-sql&lt;/code>&lt;/a>&lt;br>
 Execute SQL on Google Cloud Spanner.&lt;/p></description></item><item><title>spanner-execute-sql</title><link>/resources/tools/spanner/spanner-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/spanner/spanner-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>spanner-execute-sql&lt;/code> tool executes a SQL statement against a Spanner
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/spanner/">spanner&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/spanner/">spanner&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>spanner-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -9431,7 +9431,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;code>postgresql&lt;/code>) against a Cloud Spanner database. It&amp;rsquo;s compatible with any of the
 following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/spanner/">spanner&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/spanner/">spanner&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="googlesql">GoogleSQL&lt;/h3>
 &lt;p>For the &lt;code>googlesql&lt;/code> dialect, the specified SQL statement is executed as a &lt;a href="https://cloud.google.com/spanner/docs/reference/standard-sql/dml-syntax">data
@@ -9448,15 +9448,15 @@ amount of data through a structured format.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/mssql/mssql-sql/">&lt;code>mssql-sql&lt;/code>&lt;/a>&lt;br>
 Execute pre-defined SQL Server queries with placeholder parameters.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/mssql/mssql-execute-sql/">&lt;code>mssql-execute-sql&lt;/code>&lt;/a>&lt;br>
 Run parameterized SQL Server queries in SQL Server.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/mssql/mssql-list-tables/">&lt;code>mssql-list-tables&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/mssql/mssql-list-tables/">&lt;code>mssql-list-tables&lt;/code>&lt;/a>&lt;br>
 List tables in a SQL Server database.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -9478,12 +9478,12 @@ setup, database administration, and required resources.&lt;/p>
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/sqlite/sqlite-sql/">&lt;code>sqlite-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/sqlite/sqlite-sql/">&lt;code>sqlite-sql&lt;/code>&lt;/a>&lt;br>
 Run SQL queries against a local SQLite database.&lt;/p></description></item><item><title>sqlite-execute-sql</title><link>/resources/tools/sqlite/sqlite-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/sqlite/sqlite-execute-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>sqlite-execute-sql&lt;/code> tool executes a single SQL statement against a SQLite
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/sqlite/">sqlite&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/sqlite/">sqlite&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool is designed for direct execution of SQL statements. It takes a single
 &lt;code>sql&lt;/code> input parameter and runs the SQL statement against the configured SQLite
@@ -9531,7 +9531,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>sqlite-sql&lt;/code> tool executes SQL statements against a SQLite database.
 It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/sqlite/">sqlite&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/sqlite/">sqlite&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>SQLite uses the &lt;code>?&lt;/code> placeholder for parameters in SQL statements. Parameters are
 bound in the order they are provided.&lt;/p>
@@ -9561,7 +9561,7 @@ console.&lt;/p>
 &lt;p>A &lt;code>tidb-execute-sql&lt;/code> tool executes a SQL statement against a TiDB
 database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/tidb/">tidb&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/tidb/">tidb&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>tidb-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -9608,7 +9608,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>tidb-sql&lt;/code> tool executes a pre-defined SQL statement against a TiDB
 database. It&amp;rsquo;s compatible with the following source:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/tidb/">tidb&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/tidb/">tidb&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://docs.pingcap.com/tidb/stable/sql-prepared-plan-cache">prepared statement&lt;/a>,
 and expects parameters in the SQL query to be in the form of placeholders &lt;code>?&lt;/code>.&lt;/p>
@@ -9631,11 +9631,11 @@ including Hive, Cassandra, relational databases or even proprietary data stores.
 &lt;h2 id="available-tools">Available Tools&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/trino/trino-sql/">&lt;code>trino-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/trino/trino-sql/">&lt;code>trino-sql&lt;/code>&lt;/a>&lt;br>
 Execute parameterized SQL queries against Trino.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="/resources/tools/trino/trino-execute-sql/">&lt;code>trino-execute-sql&lt;/code>&lt;/a>&lt;br>
+&lt;p>&lt;a href="./resources/tools/trino/trino-execute-sql/">&lt;code>trino-execute-sql&lt;/code>&lt;/a>&lt;br>
 Execute arbitrary SQL queries against Trino.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -9646,7 +9646,7 @@ the catalogs and schemas you want to query.&lt;/p></description></item><item><ti
 &lt;p>A &lt;code>trino-execute-sql&lt;/code> tool executes a SQL statement against a Trino
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/trino/">trino&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/trino/">trino&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>trino-execute-sql&lt;/code> takes one input parameter &lt;code>sql&lt;/code> and run the sql
 statement against the &lt;code>source&lt;/code>.&lt;/p>
@@ -9693,7 +9693,7 @@ human-in-the-loop and shouldn&amp;rsquo;t be used for production agents.&lt;/p>&
 &lt;p>A &lt;code>trino-sql&lt;/code> tool executes a pre-defined SQL statement against a Trino
 database. It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/trino/">trino&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/trino/">trino&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The specified SQL statement is executed as a &lt;a href="https://trino.io/docs/current/sql/prepare.html">prepared statement&lt;/a>, and expects parameters in the SQL query to be in the form of placeholders &lt;code>?&lt;/code>.&lt;/p>
 &lt;h2 id="example">Example&lt;/h2>
@@ -9962,7 +9962,7 @@ names, or other parts of the query.&lt;/p></description></item><item><title>Allo
 &lt;/html></description></item><item><title>alloydb-create-user</title><link>/resources/tools/alloydb/alloydb-create-user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/alloydb/alloydb-create-user/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>The &lt;code>alloydb-create-user&lt;/code> tool creates a new database user (&lt;code>ALLOYDB_BUILT_IN&lt;/code>
 or &lt;code>ALLOYDB_IAM_USER&lt;/code>) within a specified cluster. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;p>&lt;strong>Permissions &amp;amp; APIs Required:&lt;/strong>
 Before using, ensure the following on your GCP project:&lt;/p>
 &lt;ol>
@@ -9986,7 +9986,7 @@ roles:
 &lt;/html></description></item><item><title>clickhouse-sql</title><link>/resources/tools/clickhouse/clickhouse-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/clickhouse/clickhouse-sql/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>clickhouse-sql&lt;/code> tool executes SQL queries as prepared statements against a
 ClickHouse database. It&amp;rsquo;s compatible with the
-&lt;a href="/resources/sources/clickhouse/">clickhouse&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/clickhouse/">clickhouse&lt;/a> source.&lt;/p>
 &lt;p>This tool supports both template parameters (for SQL statement customization)
 and regular parameters (for prepared statement values), providing flexible
 query execution capabilities.&lt;/p>
@@ -10421,9 +10421,9 @@ for more information.&lt;/p>
  &lt;/tr>
  &lt;tr>
  &lt;td>parameters&lt;/td>
- &lt;td style="text-align: center">&lt;a href="/resources/tools/#specifying-parameters">parameters&lt;/a>&lt;/td>
+ &lt;td style="text-align: center">&lt;a href="./resources/tools/#specifying-parameters">parameters&lt;/a>&lt;/td>
  &lt;td style="text-align: center">false&lt;/td>
- &lt;td>List of &lt;a href="/resources/tools/#specifying-parameters">parameters&lt;/a> that will be used with the ES|QL query.&lt;br/>Only supports “string”, “integer”, “float”, “boolean”.&lt;/td>
+ &lt;td>List of &lt;a href="./resources/tools/#specifying-parameters">parameters&lt;/a> that will be used with the ES|QL query.&lt;br/>Only supports “string”, “integer”, “float”, “boolean”.&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table></description></item><item><title>FAQ</title><link>/about/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/faq/</guid><description>&lt;h2 id="how-can-i-deploy-or-run-toolbox">How can I deploy or run Toolbox?&lt;/h2>
@@ -10432,8 +10432,8 @@ multitude of environments. For convenience, we release &lt;a href="https://githu
 docker images&lt;/a> (but you can always compile yourself as well!).&lt;/p>
 &lt;p>For detailed instructions, check out these resources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/getting-started/local_quickstart/">Quickstart: How to Run Locally&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/deploy_toolbox/">Deploy to Cloud Run&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./getting-started/local_quickstart/">Quickstart: How to Run Locally&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/deploy_toolbox/">Deploy to Cloud Run&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="do-i-need-a-google-cloud-accountproject-to-get-started-with-toolbox">Do I need a Google Cloud account/project to get started with Toolbox?&lt;/h2>
 &lt;p>Nope! While some of the sources Toolbox connects to may require GCP credentials,
@@ -10444,7 +10444,7 @@ that don&amp;rsquo;t.&lt;/p></description></item><item><title>Firestore using MC
  &lt;meta http-equiv="refresh" content="0;url=https://cloud.google.com/firestore/native/docs/connect-ide-using-mcp-toolbox"/>
  &lt;/head>
 &lt;/html></description></item><item><title>Javascript</title><link>/samples/pre_post_processing/js/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/samples/pre_post_processing/js/</guid><description>&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
-&lt;p>This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the &lt;a href="/getting-started/local_quickstart_js/">local quickstart&lt;/a>.&lt;/p>
+&lt;p>This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the &lt;a href="./getting-started/local_quickstart_js/">local quickstart&lt;/a>.&lt;/p>
 &lt;p>This guide demonstrates how to implement these patterns in your Toolbox applications.&lt;/p>
 &lt;h2 id="implementation">Implementation&lt;/h2>
 
@@ -10475,14 +10475,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like Postgres. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a>
 to expose your developer assistant tools to a Looker instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Gemini-CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#connect-with-antigravity">Antigravity&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Gemini-CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/looker_mcp/#connect-with-antigravity">Antigravity&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-looker">Set up Looker&lt;/h2>
 &lt;ol>
@@ -10499,14 +10499,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like MySQL. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a> to
 expose your developer assistant tools to a MySQL instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -10523,14 +10523,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like Neo4j. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a> to
 expose your developer assistant tools to a Neo4j instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -10548,14 +10548,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like Postgres. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a>
 to expose your developer assistant tools to a Postgres instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;style type="text/css">
  
@@ -10816,7 +10816,7 @@ local development:&lt;/p>
 &lt;p>&lt;a href="https://cloud.google.com/sdk/docs/install">Install the Google Cloud CLI&lt;/a>&lt;/p></description></item><item><title>Quickstart (MCP with Looker and Gemini-CLI)</title><link>/samples/looker/looker_gemini/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/samples/looker/looker_gemini/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>&lt;a href="https://modelcontextprotocol.io">Model Context Protocol&lt;/a> is an open protocol
 that standardizes how applications provide context to LLMs. Check out this page
-on how to &lt;a href="/how-to/connect_via_mcp/">connect to Toolbox via MCP&lt;/a>.&lt;/p>
+on how to &lt;a href="./how-to/connect_via_mcp/">connect to Toolbox via MCP&lt;/a>.&lt;/p>
 &lt;h2 id="step-1-get-a-looker-client-id-and-client-secret">Step 1: Get a Looker Client ID and Client Secret&lt;/h2>
 &lt;p>The Looker Client ID and Client Secret can be obtained from the Users page of
 your Looker instance. Refer to the documentation
@@ -10829,7 +10829,7 @@ asynchronous, so the batch state will not change immediately after the tool
 returns; it can take a minute or so for the cancellation to be reflected.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>serverless-spark-cancel-batch&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -10841,10 +10841,10 @@ would pass &lt;code>my-operation&lt;/code>.&lt;/li>
 &lt;p>A &lt;code>serverless-spark-create-pyspark-batch&lt;/code> tool submits a Spark batch to a Google
 Cloud Serverless for Apache Spark source. The workload executes asynchronously
 and takes around a minute to begin executing; status can be polled using the
-&lt;a href="/resources/tools/serverless-spark/serverless-spark-get-batch/">get batch&lt;/a> tool.&lt;/p>
+&lt;a href="./resources/tools/serverless-spark/serverless-spark-get-batch/">get batch&lt;/a> tool.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>serverless-spark-create-pyspark-batch&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -10864,10 +10864,10 @@ are parsed as YAML and passed to the Dataproc API.&lt;/p></description></item><i
 &lt;p>A &lt;code>serverless-spark-create-spark-batch&lt;/code> tool submits a Java Spark batch to a
 Google Cloud Serverless for Apache Spark source. The workload executes
 asynchronously and takes around a minute to begin executing; status can be
-polled using the &lt;a href="/resources/tools/serverless-spark/serverless-spark-get-batch/">get batch&lt;/a> tool.&lt;/p>
+polled using the &lt;a href="./resources/tools/serverless-spark/serverless-spark-get-batch/">get batch&lt;/a> tool.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/serverless-spark/">serverless-spark&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>serverless-spark-create-spark-batch&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -10899,14 +10899,14 @@ like SQL Server. This guide covers how to use &lt;a href="https://github.com/goo
 Databases&lt;/a> to expose your developer assistant tools to a SQL Server
 instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -10924,14 +10924,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like SQLite. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a>
 to expose your developer assistant tools to a SQLite instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -10950,11 +10950,11 @@ telemetry and observability available in Toolbox.&lt;/p>
 &lt;p>Toolbox exports telemetry data of logs via standard out/err, and traces/metrics
 through &lt;a href="https://opentelemetry.io/">OpenTelemetry&lt;/a>. Additional flags can be
 passed to Toolbox to enable different logging behavior, or to export metrics
-through a specific &lt;a href="/concepts/telemetry/#exporter">exporter&lt;/a>.&lt;/p>
+through a specific &lt;a href="./concepts/telemetry/#exporter">exporter&lt;/a>.&lt;/p>
 &lt;h2 id="logging">Logging&lt;/h2>
 &lt;p>The following flags can be used to customize Toolbox logging:&lt;/p></description></item><item><title>clickhouse-list-databases</title><link>/resources/tools/clickhouse/clickhouse-list-databases/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/clickhouse/clickhouse-list-databases/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>clickhouse-list-databases&lt;/code> tool lists all available databases in a ClickHouse
-instance. It&amp;rsquo;s compatible with the &lt;a href="/resources/sources/clickhouse/">clickhouse&lt;/a>
+instance. It&amp;rsquo;s compatible with the &lt;a href="./resources/sources/clickhouse/">clickhouse&lt;/a>
 source.&lt;/p>
 &lt;p>This tool executes the &lt;code>SHOW DATABASES&lt;/code> command and returns a list of all
 databases accessible to the configured user, making it useful for database
@@ -10970,14 +10970,14 @@ discovery and exploration tasks.&lt;/p>
 developer assistant tools to create and manage Cloud SQL for PostgreSQL
 instance, database and users:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>
@@ -11022,7 +11022,7 @@ roles):&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>To create a secret, you must have the following roles:&lt;/p></description></item><item><title>Go</title><link>/samples/pre_post_processing/go/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/samples/pre_post_processing/go/</guid><description>&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
-&lt;p>This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the &lt;a href="/getting-started/local_quickstart_go/">local quickstart&lt;/a>.&lt;/p>
+&lt;p>This tutorial assumes that you have set up MCP Toolbox with a basic agent as described in the &lt;a href="./getting-started/local_quickstart_go/">local quickstart&lt;/a>.&lt;/p>
 &lt;p>This guide demonstrates how to implement these patterns in your Toolbox applications.&lt;/p>
 &lt;h2 id="implementation">Implementation&lt;/h2>
 
@@ -11490,7 +11490,7 @@ local development:&lt;/p>
 graphs in a Cloud Spanner database. It returns detailed metadata including
 node tables, edge tables, labels and property declarations. It&amp;rsquo;s compatible with:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/spanner/">spanner&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/spanner/">spanner&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool is read-only and executes pre-defined SQL queries against the
 &lt;code>INFORMATION_SCHEMA&lt;/code> tables to gather metadata.
@@ -11621,7 +11621,7 @@ tables in a Cloud Spanner database. It automatically adapts to the database
 dialect (GoogleSQL or PostgreSQL) and returns detailed metadata including
 columns, constraints, and indexes. It&amp;rsquo;s compatible with:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/spanner/">spanner&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/spanner/">spanner&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>This tool is read-only and executes pre-defined SQL queries against the
 &lt;code>INFORMATION_SCHEMA&lt;/code> tables to gather metadata. The tool automatically detects
@@ -11629,7 +11629,7 @@ the database dialect from the source configuration and uses the appropriate SQL
 syntax.&lt;/p></description></item><item><title>clickhouse-list-tables</title><link>/resources/tools/clickhouse/clickhouse-list-tables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/resources/tools/clickhouse/clickhouse-list-tables/</guid><description>&lt;h2 id="about">About&lt;/h2>
 &lt;p>A &lt;code>clickhouse-list-tables&lt;/code> tool lists all available tables in a specified
 ClickHouse database. It&amp;rsquo;s compatible with the
-&lt;a href="/resources/sources/clickhouse/">clickhouse&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/clickhouse/">clickhouse&lt;/a> source.&lt;/p>
 &lt;p>This tool executes the &lt;code>SHOW TABLES FROM &amp;lt;database&amp;gt;&lt;/code> command and returns a list
 of all tables in the specified database that are accessible to the configured
 user, making it useful for schema exploration and table discovery tasks.&lt;/p>
@@ -11663,14 +11663,14 @@ user, making it useful for schema exploration and table discovery tasks.&lt;/p>
 developer assistant tools to create and manage Cloud SQL for MySQL instance,
 database and users:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>
@@ -11684,7 +11684,7 @@ select or create a Google Cloud project.&lt;/p>
 project&lt;/a>.&lt;/p></description></item><item><title>Deploy ADK Agent and MCP Toolbox</title><link>/how-to/deploy_adk_agent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/how-to/deploy_adk_agent/</guid><description>&lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;p>This guide assumes you have already done the following:&lt;/p>
 &lt;ol>
-&lt;li>Completed the &lt;a href="/getting-started/local_quickstart/">Python Quickstart
+&lt;li>Completed the &lt;a href="./getting-started/local_quickstart/">Python Quickstart
 (Local)&lt;/a> and have a working ADK
 agent running locally.&lt;/li>
 &lt;li>Installed the &lt;a href="https://cloud.google.com/sdk/docs/install">Google Cloud CLI&lt;/a>.&lt;/li>
@@ -11693,7 +11693,7 @@ agent running locally.&lt;/li>
 &lt;h2 id="step-1-deploy-mcp-toolbox-to-cloud-run">Step 1: Deploy MCP Toolbox to Cloud Run&lt;/h2>
 &lt;p>Before deploying your agent, your MCP Toolbox server needs to be accessible from
 the cloud. We will deploy MCP Toolbox to Cloud Run.&lt;/p>
-&lt;p>Follow the &lt;a href="/how-to/deploy_toolbox/">Deploy to Cloud Run&lt;/a> guide to deploy your MCP
+&lt;p>Follow the &lt;a href="./how-to/deploy_toolbox/">Deploy to Cloud Run&lt;/a> guide to deploy your MCP
 Toolbox instance.&lt;/p></description></item><item><title>Deploy to Kubernetes</title><link>/how-to/deploy_gke/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/how-to/deploy_gke/</guid><description>&lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>
 &lt;li>
@@ -12191,14 +12191,14 @@ local development:&lt;/p>
 developer assistant tools to create and manage Cloud SQL for SQL Server
 instance, database and users:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>
@@ -12239,7 +12239,7 @@ accessed by our agent, and create a database user for Toolbox to connect with.&l
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here, &lt;code>postgres&lt;/code> denotes the default postgres superuser.&lt;/p></description></item><item><title>Configuration</title><link>/getting-started/configure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/getting-started/configure/</guid><description>&lt;p>The primary way to configure Toolbox is through the &lt;code>tools.yaml&lt;/code> file. If you
 have multiple files, you can tell toolbox which to load with the &lt;code>--tools-file tools.yaml&lt;/code> flag.&lt;/p>
 &lt;p>You can find more detailed reference documentation to all resource types in the
-&lt;a href="/resources/">Resources&lt;/a>.&lt;/p>
+&lt;a href="./resources/">Resources&lt;/a>.&lt;/p>
 &lt;h3 id="using-environment-variables">Using Environment Variables&lt;/h3>
 &lt;p>To avoid hardcoding certain secret fields like passwords, usernames, API keys
 etc., you could use environment variables instead with the format &lt;code>${ENV_NAME}&lt;/code>.&lt;/p>
@@ -12249,7 +12249,7 @@ etc., you could use environment variables instead with the format &lt;code>${ENV
 long-running AlloyDB operation to complete. It does this by polling the AlloyDB
 Admin API operation status endpoint until the operation is finished, using
 exponential backoff. It is compatible with
-&lt;a href="/resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
+&lt;a href="./resources/sources/alloydb-admin/">alloydb-admin&lt;/a> source.&lt;/p>
 &lt;table>
  &lt;thead>
  &lt;tr>
@@ -13726,7 +13726,7 @@ Natural Language Overview&lt;/a>.&lt;/p>
 &lt;p>The &lt;code>cloud-logging-admin-list-log-names&lt;/code> tool lists the log names available in the Google Cloud project.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -13787,7 +13787,7 @@ It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>The &lt;code>cloud-logging-admin-list-resource-types&lt;/code> tool lists the monitored resource types available in Google Cloud Logging.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -13829,7 +13829,7 @@ It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>The &lt;code>cloud-logging-admin-query-logs&lt;/code> tool allows you to query log entries from Google Cloud Logging using the advanced logs filter syntax.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">

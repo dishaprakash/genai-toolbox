@@ -2,7 +2,7 @@
 &lt;p>The &lt;code>cloud-logging-admin-list-log-names&lt;/code> tool lists the log names available in the Google Cloud project.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -63,7 +63,7 @@ It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>The &lt;code>cloud-logging-admin-list-resource-types&lt;/code> tool lists the monitored resource types available in Google Cloud Logging.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">
@@ -105,7 +105,7 @@ It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;p>The &lt;code>cloud-logging-admin-query-logs&lt;/code> tool allows you to query log entries from Google Cloud Logging using the advanced logs filter syntax.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-logging-admin/">cloud-logging-admin&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="example">Example&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">tools&lt;/span>&lt;span class="w">

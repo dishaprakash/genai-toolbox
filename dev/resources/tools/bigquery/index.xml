@@ -4,7 +4,7 @@ BigQuery by creating a temporary &lt;code>CONTRIBUTION_ANALYSIS&lt;/code> model 
 it with &lt;code>ML.GET_INSIGHTS&lt;/code> to find top contributors for a given metric.&lt;/p>
 &lt;p>It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-analyze-contribution&lt;/code> takes the following parameters:&lt;/p>
 &lt;ul>
@@ -41,7 +41,7 @@ SQL or Python code, the data retrieved, and the final text answer.&lt;/p></descr
 &lt;p>A &lt;code>bigquery-execute-sql&lt;/code> tool executes a SQL statement against BigQuery.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-execute-sql&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -67,7 +67,7 @@ layer of security by controlling which datasets can be accessed:&lt;/p></descrip
 &lt;p>A &lt;code>bigquery-forecast&lt;/code> tool forecasts time series data in BigQuery.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-forecast&lt;/code> constructs and executes a &lt;code>SELECT * FROM AI.FORECAST(...)&lt;/code>
 query based on the provided parameters:&lt;/p>
@@ -92,7 +92,7 @@ predict. It defaults to 10 if not specified.&lt;/li>
 &lt;p>A &lt;code>bigquery-get-dataset-info&lt;/code> tool retrieves metadata for a BigQuery dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-get-dataset-info&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -150,7 +150,7 @@ list, it will be used as the default value for the &lt;code>dataset&lt;/code> pa
 &lt;p>A &lt;code>bigquery-get-table-info&lt;/code> tool retrieves metadata for a BigQuery table.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-get-table-info&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -164,7 +164,7 @@ tool defaults to the project from the source configuration.&lt;/li>
 &lt;p>A &lt;code>bigquery-list-dataset-ids&lt;/code> tool returns all dataset IDs from the source.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-list-dataset-ids&lt;/code> accepts the following parameter:&lt;/p>
 &lt;ul>
@@ -220,7 +220,7 @@ parameter is ignored.&lt;/li>
 &lt;p>A &lt;code>bigquery-list-table-ids&lt;/code> tool returns table IDs in a given BigQuery dataset.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-list-table-ids&lt;/code> accepts the following parameters:&lt;/p>
 &lt;ul>
@@ -234,7 +234,7 @@ the tool defaults to the project from the source configuration.&lt;/li>
 tables, views, models) with system=bigquery that matches given user query.
 It&amp;rsquo;s compatible with the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>bigquery-search-catalog&lt;/code> takes a required &lt;code>query&lt;/code> parameter based on which
 entries are filtered and returned to the user. It also optionally accepts
@@ -255,7 +255,7 @@ interacting with [Dataplex][dataplex-docs].&lt;/p></description></item><item><ti
 &lt;p>A &lt;code>bigquery-sql&lt;/code> tool executes a pre-defined SQL statement. It&amp;rsquo;s compatible with
 the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/bigquery/">bigquery&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The behavior of this tool is influenced by the &lt;code>writeMode&lt;/code> setting on its
 &lt;code>bigquery&lt;/code> source:&lt;/p>

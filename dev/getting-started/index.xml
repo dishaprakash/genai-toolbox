@@ -426,7 +426,7 @@ accessed by our agent, and create a database user for Toolbox to connect with.&l
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here, &lt;code>postgres&lt;/code> denotes the default postgres superuser.&lt;/p></description></item><item><title>Configuration</title><link>/getting-started/configure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/getting-started/configure/</guid><description>&lt;p>The primary way to configure Toolbox is through the &lt;code>tools.yaml&lt;/code> file. If you
 have multiple files, you can tell toolbox which to load with the &lt;code>--tools-file tools.yaml&lt;/code> flag.&lt;/p>
 &lt;p>You can find more detailed reference documentation to all resource types in the
-&lt;a href="/resources/">Resources&lt;/a>.&lt;/p>
+&lt;a href="../resources/">Resources&lt;/a>.&lt;/p>
 &lt;h3 id="using-environment-variables">Using Environment Variables&lt;/h3>
 &lt;p>To avoid hardcoding certain secret fields like passwords, usernames, API keys
 etc., you could use environment variables instead with the format &lt;code>${ENV_NAME}&lt;/code>.&lt;/p>

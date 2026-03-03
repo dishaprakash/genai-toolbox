@@ -38,14 +38,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like Postgres. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a>
 to expose your developer assistant tools to a Looker instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Gemini-CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/looker_mcp/#connect-with-antigravity">Antigravity&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Gemini-CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/looker_mcp/#connect-with-antigravity">Antigravity&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-looker">Set up Looker&lt;/h2>
 &lt;ol>
@@ -62,14 +62,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like MySQL. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a> to
 expose your developer assistant tools to a MySQL instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mysql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -86,14 +86,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like Neo4j. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a> to
 expose your developer assistant tools to a Neo4j instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/neo4j_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -111,14 +111,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like Postgres. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a>
 to expose your developer assistant tools to a Postgres instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/postgres_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;style type="text/css">
  
@@ -252,14 +252,14 @@ like SQL Server. This guide covers how to use &lt;a href="https://github.com/goo
 Databases&lt;/a> to expose your developer assistant tools to a SQL Server
 instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/mssql_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -277,14 +277,14 @@ an open protocol for connecting Large Language Models (LLMs) to data sources
 like SQLite. This guide covers how to use &lt;a href="https://github.com/googleapis/genai-toolbox">MCP Toolbox for Databases&lt;/a>
 to expose your developer assistant tools to a SQLite instance:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/sqlite_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="set-up-the-database">Set up the database&lt;/h2>
 &lt;ol>
@@ -300,14 +300,14 @@ V0.10.0+:&lt;/p></description></item><item><title>Cloud SQL for PostgreSQL Admin
 developer assistant tools to create and manage Cloud SQL for PostgreSQL
 instance, database and users:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_pg_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>
@@ -322,14 +322,14 @@ project&lt;/a>.&lt;/p></description></item><item><title>Cloud SQL for MySQL Admi
 developer assistant tools to create and manage Cloud SQL for MySQL instance,
 database and users:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mysql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>
@@ -344,14 +344,14 @@ project&lt;/a>.&lt;/p></description></item><item><title>Cloud SQL for SQL Server
 developer assistant tools to create and manage Cloud SQL for SQL Server
 instance, database and users:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cursor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Windsurf&lt;/a> (Codium)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Visual Studio Code&lt;/a> (Copilot)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Cline&lt;/a> (VS Code extension)&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude desktop&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Claude code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../how-to/connect-ide/cloud_sql_mssql_admin_mcp/#configure-your-mcp-client">Gemini Code Assist&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="before-you-begin">Before you begin&lt;/h2>
 &lt;ol>

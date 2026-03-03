@@ -6,7 +6,7 @@ available in Google Cloud Monitoring using the Prometheus Query Language
 (PromQL).
 It&amp;rsquo;s compatible with any of the following sources:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/resources/sources/cloud-monitoring/">cloud-monitoring&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../resources/sources/cloud-monitoring/">cloud-monitoring&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
 &lt;p>To use this tool, you need to have the following IAM role on your Google Cloud

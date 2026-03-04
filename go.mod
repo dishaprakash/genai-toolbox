@@ -20,6 +20,15 @@ require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.55.0
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.31.0
 	github.com/MicahParks/jwkset v0.11.0
+	cloud.google.com/go/dataproc/v2 v2.15.0
+	cloud.google.com/go/firestore v1.20.0
+	cloud.google.com/go/geminidataanalytics v0.5.0
+	cloud.google.com/go/logging v1.13.1
+	cloud.google.com/go/longrunning v0.7.0
+	cloud.google.com/go/spanner v1.86.1
+	github.com/ClickHouse/clickhouse-go/v2 v2.40.3
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.53.0
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.30.0
 	github.com/MicahParks/keyfunc/v3 v3.8.0
 	github.com/apache/cassandra-gocql-driver/v2 v2.0.0
 	github.com/cenkalti/backoff/v5 v5.0.3
@@ -38,6 +47,8 @@ require (
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/goccy/go-yaml v1.19.2
 	github.com/godror/godror v0.50.0
+	github.com/goccy/go-yaml v1.18.0
+	github.com/godror/godror v0.49.6
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/google/go-cmp v0.7.0
 	github.com/google/uuid v1.6.0
@@ -110,6 +121,10 @@ require (
 	github.com/GoogleCloudPlatform/grpc-gcp-go/grpcgcp v1.6.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.30.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.55.0 // indirect
+	github.com/GoogleCloudPlatform/grpc-gcp-go/grpcgcp v1.5.3 // indirect
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.29.0 // indirect
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.54.0 // indirect
+	github.com/MicahParks/jwkset v0.11.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/PuerkitoBio/goquery v1.10.3 // indirect
 	github.com/VictoriaMetrics/easyproto v0.1.4 // indirect

@@ -112,7 +112,7 @@ To install Toolbox as a binary on Linux (AMD64):
 
 ```sh
 # see releases page for other versions
-export VERSION=0.27.0
+export VERSION=0.28.0
 curl -L -o toolbox https://storage.googleapis.com/genai-toolbox/v$VERSION/linux/amd64/toolbox
 chmod +x toolbox
 ```
@@ -123,7 +123,7 @@ To install Toolbox as a binary on macOS (Apple Silicon):
 
 ```sh
 # see releases page for other versions
-export VERSION=0.27.0
+export VERSION=0.28.0
 curl -L -o toolbox https://storage.googleapis.com/genai-toolbox/v$VERSION/darwin/arm64/toolbox
 chmod +x toolbox
 ```
@@ -134,7 +134,7 @@ To install Toolbox as a binary on macOS (Intel):
 
 ```sh
 # see releases page for other versions
-export VERSION=0.27.0
+export VERSION=0.28.0
 curl -L -o toolbox https://storage.googleapis.com/genai-toolbox/v$VERSION/darwin/amd64/toolbox
 chmod +x toolbox
 ```
@@ -145,7 +145,7 @@ To install Toolbox as a binary on Windows (Command Prompt):
 
 ```cmd
 :: see releases page for other versions
-set VERSION=0.27.0
+set VERSION=0.28.0
 curl -o toolbox.exe "https://storage.googleapis.com/genai-toolbox/v%VERSION%/windows/amd64/toolbox.exe"
 ```
 
@@ -155,7 +155,7 @@ To install Toolbox as a binary on Windows (PowerShell):
 
 ```powershell
 # see releases page for other versions
-$VERSION = "0.27.0"
+$VERSION = "0.28.0"
 curl.exe -o toolbox.exe "https://storage.googleapis.com/genai-toolbox/v$VERSION/windows/amd64/toolbox.exe"
 ```
 
@@ -167,7 +167,7 @@ You can also install Toolbox as a container:
 
 ```sh
 # see releases page for other versions
-export VERSION=0.27.0
+export VERSION=0.28.0
 docker pull us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:$VERSION
 ```
 
@@ -186,7 +186,7 @@ To install from source, ensure you have the latest version of
 [Go installed](https://go.dev/doc/install), and then run the following command:
 
 ```sh
-go install github.com/googleapis/genai-toolbox@v0.27.0
+go install github.com/googleapis/genai-toolbox@v0.28.0
 ```
 
 {{% /tab %}}
@@ -1547,7 +1547,7 @@ In this section, we will download Toolbox, configure our tools in a
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -2225,19 +2225,19 @@ After you install Looker in the MCP Store, resources and tools from the server a
 
 {{< tabpane persist=header >}}
 {{< tab header="linux/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/linux/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/linux/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/arm64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/arm64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/arm64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="windows/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/windows/amd64/toolbox.exe
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolbox.exe
 {{< /tab >}}
 {{< /tabpane >}}
     <!-- {x-release-please-end} -->
@@ -2577,19 +2577,19 @@ expose your developer assistant tools to a MySQL instance:
    <!-- {x-release-please-start-version} -->
    {{< tabpane persist=header >}}
 {{< tab header="linux/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/linux/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/linux/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/arm64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/arm64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/arm64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="windows/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/windows/amd64/toolbox.exe
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolbox.exe
 {{< /tab >}}
 {{< /tabpane >}}
     <!-- {x-release-please-end} -->
@@ -2896,19 +2896,19 @@ expose your developer assistant tools to a Neo4j instance:
    <!-- {x-release-please-start-version} -->
    {{< tabpane persist=header >}}
 {{< tab header="linux/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/linux/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/linux/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/arm64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/arm64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/arm64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="windows/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/windows/amd64/toolbox.exe
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolbox.exe
 {{< /tab >}}
 {{< /tabpane >}}
     <!-- {x-release-please-end} -->
@@ -3222,19 +3222,19 @@ Omni](https://cloud.google.com/alloydb/omni/docs/overview).
    <!-- {x-release-please-start-version} -->
    {{< tabpane persist=header >}}
 {{< tab header="linux/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/linux/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/linux/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/arm64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/arm64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/arm64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="windows/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/windows/amd64/toolbox.exe
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolbox.exe
 {{< /tab >}}
 {{< /tabpane >}}
     <!-- {x-release-please-end} -->
@@ -3555,19 +3555,19 @@ instance:
    <!-- {x-release-please-start-version} -->
    {{< tabpane persist=header >}}
 {{< tab header="linux/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/linux/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/linux/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/arm64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/arm64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/arm64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="windows/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/windows/amd64/toolbox.exe
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolbox.exe
 {{< /tab >}}
 {{< /tabpane >}}
     <!-- {x-release-please-end} -->
@@ -3874,19 +3874,19 @@ to expose your developer assistant tools to a SQLite instance:
    <!-- {x-release-please-start-version} -->
    {{< tabpane persist=header >}}
 {{< tab header="linux/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/linux/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/linux/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/arm64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/arm64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/arm64/toolbox
 {{< /tab >}}
 
 {{< tab header="darwin/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/darwin/amd64/toolbox
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/darwin/amd64/toolbox
 {{< /tab >}}
 
 {{< tab header="windows/amd64" lang="bash" >}}
-curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/windows/amd64/toolbox.exe
+curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolbox.exe
 {{< /tab >}}
 {{< /tabpane >}}
     <!-- {x-release-please-end} -->
@@ -8985,6 +8985,64 @@ This abbreviated syntax works for the qualified predicates except for `label` in
 | project   |  string  |     true     | ID of the GCP project used for quota and billing purposes (e.g. "my-project-id").|
 
 
+# Dataproc Clusters
+Google Cloud Dataproc Clusters lets you provision and manage Apache Spark and Hadoop clusters.
+
+
+## About
+
+The [Dataproc
+Clusters](https://cloud.google.com/dataproc/docs/concepts/overview) source
+allows Toolbox to interact with Dataproc Clusters hosted on Google Cloud.
+
+## Available Tools
+
+- [`dataproc-get-cluster`](../tools/dataproc/dataproc-get-cluster.md)
+  Get a specific Dataproc cluster.
+- [`dataproc-list-clusters`](../tools/dataproc/dataproc-list-clusters.md)
+  List and filter Dataproc clusters.
+- [`dataproc-get-job`](../tools/dataproc/dataproc-get-job.md)
+  Get a specific Dataproc job.
+- [`dataproc-list-jobs`](../tools/dataproc/dataproc-list-jobs.md)
+  List and filter Dataproc jobs.
+
+## Requirements
+
+### IAM Permissions
+
+Dataproc uses [Identity and Access Management
+(IAM)](https://cloud.google.com/dataproc/docs/concepts/iam/iam) to control user
+and group access to Dataproc resources.
+
+Toolbox will use your [Application Default Credentials
+(ADC)](https://cloud.google.com/docs/authentication#adc) to authorize and
+authenticate when interacting with Dataproc. When using this method, you need to
+ensure the IAM identity associated with your ADC has the correct
+[permissions](https://cloud.google.com/dataproc/docs/concepts/iam/iam)
+for the actions you intend to perform. Common roles include
+`roles/dataproc.editor` or `roles/dataproc.viewer`. Follow this
+[guide](https://cloud.google.com/docs/authentication/provide-credentials-adc) to
+set up your ADC.
+
+## Example
+
+```yaml
+kind: sources
+name: my-dataproc-source
+type: dataproc
+project: my-project
+region: us-central1
+```
+
+## Reference
+
+| **field** | **type** | **required** | **description**                                    |
+| --------- | :------: | :----------: | -------------------------------------------------- |
+| type      |  string  |     true     | Must be "dataproc".                                |
+| project   |  string  |     true     | ID of the GCP project with Dataproc resources.     |
+| region    |  string  |     true     | Region containing Dataproc resources.            |
+
+
 # Dgraph
 Dgraph is fully open-source, built-for-scale graph database for Gen AI workloads
 
@@ -10395,6 +10453,10 @@ Apache Spark.
   Create a Serverless Spark PySpark batch operation.
 - [`serverless-spark-create-spark-batch`](../tools/serverless-spark/serverless-spark-create-spark-batch.md)
   Create a Serverless Spark Java batch operation.
+- [`serverless-spark-list-sessions`](../tools/serverless-spark/serverless-spark-list-sessions.md)
+  List and filter Serverless Spark sessions.
+- [`serverless-spark-get-session`](../tools/serverless-spark/serverless-spark-get-session.md)
+  Get a Serverless Spark session.
 
 ## Requirements
 
@@ -11266,6 +11328,39 @@ parameters:
     type: string
     description: 1 to 4 digit number
 ```
+
+## Prebuilt vs. Custom Tools
+
+MCP Toolbox provides two main approaches for tools: **prebuilt** and **custom**.
+
+[**Prebuilt tools**](../../reference/prebuilt-tools/) are ready to use out of
+the box. For example, a tool like
+[`postgres-execute-sql`](postgres/postgres-execute-sql/) has fixed parameters
+and always works the same way, allowing the agent to execute arbitrary SQL.
+While these are convenient, they are typically only safe when a developer is in
+the loop (e.g., during prototyping, developing, or debugging).
+
+For application use cases, you need to be wary of security risks such as prompt
+injection or data poisoning. Allowing an LLM to execute arbitrary queries in
+production is highly dangerous.
+
+To secure your application, you should **use custom tools** to suit your
+specific schema and application needs. Creating a custom tool restricts the
+agent's capabilities to only what is necessary. For example, you can use the
+[`postgres-sql`](postgres/postgres-sql/) tool to define a specific action. This
+typically involves:
+
+*   **Prepared Statements:** Writing a SQL query ahead of time and letting the
+    agent only fill in specific [basic parameters](#basic-parameters).
+*   [**Bound Parameters:**](../../sdks/python-sdk/core/#option-a-binding-parameters-to-a-loaded-tool)
+    Passing parameters directly to the underlying engine as bound variables
+    rather than allowing the LLM to provide them.
+*   **Secure Parameters:** Using mechanisms like [authenticated
+    parameters](#authenticated-parameters) to restrict what data the agent can
+    access based on the logged-in user.
+
+By creating custom tools, you significantly reduce the attack surface and ensure
+the agent operates within defined, safe boundaries.
 
 ## Specifying Parameters
 
@@ -12766,6 +12861,16 @@ Tools that work with Dataplex Sources.
 
 
 
+# Dataproc
+Tools that work with Google Cloud Dataproc Sources.
+
+
+- [dataproc-get-cluster](./dataproc-get-cluster.md)
+- [dataproc-get-job](./dataproc-get-job.md)
+- [dataproc-list-clusters](./dataproc-list-clusters.md)
+- [dataproc-list-jobs](./dataproc-list-jobs.md)
+
+
 # Dgraph
 Tools that work with Dgraph Sources.
 
@@ -12979,6 +13084,8 @@ Tools that work with Google Cloud Serverless for Apache Spark Sources.
 - [serverless-spark-cancel-batch](./serverless-spark-cancel-batch.md)
 - [serverless-spark-create-pyspark-batch](./serverless-spark-create-pyspark-batch.md)
 - [serverless-spark-create-spark-batch](./serverless-spark-create-spark-batch.md)
+- [serverless-spark-get-session](./serverless-spark-get-session.md)
+- [serverless-spark-list-sessions](./serverless-spark-list-sessions.md)
 
 
 # SingleStore
@@ -13306,7 +13413,7 @@ In this section, we will download and install the Toolbox binary.
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    export VERSION="0.27.0"
+    export VERSION="0.28.0"
     curl -O https://storage.googleapis.com/genai-toolbox/v$VERSION/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
@@ -13740,7 +13847,7 @@ to use BigQuery, and then run the Toolbox server.
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -14387,7 +14494,7 @@ In this section, we will download Toolbox, configure our tools in a
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -14592,7 +14699,7 @@ In this section, we will download Toolbox and run the Toolbox server.
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -14717,7 +14824,7 @@ In this section, we will download Toolbox and run the Toolbox server.
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -14827,7 +14934,7 @@ In this section, we will download Toolbox and run the Toolbox server.
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.27.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -20183,7 +20290,7 @@ This page describes the `toolbox` command-line options.
 |              | `--log-level`              | Specify the minimum level logged. Allowed: 'DEBUG', 'INFO', 'WARN', 'ERROR'.                                                                                                     | `info`      |
 |              | `--logging-format`         | Specify logging format to use. Allowed: 'standard' or 'JSON'.                                                                                                                    | `standard`  |
 | `-p`         | `--port`                   | Port the server will listen on.                                                                                                                                                  | `5000`      |
-|              | `--prebuilt`               | Use one or more prebuilt tool configuration by source type. See [Prebuilt Tools Reference](prebuilt-tools.md) for allowed values.                                                          |             |
+|              | `--prebuilt`               | Use one or more prebuilt tool configuration by source type. See [Prebuilt Tools Reference](prebuilt-tools.md) for allowed values.                                                |             |
 |              | `--stdio`                  | Listens via MCP STDIO instead of acting as a remote HTTP server.                                                                                                                 |             |
 |              | `--telemetry-gcp`          | Enable exporting directly to Google Cloud Monitoring.                                                                                                                            |             |
 |              | `--telemetry-otlp`         | Enable exporting using OpenTelemetry Protocol (OTLP) to the specified endpoint (e.g. 'http://127.0.0.1:4318')                                                                    |             |
@@ -20195,6 +20302,7 @@ This page describes the `toolbox` command-line options.
 |              | `--allowed-origins`        | Specifies a list of origins permitted to access this server for CORs access.                                                                                                     | `*`         |
 |              | `--allowed-hosts`          | Specifies a list of hosts permitted to access this server to prevent DNS rebinding attacks.                                                                                      | `*`         |
 |              | `--user-agent-metadata`    | Appends additional metadata to the User-Agent.                                                                                                                                   |             |
+|              | `--poll-interval`          | Specifies the polling frequency (seconds) for configuration file updates.                                                                                                        | `0`         |
 | `-v`         | `--version`                | version for toolbox                                                                                                                                                              |             |
 
 ## Sub Commands
@@ -20300,8 +20408,18 @@ used at a time.
 
 ### Hot Reload
 
-Toolbox enables dynamic reloading by default. To disable, use the
-`--disable-reload` flag.
+Toolbox supports two methods for detecting configuration changes: **Push**
+(event-driven) and **Poll** (interval-based). To completely disable all hot
+reloading, use the `--disable-reload` flag.
+
+* **Push (Default):** Toolbox uses a highly efficient push system that listens
+  for instant OS-level file events to reload configurations the moment you save.
+* **Poll (Fallback):** Alternatively, you can use the
+  `--poll-interval=<seconds>` flag to actively check for updates at a set
+  cadence. Unlike the push system, polling "pulls" the file status manually,
+  which is a great fallback for network drives or container volumes where OS
+  events might get dropped. Set the interval to `0` to disable the polling
+  system.
 
 ### Toolbox UI
 
@@ -20774,6 +20892,20 @@ See [Usage Examples](../reference/cli.md#examples).
     *   `search_aspect_types`: Finds aspect types relevant to the
         query.
 
+## Dataproc
+
+*   `--prebuilt` value: `dataproc`
+*   **Environment Variables:**
+    *   `DATAPROC_PROJECT`: The GCP project ID.
+    *   `DATAPROC_REGION`: The Dataproc region.
+*   **Permissions:**
+    *   **Dataproc Viewer** (`roles/dataproc.viewer`) to examine clusters and jobs.
+*   **Tools:**
+    *   `list_clusters`: Lists Dataproc clusters.
+    *   `get_cluster`: Gets a Dataproc cluster.
+    *   `list_jobs`: Lists Dataproc jobs.
+    *   `get_job`: Gets a Dataproc job.
+
 ## Elasticsearch
 
 *   `--prebuilt` value: `elasticsearch`
@@ -20841,6 +20973,23 @@ See [Usage Examples](../reference/cli.md#examples).
     *   `add_dashboard_element`: Adds a tile to a dashboard.
     *   `add_dashboard_filter`: Adds a filter to a dashboard.
     *   `generate_embed_url`: Generate an embed url for content.
+
+## Looker Dev
+
+*   `--prebuilt` value: `looker-dev`
+*   **Environment Variables:**
+    *   `LOOKER_BASE_URL`: The URL of your Looker instance.
+    *   `LOOKER_CLIENT_ID`: The client ID for the Looker API.
+    *   `LOOKER_CLIENT_SECRET`: The client secret for the Looker API.
+    *   `LOOKER_VERIFY_SSL`: Whether to verify SSL certificates.
+    *   `LOOKER_USE_CLIENT_OAUTH`: Whether to use OAuth for authentication.
+    *   `LOOKER_SHOW_HIDDEN_MODELS`: Whether to show hidden models.
+    *   `LOOKER_SHOW_HIDDEN_EXPLORES`: Whether to show hidden explores.
+    *   `LOOKER_SHOW_HIDDEN_FIELDS`: Whether to show hidden fields.
+*   **Permissions:**
+    *   A Looker account with permissions to access the desired projects
+        and LookML is required.
+*   **Tools:**
     *   `health_pulse`: Test the health of a Looker instance.
     *   `health_analyze`: Analyze the LookML usage of a Looker instance.
     *   `health_vacuum`: Suggest LookML elements that can be removed.
@@ -20860,6 +21009,9 @@ See [Usage Examples](../reference/cli.md#examples).
     *   `get_connection_databases`: Get the available databases in a connection.
     *   `get_connection_tables`: Get the available tables in a connection.
     *   `get_connection_table_columns`: Get the available columns for a table.
+    *   `get_lookml_tests`: Retrieves a list of available LookML tests for a project.
+    *   `run_lookml_tests`: Executes specific LookML tests within a project.
+    *   `create_view_from_table`: Generates boilerplate LookML views directly from the database schema.
 
 ## Looker Conversational Analytics
 
@@ -21020,6 +21172,8 @@ See [Usage Examples](../reference/cli.md#examples).
     *   `cancel_batch`: Cancels a Spark batch.
     *   `create_pyspark_batch`: Creates a PySpark batch.
     *   `create_spark_batch`: Creates a Spark batch.
+    *   `list_sessions`: Lists Spark sessions.
+    *   `get_session`: Gets a Spark session.
 
 ## SingleStore
 

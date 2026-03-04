@@ -1,0 +1,60 @@
+name: "CF: Deploy Previous Version Docs"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'The old version tag (e.g., v0.15.0)'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cf-docs-update
+      cancel-in-progress: false
+    steps:
+      - name: Checkout main (for latest theme/templates)
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+          submodules: 'recursive'
+          fetch-depth: 0
+
+      - name: Checkout old content
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version_tag }}
+          path: 'old_version_source'
+          sparse-checkout: docs
+
+      - name: Replace content and Patch
+        run: |
+          rm -rf docs/
+          mv ./old_version_source/docs docs
+          # Strip paths for Cloudflare
+          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
+          if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
+            sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
+          fi
+          # Ensure version is in menu
+          if ! grep -q "${{ github.event.inputs.version_tag }}" .hugo/hugo.toml; then
+            sed -i "/\[params\.versions\]/a \ \ [[params.versions]]\n\ \ version = \"${{ github.event.inputs.version_tag }}\"\n\ \ url = \"/${{ github.event.inputs.version_tag }}/\"" .hugo/hugo.toml
+          fi
+
+      - name: Setup and Build
+        run: |
+          cd .hugo && npm ci
+          hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/"
+        env:
+          HUGO_RELATIVEURLS: false
+
+      - name: Push Version to v1-docsite
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .hugo/public
+          publish_branch: v1-docsite
+          destination_dir: ${{ github.event.inputs.version_tag }}
+          keep_files: true

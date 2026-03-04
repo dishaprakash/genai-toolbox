@@ -16,14 +16,14 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout main (for latest theme/templates)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: 'main'
           submodules: 'recursive'
           fetch-depth: 0
 
       - name: Checkout old content
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.inputs.version_tag }}
           path: 'old_version_source'
@@ -65,7 +65,7 @@ jobs:
           HUGO_RELATIVEURLS: false
 
       - name: Push Version to v1-docsite
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public

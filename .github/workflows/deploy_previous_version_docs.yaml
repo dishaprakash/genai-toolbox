@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: "CF: Deploy Previous Version Docs"
+name: "Deploy Previous Version Docs"
 
 on:
   workflow_dispatch:
@@ -30,88 +30,75 @@ jobs:
 
     steps:
       - name: Checkout main branch (for latest templates and theme)
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           ref: 'main'
           submodules: 'recursive'
           fetch-depth: 0
 
       - name: Checkout old content from tag into a temporary directory
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           ref: ${{ github.event.inputs.version_tag }}
-          path: 'old_version_source'
+          path: 'old_version_source' # Checkout into a temp subdir
+          # Sparse checkout to only get the content directory
           sparse-checkout: |
             docs
 
       - name: Replace content with old version
         run: |
+          # Remove the current content directory from the main branch checkout
           rm -rf docs/
+          # Move the old content directory into place
           mv ./old_version_source/docs docs
 
-      - name: Patch Config and Templates for Cloudflare
-        run: |
-          # Strip GitHub domain from config
-          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
-          # Strip hardcoded prefix from navbar
-          if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
-            sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
-          fi
-          # Ensure version is in menu
-          if ! grep -q "${{ github.event.inputs.version_tag }}" .hugo/hugo.toml; then
-            sed -i "/\[params\.versions\]/a \ \ [[params.versions]]\n\ \ version = \"${{ github.event.inputs.version_tag }}\"\n\ \ url = \"/${{ github.event.inputs.version_tag }}/\"" .hugo/hugo.toml
-          fi
-
       - name: Setup Hugo and Node
-        uses: peaceiris/actions-hugo@v3
+        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
         with:
           hugo-version: "0.145.0"
           extended: true
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
           node-version: "22"
 
       - name: Install Dependencies
-        run: |
-          cd .hugo
-          npm ci
-          hugo mod clean
-          hugo mod get -u
+        run: npm ci
+        working-directory: .hugo
 
       - name: Build Hugo Site for Archived Version
         run: hugo --minify
         working-directory: .hugo
         env:
-          HUGO_BASEURL: https://go.mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/
+          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.event.inputs.version_tag }}/
           HUGO_RELATIVEURLS: false
 
-      - name: Deploy to v1-docsite (Versioned Dir)
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public
-          publish_branch: v1-docsite
+          publish_branch: versioned-gh-pages
           destination_dir: ./${{ github.event.inputs.version_tag }}
           keep_files: true
           allow_empty_commit: true
-          commit_message: "cf-docs(backport): deploy docs for ${{ github.event.inputs.version_tag }}"
+          commit_message: "docs(backport): deploy docs for ${{ github.event.inputs.version_tag }}"
 
       - name: Clean Build Directory
         run: rm -rf .hugo/public
 
-      - name: Build Hugo Site (Root)
+      - name: Build Hugo Site
         run: hugo --minify
         working-directory: .hugo
         env:
-          HUGO_BASEURL: https://go.mcp-toolbox.dev/
+          HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           HUGO_RELATIVEURLS: false
 
-      - name: Deploy to v1-docsite (Root)
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to root
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public
-          publish_branch: v1-docsite
+          publish_branch: versioned-gh-pages
           keep_files: true
           allow_empty_commit: true
-          commit_message: "cf-deploy: docs to root for ${{ github.event.inputs.version_tag }}"
+          commit_message: "deploy: docs to root for ${{ github.event.inputs.version_tag }}"

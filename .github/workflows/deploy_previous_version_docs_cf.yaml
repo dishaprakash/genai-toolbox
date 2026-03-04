@@ -55,12 +55,20 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install Dependencies and Build
+      - name: Install Dependencies and Clear Cache
         run: |
           cd .hugo
           npm ci
-          hugo mod get -u # Refresh Docsy modules
-          hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/"
+          # Define local cache to avoid runner-level corruption
+          export HUGO_CACHEDIR=$(pwd)/hugo_cache
+          hugo mod clean
+          hugo mod get -u
+
+      - name: Build Hugo Site for Archived Version
+        run: |
+          export HUGO_CACHEDIR=$(pwd)/hugo_cache
+          hugo --minify --baseURL="https://go.mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/"
+        working-directory: .hugo
         env:
           HUGO_RELATIVEURLS: false
 

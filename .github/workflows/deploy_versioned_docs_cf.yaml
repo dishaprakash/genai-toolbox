@@ -1,0 +1,67 @@
+name: "CF: Deploy Versioned Docs"
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cf-docs-update
+      cancel-in-progress: false
+    steps:
+      - name: Checkout Tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Patch Config and Templates for Cloudflare
+        run: |
+          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
+          if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
+            sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
+          fi
+
+      - name: Setup Hugo/Node
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.146.0"
+          extended: true
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build and Push Version
+        run: |
+          cd .hugo && npm ci
+          hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/${{ github.event.release.tag_name }}/"
+        env:
+          HUGO_RELATIVEURLS: false
+
+      - name: Push Version to v1-docsite
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .hugo/public
+          publish_branch: v1-docsite
+          destination_dir: ${{ github.event.release.tag_name }}
+          keep_files: true
+
+      - name: Build and Push Root Assets
+        run: |
+          rm -rf .hugo/public
+          cd .hugo && hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/"
+        env:
+          HUGO_RELATIVEURLS: false
+
+      - name: Deploy to Root
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .hugo/public
+          publish_branch: v1-docsite
+          keep_files: true

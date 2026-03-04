@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/googleapis/genai-toolbox/internal/auth/generic"
 	"github.com/googleapis/genai-toolbox/internal/auth/google"
 	"github.com/googleapis/genai-toolbox/internal/embeddingmodels/gemini"
 	"github.com/googleapis/genai-toolbox/internal/prebuiltconfigs"
@@ -625,6 +626,16 @@ func TestParseToolFile(t *testing.T) {
 			type: google
 			clientId: testing-id
 ---
+			kind: authServices
+			name: my-generic-auth
+			type: generic
+			clientId: testings
+			authUrl: https://testings
+			mcpEnabled: true
+			scopesRequired:
+			  - read:files
+			  - write:files
+---
 			kind: embeddingModels
 			name: gemini-model
 			type: gemini
@@ -677,6 +688,14 @@ func TestParseToolFile(t *testing.T) {
 						Name:     "my-google-auth",
 						Type:     google.AuthServiceType,
 						ClientID: "testing-id",
+					},
+					"my-generic-auth": generic.Config{
+						Name:           "my-generic-auth",
+						Type:           generic.AuthServiceType,
+						ClientID:       "testings",
+						McpEnabled:     true,
+						AuthURL:        "https://testings",
+						ScopesRequired: []string{"read:files", "write:files"},
 					},
 				},
 				EmbeddingModels: server.EmbeddingModelConfigs{
@@ -2138,12 +2157,19 @@ func TestMergeToolsFiles(t *testing.T) {
 		Sources: server.SourceConfigs{"source1": httpsrc.Config{Name: "source1"}},
 		Tools:   server.ToolConfigs{"tool2": http.Config{Name: "tool2"}},
 	}
+	fileMcp1 := ToolsFile{
+		AuthServices: server.AuthServiceConfigs{"generic1": generic.Config{Name: "generic1", McpEnabled: true}},
+	}
+	fileMcp2 := ToolsFile{
+		AuthServices: server.AuthServiceConfigs{"generic2": generic.Config{Name: "generic2", McpEnabled: true}},
+	}
 
 	testCases := []struct {
 		name    string
 		files   []ToolsFile
 		want    ToolsFile
 		wantErr bool
+		errString string
 	}{
 		{
 			name:  "merge two distinct files",
@@ -2162,6 +2188,12 @@ func TestMergeToolsFiles(t *testing.T) {
 			name:    "merge with conflicts",
 			files:   []ToolsFile{file1, file2, fileWithConflicts},
 			wantErr: true,
+		},
+		{
+			name:    "merge multiple mcp enabled generic",
+			files:   []ToolsFile{fileMcp1, fileMcp2},
+			wantErr: true,
+			errString: "multiple authServices with mcpEnabled=true detected",
 		},
 		{
 			name:  "merge single file",
@@ -2203,7 +2235,9 @@ func TestMergeToolsFiles(t *testing.T) {
 				if err == nil {
 					t.Fatal("expected an error for conflicting files but got none")
 				}
-				if !strings.Contains(err.Error(), "resource conflicts detected") {
+				if tc.errString != "" && !strings.Contains(err.Error(), tc.errString) {
+					t.Errorf("expected error %q, but got: %v", tc.errString, err)
+				} else if tc.errString == "" && !strings.Contains(err.Error(), "resource conflicts detected") {
 					t.Errorf("expected conflict error, but got: %v", err)
 				}
 			}

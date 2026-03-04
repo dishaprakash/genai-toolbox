@@ -27,6 +27,7 @@ import (
 
 	"github.com/goccy/go-yaml"
 	"github.com/google/go-cmp/cmp"
+	"github.com/googleapis/genai-toolbox/internal/auth/generic"
 	"github.com/googleapis/genai-toolbox/internal/server"
 )
 
@@ -296,6 +297,18 @@ func mergeToolsFiles(files ...ToolsFile) (ToolsFile, error) {
 	// If conflicts were detected, return an error
 	if len(conflicts) > 0 {
 		return ToolsFile{}, fmt.Errorf("resource conflicts detected:\n  - %s\n\nPlease ensure each source, authService, tool, toolset and prompt has a unique name across all files", strings.Join(conflicts, "\n  - "))
+	}
+
+	// Ensure only one authService has mcpEnabled = true
+	var mcpEnabledAuthServers []string
+	for name, authService := range merged.AuthServices {
+		// Only generic type has McpEnabled right now
+		if genericService, ok := authService.(generic.Config); ok && genericService.McpEnabled {
+			mcpEnabledAuthServers = append(mcpEnabledAuthServers, name)
+		}
+	}
+	if len(mcpEnabledAuthServers) > 1 {
+		return ToolsFile{}, fmt.Errorf("multiple authServices with mcpEnabled=true detected: %s. Only one MCP authorization server is currently supported", strings.Join(mcpEnabledAuthServers, ", "))
 	}
 
 	return merged, nil

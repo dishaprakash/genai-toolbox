@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Javascript on MCP Toolbox for Databases</title><link>/sdks/js-sdk/</link><description>Recent content in Javascript on MCP Toolbox for Databases</description><generator>Hugo</generator><language>en</language><atom:link href="/sdks/js-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>ADK</title><link>/sdks/js-sdk/adk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/sdks/js-sdk/adk/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Javascript on MCP Toolbox for Databases</title><link>https://dishaprakash.github.io/genai-toolbox/dev/sdks/js-sdk/</link><description>Recent content in Javascript on MCP Toolbox for Databases</description><generator>Hugo</generator><language>en</language><atom:link href="https://dishaprakash.github.io/genai-toolbox/dev/sdks/js-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>ADK</title><link>https://dishaprakash.github.io/genai-toolbox/dev/sdks/js-sdk/adk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/dev/sdks/js-sdk/adk/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>The &lt;code>@toolbox-sdk/adk&lt;/code> package provides a Javascript interface to the MCP Toolbox service, enabling you to load and invoke tools from your own applications.&lt;/p>
 &lt;h2 id="supported-environments">Supported Environments&lt;/h2>
 &lt;p>This SDK is a standard Node.js package built with TypeScript, ensuring broad compatibility with the modern JavaScript ecosystem.&lt;/p>
@@ -12,7 +12,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="quickstart">Quickstart&lt;/h2>
 &lt;ol>
 &lt;li>
-&lt;p>&lt;strong>Start the Toolbox Service&lt;/strong>&lt;/p></description></item><item><title>Core</title><link>/sdks/js-sdk/core/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/sdks/js-sdk/core/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>&lt;strong>Start the Toolbox Service&lt;/strong>&lt;/p></description></item><item><title>Core</title><link>https://dishaprakash.github.io/genai-toolbox/dev/sdks/js-sdk/core/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dishaprakash.github.io/genai-toolbox/dev/sdks/js-sdk/core/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>The &lt;code>@toolbox-sdk/core&lt;/code> package provides a Javascript interface to the MCP Toolbox service, enabling you to load and invoke tools from your own applications.&lt;/p>
 &lt;h2 id="supported-environments">Supported Environments&lt;/h2>
 &lt;p>This SDK is a standard Node.js package built with TypeScript, ensuring broad compatibility with the modern JavaScript ecosystem.&lt;/p>

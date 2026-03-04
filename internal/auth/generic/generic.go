@@ -126,7 +126,7 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 
 	parts := strings.Split(authHeader, " ")
 	if len(parts) != 2 || strings.ToLower(parts[0]) != "bearer" {
-		return nil, fmt.Errorf("Authorization header format must be Bearer {token}")
+		return nil, fmt.Errorf("authorization header format must be Bearer {token}")
 	}
 	tokenString := parts[1]
 

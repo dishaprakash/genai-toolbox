@@ -2165,10 +2165,10 @@ func TestMergeToolsFiles(t *testing.T) {
 	}
 
 	testCases := []struct {
-		name    string
-		files   []ToolsFile
-		want    ToolsFile
-		wantErr bool
+		name      string
+		files     []ToolsFile
+		want      ToolsFile
+		wantErr   bool
 		errString string
 	}{
 		{
@@ -2190,9 +2190,9 @@ func TestMergeToolsFiles(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name:    "merge multiple mcp enabled generic",
-			files:   []ToolsFile{fileMcp1, fileMcp2},
-			wantErr: true,
+			name:      "merge multiple mcp enabled generic",
+			files:     []ToolsFile{fileMcp1, fileMcp2},
+			wantErr:   true,
 			errString: "multiple authServices with mcpEnabled=true detected",
 		},
 		{

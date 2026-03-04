@@ -44,7 +44,7 @@ func setupJWKSMockServer(t *testing.T, key *rsa.PrivateKey, keyID string) *httpt
 	jwksHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/.well-known/openid-configuration" {
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(map[string]interface{}{
+			_ = json.NewEncoder(w).Encode(map[string]interface{}{
 				"issuer":   "https://example.com",
 				"jwks_uri": "http://" + r.Host + "/jwks",
 			})
@@ -62,7 +62,7 @@ func setupJWKSMockServer(t *testing.T, key *rsa.PrivateKey, keyID string) *httpt
 				t.Fatalf("failed to create JWK: %v", err)
 			}
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(map[string]interface{}{
+			_ = json.NewEncoder(w).Encode(map[string]interface{}{
 				"keys": []jwkset.JWKMarshal{jwk.Marshal()},
 			})
 			return

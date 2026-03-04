@@ -34,7 +34,7 @@ func newConfig(ctx context.Context, name string, decoder *yaml.Decoder) (tools.T
 
 type compatibleSource interface {
 	OracleDB() *sql.DB
-	RunSQL(context.Context, string, []any, bool) (any, error)
+	RunSQL(context.Context, string, []any) (any, error)
 }
 
 type Config struct {
@@ -43,7 +43,6 @@ type Config struct {
 	Source             string                `yaml:"source" validate:"required"`
 	Description        string                `yaml:"description" validate:"required"`
 	Statement          string                `yaml:"statement" validate:"required"`
-	ReadOnly           *bool                 `yaml:"readOnly"`
 	AuthRequired       []string              `yaml:"authRequired"`
 	Parameters         parameters.Parameters `yaml:"parameters"`
 	TemplateParameters parameters.Parameters `yaml:"templateParameters"`
@@ -106,14 +105,7 @@ func (t Tool) Invoke(ctx context.Context, resourceMgr tools.SourceProvider, para
 		fmt.Printf("[%d]=%T ", i, p)
 	}
 	fmt.Printf("\n")
-
-	isReadOnly := true
-	if t.ReadOnly != nil {
-		isReadOnly = *t.ReadOnly
-	}
-
-	resp, err := source.RunSQL(ctx, newStatement, sliceParams, isReadOnly)
-
+	resp, err := source.RunSQL(ctx, newStatement, sliceParams)
 	if err != nil {
 		return nil, util.ProcessGeneralError(err)
 	}

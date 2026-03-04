@@ -65,7 +65,7 @@ jobs:
           HUGO_RELATIVEURLS: false
 
       - name: Push Version to v1-docsite
-        uses: peaceiris/actions-gh-pages@v6
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public

@@ -1,0 +1,29 @@
+name: "Sync v1-docsite to Cloudflare"
+
+concurrency:
+  group: cloudflare-sync
+  cancel-in-progress: true
+
+on:
+  workflow_run:
+    workflows: ["CF: Deploy Dev Docs", "CF: Deploy Versioned Docs", "CF: Deploy Previous Version Docs"]
+    types: [completed]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 'v1-docsite'
+      - name: Cleanup
+        run: |
+          rm -rf .git
+          find . -type f -size +25M -delete
+      - name: Cloudflare Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=toolbox-docs --branch=main

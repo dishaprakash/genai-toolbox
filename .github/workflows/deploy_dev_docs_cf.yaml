@@ -1,0 +1,60 @@
+name: "CF: Deploy Dev Docs"
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', '.hugo/**']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cf-docs-update
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Patch Config and Templates for Cloudflare
+        run: |
+          # Strip GitHub domain from config
+          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
+          # Strip prefix from navbar partial
+          if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
+            sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
+          fi
+
+      - name: Setup Hugo/Node
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.146.0"
+          extended: true
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build
+        run: |
+          cd .hugo && npm ci
+          hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/dev/"
+        env:
+          HUGO_RELATIVEURLS: false
+
+      - name: Structure for v1-docsite
+        run: |
+          mkdir staging
+          mv .hugo/public staging/dev
+          # Extract releases list to root so navbar can find it at /releases.releases
+          cp staging/dev/releases.releases staging/releases.releases
+
+      - name: Push to Cloudflare Branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./staging
+          publish_branch: v1-docsite
+          keep_files: true

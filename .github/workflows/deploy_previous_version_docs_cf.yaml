@@ -52,21 +52,6 @@ jobs:
           # Move the old content directory into place
           mv ./old_version_source/docs docs
 
-      - name: Patch Config and Templates for Cloudflare
-        run: |
-          # Strip the GitHub domain from the Hugo config
-          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
-
-          # Strip the hardcoded path prefix from the navbar selector
-          if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
-            sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
-          fi
-
-          # Disable the migration banner for the new live site
-          if [ -f ".hugo/static/js/migration-banner.js" ]; then
-            echo "" > .hugo/static/js/migration-banner.js
-          fi
-
       - name: Setup Hugo and Node
         uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
         with:
@@ -81,7 +66,7 @@ jobs:
         working-directory: .hugo
 
       - name: Build Hugo Site for Archived Version
-        run: hugo --minify
+        run: hugo --minify --config hugo.toml,hugo.cloudflare.toml
         working-directory: .hugo
         env:
           HUGO_BASEURL: https://mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/
@@ -102,7 +87,7 @@ jobs:
         run: rm -rf .hugo/public
 
       - name: Build Hugo Site
-        run: hugo --minify
+        run: hugo --minify --config hugo.toml,hugo.cloudflare.toml
         working-directory: .hugo
         env:
           HUGO_BASEURL: https://mcp-toolbox.dev/

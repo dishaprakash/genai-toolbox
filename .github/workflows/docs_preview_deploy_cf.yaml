@@ -102,13 +102,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy .hugo/public --project-name toolbox-docs --branch pr-${{ github.event.number }}
 
-      - name: Comment
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+      - name: Comment PR Link
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.payload.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "🚀 **Cloudflare Preview is building!**\n\n🔎 View Preview: ${{ steps.cf_deploy.outputs.pages-deployment-alias-url }}\n\n*(Note: It may take a minute or two for Cloudflare to finish deploying the branch)*"
-            })
+          header: cf-preview-link
+          message: |
+            🚀 **Cloudflare Preview is ready!**
+
+            🔎 View Preview: ${{ steps.cf_deploy.outputs.pages-deployment-alias-url }}
+
+            *(Note: This comment will automatically update when new commits are pushed).*

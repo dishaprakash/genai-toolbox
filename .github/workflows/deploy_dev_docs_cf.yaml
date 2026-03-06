@@ -1,19 +1,46 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 name: "CF: Deploy Dev Docs"
+
+permissions:
+  contents: write
 
 on:
   push:
-    branches: [main]
-    paths: ['docs/**', '.hugo/**']
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'github/workflows/docs**'
+      - '.hugo/**'
+
+  # Allow triggering manually.
   workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: .hugo
+    # This shared concurrency group ensures only one docs deployment runs at a time.
     concurrency:
       group: cf-docs-update
       cancel-in-progress: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           fetch-depth: 0
           submodules: recursive
@@ -21,40 +48,52 @@ jobs:
       - name: Patch Config and Templates for Cloudflare
         run: |
           # Strip GitHub domain from config
-          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
+          sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' hugo.toml
           # Strip prefix from navbar partial
-          if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
-            sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
+          if [ -f "layouts/partials/navbar-version-selector.html" ]; then
+            sed -i 's|/genai-toolbox/|/|g' layouts/partials/navbar-version-selector.html
+          fi
+          # Disable the migration banner for the new live site
+          if [ -f "static/js/migration-banner.js" ]; then
+            echo "" > static/js/migration-banner.js
           fi
 
-      - name: Setup Hugo/Node
-        uses: peaceiris/actions-hugo@v3
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
         with:
           hugo-version: "0.145.0"
           extended: true
-      
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
           node-version: "22"
 
-      - name: Build
-        run: |
-          cd .hugo && npm ci
-          hugo --gc --minify --baseURL="https://go.mcp-toolbox.dev/dev/"
+      - name: Cache dependencies
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: npm ci
+      - run: hugo --minify
         env:
+          HUGO_BASEURL: https://mcp-toolbox.dev/dev/
           HUGO_RELATIVEURLS: false
 
-      - name: Structure for v1-docsite
+      - name: Create Staging Directory
         run: |
           mkdir staging
-          mv .hugo/public staging/dev
-          # Extract releases list to root so navbar can find it at /releases.releases
-          cp staging/dev/releases.releases staging/releases.releases
+          mv public staging/dev
+          mv staging/dev/releases.releases staging/releases.releases
 
       - name: Push to Cloudflare Branch
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./staging
-          publish_branch: v1-docsite
+          publish_dir: ./.hugo/staging
+          publish_branch: cloudflare-pages
           keep_files: true
+          commit_message: "deploy: ${{ github.event.head_commit.message }}"

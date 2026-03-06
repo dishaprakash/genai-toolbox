@@ -94,6 +94,12 @@ jobs:
           HUGO_ENVIRONMENT: preview
           HUGO_RELATIVEURLS: true
 
+      - name: Clean up large files for Cloudflare limits
+        working-directory: .
+        run: |
+          rm -rf .git
+          find .hugo/public -type f -size +24M -exec rm -f {} +
+
       - name: Deploy to Cloudflare Pages via Wrangler
         id: cf_deploy
         uses: cloudflare/wrangler-action@v3

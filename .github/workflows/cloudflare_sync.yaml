@@ -1,4 +1,4 @@
-name: "Sync v1-docsite to Cloudflare"
+name: "Sync v1 docsite to Cloudflare"
 
 concurrency:
   group: cloudflare-sync
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 'v1-docsite'
+          ref: 'cloudflare-pages'
       - name: Cleanup
         run: |
           rm -rf .git

@@ -1,5 +1,16 @@
 # Copyright 2025 Google LLC
-# ... (License header) ...
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 name: "CF: Deploy Previous Version Docs"
 
@@ -34,23 +45,26 @@ jobs:
           sparse-checkout: |
             docs
 
-      - name: Checkout old content from tag into a temporary directory
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          ref: ${{ github.event.inputs.version_tag }}
-          path: 'old_version_source' # Checkout into a temp subdir
-          # Sparse checkout to only get the content directory
-          sparse-checkout: |
-            docs
+      - name: Replace content with old version
+        run: |
+          # Remove the current content directory from the main branch checkout
+          rm -rf docs/
+          # Move the old content directory into place
+          mv ./old_version_source/docs docs
 
       - name: Patch Config and Templates for Cloudflare
         run: |
-          # 1. Strip the GitHub domain from the Hugo config
+          # Strip the GitHub domain from the Hugo config
           sed -i 's|https://googleapis.github.io/genai-toolbox/|/|g' .hugo/hugo.toml
-          
-          # 2. Strip the hardcoded path prefix from the navbar selector
+
+          # Strip the hardcoded path prefix from the navbar selector
           if [ -f ".hugo/layouts/partials/navbar-version-selector.html" ]; then
             sed -i 's|/genai-toolbox/|/|g' .hugo/layouts/partials/navbar-version-selector.html
+          fi
+
+          # Disable the migration banner for the new live site
+          if [ -f ".hugo/static/js/migration-banner.js" ]; then
+            echo "" > .hugo/static/js/migration-banner.js
           fi
 
       - name: Setup Hugo and Node
@@ -70,36 +84,36 @@ jobs:
         run: hugo --minify
         working-directory: .hugo
         env:
-          HUGO_BASEURL: https://go.mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/
+          HUGO_BASEURL: https://mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/
           HUGO_RELATIVEURLS: false
 
-      - name: Deploy to v1-docsite (Version Dir)
+      - name: Deploy to cloudflare-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public
-          publish_branch: v1-docsite
+          publish_branch: cloudflare-pages
           destination_dir: ./${{ github.event.inputs.version_tag }}
           keep_files: true
           allow_empty_commit: true
-          commit_message: "cf-docs(backport): deploy docs for ${{ github.event.inputs.version_tag }}"
+          commit_message: "docs(backport): deploy docs for ${{ github.event.inputs.version_tag }}"
 
       - name: Clean Build Directory
         run: rm -rf .hugo/public
 
-      - name: Build Hugo Site (Root)
+      - name: Build Hugo Site
         run: hugo --minify
         working-directory: .hugo
         env:
-          HUGO_BASEURL: https://go.mcp-toolbox.dev/
+          HUGO_BASEURL: https://mcp-toolbox.dev/
           HUGO_RELATIVEURLS: false
 
-      - name: Deploy to v1-docsite (Root)
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to root
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .hugo/public
-          publish_branch: v1-docsite
+          publish_branch: cloudflare-pages
           keep_files: true
           allow_empty_commit: true
-          commit_message: "cf-deploy: docs to root for ${{ github.event.inputs.version_tag }}"
+          commit_message: "deploy: docs to root for ${{ github.event.inputs.version_tag }}"

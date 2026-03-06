@@ -75,7 +75,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: hugo --minify --config hugo.toml,cloudflare.hugo.toml
+      - run: hugo --minify --config hugo.toml,hugo.cloudflare.toml
         env:
           HUGO_BASEURL: "/"
           HUGO_ENVIRONMENT: preview

@@ -15520,7 +15520,7 @@ Run the Toolbox server, pointing to the `tools.yaml` file created earlier:
 
 
 # About
-A list of other information related to Toolbox.
+A list of other information related to MCP Toolbox.
 
 
 # FAQ

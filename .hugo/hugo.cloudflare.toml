@@ -1,0 +1,97 @@
+# This file overrides the main config specifically for Cloudflare deployments
+
+baseURL = "/"
+
+[params]
+  disableMigrationBanner = true
+
+[[params.versions]]
+  version = "Dev"
+  url = "/dev/"
+
+# Add a new version block here before every release
+# The order of versions in this file is mirrored into the dropdown
+
+[[params.versions]]
+  version = "v0.28.0"
+  url = "/v0.28.0/"
+
+[[params.versions]]
+  version = "v0.27.0"
+  url = "/v0.27.0/"
+
+[[params.versions]]
+  version = "v0.26.0"
+  url = "/v0.26.0/"
+
+[[params.versions]]
+  version = "v0.25.0"
+  url = "/v0.25.0/"
+
+[[params.versions]]
+  version = "v0.24.0"
+  url = "/v0.24.0/"
+
+[[params.versions]]
+  version = "v0.23.0"
+  url = "/v0.23.0/"
+
+[[params.versions]]
+  version = "v0.22.0"
+  url = "/v0.22.0/"
+
+[[params.versions]]
+  version = "v0.21.0"
+  url = "/v0.21.0/"
+
+[[params.versions]]
+  version = "v0.20.0"
+  url = "/v0.20.0/"
+
+[[params.versions]]
+  version = "v0.19.1"
+  url = "/v0.19.1/"
+
+[[params.versions]]
+  version = "v0.18.0"
+  url = "/v0.18.0/"
+
+[[params.versions]]
+  version = "v0.17.0"
+  url = "/v0.17.0/"
+
+[[params.versions]]
+  version = "v0.16.0"
+  url = "/v0.16.0/"
+
+[[params.versions]]
+  version = "v0.15.0"
+  url = "/v0.15.0/"
+
+[[params.versions]]
+  version = "v0.14.0"
+  url = "/v0.14.0/"
+
+[[params.versions]]
+  version = "v0.13.0"
+  url = "/v0.13.0/"
+
+[[params.versions]]
+  version = "v0.12.0"
+  url = "/v0.12.0/"
+
+[[params.versions]]
+  version = "v0.11.0"
+  url = "/v0.11.0/"
+
+[[params.versions]]
+  version = "v0.10.0"
+  url = "/v0.10.0/"
+
+[[params.versions]]
+  version = "v0.9.0"
+  url = "/v0.9.0/"
+
+[[params.versions]]
+  version = "v0.8.0"
+  url = "/v0.8.0/"

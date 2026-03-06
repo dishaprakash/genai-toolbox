@@ -56,7 +56,7 @@ jobs:
         working-directory: .hugo
 
       - name: Build Hugo Site
-        run: hugo --minify --config hugo.toml,hugo.cloudflare.toml
+        run: hugo --minify --config hugo.cloudflare.toml
         working-directory: .hugo
         env:
           HUGO_BASEURL: https://mcp-toolbox.dev/${{ steps.get_version.outputs.VERSION }}/
@@ -76,7 +76,7 @@ jobs:
         run: rm -rf .hugo/public
 
       - name: Build Hugo Site
-        run: hugo --minify --config hugo.toml,hugo.cloudflare.toml
+        run: hugo --minify --config hugo.cloudflare.toml
         working-directory: .hugo
         env:
           HUGO_BASEURL: https://mcp-toolbox.dev/

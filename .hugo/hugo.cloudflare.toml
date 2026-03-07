@@ -39,6 +39,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   version_menu = "Releases"
   disableMigrationBanner = true
   releases_url = "/releases.releases"
+  global_logo_url = "/"
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true

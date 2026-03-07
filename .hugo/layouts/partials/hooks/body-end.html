@@ -1,0 +1,8 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const logoLink = document.querySelector('.navbar-brand');
+    if (logoLink) {
+      logoLink.href = "{{ .Site.Params.global_logo_url | default "/" }}";
+    }
+  });
+</script>

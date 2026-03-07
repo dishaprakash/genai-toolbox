@@ -1,10 +1,10 @@
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -71,6 +71,7 @@ jobs:
         env:
           HUGO_BASEURL: https://mcp-toolbox.dev/${{ github.event.inputs.version_tag }}/
           HUGO_RELATIVEURLS: false
+          HUGO_PARAMS_VERSION: ${{ github.event.inputs.version_tag }}
 
       - name: Deploy to cloudflare-pages
         uses: peaceiris/actions-gh-pages@v4
@@ -92,6 +93,7 @@ jobs:
         env:
           HUGO_BASEURL: https://mcp-toolbox.dev/
           HUGO_RELATIVEURLS: false
+          HUGO_PARAMS_VERSION: ${{ github.event.inputs.version_tag }}
 
       - name: Deploy to root
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4

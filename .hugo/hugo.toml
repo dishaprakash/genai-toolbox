@@ -39,6 +39,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   version_menu = "Releases"
   releases_url = "/genai-toolbox/releases.releases"
   global_logo_url = "/genai-toolbox/"
+  version = "Dev"
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true

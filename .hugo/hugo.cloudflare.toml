@@ -38,6 +38,7 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
   offlineSearch = true
   version_menu = "Releases"
   disableMigrationBanner = true
+  releases_url = "/releases.releases"
   [params.ui]
     ul_show = 100
     showLightDarkModeMenu = true

@@ -1,0 +1,45 @@
+<div id="search" class="ms-auto me-3" style="width: 300px; max-width: 100%;"></div>
+
+<!-- Use Hugo's relURL so it correctly maps to /dev/pagefind/ -->
+<link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+<script src="{{ "pagefind/pagefind-ui.js" | relURL }}"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ 
+            element: "#search", 
+            showSubResults: true,
+            showImages: false,
+            resetStyles: false,
+            // Explicitly tell Pagefind where its bundle is located relative to the domain
+            bundlePath: "{{ "pagefind/" | relURL }}"
+        });
+    });
+</script>
+
+<style>
+    /* Clean up the default Pagefind UI to match Docsy */
+    :root {
+        --pagefind-ui-scale: 0.8;
+        --pagefind-ui-primary: #0f172a;
+        --pagefind-ui-text: #393939;
+        --pagefind-ui-background: #ffffff;
+        --pagefind-ui-border: #cccccc;
+        --pagefind-ui-tag: #eeeeee;
+        --pagefind-ui-border-width: 1px;
+        --pagefind-ui-border-radius: 4px;
+    }
+    
+    .pagefind-ui__drawer:not(.pagefind-ui__hidden) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-top: 10px;
+        z-index: 9999;
+        background-color: var(--pagefind-ui-background);
+        padding: 1rem;
+        border: 1px solid var(--pagefind-ui-border);
+        border-radius: var(--pagefind-ui-border-radius);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+</style>

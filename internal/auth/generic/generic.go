@@ -22,6 +22,7 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"strings"
 	"syscall"
 	"time"
 
@@ -191,18 +192,33 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 		return nil, nil
 	}
 
-	tokenString := h.Get(a.Name + "_token")
-	if tokenString == "" {
-		return nil, nil
+	authHeader := h.Get("Authorization")
+	if authHeader == "" {
+		return nil, nil // Return nil, nil if no authorization header is found
 	}
+
+	parts := strings.Split(authHeader, " ")
+	if len(parts) != 2 || strings.ToLower(parts[0]) != "bearer" {
+		return nil, fmt.Errorf("Authorization header format must be Bearer {token}")
+	}
+	tokenString := parts[1]
 
 	// Parse and verify the token signature
-	token, err := jwt.Parse(tokenString, a.kf.Keyfunc)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse and verify JWT token: %w", err)
+	var token *jwt.Token
+	var err error
+
+	if a.kf != nil {
+		token, err = jwt.Parse(tokenString, a.kf.Keyfunc)
+	} else {
+		// If no keyfunc is configured (AuthURL was empty), we parse without verifying signature
+		token, _, err = new(jwt.Parser).ParseUnverified(tokenString, jwt.MapClaims{})
 	}
 
-	if !token.Valid {
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse JWT token: %w", err)
+	}
+
+	if a.kf != nil && !token.Valid {
 		return nil, fmt.Errorf("invalid JWT token")
 	}
 

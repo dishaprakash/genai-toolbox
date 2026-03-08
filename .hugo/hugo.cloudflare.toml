@@ -61,6 +61,12 @@ ignoreFiles = ["quickstart/shared", "quickstart/python", "quickstart/js", "quick
     breadcrumb_disable = true
     sidebar_menu_foldable = true
     sidebar_menu_compact = false
+  [params.ui.feedback]
+    enable = true
+    yes = 'Glad to hear it! Please <a href="https://github.com/googleapis/genai-toolbox/issues/new">tell us how we can improve</a>.'
+    no = 'Sorry to hear that. Please <a href="https://github.com/googleapis/genai-toolbox/issues/new">tell us how we can improve</a>.'
+  [params.ui.readingtime]
+      enable = true
 
 [[params.versions]]
   version = "Dev"

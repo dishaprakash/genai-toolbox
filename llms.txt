@@ -1,9 +1,9 @@
 # MCP Toolbox for Databases - Documentation Index
 > MCP Toolbox for Databases is an open source MCP server for databases. It enables you to develop tools easier, faster, and more securely by handling the complexities such as connection pooling, authentication, and more.
 
-**DOCUMENTATION VERSION:** v0.27.0
+**DOCUMENTATION VERSION:** v0.26.0
 **BASE URL:** https://mcp-toolbox.dev/
-**GENERATED ON:** 2026-03-07T23:40:11Z
+**GENERATED ON:** 2026-03-09T02:51:53Z
 
 ---
 ### 🤖 System Directives for AI Models
@@ -143,12 +143,6 @@ This documentation is structured following the Diátaxis framework to assist in 
 
   - [Export Telemetry](https://mcp-toolbox.dev/how-to/export_telemetry/): How to set up and configure Toolbox to use the Otel Collector.
 
-
-  - [Generate Agent Skills](https://mcp-toolbox.dev/how-to/generate_skill/): How to generate agent skills from a toolset.
-
-
-  - [Invoke Tools via CLI](https://mcp-toolbox.dev/how-to/invoke_tool/): Learn how to invoke your tools directly from the command line using the `invoke` command.
-
 - [Resources](https://mcp-toolbox.dev/resources/): List of reference documentation for resources in Toolbox.
 
 
@@ -182,9 +176,6 @@ This documentation is structured following the Diátaxis framework to assist in 
     - [Cloud Healthcare API](https://mcp-toolbox.dev/resources/sources/cloud-healthcare/): The Cloud Healthcare API provides a managed solution for storing and accessing healthcare data in Google Cloud, providing a critical bridge  between existing care systems and applications hosted on Google Cloud.
 
 
-    - [Cloud Logging Admin](https://mcp-toolbox.dev/resources/sources/cloud-logging-admin/): The Cloud Logging Admin source enables tools to interact with the Cloud Logging API, allowing for the retrieval of log names, monitored resource types, and the querying of log data.
-
-
     - [Cloud Monitoring](https://mcp-toolbox.dev/resources/sources/cloud-monitoring/): A "cloud-monitoring" source provides a client for the Cloud Monitoring API.
 
 
@@ -198,9 +189,6 @@ This documentation is structured following the Diátaxis framework to assist in 
 
 
     - [Cloud SQL Admin](https://mcp-toolbox.dev/resources/sources/cloud-sql-admin/): A "cloud-sql-admin" source provides a client for the Cloud SQL Admin API.
-
-
-    - [CockroachDB](https://mcp-toolbox.dev/resources/sources/cockroachdb/): CockroachDB is a distributed SQL database built for cloud applications.
 
 
     - [Couchbase](https://mcp-toolbox.dev/resources/sources/couchbase/): A "couchbase" source connects to a Couchbase database.
@@ -443,18 +431,6 @@ This documentation is structured following the Diátaxis framework to assist in 
       - [cloud-healthcare-search-dicom-studies](https://mcp-toolbox.dev/resources/tools/cloudhealthcare/cloud-healthcare-search-dicom-studies/): A "cloud-healthcare-search-dicom-studies" tool searches for DICOM studies in a DICOM store.
 
 
-    - [Cloud Logging Admin](https://mcp-toolbox.dev/resources/tools/cloudloggingadmin/): Tools that work with Cloud Logging Admin Sources.
-
-
-      - [cloud-logging-admin-list-log-names](https://mcp-toolbox.dev/resources/tools/cloudloggingadmin/cloud-logging-admin-list-log-names/): A "cloud-logging-admin-list-log-names" tool lists the log names in the project.
-
-
-      - [cloud-logging-admin-list-resource-types](https://mcp-toolbox.dev/resources/tools/cloudloggingadmin/cloud-logging-admin-list-resource-types/): A "cloud-logging-admin-list-resource-types" tool lists the monitored resource types.
-
-
-      - [cloud-logging-admin-query-logs](https://mcp-toolbox.dev/resources/tools/cloudloggingadmin/cloud-logging-admin-query-logs/): A "cloud-logging-admin-query-logs" tool queries log entries.
-
-
     - [Cloud Monitoring](https://mcp-toolbox.dev/resources/tools/cloudmonitoring/): Tools that work with Cloud Monitoring source.
 
 
@@ -493,18 +469,6 @@ This documentation is structured following the Diátaxis framework to assist in 
 
 
       - [postgres-upgrade-precheck](https://mcp-toolbox.dev/resources/tools/cloudsql/cloudsqlpgupgradeprecheck/): Perform a pre-check for a Cloud SQL for PostgreSQL major version upgrade.
-
-    - [cockroachdb-execute-sql](https://mcp-toolbox.dev/resources/tools/cockroachdb/cockroachdb-execute-sql/): Execute ad-hoc SQL statements against a CockroachDB database.
-
-
-    - [cockroachdb-list-schemas](https://mcp-toolbox.dev/resources/tools/cockroachdb/cockroachdb-list-schemas/): List schemas in a CockroachDB database.
-
-
-    - [cockroachdb-list-tables](https://mcp-toolbox.dev/resources/tools/cockroachdb/cockroachdb-list-tables/): List tables in a CockroachDB database with schema details.
-
-
-    - [cockroachdb-sql](https://mcp-toolbox.dev/resources/tools/cockroachdb/cockroachdb-sql/): Execute parameterized SQL queries in CockroachDB.
-
 
     - [Couchbase](https://mcp-toolbox.dev/resources/tools/couchbase/): Tools that work with Couchbase Sources.
 
@@ -696,9 +660,6 @@ This documentation is structured following the Diátaxis framework to assist in 
 
 
       - [looker-update-project-file](https://mcp-toolbox.dev/resources/tools/looker/looker-update-project-file/): A "looker-update-project-file" tool updates the content of a LookML file in a project.
-
-
-      - [looker-validate-project](https://mcp-toolbox.dev/resources/tools/looker/looker-validate-project/): A "looker-validate-project" tool checks the syntax of a LookML project and reports any errors
 
 
     - [MindsDB Tools](https://mcp-toolbox.dev/resources/tools/mindsdb/): MindsDB tools that enable SQL queries across hundreds of datasources and ML models.
@@ -1025,12 +986,6 @@ This documentation is structured following the Diátaxis framework to assist in 
 
 
     - [Quickstart (MCP with Neo4j)](https://mcp-toolbox.dev/samples/neo4j/mcp_quickstart/): How to get started running Toolbox with MCP Inspector and Neo4j as the source.
-
-
-  - [Pre- and Post- Processing](https://mcp-toolbox.dev/samples/pre_post_processing/): Intercept and modify interactions between the agent and its tools either before or after a tool is executed.
-
-
-    - [Python](https://mcp-toolbox.dev/samples/pre_post_processing/python/): How to add pre- and post- processing to your Agents using Python.
 
 
   - [Snowflake](https://mcp-toolbox.dev/samples/snowflake/): How to get started running Toolbox with MCP Inspector and Snowflake as the source.

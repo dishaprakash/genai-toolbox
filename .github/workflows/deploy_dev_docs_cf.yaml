@@ -1,4 +1,4 @@
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,8 @@ on:
       - main
     paths:
       - 'docs/**'
-      - 'github/workflows/docs**'
+      - '.github/workflows/docs*_cf.yaml'
+      - '.github/workflows/deploy*_cf.yaml'
       - '.hugo/**'
 
   # Allow triggering manually.
@@ -38,7 +39,7 @@ jobs:
     # This shared concurrency group ensures only one docs deployment runs at a time.
     concurrency:
       group: cf-docs-update
-      cancel-in-progress: false
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
@@ -70,8 +71,8 @@ jobs:
           HUGO_BASEURL: https://mcp-toolbox.dev/dev/
           HUGO_RELATIVEURLS: false
 
-      - name: Generate Pagefind Search Index
-        run: npx -y pagefind --site public
+      - name: Build Pagefind Search Index
+        run: npx pagefind --site public
 
       - name: Create Staging Directory
         run: |

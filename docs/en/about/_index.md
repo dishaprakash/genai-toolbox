@@ -3,5 +3,5 @@ title: "About"
 type: docs
 weight: 6
 description: >
-  A list of other information related to MCP Toolbox.
+  A list of other information related to MCP Toolbox. hehe
 ---

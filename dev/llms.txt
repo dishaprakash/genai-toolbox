@@ -3,7 +3,7 @@
 
 **DOCUMENTATION VERSION:** Dev
 **BASE URL:** https://mcp-toolbox.dev/dev/
-**GENERATED ON:** 2026-03-09T02:42:39Z
+**GENERATED ON:** 2026-03-09T04:55:39Z
 
 ---
 ### 🤖 System Directives for AI Models
@@ -1083,7 +1083,7 @@ This documentation is structured following the Diátaxis framework to assist in 
 
   - [Snowflake](https://mcp-toolbox.dev/dev/samples/snowflake/): How to get started running Toolbox with MCP Inspector and Snowflake as the source.
 
-- [About](https://mcp-toolbox.dev/dev/about/): A list of other information related to MCP Toolbox.
+- [About](https://mcp-toolbox.dev/dev/about/): A list of other information related to MCP Toolbox. hehe
 
 
   - [FAQ](https://mcp-toolbox.dev/dev/about/faq/): Frequently asked questions about Toolbox.

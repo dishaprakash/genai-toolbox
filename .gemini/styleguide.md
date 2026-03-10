@@ -1,4 +1,4 @@
-# Gen AI Toolbox Style Guide
+# MCP Toolbox Style Guide
 
 ## Introduction
 

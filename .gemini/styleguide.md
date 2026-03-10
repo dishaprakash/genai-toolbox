@@ -4,6 +4,13 @@
 
 This style guide outlines the coding conventions and contribution standards for the Gen AI Toolbox for Databases. Adhering to these guidelines ensures consistency, readability, and maintainability across the codebase and its associated tools. This file is used by the Gemini Code Assist to perform consistent code reviews.
 
+### Versioning
+
+We use [Semantic Versioning](https://semver.org/), **MAJOR.MINOR.PATCH**, which increments with:
+*   **MAJOR**: Incompatible API changes.
+*   **MINOR**: Functionality added in a backward-compatible manner.
+*   **PATCH**: Backward-compatible bug fixes.
+
 ## Key Principles
 
 - **Readability:** Code should be clear and easy to understand for all contributors.
@@ -41,19 +48,30 @@ Format: `<type>[optional scope]: <description>`
 
 ### Scopes
 
-Scopes should follow the format `<kind>/<name>`. Common scopes include:
+PRs addressing a specific source or tool should **always** add the source or tool name as scope.
 
-- `source/postgres`, `source/bigquery`, etc.
-- `tool/mssql-sql`, `tool/list-tables`, etc.
+The scope is formatted as `<type>/<kind>`. Common scopes include:
+- `source/postgres`, `source/cloudsql-mysql`
+- `tool/mssql-sql`, `tool/list-tables`
 - `auth/google`
 
-For PRs covering multiple scopes of the same kind, use commas: `feat(source/postgres,source/alloydbpg): ...`.
+**Multiple Scopes:**
+- If the PR covers multiple scopes of the same kind, separate them with a comma: `feat(source/postgres,source/alloydbpg): ...`.
+- If the PR covers multiple scope types (e.g., adding a new database source and tool), disregard the scope type prefix: `feat(new-db): adding support for new-db source and tool`.
 
 ### PR Description
 
-Every PR must include a description that explains:
+Every PR must include a description that follows the repository's template:
 
-1.  **What** changed.
-2.  **Why** the change was made (impact).
-3.  **How** it was solved (summary of solution).
-4.  Reference to any related issues (e.g., `Fixes #123`).
+**1. Description**
+A concise description of the changes (bug or feature), its impact, and a summary of the solution.
+
+**2. PR Checklist**
+- [ ] Make sure to open an issue as a bug/issue before writing your code!
+- [ ] Ensure the tests and linter pass
+- [ ] Code coverage does not decrease (if any source code was changed)
+- [ ] Appropriate docs were updated (if necessary)
+- [ ] Make sure to add `!` if this involves a breaking change
+
+**3. Issue Reference**
+Use the format: `Fixes #<issue_number> 🦕`

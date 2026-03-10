@@ -133,7 +133,7 @@ func TestGetClaimsFromHeader(t *testing.T) {
 					"exp":   time.Now().Add(time.Hour).Unix(),
 				})
 				header := http.Header{}
-				header.Set("test-generic-auth_token", token)
+				header.Set("Authorization", "Bearer "+token)
 				return header
 			},
 			wantError: false,
@@ -165,11 +165,26 @@ func TestGetClaimsFromHeader(t *testing.T) {
 					"exp":   time.Now().Add(time.Hour).Unix(),
 				})
 				header := http.Header{}
-				header.Set("test-generic-auth_token", token)
+				header.Set("Authorization", "Bearer "+token)
 				return header
 			},
 			wantError:   true,
 			errContains: "audience validation failed",
+		},
+		{
+			name: "missing required scope",
+			setupHeader: func() http.Header {
+				token := generateValidToken(t, privateKey, keyID, jwt.MapClaims{
+					"aud":   "my-audience",
+					"scope": "some:other_scope",
+					"exp":   time.Now().Add(time.Hour).Unix(),
+				})
+				header := http.Header{}
+				header.Set("Authorization", "Bearer "+token)
+				return header
+			},
+			wantError:   true,
+			errContains: "missing required scope: read:files",
 		},
 
 		{
@@ -181,14 +196,14 @@ func TestGetClaimsFromHeader(t *testing.T) {
 					"exp":   time.Now().Add(-1 * time.Hour).Unix(),
 				})
 				header := http.Header{}
-				header.Set("test-generic-auth_token", token)
+				header.Set("Authorization", "Bearer "+token)
 				return header
 			},
 			wantError:   true,
 			errContains: "token has invalid claims: token is expired", // Custom JWT err string
 		},
 	}
-
+	
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			header := tc.setupHeader()

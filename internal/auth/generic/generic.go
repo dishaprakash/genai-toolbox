@@ -245,11 +245,32 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 		return nil, fmt.Errorf("audience validation failed: expected %s, got %v", a.Audience, aud)
 	}
 
-	// Return claims dynamically
-	claimsMap := make(map[string]any)
-	for k, v := range claims {
-		claimsMap[k] = v
+	// Validate 'scope' claim against ScopesRequired
+	if len(a.ScopesRequired) > 0 {
+		var tokenScopes []string
+
+		switch s := claims["scope"].(type) {
+		case string:
+			tokenScopes = strings.Split(s, " ") // space-separated string is common
+		case []interface{}:
+			for _, v := range s {
+				if str, ok := v.(string); ok {
+					tokenScopes = append(tokenScopes, str)
+				}
+			}
+		}
+
+		scopeMap := make(map[string]bool)
+		for _, s := range tokenScopes {
+			scopeMap[s] = true
+		}
+
+		for _, requiredScope := range a.ScopesRequired {
+			if !scopeMap[requiredScope] {
+				return nil, fmt.Errorf("missing required scope: %s", requiredScope)
+			}
+		}
 	}
 
-	return claimsMap, nil
+	return claims, nil
 }

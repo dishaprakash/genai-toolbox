@@ -24,17 +24,20 @@ Format: `<type>[optional scope]: <description>`
 
 ### Types
 
-| Type                | Description                                                  | Version Bump |
-| :------------------ | :----------------------------------------------------------- | :----------- |
-| **BREAKING CHANGE** | Any change with `!` or `BREAKING CHANGE` in footer           | Major        |
-| **feat**            | Adding a new feature                                         | Minor        |
-| **fix**             | Fixing a bug or typo                                         | Patch        |
-| **docs**            | Documentation-only changes                                   | None         |
-| **test**            | Adding or correcting tests                                   | None         |
-| **ci**              | CI/CD configuration changes                                  | None         |
-| **refactor**        | Code change that neither fixes a bug nor adds a feature      | None         |
-| **chore**           | Routine tasks, maintenance, or dependency updates            | None         |
-| **style**           | Formatting, missing semi-colons, etc. (no code logic change) | None         |
+| Type | Description | Version change affected |
+| :--- | :--- | :--- |
+| **BREAKING CHANGE** | Anything with this type or a `!` after the type/scope introduces a breaking API change. E.g. `fix!: description` or `feat!: description`. | major |
+| **feat** | Adding a new feature to the codebase. | minor |
+| **fix** | Fixing a bug or typo in the codebase. | patch |
+| **ci** | Changes made to the continuous integration configuration files or scripts (usually the yml and other configuration files). | n/a |
+| **docs** | Documentations-related PRs, including fixes on docs. | n/a |
+| **chore** | Other small tasks or updates that don't fall into any of the types above. | n/a |
+| **perf** | changed src code, with improvement of performance metrics. | n/a |
+| **refactor** | Change src code but unlike feat, there are no tests broken and no lines lost coverage. | n/a |
+| **revert** | Revert changes made in another commit. | n/a |
+| **style** | updated src code, with only formatting and whitespace updates. In other words, this includes anything a code formatter or linter changes. | n/a |
+| **test** | Changes made to test files. | n/a |
+| **build** | Changes related to build of the projects and dependency. | n/a |
 
 ### Scopes
 

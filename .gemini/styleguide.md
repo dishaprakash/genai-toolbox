@@ -8,7 +8,7 @@ This style guide outlines the coding conventions and contribution standards for 
 
 We use [Semantic Versioning](https://semver.org/), **MAJOR.MINOR.PATCH**, which increments with:
 *   **MAJOR**: Breaking changes in API.
-*   **MINOR**: Functionality added in a backward-compatible manner.
+*   **MINOR**: Features added in a backward-compatible manner.
 *   **PATCH**: Backward-compatible bug fixes.
 
 ## Key Principles

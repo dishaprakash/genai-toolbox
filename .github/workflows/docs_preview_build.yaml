@@ -21,8 +21,9 @@ on:
       - '.github/workflows/docs**'
       - '.hugo/**'
 
-# Read-only token for code execution
-permissions: read-all
+# Minimal permissions for security
+permissions:
+  contents: read
 
 jobs:
   build-preview:
@@ -34,47 +35,50 @@ jobs:
       run:
         working-directory: .hugo
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          # Checkout the PR's HEAD commit (supports forks).
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0 
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.145.0"
           extended: true
 
       - name: Setup Node
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Cache dependencies
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
+        uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/.hugo/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: npm ci --ignore-scripts
-      
-      - run: hugo --minify
+      - name: Install and Build
+        run: |
+          npm ci --ignore-scripts
+          hugo --minify
         env:
           HUGO_BASEURL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/previews/PR-${{ github.event.number }}/
           HUGO_ENVIRONMENT: preview
           HUGO_RELATIVEURLS: false
 
       - name: Prepare Artifact Payload
+        working-directory: .
         run: |
-          mkdir -p ../artifact-payload
-          cp -r public ../artifact-payload/public
-          echo ${{ github.event.number }} > ../artifact-payload/pr_number.txt
+          mkdir -p docs-dist
+          cp -r .hugo/public docs-dist/public
+          echo ${{ github.event.number }} > docs-dist/pr_number.txt
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: docs-preview-data
-          path: artifact-payload/
+          path: docs-dist/
+          retention-days: 1

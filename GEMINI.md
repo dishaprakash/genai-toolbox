@@ -1,4 +1,4 @@
-# MCP Toolbox Context
+# MCP Toolbox Context & Style Guide
 
 This file (symlinked as `CLAUDE.md`, `AGENTS.md`, and `.gemini/styleguide.md`) provides context and guidelines for AI agents working on the MCP Toolbox for Databases project. It summarizes key information from `CONTRIBUTING.md` and `DEVELOPER.md`.
 
@@ -65,23 +65,6 @@ This file (symlinked as `CLAUDE.md`, `AGENTS.md`, and `.gemini/styleguide.md`) p
 2.  **Deploy Versioned Docs**: New Release -> `/<version>/` and root.
 3.  **Deploy Previous Version Docs**: Manual workflow for older versions.
 
-## Coding Conventions
-
-### Tool Naming
-
--   **Tool Name:** `snake_case` (e.g., `list_collections`, `run_query`).
-    -   Do *not* include the product name (e.g., avoid `firestore_list_collections`).
--   **Tool Type:** `kebab-case` (e.g., `firestore-list-collections`).
-    -   *Must* include the product name.
-
-### Branching and Commits
-
--   **Branch Naming:** `feat/`, `fix/`, `docs/`, `chore/` (e.g., `feat/add-gemini-md`).
--   **Commit Messages:** [Conventional Commits](https://www.conventionalcommits.org/) format.
-    -   Format: `<type>(<scope>): <description>`
-    -   Example: `feat(source/postgres): add new connection option`
-    -   Types: `feat`, `fix`, `docs`, `chore`, `test`, `ci`, `refactor`, `revert`, `style`.
-
 ## Adding New Features
 
 ### Adding a New Data Source
@@ -107,11 +90,21 @@ This file (symlinked as `CLAUDE.md`, `AGENTS.md`, and `.gemini/styleguide.md`) p
 -   Add source documentation to `docs/en/resources/sources/`.
 -   Add tool documentation to `docs/en/resources/tools/`.
 
-# MCP Toolbox Style Guide
+## Style Guide & Coding Conventions
 
-## Introduction
+### Key Principles
 
-This style guide outlines the coding conventions and contribution standards for the Gen AI Toolbox for Databases. Adhering to these guidelines ensures consistency, readability, and maintainability across the codebase and its associated tools. This file is used by the Gemini Code Assist to perform consistent code reviews.
+- **Readability:** Code should be clear and easy to understand for all contributors.
+- **Consistency:** Follow established patterns in tool naming, package structure, and commit messages.
+- **Testability:** All new features and bug fixes must be accompanied by comprehensive unit and integration tests.
+- **Documentation:** Every new source or tool must be documented using the project's Hugo-based system.
+
+### Tool Naming
+
+-   **Tool Name:** `snake_case` (e.g., `list_collections`, `run_query`).
+    -   Do *not* include the product name (e.g., avoid `firestore_list_collections`).
+-   **Tool Type:** `kebab-case` (e.g., `firestore-list-collections`).
+    -   *Must* include the product name.
 
 ### Versioning
 
@@ -120,16 +113,13 @@ We use [Semantic Versioning](https://semver.org/), **MAJOR.MINOR.PATCH**, which 
 *   **MINOR**: Features added in a backward-compatible manner.
 *   **PATCH**: Backward-compatible bug fixes.
 
-## Key Principles
-
-- **Readability:** Code should be clear and easy to understand for all contributors.
-- **Consistency:** Follow established patterns in tool naming, package structure, and commit messages.
-- **Testability:** All new features and bug fixes must be accompanied by comprehensive unit and integration tests.
-- **Documentation:** Every new source or tool must be documented using the project's Hugo-based system.
-
 ## Pull Requests & Commits
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for all commit messages and PR titles.
+
+### Branch Naming
+
+-   **Branch Naming:** `feat/`, `fix/`, `docs/`, `chore/` (e.g., `feat/add-gemini-md`).
 
 ### PR Title Format
 

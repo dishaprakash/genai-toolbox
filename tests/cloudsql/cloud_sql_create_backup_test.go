@@ -167,8 +167,17 @@ func TestCreateBackupToolEndpoints(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", tc.toolName)
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(tc.body))
+			mcpReq := map[string]any{
+				"jsonrpc": "2.0",
+				"id":      "test-1",
+				"method":  "tools/call",
+				"params": map[string]any{
+					"name":      tc.toolName,
+					"arguments": json.RawMessage(tc.body),
+				},
+			}
+			mcpBytes, _ := json.Marshal(mcpReq)
+			req, err := http.NewRequest(http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(mcpBytes))
 			if err != nil {
 				t.Fatalf("unable to create request: %s", err)
 			}
@@ -192,15 +201,61 @@ func TestCreateBackupToolEndpoints(t *testing.T) {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
-			var result struct {
-				Result string `json:"result"`
+			var mcpResp struct {
+				Jsonrpc string `json:"jsonrpc"`
+				Id      string `json:"id"`
+				Result  struct {
+					Content []struct {
+						Type string `json:"type"`
+						Text string `json:"text"`
+					} `json:"content"`
+					IsError bool `json:"isError,omitempty"`
+				} `json:"result"`
+				Error *struct {
+					Code    int    `json:"code"`
+					Message string `json:"message"`
+				} `json:"error,omitempty"`
 			}
-			if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+			if err := json.NewDecoder(resp.Body).Decode(&mcpResp); err != nil {
 				t.Fatalf("failed to decode response: %v", err)
 			}
 
+			var gotText string
+			isError := false
+
+			if mcpResp.Error != nil {
+				gotText = mcpResp.Error.Message
+				isError = true
+			} else if mcpResp.Result.IsError {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("empty content in result")
+				}
+				gotText = mcpResp.Result.Content[0].Text
+				isError = true
+			}
+
+			if isError {
+				var wantMap map[string]any
+				if err := json.Unmarshal([]byte(tc.want), &wantMap); err == nil {
+					if wantErr, ok := wantMap["error"].(string); ok {
+						if gotText == wantErr || strings.Contains(gotText, wantErr) {
+							return // Success!
+						}
+					}
+				}
+				if strings.Contains(gotText, tc.want) {
+					return
+				}
+				t.Fatalf("expected error message matching %q but got %q", tc.want, gotText)
+			}
+
+			if len(mcpResp.Result.Content) == 0 {
+				t.Fatalf("empty content in result")
+			}
+			gotText = mcpResp.Result.Content[0].Text
+
 			var got, want map[string]any
-			if err := json.Unmarshal([]byte(result.Result), &got); err != nil {
+			if err := json.Unmarshal([]byte(gotText), &got); err != nil {
 				t.Fatalf("failed to unmarshal result: %v", err)
 			}
 			if err := json.Unmarshal([]byte(tc.want), &want); err != nil {

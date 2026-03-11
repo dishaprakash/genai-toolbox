@@ -240,13 +240,15 @@ func TestPreCheckToolEndpoints(t *testing.T) {
 	}
 
 	tcs := []struct {
-		name        string
-		toolName    string
-		body        string
-		want        string
-		expectError bool
-		errorStatus int
-		errorMsg    string
+		name           string
+		toolName       string
+		body           string
+		want           string
+		expectError    bool
+		errorStatus    int
+		expectAgentErr bool
+		wantMsg        string
+		errorMsg       string
 	}{
 		{
 			name:     "successful precheck - nil response in context",
@@ -282,16 +284,18 @@ func TestPreCheckToolEndpoints(t *testing.T) {
 			errorMsg:    "failed to access GCP resource: googleapi: got HTTP response code 403",
 		},
 		{
-			name:     "missing required parameter - project",
-			toolName: "precheck-tool",
-			body:     `{"instance": "instance-ok", "targetDatabaseVersion": "POSTGRES_18"}`,
-			want:     `{"error":"parameter \"project\" is required"}`,
+			name:           "missing required parameter - project",
+			toolName:       "precheck-tool",
+			body:           `{"instance": "instance-ok", "targetDatabaseVersion": "POSTGRES_18"}`,
+			expectAgentErr: true,
+			wantMsg:        "parameter \"project\" is required",
 		},
 		{
-			name:     "missing required parameter - instance",
-			toolName: "precheck-tool",
-			body:     `{"project": "p1", "targetDatabaseVersion": "POSTGRES_18"}`, // Missing instance
-			want:     `{"error":"parameter \"instance\" is required"}`,
+			name:           "missing required parameter - instance",
+			toolName:       "precheck-tool",
+			body:           `{"project": "p1", "targetDatabaseVersion": "POSTGRES_18"}`,
+			expectAgentErr: true,
+			wantMsg:        "parameter \"instance\" is required",
 		},
 		{
 			name:     "missing parameter - targetDatabaseVersion",
@@ -304,8 +308,9 @@ func TestPreCheckToolEndpoints(t *testing.T) {
 	for _, tc := range tcs {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			api := fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", tc.toolName)
-			req, err := http.NewRequestWithContext(ctx, http.MethodPost, api, bytes.NewBufferString(tc.body))
+			api := "http://127.0.0.1:5000/mcp"
+			payload := fmt.Sprintf(`{"jsonrpc":"2.0","id":"1","method":"tools/call","params":{"name":"%s","arguments":%s}}`, tc.toolName, tc.body)
+			req, err := http.NewRequestWithContext(ctx, http.MethodPost, api, bytes.NewBufferString(payload))
 			if err != nil {
 				t.Fatalf("unable to create request: %s", err)
 			}
@@ -336,14 +341,33 @@ func TestPreCheckToolEndpoints(t *testing.T) {
 			}
 
 			var result struct {
-				Result string `json:"result"`
+				Result struct {
+					Content []struct {
+						Text string `json:"text"`
+					} `json:"content"`
+				} `json:"result"`
+				Error *struct {
+					Message string `json:"message"`
+				} `json:"error"`
 			}
 			if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 				t.Fatalf("failed to decode response: %v", err)
 			}
+			if tc.expectAgentErr {
+				if result.Error == nil {
+					t.Fatalf("expected agent error but got success. Result: %+v", result)
+				}
+				if tc.wantMsg != "" && !strings.Contains(result.Error.Message, tc.wantMsg) {
+					t.Fatalf("unexpected error message: got %q, want %q", result.Error.Message, tc.wantMsg)
+				}
+				return
+			}
+			if result.Error != nil {
+				t.Fatalf("unexpected agent error: %s", result.Error.Message)
+			}
 
 			var got PreCheckAPIResponse
-			if err := json.Unmarshal([]byte(result.Result), &got); err != nil {
+			if err := json.Unmarshal([]byte(result.Result.Content[0].Text), &got); err != nil {
 				t.Fatalf("failed to unmarshal result: %v", err)
 			}
 

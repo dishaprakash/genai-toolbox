@@ -193,7 +193,7 @@ function createHeaderEditorModal(toolId, currentHeaders, toolParameters, authReq
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(headersTextarea);
 
-    if (authProfileNames.size > 0 || authRequired.length > 0) {
+    if (authProfileNames.size > 0 || (authRequired && authRequired.length > 0)) {
         const authHelperSection = document.createElement('div');
         authHelperSection.className = 'auth-helper-section';
         const authList = document.createElement('div');

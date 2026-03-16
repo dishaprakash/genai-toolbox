@@ -3755,9 +3755,8 @@ func CreateAndLockPostgresTable(t *testing.T, ctx context.Context, pool *pgxpool
 	}
 }
 
-// RunPostgresListLocksTest runs tests for the postgres list-locks tool
+// RunPostgresListLocksTest runs tests for the postgres list-locks tool using MCP.
 func RunPostgresListLocksTest(t *testing.T, ctx context.Context, pool *pgxpool.Pool) {
-
 	// Create and lock a test table
 	cleanup := CreateAndLockPostgresTable(t, ctx, pool, "test_postgres_list_locks_table")
 	defer cleanup()
@@ -3770,23 +3769,40 @@ func RunPostgresListLocksTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 		Locks   string `json:"locks"`
 	}
 
+	sessionId := RunInitialize(t, "2024-11-05") // Get MCP session
+
 	invokeTcs := []struct {
 		name           string
-		requestBody    io.Reader
+		requestBody    jsonrpc.JSONRPCRequest
 		wantStatusCode int
 		expectResults  bool
 	}{
 		{
-			name:           "invoke list_locks with no arguments",
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
+			name: "invoke list_locks with no arguments",
+			requestBody: jsonrpc.JSONRPCRequest{
+				Jsonrpc: "2.0",
+				Id:      "list_locks",
+				Request: jsonrpc.Request{
+					Method: "tools/call",
+				},
+				Params: map[string]any{
+					"name":      "list_locks",
+					"arguments": map[string]any{},
+				},
+			},
 			wantStatusCode: http.StatusOK,
 			expectResults:  true,
 		},
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_locks/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			reqBytes, _ := json.Marshal(tc.requestBody)
+			headers := map[string]string{}
+			if sessionId != "" {
+				headers["Mcp-Session-Id"] = sessionId
+			}
+
+			resp, respBody := RunRequest(t, http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqBytes), headers)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -3794,25 +3810,35 @@ func RunPostgresListLocksTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 				return
 			}
 
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
+			var body map[string]interface{}
+			err := json.Unmarshal(respBody, &body)
+			if err != nil {
+				t.Fatalf("error parsing response body: %v", err)
 			}
 
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
+			if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+				t.Fatalf("MCP returned an error: %v", errMap["message"])
+			}
+
+			resultMap, hasResult := body["result"].(map[string]interface{})
+			if !hasResult {
+				t.Fatalf("unable to find result in response body: %s", string(respBody))
+			}
+			contentList, hasContent := resultMap["content"].([]interface{})
+			if !hasContent || len(contentList) == 0 {
+				t.Fatalf("unable to find result.content in response body: %s", string(respBody))
+			}
+			contentItem := contentList[0].(map[string]interface{})
+			gotStr, ok := contentItem["text"].(string)
+			if !ok {
+				t.Fatalf("unable to extract text value from result.content[0]")
 			}
 
 			var got []lockDetails
-			if resultString != "null" {
-				if err := json.Unmarshal([]byte(resultString), &got); err != nil {
-					t.Fatalf("failed to unmarshal result: %v, result string: %s", err, resultString)
-				}
+			if err := json.Unmarshal([]byte(gotStr), &got); err != nil {
+				t.Fatalf("failed to unmarshal result: %v, result string: %s", err, gotStr)
 			}
-			// Verify that we got results if expected
+
 			if tc.expectResults && len(got) == 0 {
 				t.Errorf("expected results but got none")
 			}
@@ -4795,23 +4821,51 @@ func RunRequest(t *testing.T, method, url string, body io.Reader, headers map[st
 }
 
 func RunStatementToolsTest(t *testing.T, tools map[string]string) {
+	sessionId := RunInitialize(t, "2024-11-05")
+
 	for toolName, paramBody := range tools {
 		t.Run(toolName, func(t *testing.T) {
-			api := fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", toolName)
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(paramBody))
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+			var parsedArgs map[string]any
+			if paramBody != "" {
+				if err := json.Unmarshal([]byte(paramBody), &parsedArgs); err != nil {
+					t.Fatalf("failed to parse arguments %s: %v", paramBody, err)
+				}
+			} else {
+				parsedArgs = map[string]any{}
 			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
+
+			requestBody := jsonrpc.JSONRPCRequest{
+				Jsonrpc: "2.0",
+				Id:      toolName,
+				Request: jsonrpc.Request{
+					Method: "tools/call",
+				},
+				Params: map[string]any{
+					"name":      toolName,
+					"arguments": parsedArgs,
+				},
 			}
-			defer resp.Body.Close()
+			reqBytes, _ := json.Marshal(requestBody)
+
+			headers := map[string]string{}
+			if sessionId != "" {
+				headers["Mcp-Session-Id"] = sessionId
+			}
+
+			resp, respBody := RunRequest(t, http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqBytes), headers)
 
 			if resp.StatusCode != http.StatusOK {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+				t.Fatalf("StatusCode mismatch: got %d, want %d. Response body: %s", resp.StatusCode, http.StatusOK, string(respBody))
+			}
+
+			var body map[string]interface{}
+			err := json.Unmarshal(respBody, &body)
+			if err != nil {
+				t.Fatalf("error parsing response body: %v", err)
+			}
+
+			if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+				t.Fatalf("MCP returned an error: %v, string response: %s", errMap["message"], string(respBody))
 			}
 		})
 	}

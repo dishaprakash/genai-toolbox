@@ -408,11 +408,6 @@ func NewServer(ctx context.Context, cfg ServerConfig) (*Server, error) {
 	r.Use(hostCheck(allowedHostsMap))
 
 	// control plane
-	apiR, err := apiRouter(s)
-	if err != nil {
-		return nil, err
-	}
-	r.Mount("/api", apiR)
 	mcpR, err := mcpRouter(s)
 	if err != nil {
 		return nil, err

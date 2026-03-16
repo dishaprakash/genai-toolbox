@@ -21,7 +21,6 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"reflect"
 	"regexp"
 	"strings"
@@ -366,7 +365,7 @@ func getHTTPToolsConfig(sourceConfig map[string]any, toolType string) map[string
 	otherSourceConfig["headers"] = map[string]string{"X-Custom-Header": "unexpected", "Content-Type": "application/json"}
 	otherSourceConfig["queryParams"] = map[string]any{"id": 1, "name": "Sid"}
 
-	clientId := os.Getenv("CLIENT_ID")
+	clientId := tests.ClientId
 	if clientId == "" {
 		clientId = uuid.NewString()
 	}

@@ -27,11 +27,11 @@ import (
 
 // MockTool is used to mock tools in tests
 type MockTool struct {
-	Name                         string
-	Description                  string
-	Params                       []parameters.Parameter
-	manifest                     tools.Manifest
-	unauthorized                 bool
+	Name                        string
+	Description                 string
+	Params                      []parameters.Parameter
+	manifest                    tools.Manifest
+	unauthorized                bool
 	requiresClientAuthorization bool
 }
 

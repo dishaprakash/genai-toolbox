@@ -181,7 +181,6 @@ tools.
   refer to [config option](./tests/option.go):
 
      1. [RunMCPToolInvokeTest][tool-invoke]: tests for the `/mcp` tools/call endpoint that executes the tool.
-            tool's manifest.
 
      2. [RunToolInvokeTest][tool-call]: tests for tool calling through the native
         Toolbox endpoints.

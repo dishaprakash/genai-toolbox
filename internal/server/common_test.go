@@ -70,7 +70,7 @@ var tool4 = MockTool{
 var tool5 = MockTool{
 	Name:                         "require_client_auth_tool",
 	Params:                       []parameters.Parameter{},
-	requiresClientAuthrorization: true,
+	requiresClientAuthorization: true,
 }
 
 var prompt1 = MockPrompt{
@@ -213,12 +213,12 @@ func runRequest(ts *httptest.Server, method, path string, body io.Reader, header
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to send request: %w", err)
 	}
+	defer resp.Body.Close()
 
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to read request body: %w", err)
 	}
-	defer resp.Body.Close()
 
 	return resp, respBody, nil
 }

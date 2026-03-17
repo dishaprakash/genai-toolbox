@@ -78,6 +78,8 @@ type ServerConfig struct {
 	UserAgentMetadata []string
 	// PollInterval sets the polling frequency for configuration file updates.
 	PollInterval int
+	// ToolboxUrl specifies the Toolbox URL. Used as the resource field in the MCP PRM file when MCP Auth is enabled.
+	ToolboxUrl string
 }
 
 type logFormat string

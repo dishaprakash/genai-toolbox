@@ -28,6 +28,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/googleapis/genai-toolbox/internal/testutils"
 	"github.com/googleapis/genai-toolbox/internal/util/parameters"
 	"github.com/googleapis/genai-toolbox/tests"
@@ -367,7 +368,7 @@ func getHTTPToolsConfig(sourceConfig map[string]any, toolType string) map[string
 
 	clientId := os.Getenv("CLIENT_ID")
 	if clientId == "" {
-		clientId = "test-client-id"
+		clientId = uuid.NewString()
 	}
 
 	toolsFile := map[string]any{

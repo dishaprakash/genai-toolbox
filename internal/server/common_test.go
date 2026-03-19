@@ -172,6 +172,11 @@ func setUpServer(t *testing.T, router string, tools map[string]tools.Tool, tools
 		if err != nil {
 			t.Fatalf("unable to initialize mcp router: %s", err)
 		}
+	case "admin":
+		r, err = adminRouter(&server)
+		if err != nil {
+			t.Fatalf("unable to initialize admin router: %s", err)
+		}
 	default:
 		t.Fatalf("unknown router")
 	}

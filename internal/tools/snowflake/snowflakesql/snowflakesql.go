@@ -102,8 +102,6 @@ func (t Tool) Invoke(ctx context.Context, resourceMgr tools.SourceProvider, para
 	}
 
 	paramsMap := params.AsMap()
-	fmt.Println("DEBUG: GetParameters() returned:", t.GetParameters())
-	fmt.Println("DEBUG: paramsMap:", paramsMap)
 
 	newStatement, err := parameters.ResolveTemplateParams(t.TemplateParameters, t.Statement, paramsMap)
 	if err != nil {

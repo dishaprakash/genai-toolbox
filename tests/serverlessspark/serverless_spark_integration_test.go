@@ -56,11 +56,11 @@ const (
 func getServerlessSparkVars(t *testing.T) map[string]any {
 	switch "" {
 	case serverlessSparkLocation:
-		t.Skip("'SERVERLESS_SPARK_LOCATION' not set")
+		t.Fatal("'SERVERLESS_SPARK_LOCATION' not set")
 	case serverlessSparkProject:
-		t.Skip("'SERVERLESS_SPARK_PROJECT' not set")
+		t.Fatal("'SERVERLESS_SPARK_PROJECT' not set")
 	case serverlessSparkServiceAccount:
-		t.Skip("'SERVERLESS_SPARK_SERVICE_ACCOUNT' not set")
+		t.Fatal("'SERVERLESS_SPARK_SERVICE_ACCOUNT' not set")
 	}
 
 	return map[string]any{

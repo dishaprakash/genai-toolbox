@@ -50,7 +50,7 @@ var (
 func getDataplexVars(t *testing.T) map[string]any {
 	switch "" {
 	case DataplexProject:
-		t.Skip("'DATAPLEX_PROJECT' not set")
+		t.Fatal("'DATAPLEX_PROJECT' not set")
 	}
 	return map[string]any{
 		"type":    DataplexSourceType,

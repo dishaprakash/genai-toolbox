@@ -46,17 +46,17 @@ var (
 func getCloudSQLMySQLVars(t *testing.T) map[string]any {
 	switch "" {
 	case CloudSQLMySQLProject:
-		t.Skip("'CLOUD_SQL_MYSQL_PROJECT' not set")
+		t.Fatal("'CLOUD_SQL_MYSQL_PROJECT' not set")
 	case CloudSQLMySQLRegion:
-		t.Skip("'CLOUD_SQL_MYSQL_REGION' not set")
+		t.Fatal("'CLOUD_SQL_MYSQL_REGION' not set")
 	case CloudSQLMySQLInstance:
-		t.Skip("'CLOUD_SQL_MYSQL_INSTANCE' not set")
+		t.Fatal("'CLOUD_SQL_MYSQL_INSTANCE' not set")
 	case CloudSQLMySQLDatabase:
-		t.Skip("'CLOUD_SQL_MYSQL_DATABASE' not set")
+		t.Fatal("'CLOUD_SQL_MYSQL_DATABASE' not set")
 	case CloudSQLMySQLUser:
-		t.Skip("'CLOUD_SQL_MYSQL_USER' not set")
+		t.Fatal("'CLOUD_SQL_MYSQL_USER' not set")
 	case CloudSQLMySQLPass:
-		t.Skip("'CLOUD_SQL_MYSQL_PASS' not set")
+		t.Fatal("'CLOUD_SQL_MYSQL_PASS' not set")
 	}
 
 	return map[string]any{

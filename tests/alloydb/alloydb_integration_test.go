@@ -47,16 +47,16 @@ var (
 
 func getAlloyDBVars(t *testing.T) map[string]string {
 	if AlloyDBProject == "" {
-		t.Skip("'ALLOYDB_PROJECT' not set")
+		t.Fatal("'ALLOYDB_PROJECT' not set")
 	}
 	if AlloyDBLocation == "" {
-		t.Skip("'ALLOYDB_REGION' not set")
+		t.Fatal("'ALLOYDB_REGION' not set")
 	}
 	if AlloyDBCluster == "" {
-		t.Skip("'ALLOYDB_CLUSTER' not set")
+		t.Fatal("'ALLOYDB_CLUSTER' not set")
 	}
 	if AlloyDBInstance == "" {
-		t.Skip("'ALLOYDB_INSTANCE' not set")
+		t.Fatal("'ALLOYDB_INSTANCE' not set")
 	}
 	if AlloyDBUser == "" {
 		t.Fatal("'ALLOYDB_USER' not set")

@@ -15,6 +15,8 @@
 package resources_test
 
 import (
+	"context"
+	"reflect"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -24,7 +26,11 @@ import (
 	"github.com/googleapis/genai-toolbox/internal/server/resources"
 	"github.com/googleapis/genai-toolbox/internal/sources"
 	"github.com/googleapis/genai-toolbox/internal/sources/alloydbpg"
+	"github.com/googleapis/genai-toolbox/internal/telemetry"
+	"github.com/googleapis/genai-toolbox/internal/testutils"
 	"github.com/googleapis/genai-toolbox/internal/tools"
+	"github.com/googleapis/genai-toolbox/internal/util"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestUpdateServer(t *testing.T) {
@@ -101,5 +107,146 @@ func TestUpdateServer(t *testing.T) {
 	gotSource, _ = resMgr.GetSource("example-source2")
 	if diff := cmp.Diff(gotSource, updateSource["example-source2"]); diff != "" {
 		t.Errorf("error updating server, sources (-want +got):\n%s", diff)
+	}
+}
+
+func TestCreateAndUpdatePrimitives(t *testing.T) {
+	instrumentation, err := telemetry.CreateTelemetryInstrumentation("test-version")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	ctx := context.Background()
+	ctx = util.WithInstrumentation(ctx, instrumentation)
+	resMgr := resources.NewResourceManager(
+		map[string]sources.Source{},
+		map[string]auth.AuthService{},
+		map[string]embeddingmodels.EmbeddingModel{},
+		map[string]tools.Tool{},
+		map[string]tools.Toolset{},
+		map[string]prompts.Prompt{},
+		map[string]prompts.Promptset{},
+	)
+
+	// create primitives
+	sourceConfig := &testutils.MockSourceConfig{}
+	err = resMgr.UpdateSource(ctx, "test-source", sourceConfig)
+	assert.NoError(t, err)
+	_, ok := resMgr.GetSource("test-source")
+	if !ok {
+		t.Fatalf("missing source")
+	}
+
+	asConfig := &testutils.MockAuthServiceConfig{}
+	err = resMgr.UpdateAuthService(ctx, "test-auth-service", asConfig)
+	assert.NoError(t, err)
+	_, ok = resMgr.GetAuthService("test-auth-service")
+	if !ok {
+		t.Fatalf("missing auth service")
+	}
+
+	emConfig := &testutils.MockEmbeddingModelConfig{}
+	err = resMgr.UpdateEmbeddingModel(ctx, "test-embedding-model", emConfig)
+	assert.NoError(t, err)
+	_, ok = resMgr.GetEmbeddingModel("test-embedding-model")
+	if !ok {
+		t.Fatalf("missing embedding model")
+	}
+
+	toolConfig := &testutils.MockToolConfig{}
+	err = resMgr.UpdateTool(ctx, "test-tool", toolConfig)
+	assert.NoError(t, err)
+	_, ok = resMgr.GetTool("test-tool")
+	if !ok {
+		t.Fatalf("missing tool")
+	}
+
+	tsConfig := tools.ToolsetConfig{
+		Name:      "test-toolset",
+		ToolNames: []string{},
+	}
+	err = resMgr.UpdateToolset(ctx, "test-toolset", tsConfig, "test-version")
+	assert.NoError(t, err)
+	_, ok = resMgr.GetToolset("test-toolset")
+	if !ok {
+		t.Fatalf("missing toolset")
+	}
+
+	pConfig := &testutils.MockPromptConfig{}
+	err = resMgr.UpdatePrompt(ctx, "test-prompt", pConfig)
+	assert.NoError(t, err)
+	_, ok = resMgr.GetPrompt("test-prompt")
+	if !ok {
+		t.Fatalf("missing prompt")
+	}
+
+	// Update primitives
+	sourceConfig = &testutils.MockSourceConfig{Foo: "foo"}
+	err = resMgr.UpdateSource(ctx, "test-source", sourceConfig)
+	assert.NoError(t, err)
+	source, ok := resMgr.GetSource("test-source")
+	if !ok {
+		t.Fatalf("missing source")
+	}
+	sc := source.ToConfig()
+	if !reflect.DeepEqual(sc, sourceConfig) {
+		t.Fatalf("update failed: got %s, want %s", sc, sourceConfig)
+	}
+
+	asConfig = &testutils.MockAuthServiceConfig{}
+	err = resMgr.UpdateAuthService(ctx, "test-auth-service", asConfig)
+	assert.NoError(t, err)
+	as, ok := resMgr.GetAuthService("test-auth-service")
+	if !ok {
+		t.Fatalf("missing auth service")
+	}
+	if !reflect.DeepEqual(as, asConfig) {
+		t.Fatalf("update failed: got %s, want %s", as, asConfig)
+	}
+
+	emConfig = &testutils.MockEmbeddingModelConfig{}
+	err = resMgr.UpdateEmbeddingModel(ctx, "test-embedding-model", emConfig)
+	assert.NoError(t, err)
+	em, ok := resMgr.GetEmbeddingModel("test-embedding-model")
+	if !ok {
+		t.Fatalf("missing embedding model")
+	}
+	if !reflect.DeepEqual(em, emConfig) {
+		t.Fatalf("update failed: got %s, want %s", em, emConfig)
+	}
+
+	toolConfig = &testutils.MockToolConfig{}
+	err = resMgr.UpdateTool(ctx, "test-tool", toolConfig)
+	assert.NoError(t, err)
+	tool, ok := resMgr.GetTool("test-tool")
+	if !ok {
+		t.Fatalf("missing tool")
+	}
+	if !reflect.DeepEqual(tool, toolConfig) {
+		t.Fatalf("update failed: got %s, want %s", tool, toolConfig)
+	}
+
+	tsConfig = tools.ToolsetConfig{
+		Name:      "test-toolset",
+		ToolNames: []string{"test-tool"},
+	}
+	err = resMgr.UpdateToolset(ctx, "test-toolset", tsConfig, "test-version")
+	assert.NoError(t, err)
+	ts, ok := resMgr.GetToolset("test-toolset")
+	if !ok {
+		t.Fatalf("missing toolset")
+	}
+	if !reflect.DeepEqual(ts, tsConfig) {
+		t.Fatalf("update failed: got %v, want %v", ts, tsConfig)
+	}
+
+	pConfig = &testutils.MockPromptConfig{}
+	err = resMgr.UpdatePrompt(ctx, "test-prompt", pConfig)
+	assert.NoError(t, err)
+	p, ok := resMgr.GetPrompt("test-prompt")
+	if !ok {
+		t.Fatalf("missing prompt")
+	}
+	if !reflect.DeepEqual(p, pConfig) {
+		t.Fatalf("update failed: got %s, want %s", p, pConfig)
 	}
 }

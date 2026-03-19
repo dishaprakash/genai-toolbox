@@ -46,19 +46,19 @@ var (
 func getAlloyDBAINLVars(t *testing.T) map[string]any {
 	switch "" {
 	case AlloyDBAINLProject:
-		t.Skip("'ALLOYDB_AI_NL_PROJECT' not set")
+		t.Fatal("'ALLOYDB_AI_NL_PROJECT' not set")
 	case AlloyDBAINLRegion:
-		t.Skip("'ALLOYDB_AI_NL_REGION' not set")
+		t.Fatal("'ALLOYDB_AI_NL_REGION' not set")
 	case AlloyDBAINLCluster:
-		t.Skip("'ALLOYDB_AI_NL_CLUSTER' not set")
+		t.Fatal("'ALLOYDB_AI_NL_CLUSTER' not set")
 	case AlloyDBAINLInstance:
-		t.Skip("'ALLOYDB_AI_NL_INSTANCE' not set")
+		t.Fatal("'ALLOYDB_AI_NL_INSTANCE' not set")
 	case AlloyDBAINLDatabase:
-		t.Skip("'ALLOYDB_AI_NL_DATABASE' not set")
+		t.Fatal("'ALLOYDB_AI_NL_DATABASE' not set")
 	case AlloyDBAINLUser:
-		t.Skip("'ALLOYDB_AI_NL_USER' not set")
+		t.Fatal("'ALLOYDB_AI_NL_USER' not set")
 	case AlloyDBAINLPass:
-		t.Skip("'ALLOYDB_AI_NL_PASS' not set")
+		t.Fatal("'ALLOYDB_AI_NL_PASS' not set")
 	}
 	return map[string]any{
 		"type":     AlloyDBAINLSourceType,

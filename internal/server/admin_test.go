@@ -128,7 +128,7 @@ func TestUpdateEndpoint(t *testing.T) {
 			kind:               "foo",
 			resourceName:       "test-foo",
 			requestBody:        `{"config": {"type": "mock"}}`,
-			expectedStatusCode: http.StatusInternalServerError,
+			expectedStatusCode: http.StatusBadRequest,
 		},
 	}
 

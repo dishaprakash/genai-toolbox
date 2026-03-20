@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/goccy/go-yaml"
 	"github.com/googleapis/genai-toolbox/internal/embeddingmodels"
 	"github.com/googleapis/genai-toolbox/internal/util"
 	"google.golang.org/genai"
@@ -28,6 +29,20 @@ const EmbeddingModelType string = "gemini"
 
 // validate interface
 var _ embeddingmodels.EmbeddingModelConfig = Config{}
+
+func init() {
+	if !embeddingmodels.Register(EmbeddingModelType, newConfig) {
+		panic(fmt.Sprintf("embedding model type %q already registered", EmbeddingModelType))
+	}
+}
+
+func newConfig(ctx context.Context, name string, decoder *yaml.Decoder) (embeddingmodels.EmbeddingModelConfig, error) {
+	actual := Config{Name: name}
+	if err := decoder.DecodeContext(ctx, &actual); err != nil {
+		return nil, err
+	}
+	return actual, nil
+}
 
 type Config struct {
 	Name      string `yaml:"name" validate:"required"`

@@ -23,9 +23,7 @@ import (
 
 	yaml "github.com/goccy/go-yaml"
 	"github.com/googleapis/genai-toolbox/internal/auth"
-	"github.com/googleapis/genai-toolbox/internal/auth/google"
 	"github.com/googleapis/genai-toolbox/internal/embeddingmodels"
-	"github.com/googleapis/genai-toolbox/internal/embeddingmodels/gemini"
 	"github.com/googleapis/genai-toolbox/internal/prompts"
 	"github.com/googleapis/genai-toolbox/internal/sources"
 	"github.com/googleapis/genai-toolbox/internal/tools"
@@ -253,18 +251,15 @@ func UnmarshalYAMLAuthServiceConfig(ctx context.Context, name string, r map[stri
 	if !ok {
 		return nil, fmt.Errorf("missing 'type' field or it is not a string")
 	}
-	if resourceType != google.AuthServiceType {
-		return nil, fmt.Errorf("%s is not a valid type of auth service", resourceType)
-	}
 	dec, err := util.NewStrictDecoder(r)
 	if err != nil {
-		return nil, fmt.Errorf("error creating decoder: %s", err)
+		return nil, fmt.Errorf("error creating decoder: %w", err)
 	}
-	actual := google.Config{Name: name}
-	if err := dec.DecodeContext(ctx, &actual); err != nil {
-		return nil, fmt.Errorf("unable to parse as %s: %w", name, err)
+	authConfig, err := auth.DecodeConfig(ctx, resourceType, name, dec)
+	if err != nil {
+		return nil, err
 	}
-	return actual, nil
+	return authConfig, nil
 }
 
 func UnmarshalYAMLEmbeddingModelConfig(ctx context.Context, name string, r map[string]any) (embeddingmodels.EmbeddingModelConfig, error) {
@@ -272,18 +267,15 @@ func UnmarshalYAMLEmbeddingModelConfig(ctx context.Context, name string, r map[s
 	if !ok {
 		return nil, fmt.Errorf("missing 'type' field or it is not a string")
 	}
-	if resourceType != gemini.EmbeddingModelType {
-		return nil, fmt.Errorf("%s is not a valid type of embedding model", resourceType)
-	}
 	dec, err := util.NewStrictDecoder(r)
 	if err != nil {
-		return nil, fmt.Errorf("error creating decoder: %s", err)
+		return nil, fmt.Errorf("error creating decoder: %w", err)
 	}
-	actual := gemini.Config{Name: name}
-	if err := dec.DecodeContext(ctx, &actual); err != nil {
-		return nil, fmt.Errorf("unable to parse as %q: %w", name, err)
+	emConfig, err := embeddingmodels.DecodeConfig(ctx, resourceType, name, dec)
+	if err != nil {
+		return nil, err
 	}
-	return actual, nil
+	return emConfig, nil
 }
 
 func UnmarshalYAMLToolConfig(ctx context.Context, name string, r map[string]any) (tools.ToolConfig, error) {

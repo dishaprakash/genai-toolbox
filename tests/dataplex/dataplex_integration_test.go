@@ -326,7 +326,6 @@ func getDataplexToolsConfig(sourceConfig map[string]any) map[string]any {
 	return toolsFile
 }
 
-
 func runDataplexSearchEntriesToolInvokeTest(t *testing.T, tableName string, datasetName string) {
 	idToken, err := tests.GetGoogleIdToken(tests.ClientId)
 	if err != nil {

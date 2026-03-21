@@ -4864,41 +4864,37 @@ func RunMCPToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
 			}
 
-			var body map[string]interface{}
+			var body McpResponse
 			err := json.Unmarshal(respBody, &body)
 			if err != nil {
 				t.Fatalf("error parsing response body: %v", err)
 			}
 
-			if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+			if body.Error != nil {
 				if tc.isErr {
 					return
 				}
-				errMsg, _ := errMap["message"].(string)
-				if tc.want != "" && strings.Contains(errMsg, tc.want) {
+				if tc.want != "" && strings.Contains(body.Error.Message, tc.want) {
 					return
 				}
-				t.Fatalf("MCP returned an error: %v", errMap["message"])
+				t.Fatalf("MCP returned an error: %v", body.Error.Message)
 			}
 
 			if tc.want == "" {
 				return
 			}
 
-			resultMap, hasResult := body["result"].(map[string]interface{})
-			if !hasResult && !tc.isErr {
-				t.Fatalf("unable to find result in response body: %s", string(respBody))
+			if body.Result == nil || len(body.Result.Content) == 0 {
+				if !tc.isErr {
+					t.Fatalf("unable to find result in response body: %s", string(respBody))
+				}
+				return
 			}
-			contentList, hasContent := resultMap["content"].([]interface{})
-			if !hasContent {
-				t.Fatalf("unable to find result.content in response body: %s", string(respBody))
-			}
+
 			var combined []string
-			for _, item := range contentList {
-				if cMap, ok := item.(map[string]interface{}); ok {
-					if txt, ok := cMap["text"].(string); ok {
-						combined = append(combined, txt)
-					}
+			for _, item := range body.Result.Content {
+				if item.Text != "" {
+					combined = append(combined, item.Text)
 				}
 			}
 			got := ""
@@ -4912,12 +4908,7 @@ func RunMCPToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
 			}
 
 			if !strings.Contains(got, wantStr) {
-				var gotObj, wantObj interface{}
-				err1 := json.Unmarshal([]byte(got), &gotObj)
-				err2 := json.Unmarshal([]byte(wantStr), &wantObj)
-				if err1 != nil || err2 != nil || !reflect.DeepEqual(gotObj, wantObj) {
-					t.Fatalf("unexpected value: got %q, want %q\nGOT HEX: %x\nWANT HEX: %x", got, wantStr, got, wantStr)
-				}
+				t.Fatalf("unexpected value: got %q, want %q\nGOT HEX: %x\nWANT HEX: %x", got, wantStr, got, wantStr)
 			}
 		})
 	}
@@ -4975,21 +4966,20 @@ func RunMCPToolInvokeParametersTest(t *testing.T, name string, params []byte, si
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
 			}
 
-			var body map[string]interface{}
+			var body McpResponse
 			err := json.Unmarshal(respBody, &body)
 			if err != nil {
 				t.Fatalf("error parsing response body: %v", err)
 			}
 
-			if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+			if body.Error != nil {
 				if tc.isErr || tc.want == "" {
 					return
 				}
-				errMsg, _ := errMap["message"].(string)
-				if strings.Contains(errMsg, tc.want) {
+				if strings.Contains(body.Error.Message, tc.want) {
 					return
 				}
-				t.Fatalf("MCP returned an error: %v", errMap["message"])
+				t.Fatalf("MCP returned an error: %v", body.Error.Message)
 			}
 
 			if tc.want == "" && tc.isErr {
@@ -5001,21 +4991,17 @@ func RunMCPToolInvokeParametersTest(t *testing.T, name string, params []byte, si
 				return
 			}
 
-			resultMap, hasResult := body["result"].(map[string]interface{})
-			if !hasResult && !tc.isErr {
-				t.Fatalf("unable to find result in response body: %s", string(respBody))
+			if body.Result == nil || len(body.Result.Content) == 0 {
+				if !tc.isErr {
+					t.Fatalf("unable to find result in response body: %s", string(respBody))
+				}
+				return
 			}
 
-			contentList, hasContent := resultMap["content"].([]interface{})
-			if !hasContent {
-				t.Fatalf("unable to find result.content in response body: %s", string(respBody))
-			}
 			var combined []string
-			for _, item := range contentList {
-				if cMap, ok := item.(map[string]interface{}); ok {
-					if txt, ok := cMap["text"].(string); ok {
-						combined = append(combined, txt)
-					}
+			for _, item := range body.Result.Content {
+				if item.Text != "" {
+					combined = append(combined, item.Text)
 				}
 			}
 			got := ""

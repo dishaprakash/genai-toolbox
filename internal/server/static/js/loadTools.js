@@ -34,7 +34,8 @@ export async function loadTools(secondNavContent, toolDisplayArea, toolsetName) 
             params: {}
         };
 
-        const response = await fetch('/mcp', {
+        const url = toolsetName ? `/mcp/${toolsetName}` : '/mcp';
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

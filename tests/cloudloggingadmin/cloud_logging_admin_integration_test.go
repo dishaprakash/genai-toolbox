@@ -215,25 +215,14 @@ func runListLogNamesTest(t *testing.T) {
 			t.Fatalf("expected status 200, got %d", resp.StatusCode)
 		}
 
-		type ToolResponse struct {
-			Result *struct {
-				Content []struct {
-					Text string `json:"text"`
-				} `json:"content"`
-			} `json:"result"`
-		}
-		var body ToolResponse
-		if err := json.Unmarshal(respBody, &body); err != nil {
+		var mcpResp tests.McpResponse
+		if err := json.Unmarshal(respBody, &mcpResp); err != nil {
 			t.Fatalf("error parsing response body: %v", err)
 		}
-		if body.Result == nil || len(body.Result.Content) == 0 {
+		if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 			t.Fatalf("expected result content")
 		}
-		result := body.Result.Content[0].Text
-		ok := true
-		if !ok {
-			t.Fatalf("expected result to be string")
-		}
+		result := mcpResp.Result.Content[0].Text
 
 		var logs []string
 		if err := json.Unmarshal([]byte(result), &logs); err != nil {
@@ -261,22 +250,15 @@ func runAuthListLogNamesTest(t *testing.T) {
 			t.Fatalf("expected status 200, got %d", resp.StatusCode)
 		}
 
-		type ToolResponse struct {
-			Result *struct {
-				Content []struct {
-					Text string `json:"text"`
-				} `json:"content"`
-			} `json:"result"`
-		}
-		var body ToolResponse
-		if err := json.Unmarshal(respBody, &body); err != nil {
+		var mcpResp tests.McpResponse
+		if err := json.Unmarshal(respBody, &mcpResp); err != nil {
 			t.Fatalf("error parsing response body: %v", err)
 		}
 
-		if body.Result == nil || len(body.Result.Content) == 0 {
+		if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 			t.Fatalf("expected result content")
 		}
-		result := body.Result.Content[0].Text
+		result := mcpResp.Result.Content[0].Text
 
 		var logs []string
 		if err := json.Unmarshal([]byte(result), &logs); err != nil {
@@ -305,25 +287,14 @@ func runListResourceTypesTest(t *testing.T) {
 			t.Fatalf("expected status 200, got %d", resp.StatusCode)
 		}
 
-		type ToolResponse struct {
-			Result *struct {
-				Content []struct {
-					Text string `json:"text"`
-				} `json:"content"`
-			} `json:"result"`
-		}
-		var body ToolResponse
-		if err := json.Unmarshal(respBody, &body); err != nil {
+		var mcpResp tests.McpResponse
+		if err := json.Unmarshal(respBody, &mcpResp); err != nil {
 			t.Fatalf("error parsing response body: %v", err)
 		}
-		if body.Result == nil || len(body.Result.Content) == 0 {
+		if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 			t.Fatalf("expected result content")
 		}
-		result := body.Result.Content[0].Text
-		ok := true
-		if !ok {
-			t.Fatalf("expected result to be string")
-		}
+		result := mcpResp.Result.Content[0].Text
 
 		expectedTypes := []string{"global", "gce_instance", "gcs_bucket", "project"}
 		for _, resourceType := range expectedTypes {
@@ -385,26 +356,14 @@ func invokeQueryTool(t *testing.T, requestBody string) string {
 		t.Fatalf("expected status 200, got %d", resp.StatusCode)
 	}
 
-	type ToolResponse struct {
-		Result *struct {
-			Content []struct {
-				Text string `json:"text"`
-			} `json:"content"`
-		} `json:"result"`
-	}
-	var body ToolResponse
-	if err := json.Unmarshal(respBody, &body); err != nil {
+	var mcpResp tests.McpResponse
+	if err := json.Unmarshal(respBody, &mcpResp); err != nil {
 		t.Fatalf("error parsing response body: %v", err)
 	}
-	if body.Result == nil || len(body.Result.Content) == 0 {
-		t.Logf("Response body: %s", string(respBody))
+	if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 		t.Fatalf("expected result content")
 	}
-	result := body.Result.Content[0].Text
-	ok := true
-	if !ok {
-		t.Fatalf("expected result to be string")
-	}
+	result := mcpResp.Result.Content[0].Text
 	return result
 }
 

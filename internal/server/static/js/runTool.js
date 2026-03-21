@@ -90,9 +90,14 @@ export async function handleRunTool(toolId, form, responseArea, parameters, pret
             }
         };
 
+        const requestHeaders = { ...headers };
+        if (!requestHeaders['MCP-Protocol-Version']) {
+            requestHeaders['MCP-Protocol-Version'] = '2024-11-05';
+        }
+
         const response = await fetch(`/mcp`, {
             method: 'POST',
-            headers: headers,
+            headers: requestHeaders,
             body: JSON.stringify(rpcPayload)
         });
 

@@ -23,9 +23,9 @@ type McpResponse struct {
 }
 
 type McpResult struct {
-	Content []McpContent   `json:"content,omitempty"`
-	Tools   []McpTool      `json:"tools,omitempty"`
-	IsError bool           `json:"isError,omitempty"`
+	Content []McpContent `json:"content,omitempty"`
+	Tools   []McpTool    `json:"tools,omitempty"`
+	IsError bool         `json:"isError,omitempty"`
 }
 
 type McpContent struct {

@@ -310,7 +310,6 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 		} `json:"clusters"`
 	}
 
-
 	// NOTE: If clusters are added, removed or changed in the test project,
 	// this list must be updated for the "list clusters specific locations" test to pass
 	wantForSpecificLocation := []string{
@@ -432,23 +431,23 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 					t.Fatalf("empty MCP result")
 				}
 
-					var clustersData ListClustersResponse
-					if err := json.Unmarshal([]byte(body.Result.Content[0].Text), &clustersData); err != nil {
-						t.Fatalf("error parsing nested result JSON: %v", err)
-					}
-
-					var got []string
-					for _, cluster := range clustersData.Clusters {
-						got = append(got, cluster.Name)
-					}
-
-					sort.Strings(got)
-					sort.Strings(tc.want)
-
-					if !reflect.DeepEqual(got, tc.want) {
-						t.Errorf("cluster list mismatch:\n got: %v\nwant: %v", got, tc.want)
-					}
+				var clustersData ListClustersResponse
+				if err := json.Unmarshal([]byte(body.Result.Content[0].Text), &clustersData); err != nil {
+					t.Fatalf("error parsing nested result JSON: %v", err)
 				}
+
+				var got []string
+				for _, cluster := range clustersData.Clusters {
+					got = append(got, cluster.Name)
+				}
+
+				sort.Strings(got)
+				sort.Strings(tc.want)
+
+				if !reflect.DeepEqual(got, tc.want) {
+					t.Errorf("cluster list mismatch:\n got: %v\nwant: %v", got, tc.want)
+				}
+			}
 		})
 	}
 }

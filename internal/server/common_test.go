@@ -68,9 +68,9 @@ var tool4 = MockTool{
 }
 
 var tool5 = MockTool{
-	Name:                         "require_client_auth_tool",
-	Params:                       []parameters.Parameter{},
-	requiresClientAuthrorization: true,
+	Name:                        "require_client_auth_tool",
+	Params:                      []parameters.Parameter{},
+	requiresClientAuthorization: true,
 }
 
 var prompt1 = MockPrompt{
@@ -162,11 +162,6 @@ func setUpServer(t *testing.T, router string, tools map[string]tools.Tool, tools
 
 	var r chi.Router
 	switch router {
-	case "api":
-		r, err = apiRouter(&server)
-		if err != nil {
-			t.Fatalf("unable to initialize api router: %s", err)
-		}
 	case "mcp":
 		r, err = mcpRouter(&server)
 		if err != nil {

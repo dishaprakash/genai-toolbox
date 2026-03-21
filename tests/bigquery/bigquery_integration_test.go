@@ -1105,7 +1105,7 @@ func runBigQueryExecuteSqlToolInvokeTest(t *testing.T, select1Want, invokeParamW
 			if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 				t.Fatalf("unable to find result content in response body")
 			}
-			
+
 			got := mcpResp.Result.Content[0].Text
 
 			if got != tc.want {

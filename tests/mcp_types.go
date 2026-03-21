@@ -35,6 +35,18 @@ type McpContent struct {
 	Data     string `json:"data,omitempty"`
 }
 
+type McpRequest struct {
+	JSONRPC string     `json:"jsonrpc"`
+	ID      any        `json:"id"`
+	Method  string     `json:"method"`
+	Params  *McpParams `json:"params,omitempty"`
+}
+
+type McpParams struct {
+	Name      string `json:"name"`
+	Arguments any    `json:"arguments,omitempty"`
+}
+
 type McpError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`

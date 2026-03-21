@@ -165,13 +165,13 @@ func TestCreateDatabaseToolEndpoints(t *testing.T) {
 	for _, tc := range tcs {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			mcpReq := map[string]any{
-				"jsonrpc": "2.0",
-				"id":      "test-1",
-				"method":  "tools/call",
-				"params": map[string]any{
-					"name":      tc.toolName,
-					"arguments": json.RawMessage(tc.body),
+			mcpReq := tests.McpRequest{
+				JSONRPC: "2.0",
+				ID:      "test-1",
+				Method:  "tools/call",
+				Params: &tests.McpParams{
+					Name:      tc.toolName,
+					Arguments: json.RawMessage(tc.body),
 				},
 			}
 			mcpBytes, _ := json.Marshal(mcpReq)
@@ -199,21 +199,7 @@ func TestCreateDatabaseToolEndpoints(t *testing.T) {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
-			var mcpResp struct {
-				Jsonrpc string `json:"jsonrpc"`
-				Id      string `json:"id"`
-				Result  struct {
-					Content []struct {
-						Type string `json:"type"`
-						Text string `json:"text"`
-					} `json:"content"`
-					IsError bool `json:"isError,omitempty"`
-				} `json:"result"`
-				Error *struct {
-					Code    int    `json:"code"`
-					Message string `json:"message"`
-				} `json:"error,omitempty"`
-			}
+			var mcpResp tests.McpResponse
 			if err := json.NewDecoder(resp.Body).Decode(&mcpResp); err != nil {
 				t.Fatalf("failed to decode response: %v", err)
 			}
@@ -224,7 +210,7 @@ func TestCreateDatabaseToolEndpoints(t *testing.T) {
 			if mcpResp.Error != nil {
 				gotText = mcpResp.Error.Message
 				isError = true
-			} else if mcpResp.Result.IsError {
+			} else if mcpResp.Result != nil && mcpResp.Result.IsError {
 				if len(mcpResp.Result.Content) == 0 {
 					t.Fatalf("empty content in result")
 				}
@@ -247,7 +233,7 @@ func TestCreateDatabaseToolEndpoints(t *testing.T) {
 				t.Fatalf("expected error message matching %q but got %q", tc.want, gotText)
 			}
 
-			if len(mcpResp.Result.Content) == 0 {
+			if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 				t.Fatalf("empty content in result")
 			}
 			gotText = mcpResp.Result.Content[0].Text

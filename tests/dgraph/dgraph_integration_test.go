@@ -220,28 +220,17 @@ func TestDgraphToolEndpoints(t *testing.T) {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
-			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
+			var mcpResp tests.McpResponse
+			err = json.NewDecoder(resp.Body).Decode(&mcpResp)
 			if err != nil {
 				t.Fatalf("error parsing response body")
 			}
 
-			resultObj, ok := body["result"].(map[string]interface{})
-			if !ok {
-				t.Fatalf("unable to find result object in response body")
+			if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
+				t.Fatalf("unable to find result content in response body")
 			}
-			contentList, ok := resultObj["content"].([]interface{})
-			if !ok || len(contentList) == 0 {
-				t.Fatalf("unable to find content array in result")
-			}
-			firstContent, ok := contentList[0].(map[string]interface{})
-			if !ok {
-				t.Fatalf("content is not an object")
-			}
-			got, ok := firstContent["text"].(string)
-			if !ok {
-				t.Fatalf("unable to find text in content")
-			}
+			
+			got := mcpResp.Result.Content[0].Text
 
 			if got != tc.want {
 				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)

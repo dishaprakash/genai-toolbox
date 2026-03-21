@@ -169,17 +169,20 @@ export function displayResults(results, responseArea, prettify) {
         return;
     }
     try {
-        let content = results;
-
-        if (results.content && results.content.length > 0) {
-            if (results.content.length === 1 && results.content[0].text) {
-                content = results.content[0].text;
-            } else {
-                content = JSON.stringify(results.content.map(c => JSON.parse(c.text)));
-            }
+        let resultJson;
+        if (results.content && Array.isArray(results.content) && results.content.length > 0) {
+            const parsedContent = results.content.map(item => {
+                try {
+                    return JSON.parse(item.text);
+                } catch {
+                    return item.text;
+                }
+            });
+            resultJson = parsedContent.length === 1 ? parsedContent[0] : parsedContent;
+        } else {
+            resultJson = results;
         }
 
-        const resultJson = JSON.parse(content);
         if (prettify) {
             responseArea.value = JSON.stringify(resultJson, null, 2);
         } else {
@@ -187,12 +190,12 @@ export function displayResults(results, responseArea, prettify) {
         }
     } catch (error) {
         console.error("Error parsing or stringifying results:", error);
-        if (results.content && results.content.length > 0) {
-            responseArea.value = results.content.map(c => c.text).join('\n\n');
+        if (results.content && Array.isArray(results.content) && results.content.length > 0) {
+             responseArea.value = results.content.map(c => c.text).join('\n');
         } else if (typeof results === 'string') {
-            responseArea.value = results;
+             responseArea.value = results;
         } else {
-            responseArea.value = JSON.stringify(results, null, 2);
+             responseArea.value = JSON.stringify(results, null, 2);
         }
     }
 }

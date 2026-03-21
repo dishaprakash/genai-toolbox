@@ -3778,18 +3778,8 @@ func RunPostgresListLocksTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 		expectResults  bool
 	}{
 		{
-			name: "invoke list_locks with no arguments",
-			requestBody: jsonrpc.JSONRPCRequest{
-				Jsonrpc: "2.0",
-				Id:      "list_locks",
-				Request: jsonrpc.Request{
-					Method: "tools/call",
-				},
-				Params: map[string]any{
-					"name":      "list_locks",
-					"arguments": map[string]any{},
-				},
-			},
+			name:           "invoke list_locks with no arguments",
+			requestBody:    CreateMCPToolCallRequest("list_locks", "list_locks", map[string]any{}),
 			wantStatusCode: http.StatusOK,
 			expectResults:  true,
 		},
@@ -4820,6 +4810,29 @@ func RunRequest(t *testing.T, method, url string, body io.Reader, headers map[st
 	return resp, respBody
 }
 
+// CreateMCPToolCallRequest creates a tools/call request.
+func CreateMCPToolCallRequest(id string, toolName string, arguments map[string]any) jsonrpc.JSONRPCRequest {
+	return jsonrpc.JSONRPCRequest{
+		Jsonrpc: "2.0",
+		Id:      id,
+		Request: jsonrpc.Request{Method: "tools/call"},
+		Params: map[string]any{
+			"name":      toolName,
+			"arguments": arguments,
+		},
+	}
+}
+
+// CreateMCPToolListRequest creates a tools/list request.
+func CreateMCPToolListRequest(id string) jsonrpc.JSONRPCRequest {
+	return jsonrpc.JSONRPCRequest{
+		Jsonrpc: "2.0",
+		Id:      id,
+		Request: jsonrpc.Request{Method: "tools/list"},
+		Params:  map[string]any{},
+	}
+}
+
 func RunStatementToolsTest(t *testing.T, tools map[string]string) {
 	sessionId := RunInitialize(t, "2024-11-05")
 
@@ -4834,17 +4847,7 @@ func RunStatementToolsTest(t *testing.T, tools map[string]string) {
 				parsedArgs = map[string]any{}
 			}
 
-			requestBody := jsonrpc.JSONRPCRequest{
-				Jsonrpc: "2.0",
-				Id:      toolName,
-				Request: jsonrpc.Request{
-					Method: "tools/call",
-				},
-				Params: map[string]any{
-					"name":      toolName,
-					"arguments": parsedArgs,
-				},
-			}
+			requestBody := CreateMCPToolCallRequest(toolName, toolName, parsedArgs)
 			reqBytes, _ := json.Marshal(requestBody)
 
 			headers := map[string]string{}
@@ -4858,14 +4861,14 @@ func RunStatementToolsTest(t *testing.T, tools map[string]string) {
 				t.Fatalf("StatusCode mismatch: got %d, want %d. Response body: %s", resp.StatusCode, http.StatusOK, string(respBody))
 			}
 
-			var body map[string]interface{}
-			err := json.Unmarshal(respBody, &body)
+			var mcpResp McpResponse
+			err := json.Unmarshal(respBody, &mcpResp)
 			if err != nil {
 				t.Fatalf("error parsing response body: %v", err)
 			}
 
-			if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
-				t.Fatalf("MCP returned an error: %v, string response: %s", errMap["message"], string(respBody))
+			if mcpResp.Error != nil {
+				t.Fatalf("MCP returned an error: %v, string response: %s", mcpResp.Error.Message, string(respBody))
 			}
 		})
 	}

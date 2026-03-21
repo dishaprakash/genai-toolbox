@@ -310,17 +310,7 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 		} `json:"clusters"`
 	}
 
-	type ToolResponse struct {
-		Error *struct {
-			Message string `json:"message"`
-		} `json:"error"`
-		Result *struct {
-			Content []struct {
-				Text string `json:"text"`
-			} `json:"content"`
-			IsError bool `json:"isError"`
-		} `json:"result"`
-	}
+
 	// NOTE: If clusters are added, removed or changed in the test project,
 	// this list must be updated for the "list clusters specific locations" test to pass
 	wantForSpecificLocation := []string{
@@ -388,13 +378,13 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			mcpReq := map[string]any{
-				"jsonrpc": "2.0",
-				"id":      "test-1",
-				"method":  "tools/call",
-				"params": map[string]any{
-					"name":      "alloydb-list-clusters",
-					"arguments": json.RawMessage(func() []byte { b, _ := io.ReadAll(tc.requestBody); return b }()),
+			mcpReq := tests.McpRequest{
+				JSONRPC: "2.0",
+				ID:      "test-1",
+				Method:  "tools/call",
+				Params: &tests.McpParams{
+					Name:      "alloydb-list-clusters",
+					Arguments: json.RawMessage(func() []byte { b, _ := io.ReadAll(tc.requestBody); return b }()),
 				},
 			}
 			mcpBytes, _ := json.Marshal(mcpReq)
@@ -416,33 +406,31 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 			}
 
 			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
+				var body tests.McpResponse
 				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
 					t.Fatalf("error parsing outer response body: %v", err)
 				}
 
 				if tc.expectAgentErr {
-					gotText := ""
 					if body.Error != nil {
-						gotText = body.Error.Message
-					} else if body.Result != nil && len(body.Result.Content) > 0 {
-						gotText = body.Result.Content[0].Text
-					}
-
-					if gotText == "" {
-						t.Fatalf("expected error response, but got none")
-					}
-				} else {
-					if body.Error != nil {
-						t.Fatalf("MCP error: %s", body.Error.Message)
+						return
 					}
 					if body.Result != nil && body.Result.IsError {
-						t.Fatalf("MCP result error")
+						return
 					}
+					t.Fatalf("expected error response, but got none")
+				}
 
-					if body.Result == nil || len(body.Result.Content) == 0 {
-						t.Fatalf("empty MCP result")
-					}
+				if body.Error != nil {
+					t.Fatalf("MCP error: %s", body.Error.Message)
+				}
+				if body.Result != nil && body.Result.IsError {
+					t.Fatalf("MCP result error")
+				}
+
+				if body.Result == nil || len(body.Result.Content) == 0 {
+					t.Fatalf("empty MCP result")
+				}
 
 					var clustersData ListClustersResponse
 					if err := json.Unmarshal([]byte(body.Result.Content[0].Text), &clustersData); err != nil {
@@ -461,7 +449,6 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 						t.Errorf("cluster list mismatch:\n got: %v\nwant: %v", got, tc.want)
 					}
 				}
-			}
 		})
 	}
 }

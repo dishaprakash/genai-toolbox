@@ -475,28 +475,16 @@ func TestClickHouseSQLTool(t *testing.T) {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
 			}
 
-			var body map[string]interface{}
+			var body tests.McpResponse
 			err := json.Unmarshal(respBody, &body)
 			if err != nil {
 				t.Fatalf("error parsing response body")
 			}
 
-			resultObj, ok := body["result"].(map[string]interface{})
-			if !ok {
-				t.Fatalf("unable to find result object in response body")
-			}
-			contentList, ok := resultObj["content"].([]interface{})
-			if !ok || len(contentList) == 0 {
+			if body.Result == nil || len(body.Result.Content) == 0 {
 				t.Fatalf("unable to find content array in result")
 			}
-			firstContent, ok := contentList[0].(map[string]interface{})
-			if !ok {
-				t.Fatalf("content is not an object")
-			}
-			got, ok := firstContent["text"].(string)
-			if !ok {
-				t.Fatalf("unable to find text in content")
-			}
+			got := body.Result.Content[0].Text
 			t.Logf("result is %s", got)
 
 			var res []any

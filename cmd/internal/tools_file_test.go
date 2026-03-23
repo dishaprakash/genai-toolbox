@@ -629,8 +629,8 @@ func TestParseToolFile(t *testing.T) {
 			kind: authServices
 			name: my-generic-auth
 			type: generic
-			clientId: testings
-			authUrl: https://testings
+			audience: testings
+			authorizationServerUrl: https://testings
 			mcpEnabled: true
 			scopesRequired:
 			  - read:files
@@ -690,12 +690,12 @@ func TestParseToolFile(t *testing.T) {
 						ClientID: "testing-id",
 					},
 					"my-generic-auth": generic.Config{
-						Name:           "my-generic-auth",
-						Type:           generic.AuthServiceType,
-						ClientID:       "testings",
-						McpEnabled:     true,
-						AuthURL:        "https://testings",
-						ScopesRequired: []string{"read:files", "write:files"},
+						Name:                   "my-generic-auth",
+						Type:                   generic.AuthServiceType,
+						Audience:               "testings",
+						McpEnabled:             true,
+						AuthorizationServerURL: "https://testings",
+						ScopesRequired:         []string{"read:files", "write:files"},
 					},
 				},
 				EmbeddingModels: server.EmbeddingModelConfigs{

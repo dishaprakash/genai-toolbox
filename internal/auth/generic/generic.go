@@ -34,12 +34,12 @@ var _ auth.AuthServiceConfig = Config{}
 
 // Auth service configuration
 type Config struct {
-	Name           string   `yaml:"name" validate:"required"`
-	Type           string   `yaml:"type" validate:"required"`
-	ClientID       string   `yaml:"clientId" validate:"required"`
-	McpEnabled     bool     `yaml:"mcpEnabled"`
-	AuthURL        string   `yaml:"authUrl" validate:"required"`
-	ScopesRequired []string `yaml:"scopesRequired"`
+	Name                   string   `yaml:"name" validate:"required"`
+	Type                   string   `yaml:"type" validate:"required"`
+	Audience               string   `yaml:"audience" validate:"required"`
+	McpEnabled             bool     `yaml:"mcpEnabled"`
+	AuthorizationServerURL string   `yaml:"authorizationServerUrl" validate:"required"`
+	ScopesRequired         []string `yaml:"scopesRequired"`
 }
 
 // Returns the auth service type
@@ -50,7 +50,7 @@ func (cfg Config) AuthServiceConfigType() string {
 // Initialize a generic auth service
 func (cfg Config) Initialize() (auth.AuthService, error) {
 	// Discover the JWKS URL from the OIDC configuration endpoint
-	jwksURL, err := discoverJWKSURL(cfg.AuthURL)
+	jwksURL, err := discoverJWKSURL(cfg.AuthorizationServerURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to discover JWKS URL: %w", err)
 	}
@@ -68,9 +68,9 @@ func (cfg Config) Initialize() (auth.AuthService, error) {
 	return a, nil
 }
 
-func discoverJWKSURL(authURL string) (string, error) {
-	authURL = strings.TrimSuffix(authURL, "/")
-	oidcConfigURL := authURL + "/.well-known/openid-configuration"
+func discoverJWKSURL(authorizationServerURL string) (string, error) {
+	authorizationServerURL = strings.TrimSuffix(authorizationServerURL, "/")
+	oidcConfigURL := authorizationServerURL + "/.well-known/openid-configuration"
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Get(oidcConfigURL)
 	if err != nil {
@@ -81,6 +81,8 @@ func discoverJWKSURL(authURL string) (string, error) {
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("failed to fetch OIDC config, status code %d", resp.StatusCode)
 	}
+
+	resp.Body = http.MaxBytesReader(nil, resp.Body, 1<<20) // 1MB limit
 
 	var config map[string]interface{}
 	if err := json.NewDecoder(resp.Body).Decode(&config); err != nil {
@@ -153,7 +155,7 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 
 	isAudValid := false
 	for _, audItem := range aud {
-		if audItem == a.ClientID {
+		if audItem == a.Audience {
 			isAudValid = true
 			break
 		}
@@ -161,15 +163,15 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 
 	// Some IDPs use 'client_id' instead of 'aud' or put it as a single string, checking that if aud not found or not matched
 	if !isAudValid {
-		if clientIDClaim, ok := claims["client_id"].(string); ok && clientIDClaim == a.ClientID {
+		if clientIDClaim, ok := claims["client_id"].(string); ok && clientIDClaim == a.Audience {
 			isAudValid = true
-		} else if audStr, ok := claims["aud"].(string); ok && audStr == a.ClientID {
+		} else if audStr, ok := claims["aud"].(string); ok && audStr == a.Audience {
 			isAudValid = true
 		}
 	}
 
 	if !isAudValid {
-		return nil, fmt.Errorf("audience validation failed: expected %s, got %v", a.ClientID, aud)
+		return nil, fmt.Errorf("audience validation failed: expected %s, got %v", a.Audience, aud)
 	}
 
 	// Validate 'scope' claim against ScopesRequired

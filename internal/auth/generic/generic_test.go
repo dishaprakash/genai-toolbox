@@ -92,12 +92,12 @@ func TestGetClaimsFromHeader(t *testing.T) {
 	defer server.Close()
 
 	cfg := Config{
-		Name:           "test-generic-auth",
-		Type:           "generic",
-		ClientID:       "my-audience",
-		McpEnabled:     true,
-		AuthURL:        server.URL,
-		ScopesRequired: []string{"read:files"},
+		Name:                   "test-generic-auth",
+		Type:                   "generic",
+		Audience:               "my-audience",
+		McpEnabled:             true,
+		AuthorizationServerURL: server.URL,
+		ScopesRequired:         []string{"read:files"},
 	}
 
 	authService, err := cfg.Initialize()
@@ -159,7 +159,7 @@ func TestGetClaimsFromHeader(t *testing.T) {
 				return header
 			},
 			wantError:   true,
-			errContains: "Authorization header format must be Bearer {token}",
+			errContains: "authorization header format must be Bearer {token}",
 		},
 		{
 			name: "wrong audience",

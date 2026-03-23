@@ -52,6 +52,7 @@ type Server struct {
 	instrumentation *telemetry.Instrumentation
 	sseManager      *sseManager
 	ResourceMgr     *resources.ResourceManager
+	toolboxUrl      string
 }
 
 func InitializeConfigs(ctx context.Context, cfg ServerConfig) (
@@ -378,6 +379,7 @@ func NewServer(ctx context.Context, cfg ServerConfig) (*Server, error) {
 		instrumentation: instrumentation,
 		sseManager:      sseManager,
 		ResourceMgr:     resourceManager,
+		toolboxUrl:      cfg.ToolboxUrl,
 	}
 
 	// cors

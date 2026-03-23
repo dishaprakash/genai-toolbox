@@ -1495,16 +1495,24 @@ func runGetSessionTemplateTest(t *testing.T, client *dataproc.SessionTemplateCon
 		bodyBytes, _ := io.ReadAll(resp.Body)
 		t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 	}
-	var body map[string]any
-	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
+	var mcpResp struct {
+		Result *struct {
+			Content []struct {
+				Text string `json:"text"`
+			} `json:"content"`
+		} `json:"result"`
+	}
+
+	if err := json.NewDecoder(resp.Body).Decode(&mcpResp); err != nil {
 		t.Fatalf("error parsing response body: %v", err)
 	}
-	result, ok := body["result"].(string)
-	if !ok {
+
+	if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 		t.Fatalf("unable to find result in response body")
 	}
+
 	var wrappedResult map[string]any
-	if err := json.Unmarshal([]byte(result), &wrappedResult); err != nil {
+	if err := json.Unmarshal([]byte(mcpResp.Result.Content[0].Text), &wrappedResult); err != nil {
 		t.Fatalf("error unmarshalling result: %s", err)
 	}
 

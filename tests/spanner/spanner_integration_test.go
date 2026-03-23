@@ -642,9 +642,27 @@ func runSpannerExecuteSqlToolInvokeTest(t *testing.T, select1Want, invokeParamWa
 // Helper function to verify table list results
 func verifyTableListResult(t *testing.T, body map[string]interface{}, expectedTables []string, expectedSimpleFormat bool) {
 	// Parse the result
-	result, ok := body["result"].(string)
+	resultObj, ok := body["result"].(map[string]interface{})
 	if !ok {
-		t.Fatalf("unable to find result in response body")
+		if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+			t.Fatalf("mcp returned error: %v", errMap)
+		}
+		t.Fatalf("unable to find result in response body: %v", body)
+	}
+
+	contentList, ok := resultObj["content"].([]interface{})
+	if !ok || len(contentList) == 0 {
+		t.Fatalf("unable to find content array in result")
+	}
+
+	firstContent, ok := contentList[0].(map[string]interface{})
+	if !ok {
+		t.Fatalf("content is not an object")
+	}
+
+	result, ok := firstContent["text"].(string)
+	if !ok {
+		t.Fatalf("unable to find text in content")
 	}
 
 	var tables []interface{}
@@ -724,11 +742,27 @@ func runSpannerListTablesTest(t *testing.T, tableNameParam, tableNameAuth, table
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			// Use RunRequest helper function from tests package
 			url := "http://127.0.0.1:5000/mcp"
 			headers := map[string]string{}
 
-			resp, respBody := tests.RunRequest(t, http.MethodPost, url, tc.requestBody, headers)
+			// Read inner args
+			argsRaw, _ := io.ReadAll(tc.requestBody)
+			var args map[string]any
+			_ = json.Unmarshal(argsRaw, &args)
+
+			// Wrap in JSON-RPC format
+			mcpReq := map[string]any{
+				"jsonrpc": "2.0",
+				"id":      "test-req",
+				"method":  "tools/call",
+				"params": map[string]any{
+					"name":      "list-tables-tool",
+					"arguments": args,
+				},
+			}
+			reqBytes, _ := json.Marshal(mcpReq)
+
+			resp, respBody := tests.RunRequest(t, http.MethodPost, url, bytes.NewBuffer(reqBytes), headers)
 
 			if resp.StatusCode != http.StatusOK {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
@@ -749,9 +783,27 @@ func runSpannerListTablesTest(t *testing.T, tableNameParam, tableNameAuth, table
 // Helper function to verify graph list results
 func verifyGraphListResult(t *testing.T, body map[string]interface{}, expectedGraphs []string, expectedSimpleFormat bool) {
 	// Parse the result
-	result, ok := body["result"].(string)
+	resultObj, ok := body["result"].(map[string]interface{})
 	if !ok {
-		t.Fatalf("unable to find result in response body")
+		if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+			t.Fatalf("mcp returned error: %v", errMap)
+		}
+		t.Fatalf("unable to find result in response body: %v", body)
+	}
+
+	contentList, ok := resultObj["content"].([]interface{})
+	if !ok || len(contentList) == 0 {
+		t.Fatalf("unable to find content array in result")
+	}
+
+	firstContent, ok := contentList[0].(map[string]interface{})
+	if !ok {
+		t.Fatalf("content is not an object")
+	}
+
+	result, ok := firstContent["text"].(string)
+	if !ok {
+		t.Fatalf("unable to find text in content")
 	}
 
 	var graphs []interface{}
@@ -830,11 +882,27 @@ func runSpannerListGraphsTest(t *testing.T, graphName string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			// Use RunRequest helper function from tests package
 			url := "http://127.0.0.1:5000/mcp"
 			headers := map[string]string{}
 
-			resp, respBody := tests.RunRequest(t, http.MethodPost, url, tc.requestBody, headers)
+			// Read inner args
+			argsRaw, _ := io.ReadAll(tc.requestBody)
+			var args map[string]any
+			_ = json.Unmarshal(argsRaw, &args)
+
+			// Wrap in JSON-RPC format
+			mcpReq := map[string]any{
+				"jsonrpc": "2.0",
+				"id":      "test-req",
+				"method":  "tools/call",
+				"params": map[string]any{
+					"name":      "list-graphs-tool",
+					"arguments": args,
+				},
+			}
+			reqBytes, _ := json.Marshal(mcpReq)
+
+			resp, respBody := tests.RunRequest(t, http.MethodPost, url, bytes.NewBuffer(reqBytes), headers)
 
 			if resp.StatusCode != http.StatusOK {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))

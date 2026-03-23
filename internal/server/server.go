@@ -53,6 +53,7 @@ type Server struct {
 	sseManager      *sseManager
 	ResourceMgr     *resources.ResourceManager
 	toolboxUrl      string
+	mcpPrmFile      string
 }
 
 func InitializeConfigs(ctx context.Context, cfg ServerConfig) (
@@ -380,6 +381,7 @@ func NewServer(ctx context.Context, cfg ServerConfig) (*Server, error) {
 		sseManager:      sseManager,
 		ResourceMgr:     resourceManager,
 		toolboxUrl:      cfg.ToolboxUrl,
+		mcpPrmFile:      cfg.McpPrmFile,
 	}
 
 	// cors

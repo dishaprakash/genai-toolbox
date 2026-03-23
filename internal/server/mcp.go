@@ -23,6 +23,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 
@@ -346,7 +347,7 @@ func mcpRouter(s *Server) (chi.Router, error) {
 		}
 	}
 
-	if mcpAuthEnabled {
+	if mcpAuthEnabled || s.mcpPrmFile != "" {
 		r.Get("/.well-known/oauth-protected-resource", func(w http.ResponseWriter, r *http.Request) { prmHandler(s, w, r) })
 	}
 
@@ -781,6 +782,27 @@ type prmResponse struct {
 
 // prmHandler generates the Protected Resource Metadata (PRM) file for MCP Authorization.
 func prmHandler(s *Server, w http.ResponseWriter, r *http.Request) {
+	if s.mcpPrmFile != "" {
+		prmBytes, err := os.ReadFile(s.mcpPrmFile)
+		if err != nil {
+			s.logger.ErrorContext(r.Context(), "failed to read manual PRM file", "error", err, "path", s.mcpPrmFile)
+			// Returning 500 when it explicitly fails to read a configured file
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+		if !json.Valid(prmBytes) {
+			s.logger.ErrorContext(r.Context(), "manual PRM file is not valid JSON", "path", s.mcpPrmFile)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		if _, err := w.Write(prmBytes); err != nil {
+			s.logger.ErrorContext(r.Context(), "failed to write manual PRM file response", "error", err)
+		}
+		return
+	}
+
 	var servers []string
 	var scopes []string
 	for _, authSvc := range s.ResourceMgr.GetAuthServiceMap() {

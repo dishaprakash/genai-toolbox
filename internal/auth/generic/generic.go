@@ -42,7 +42,7 @@ type Config struct {
 	Type                   string   `yaml:"type" validate:"required"`
 	Audience               string   `yaml:"audience" validate:"required"`
 	McpEnabled             bool     `yaml:"mcpEnabled"`
-	AuthorizationServerUrl string   `yaml:"AuthorizationServerUrl" validate:"required"`
+	AuthorizationServerUrl string   `yaml:"authorizationServerUrl" validate:"required"`
 	ScopesRequired         []string `yaml:"scopesRequired"`
 }
 

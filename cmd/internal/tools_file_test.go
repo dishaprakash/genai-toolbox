@@ -694,7 +694,7 @@ func TestParseToolFile(t *testing.T) {
 						Type:                   generic.AuthServiceType,
 						Audience:               "testings",
 						McpEnabled:             true,
-						AuthorizationServerURL: "https://testings",
+						AuthorizationServerUrl: "https://testings",
 						ScopesRequired:         []string{"read:files", "write:files"},
 					},
 				},

@@ -18,8 +18,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"net"
 	"net/http"
-	"strings"
+	"net/url"
+	"syscall"
 	"time"
 
 	"github.com/MicahParks/keyfunc/v3"
@@ -68,33 +71,95 @@ func (cfg Config) Initialize() (auth.AuthService, error) {
 	return a, nil
 }
 
+func safeDialer() *net.Dialer {
+	return &net.Dialer{
+		Timeout:   5 * time.Second,
+		KeepAlive: 30 * time.Second,
+		Control: func(network, address string, c syscall.RawConn) error {
+			host, _, err := net.SplitHostPort(address)
+			if err != nil {
+				return err
+			}
+			ip := net.ParseIP(host)
+			if ip == nil {
+				return fmt.Errorf("invalid IP address")
+			}
+			// Block private, loopback, and link-local
+			if ip.IsLoopback() || ip.IsPrivate() || ip.IsLinkLocalUnicast() || ip.IsLinkLocalMulticast() {
+				return fmt.Errorf("connection to internal/private IP blocked: %s", ip)
+			}
+			return nil
+		},
+	}
+}
+
+var AllowInsecureForTest = false
+
 func discoverJWKSURL(authorizationServerURL string) (string, error) {
-	authorizationServerURL = strings.TrimSuffix(authorizationServerURL, "/")
-	oidcConfigURL := authorizationServerURL + "/.well-known/openid-configuration"
-	client := &http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Get(oidcConfigURL)
+	u, err := url.Parse(authorizationServerURL)
+	if err != nil || (u.Scheme != "https" && !AllowInsecureForTest) {
+		return "", fmt.Errorf("invalid or insecure auth URL: must be HTTPS")
+	}
+
+	oidcConfigURL, err := url.JoinPath(authorizationServerURL, ".well-known/openid-configuration")
 	if err != nil {
 		return "", err
+	}
+
+	// HTTP Client
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+		Transport: &http.Transport{
+			ForceAttemptHTTP2:     true,
+			MaxIdleConns:          10,
+			IdleConnTimeout:       90 * time.Second,
+			TLSHandshakeTimeout:   5 * time.Second,
+			ExpectContinueTimeout: 1 * time.Second,
+		},
+		// Prevent redirect loops or redirects to internal sites
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		},
+	}
+
+	if !AllowInsecureForTest {
+		client.Transport.(*http.Transport).DialContext = safeDialer().DialContext
+	}
+
+	resp, err := client.Get(oidcConfigURL)
+	if err != nil {
+		return "", fmt.Errorf("failed to fetch OIDC config: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("failed to fetch OIDC config, status code %d", resp.StatusCode)
+		return "", fmt.Errorf("unexpected status: %d", resp.StatusCode)
 	}
 
-	resp.Body = http.MaxBytesReader(nil, resp.Body, 1<<20) // 1MB limit
-
-	var config map[string]interface{}
-	if err := json.NewDecoder(resp.Body).Decode(&config); err != nil {
+	// Limit read size to 1MB to prevent memory exhaustion
+	body, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	if err != nil {
 		return "", err
 	}
 
-	jwksURI, ok := config["jwks_uri"].(string)
-	if !ok || jwksURI == "" {
-		return "", fmt.Errorf("jwks_uri not found in OIDC configuration at %s", oidcConfigURL)
+	var config struct {
+		JWKSURI string `json:"jwks_uri"`
+	}
+	if err := json.Unmarshal(body, &config); err != nil {
+		return "", err
 	}
 
-	return jwksURI, nil
+	if config.JWKSURI == "" {
+		return "", fmt.Errorf("jwks_uri not found in config")
+	}
+
+	// Sanitize the resulting JWKS URI before returning it
+	parsedJWKS, err := url.Parse(config.JWKSURI)
+	if err != nil || (parsedJWKS.Scheme != "https" && !AllowInsecureForTest) {
+		return "", fmt.Errorf("malicious jwks_uri detected")
+	}
+
+	return config.JWKSURI, nil
 }
 
 var _ auth.AuthService = AuthService{}
@@ -162,7 +227,6 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 	if !isAudValid {
 		return nil, fmt.Errorf("audience validation failed: expected %s, got %v", a.Audience, aud)
 	}
-
 
 	// Return claims dynamically
 	claimsMap := make(map[string]any)

@@ -73,7 +73,7 @@ jobs:
           HUGO_RELATIVEURLS: false
           HUGO_PARAMS_VERSION: ${{ github.event.inputs.version_tag }}
 
-      - name: Build Pagefind Index (Root)
+      - name: Build Pagefind Index (Archived Version)
         run: npx pagefind --site public
         working-directory: .hugo
 

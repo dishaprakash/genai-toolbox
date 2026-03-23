@@ -1,5 +1,6 @@
 ---
 title: "Featured Articles"
+icon: "fas fa-newspaper"
 weight: 1
 description: Toolbox Medium Blogs
 manualLink: "https://medium.com/@mcp_toolbox"

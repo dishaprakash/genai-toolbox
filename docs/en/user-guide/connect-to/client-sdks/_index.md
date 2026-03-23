@@ -16,4 +16,4 @@ By using our SDKs, your application can dynamically request tools, bind paramete
 *   **[JavaScript / TypeScript](./javascript-sdk/_index.md)**: Includes the Node.js Core SDK and integrations for the Agent Development Kit (ADK).
 *   **[Go](./go-sdk/_index.md/)**: Includes the Core SDK, plus dedicated packages for building agents with Genkit (`tbgenkit`) and the ADK.
 
-Select your preferred language above to explore installation instructions, quickstart guides, and framework-specific implementations.
+Select your preferred language to explore installation instructions, quickstart guides, and framework-specific implementations.

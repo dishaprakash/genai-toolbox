@@ -63,7 +63,7 @@ jobs:
           HUGO_RELATIVEURLS: false
           HUGO_PARAMS_VERSION: ${{ steps.get_version.outputs.VERSION }}
 
-      - name: Build Pagefind Index (Root)
+      - name: Build Pagefind Index (Versioned)
         run: npx pagefind --site public
         working-directory: .hugo
 

@@ -12,84 +12,77 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: "CF: Deploy PR Preview"
+name: "CF: Deploy Docs Preview"
+
+on:
+  workflow_run:
+    workflows: ["CF: Build Docs Preview"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR Number to deploy (Manual override)'
+        required: true
+        type: string
+      build_run_id:
+        description: 'The Run ID from the successful "CF: Build Docs Preview" workflow'
+        required: true
+        type: string
 
 permissions:
   contents: read
   pull-requests: write
 
-# This Workflow depends on 'github.event.number',
-# not compatible with branch or manual triggers.
-on:
-  pull_request:
-    paths:
-      - 'docs/**'
-      - '.github/workflows/docs*_cf.yaml'
-      - '.github/workflows/deploy*_cf.yaml'
-      - '.hugo/**'
-
 jobs:
-  preview:
-    # Only run for PRs from the same repository to ensure secret access
-    if: "${{ github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name }}"
+  deploy-preview:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: .hugo
     concurrency:
-      # Shared concurrency group with preview cleanup.
-      group: "cf-preview-${{ github.event.number }}"
+      group: "cf-deploy-${{ github.event.inputs.pr_number || github.event.workflow_run.pull_requests[0].number }}"
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Checkout base repository
+        uses: actions/checkout@v4
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          name: cf-preview-data
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.build_run_id || github.event.workflow_run.id }}
+          path: downloaded-artifact
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3
-        with:
-          hugo-version: "0.145.0"
-          extended: true
+      - name: Read PR Number
+        id: get_pr
+        run: |
+          if [ -n "${{ github.event.inputs.pr_number }}" ]; then
+            PR_NUMBER="${{ github.event.inputs.pr_number }}"
+          else
+            PR_NUMBER=$(cat downloaded-artifact/pr_number.txt)
+          fi
+          echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
 
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
-        with:
-          node-version: "22"
-
-      - name: Cache dependencies
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - run: npm ci
-      - run: hugo --minify --config hugo.cloudflare.toml
-        env:
-          HUGO_BASEURL: "/"
-          HUGO_ENVIRONMENT: preview
-          HUGO_RELATIVEURLS: false
-
-      - name: Build Pagefind Search Index
-        run: npx pagefind --site public
-
-      - name: Deploy to Cloudflare Pages via Wrangler
+      - name: Deploy to Cloudflare Pages
         id: cf_deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .hugo/public --project-name toolbox-docs --branch pr-${{ github.event.number }}
+          command: pages deploy downloaded-artifact/public --project-name toolbox-docs --branch pr-${{ steps.get_pr.outputs.pr_number }}
 
       - name: Comment
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.payload.number,
+            const prNumber = parseInt('${{ steps.get_pr.outputs.pr_number }}', 10);
+            const deployUrl = '${{ steps.cf_deploy.outputs.pages-deployment-alias-url }}';
+
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "🚀 **Cloudflare Preview is building!**\n\n🔎 View Preview: ${{ steps.cf_deploy.outputs.pages-deployment-alias-url }}\n\n*(Note: It may take a minute or two for Cloudflare to finish deploying the branch)*"
-            })
+              body: `🚀 **Cloudflare Preview Ready!**\n\n🔎 View Preview: ${deployUrl}\n\n*(Note: It may take a minute or two for Cloudflare to finish deploying the branch)*`
+            });

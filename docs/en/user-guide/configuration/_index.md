@@ -107,3 +107,7 @@ arguments:
 
 For more details on configuring different types of prompts, see the
 [Prompts](./prompts/_index.md).
+
+---
+
+## Explore Configuration Modules

@@ -1,7 +1,7 @@
 ---
 title: "Integrations"
 type: docs
-weight: 3
+weight: 4
 description: >
   Integrations connect the MCP Toolbox to your external data sources, unlocking specific sets of tools for your agents.
 ---

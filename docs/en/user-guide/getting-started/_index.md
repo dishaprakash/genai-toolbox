@@ -10,7 +10,6 @@ Before you spin up your server and start writing code, it is helpful to understa
 
 This guide breaks down the core methodologies for using MCP Toolbox, how to think about your tool configurations, and the different ways your applications can connect to it.
 
-
 ## Prebuilt vs. Custom Configs
 
 MCP Toolbox provides two main approaches for tools: **prebuilt** and **custom**.
@@ -62,6 +61,18 @@ Being built on the Model Context Protocol (MCP), MCP Toolbox is framework-agnost
 *   **Application Integration (Client SDKs):** If you are building custom AI agents, you can use our Client SDKs to pull tools directly into your application code. We provide native support for major orchestration frameworks including LangChain, LlamaIndex, Genkit, and more across Python, JavaScript/TypeScript, and Go.
 
 ---
+
+## Popular Quickstarts
+
+Ready to dive in? Here are some of the most popular paths to getting your first agent up and running:
+
+* [**Python SDK Quickstart:**](../../build-with-mcp-toolbox/local_quickstart.md) Build a custom agent from scratch using our native Python client. This is the go-to choice for developers wanting full control over their application logic and orchestration.
+
+* [**MCP Client Quickstart:**](../../build-with-mcp-toolbox/mcp_quickstart/_index.md) Plug your databases directly into the MCP ecosystem. Perfect for a setup that works instantly with existing MCP-compatible clients and various IDEs.
+
+{{< notice tip >}}
+These are just a few starting points. For a complete list of tutorials, language-specific samples (Go, JS/TS, etc.), and advanced usage, explore the full [Build with MCP Toolbox section](../../build-with-mcp-toolbox/_index.md).
+{{< /notice >}}
 
 ## Next Steps
 

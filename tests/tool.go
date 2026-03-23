@@ -40,713 +40,12 @@ import (
 )
 
 // RunToolGet runs the tool get endpoint
-func RunToolGetTest(t *testing.T) {
-	// Test tool get endpoint
-	tcs := []struct {
-		name string
-		api  string
-		want map[string]any
-	}{
-		{
-			name: "get my-simple-tool",
-			api:  "http://127.0.0.1:5000/api/tool/my-simple-tool/",
-			want: map[string]any{
-				"my-simple-tool": map[string]any{
-					"description":  "Simple tool to test end to end functionality.",
-					"parameters":   []any{},
-					"authRequired": []any{},
-				},
-			},
-		},
-	}
-	for _, tc := range tcs {
-		t.Run(tc.name, func(t *testing.T) {
-			resp, err := http.Get(tc.api)
-			if err != nil {
-				t.Fatalf("error when sending a request: %s", err)
-			}
-			defer resp.Body.Close()
-			if resp.StatusCode != 200 {
-				t.Fatalf("response status code is not 200")
-			}
-
-			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
-			if err != nil {
-				t.Fatalf("error parsing response body")
-			}
-
-			got, ok := body["tools"]
-			if !ok {
-				t.Fatalf("unable to find tools in response body")
-			}
-			if !reflect.DeepEqual(got, tc.want) {
-				t.Fatalf("got %q, want %q", got, tc.want)
-			}
-		})
-	}
-}
-
-func RunToolGetTestByName(t *testing.T, name string, want map[string]any) {
-	// Test tool get endpoint
-	tcs := []struct {
-		name string
-		api  string
-		want map[string]any
-	}{
-		{
-			name: fmt.Sprintf("get %s", name),
-			api:  fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/", name),
-			want: want,
-		},
-	}
-	for _, tc := range tcs {
-		t.Run(tc.name, func(t *testing.T) {
-			resp, err := http.Get(tc.api)
-			if err != nil {
-				t.Fatalf("error when sending a request: %s", err)
-			}
-			defer resp.Body.Close()
-			if resp.StatusCode != 200 {
-				t.Fatalf("response status code is not 200")
-			}
-
-			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
-			if err != nil {
-				t.Fatalf("error parsing response body")
-			}
-
-			got, ok := body["tools"]
-			if !ok {
-				t.Fatalf("unable to find tools in response body")
-			}
-			if !reflect.DeepEqual(got, tc.want) {
-				t.Fatalf("got %q, want %q", got, tc.want)
-			}
-		})
-	}
-}
 
 // RunToolInvokeSimpleTest runs the tool invoke endpoint with no parameters
-func RunToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
-	// Test tool invoke endpoint
-	invokeTcs := []struct {
-		name          string
-		api           string
-		requestHeader map[string]string
-		requestBody   io.Reader
-		want          string
-		isErr         bool
-	}{
-		{
-			name:          fmt.Sprintf("invoke %s", name),
-			api:           fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", name),
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{}`)),
-			want:          simpleWant,
-			isErr:         false,
-		},
-	}
-	for _, tc := range invokeTcs {
-		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, tc.requestHeader)
-			if resp.StatusCode != http.StatusOK {
-				if tc.isErr {
-					return
-				}
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
-			}
-
-			// Check response body
-			var body map[string]interface{}
-			err := json.Unmarshal(respBody, &body)
-			if err != nil {
-				t.Fatalf("error parsing response body")
-			}
-
-			got, ok := body["result"].(string)
-			if !ok {
-				t.Fatalf("unable to find result in response body")
-			}
-
-			if !strings.Contains(got, tc.want) {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
-			}
-		})
-	}
-}
-
-func RunToolInvokeParametersTest(t *testing.T, name string, params []byte, simpleWant string) {
-	// Test tool invoke endpoint
-	invokeTcs := []struct {
-		name          string
-		api           string
-		requestHeader map[string]string
-		requestBody   io.Reader
-		want          string
-		isErr         bool
-	}{
-		{
-			name:          fmt.Sprintf("invoke %s", name),
-			api:           fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", name),
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer(params),
-			want:          simpleWant,
-			isErr:         false,
-		},
-	}
-	for _, tc := range invokeTcs {
-		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, tc.requestHeader)
-			if resp.StatusCode != http.StatusOK {
-				if tc.isErr {
-					return
-				}
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
-			}
-
-			// Check response body
-			var body map[string]interface{}
-			err := json.Unmarshal(respBody, &body)
-			if err != nil {
-				t.Fatalf("error parsing response body")
-			}
-
-			got, ok := body["result"].(string)
-			if !ok {
-				t.Fatalf("unable to find result in response body")
-			}
-
-			if !strings.Contains(got, tc.want) {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
-			}
-		})
-	}
-}
 
 // RunToolInvoke runs the tool invoke endpoint
-func RunToolInvokeTest(t *testing.T, select1Want string, options ...MCPToolInvokeTestOption) {
-	// Resolve options
-	// Default values for MCPToolInvokeTestConfig
-	configs := &MCPToolInvokeTestConfig{
-		myToolId3NameAliceWant:   "[{\"id\":1,\"name\":\"Alice\"},{\"id\":3,\"name\":\"Sid\"}]",
-		myToolById4Want:          "[{\"id\":4,\"name\":null}]",
-		myArrayToolWant:          "[{\"id\":1,\"name\":\"Alice\"},{\"id\":3,\"name\":\"Sid\"}]",
-		nullWant:                 "null",
-		supportOptionalNullParam: true,
-		supportArrayParam:        true,
-		supportClientAuth:        false,
-		supportSelect1Want:       true,
-		supportSelect1Auth:       true,
-	}
-
-	// Apply provided options
-	for _, option := range options {
-		option(configs)
-	}
-
-	// Get ID token
-	idToken, err := GetGoogleIdToken(ClientId)
-	if err != nil {
-		t.Fatalf("error getting Google ID token: %s", err)
-	}
-
-	// Get access token
-	accessToken, err := sources.GetIAMAccessToken(t.Context())
-	if err != nil {
-		t.Fatalf("error getting access token from ADC: %s", err)
-	}
-	accessToken = "Bearer " + accessToken
-
-	// Test tool invoke endpoint
-	invokeTcs := []struct {
-		name           string
-		api            string
-		enabled        bool
-		requestHeader  map[string]string
-		requestBody    io.Reader
-		wantStatusCode int
-		wantBody       string
-	}{
-		{
-			name:           "invoke my-simple-tool",
-			api:            "http://127.0.0.1:5000/api/tool/my-simple-tool/invoke",
-			enabled:        configs.supportSelect1Want,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       select1Want,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "invoke my-tool",
-			api:            "http://127.0.0.1:5000/api/tool/my-tool/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{"id": 3, "name": "Alice"}`)),
-			wantBody:       configs.myToolId3NameAliceWant,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "invoke my-tool-by-id with nil response",
-			api:            "http://127.0.0.1:5000/api/tool/my-tool-by-id/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{"id": 4}`)),
-			wantBody:       configs.myToolById4Want,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "invoke my-tool-by-name with nil response",
-			api:            "http://127.0.0.1:5000/api/tool/my-tool-by-name/invoke",
-			enabled:        configs.supportOptionalNullParam,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       configs.nullWant,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "Invoke my-tool without parameters",
-			api:            "http://127.0.0.1:5000/api/tool/my-tool/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       `{"error":"parameter \"id\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "Invoke my-tool with insufficient parameters",
-			api:            "http://127.0.0.1:5000/api/tool/my-tool/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{"id": 1}`)),
-			wantBody:       `{"error":"parameter \"name\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "invoke my-array-tool",
-			api:            "http://127.0.0.1:5000/api/tool/my-array-tool/invoke",
-			enabled:        configs.supportArrayParam,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{"idArray": [1,2,3], "nameArray": ["Alice", "Sid", "RandomName"], "cmdArray": ["HGETALL", "row3"]}`)),
-			wantBody:       configs.myArrayToolWant,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "Invoke my-auth-tool with auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-auth-tool/invoke",
-			enabled:        configs.supportSelect1Auth,
-			requestHeader:  map[string]string{"my-google-auth_token": idToken},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       configs.myAuthToolWant,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "Invoke my-auth-tool with invalid auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-auth-tool/invoke",
-			enabled:        configs.supportSelect1Auth,
-			requestHeader:  map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       "",
-			wantStatusCode: http.StatusUnauthorized,
-		},
-		{
-			name:           "Invoke my-auth-tool without auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-auth-tool/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       "",
-			wantStatusCode: http.StatusUnauthorized,
-		},
-		{
-			name:           "Invoke my-auth-required-tool with auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-auth-required-tool/invoke",
-			enabled:        configs.supportSelect1Auth,
-			requestHeader:  map[string]string{"my-google-auth_token": idToken},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       select1Want,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "Invoke my-auth-required-tool with invalid auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-auth-required-tool/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       "",
-			wantStatusCode: http.StatusUnauthorized,
-		},
-		{
-			name:           "Invoke my-auth-required-tool without auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-auth-tool/invoke",
-			enabled:        true,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       "",
-			wantStatusCode: http.StatusUnauthorized,
-		},
-		{
-			name:           "Invoke my-client-auth-tool with auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-client-auth-tool/invoke",
-			enabled:        configs.supportClientAuth,
-			requestHeader:  map[string]string{"Authorization": accessToken},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantBody:       select1Want,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "Invoke my-client-auth-tool without auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-client-auth-tool/invoke",
-			enabled:        configs.supportClientAuth,
-			requestHeader:  map[string]string{},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantStatusCode: http.StatusUnauthorized,
-		},
-		{
-
-			name:           "Invoke my-client-auth-tool with invalid auth token",
-			api:            "http://127.0.0.1:5000/api/tool/my-client-auth-tool/invoke",
-			enabled:        configs.supportClientAuth,
-			requestHeader:  map[string]string{"Authorization": "Bearer invalid-token"},
-			requestBody:    bytes.NewBuffer([]byte(`{}`)),
-			wantStatusCode: http.StatusUnauthorized,
-		},
-	}
-	for _, tc := range invokeTcs {
-		t.Run(tc.name, func(t *testing.T) {
-			if !tc.enabled {
-				return
-			}
-			// Send Tool invocation request
-			resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, tc.requestHeader)
-
-			// Check status code
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Errorf("StatusCode mismatch: got %d, want %d. Response body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
-			}
-
-			// skip response body check
-			if tc.wantBody == "" {
-				return
-			}
-
-			// Check response body
-			var body map[string]interface{}
-			err = json.Unmarshal(respBody, &body)
-			if err != nil {
-				t.Fatalf("error parsing response body: %s", err)
-			}
-
-			got, ok := body["result"].(string)
-			if !ok {
-				t.Fatalf("unable to find result in response body")
-			}
-
-			if got != tc.wantBody {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.wantBody)
-			}
-		})
-	}
-}
 
 // RunToolInvokeWithTemplateParameters runs tool invoke test cases with template parameters.
-func RunToolInvokeWithTemplateParameters(t *testing.T, tableName string, options ...TemplateParamOption) {
-	// Resolve options
-	// Default values for TemplateParameterTestConfig
-	configs := &TemplateParameterTestConfig{
-		ddlWant:         "null",
-		selectAllWant:   "[{\"age\":21,\"id\":1,\"name\":\"Alex\"},{\"age\":100,\"id\":2,\"name\":\"Alice\"}]",
-		selectId1Want:   "[{\"age\":21,\"id\":1,\"name\":\"Alex\"}]",
-		selectNameWant:  "[{\"age\":21,\"id\":1,\"name\":\"Alex\"}]",
-		selectEmptyWant: "null",
-		insert1Want:     "null",
-
-		nameFieldArray: `["name"]`,
-		nameColFilter:  "name",
-		createColArray: `["id INT","name VARCHAR(20)","age INT"]`,
-
-		supportDdl:    true,
-		supportInsert: true,
-	}
-
-	// Apply provided options
-	for _, option := range options {
-		option(configs)
-	}
-
-	selectOnlyNamesWant := "[{\"name\":\"Alex\"},{\"name\":\"Alice\"}]"
-
-	// Test tool invoke endpoint
-	invokeTcs := []struct {
-		name          string
-		enabled       bool
-		ddl           bool
-		insert        bool
-		api           string
-		requestHeader map[string]string
-		requestBody   io.Reader
-		want          string
-		isErr         bool
-	}{
-		{
-			name:          "invoke create-table-templateParams-tool",
-			ddl:           true,
-			api:           "http://127.0.0.1:5000/api/tool/create-table-templateParams-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":%s}`, tableName, configs.createColArray))),
-			want:          configs.ddlWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke insert-table-templateParams-tool",
-			insert:        true,
-			api:           "http://127.0.0.1:5000/api/tool/insert-table-templateParams-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":["id","name","age"], "values":"1, 'Alex', 21"}`, tableName))),
-			want:          configs.insert1Want,
-			isErr:         false,
-		},
-		{
-			name:          "invoke insert-table-templateParams-tool",
-			insert:        true,
-			api:           "http://127.0.0.1:5000/api/tool/insert-table-templateParams-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":["id","name","age"], "values":"2, 'Alice', 100"}`, tableName))),
-			want:          configs.insert1Want,
-			isErr:         false,
-		},
-		{
-			name:          "invoke select-templateParams-tool",
-			api:           "http://127.0.0.1:5000/api/tool/select-templateParams-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s"}`, tableName))),
-			want:          configs.selectAllWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke select-templateParams-combined-tool",
-			api:           "http://127.0.0.1:5000/api/tool/select-templateParams-combined-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"id": 1, "tableName": "%s"}`, tableName))),
-			want:          configs.selectId1Want,
-			isErr:         false,
-		},
-		{
-			name:          "invoke select-templateParams-combined-tool with no results",
-			api:           "http://127.0.0.1:5000/api/tool/select-templateParams-combined-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"id": 999, "tableName": "%s"}`, tableName))),
-			want:          configs.selectEmptyWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke select-fields-templateParams-tool",
-			enabled:       configs.supportSelectFields,
-			api:           "http://127.0.0.1:5000/api/tool/select-fields-templateParams-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "fields":%s}`, tableName, configs.nameFieldArray))),
-			want:          selectOnlyNamesWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke select-filter-templateParams-combined-tool",
-			api:           "http://127.0.0.1:5000/api/tool/select-filter-templateParams-combined-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"name": "Alex", "tableName": "%s", "columnFilter": "%s"}`, tableName, configs.nameColFilter))),
-			want:          configs.selectNameWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke drop-table-templateParams-tool",
-			ddl:           true,
-			api:           "http://127.0.0.1:5000/api/tool/drop-table-templateParams-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s"}`, tableName))),
-			want:          configs.ddlWant,
-			isErr:         false,
-		},
-	}
-	for _, tc := range invokeTcs {
-		t.Run(tc.name, func(t *testing.T) {
-			if !tc.enabled {
-				return
-			}
-			// if test case is DDL and source support ddl test cases
-			ddlAllow := !tc.ddl || (tc.ddl && configs.supportDdl)
-			// if test case is insert statement and source support insert test cases
-			insertAllow := !tc.insert || (tc.insert && configs.supportInsert)
-			if ddlAllow && insertAllow {
-				// Send Tool invocation request
-				resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, tc.requestHeader)
-				if resp.StatusCode != http.StatusOK {
-					if tc.isErr {
-						return
-					}
-					t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
-				}
-
-				// Check response body
-				var body map[string]interface{}
-				err := json.Unmarshal(respBody, &body)
-				if err != nil {
-					t.Fatalf("error parsing response body")
-				}
-
-				got, ok := body["result"].(string)
-				if !ok {
-					t.Fatalf("unable to find result in response body")
-				}
-
-				if got != tc.want {
-					t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
-				}
-			}
-		})
-	}
-}
-
-func RunExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1Want string, options ...ExecuteSqlOption) {
-	// Resolve options
-	// Default values for ExecuteSqlTestConfig
-	configs := &ExecuteSqlTestConfig{
-		select1Statement: `"SELECT 1"`,
-		createWant:       "null",
-		dropWant:         "null",
-		selectEmptyWant:  "null",
-	}
-
-	// Apply provided options
-	for _, option := range options {
-		option(configs)
-	}
-
-	// Get ID token
-	idToken, err := GetGoogleIdToken(ClientId)
-	if err != nil {
-		t.Fatalf("error getting Google ID token: %s", err)
-	}
-
-	// Test tool invoke endpoint
-	invokeTcs := []struct {
-		name          string
-		api           string
-		requestHeader map[string]string
-		requestBody   io.Reader
-		want          string
-		isErr         bool
-		isAgentErr    bool
-	}{
-		{
-			name:          "invoke my-exec-sql-tool",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
-			want:          select1Want,
-			isErr:         false,
-		},
-		{
-			name:          "invoke my-exec-sql-tool create table",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, createTableStatement))),
-			want:          configs.createWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke my-exec-sql-tool select table",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{"sql":"SELECT * FROM t"}`)),
-			want:          configs.selectEmptyWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke my-exec-sql-tool drop table",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{"sql":"DROP TABLE t"}`)),
-			want:          configs.dropWant,
-			isErr:         false,
-		},
-		{
-			name:          "invoke my-exec-sql-tool without body",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{}`)),
-			isAgentErr:    true,
-		},
-		{
-			name:          "Invoke my-auth-exec-sql-tool with auth token",
-			api:           "http://127.0.0.1:5000/api/tool/my-auth-exec-sql-tool/invoke",
-			requestHeader: map[string]string{"my-google-auth_token": idToken},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
-			isErr:         false,
-			want:          select1Want,
-		},
-		{
-			name:          "Invoke my-auth-exec-sql-tool with invalid auth token",
-			api:           "http://127.0.0.1:5000/api/tool/my-auth-exec-sql-tool/invoke",
-			requestHeader: map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
-			isErr:         true,
-		},
-		{
-			name:          "Invoke my-auth-exec-sql-tool without auth token",
-			api:           "http://127.0.0.1:5000/api/tool/my-auth-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
-			isErr:         true,
-		},
-		{
-			name:          "invoke my-exec-sql-tool with invalid SELECT SQL",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{"sql":"SELECT * FROM non_existent_table"}`)),
-			isAgentErr:    true,
-		},
-		{
-			name:          "invoke my-exec-sql-tool with invalid ALTER SQL",
-			api:           "http://127.0.0.1:5000/api/tool/my-exec-sql-tool/invoke",
-			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{"sql":"ALTER TALE t ALTER COLUMN id DROP NOT NULL"}`)),
-			isAgentErr:    true,
-		},
-	}
-	for _, tc := range invokeTcs {
-		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, tc.requestHeader)
-			if resp.StatusCode != http.StatusOK {
-				if tc.isErr {
-					return
-				}
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
-			}
-			if tc.isAgentErr {
-				return
-			}
-
-			// Check response body
-			var body map[string]interface{}
-			err = json.Unmarshal(respBody, &body)
-			if err != nil {
-				t.Fatalf("error parsing response body")
-			}
-
-			got, ok := body["result"].(string)
-			if !ok {
-				t.Fatalf("unable to find result in response body")
-			}
-
-			if got != tc.want {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
-			}
-		})
-	}
-}
 
 // RunInitialize runs the initialize lifecycle for mcp to set up client-server connection
 func RunInitialize(t *testing.T, protocolVersion string) string {
@@ -827,7 +126,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 	// Test tool invoke endpoint
 	invokeTcs := []struct {
 		name           string
-		api            string
+		toolName       string
 		enabled        bool // switch to turn on/off the test case
 		requestBody    jsonrpc.JSONRPCRequest
 		requestHeader  map[string]string
@@ -836,7 +135,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 	}{
 		{
 			name:          "MCP Invoke my-tool",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			enabled:       true,
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -858,7 +157,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke invalid tool",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			enabled:       true,
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -877,7 +176,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke my-tool without parameters",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			enabled:       true,
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -896,7 +195,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke my-tool with insufficient parameters",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			enabled:       true,
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -915,7 +214,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke my-auth-required-tool",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			enabled:       configs.supportSelect1Auth,
 			requestHeader: map[string]string{"my-google-auth_token": idToken},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -934,7 +233,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke my-auth-required-tool with invalid auth token",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
 			requestBody: jsonrpc.JSONRPCRequest{
 				Jsonrpc: "2.0",
@@ -952,7 +251,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke my-auth-required-tool without auth token",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
 				Jsonrpc: "2.0",
@@ -972,7 +271,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		{
 			name:          "MCP Invoke my-client-auth-tool",
 			enabled:       configs.supportClientAuth,
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{"Authorization": accessToken},
 			requestBody: jsonrpc.JSONRPCRequest{
 				Jsonrpc: "2.0",
@@ -991,7 +290,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		{
 			name:          "MCP Invoke my-client-auth-tool without access token",
 			enabled:       configs.supportClientAuth,
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
 				Jsonrpc: "2.0",
@@ -1010,7 +309,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		{
 			name:          "MCP Invoke my-client-auth-tool with invalid access token",
 			enabled:       configs.supportClientAuth,
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{"Authorization": "Bearer invalid-token"},
 			requestBody: jsonrpc.JSONRPCRequest{
 				Jsonrpc: "2.0",
@@ -1026,9 +325,9 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 			wantStatusCode: http.StatusUnauthorized,
 		},
 		{
-			name:    "MCP Invoke my-custom-client-auth-tool with custom access token",
-			enabled: configs.supportClientAuth,
-			api:     "http://127.0.0.1:5000/mcp",
+			name:     "MCP Invoke my-custom-client-auth-tool with custom access token",
+			enabled:  configs.supportClientAuth,
+			toolName: "http://127.0.0.1:5000/mcp",
 			// Note: This assumes my-custom-client-auth-tool is configured to use X-Custom-Auth
 			requestHeader: map[string]string{"X-Custom-Auth": accessToken},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -1048,7 +347,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		{
 			name:          "MCP Invoke my-custom-client-auth-tool without access token",
 			enabled:       configs.supportClientAuth,
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
 				Jsonrpc: "2.0",
@@ -1065,7 +364,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 		},
 		{
 			name:          "MCP Invoke my-fail-tool",
-			api:           "http://127.0.0.1:5000/mcp",
+			toolName:      "http://127.0.0.1:5000/mcp",
 			enabled:       true,
 			requestHeader: map[string]string{},
 			requestBody: jsonrpc.JSONRPCRequest{
@@ -1102,7 +401,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 				headers[key] = value
 			}
 
-			httpResponse, respBody := RunRequest(t, http.MethodPost, tc.api, bytes.NewBuffer(reqMarshal), headers)
+			httpResponse, respBody := RunLegacyApiRequestToMCP(t, tc.toolName, bytes.NewBuffer(reqMarshal))
 
 			// Check status code
 			if httpResponse.StatusCode != tc.wantStatusCode {
@@ -1176,7 +475,7 @@ func RunPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, user
 
 	invokeTcs := []struct {
 		name           string
-		api            string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 		want           string
@@ -1185,7 +484,7 @@ func RunPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, user
 	}{
 		{
 			name:           "invoke list_tables all tables detailed output",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": ""}`)),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s,%s]", getDetailedWant(tableNameAuth, authTableColumns), getDetailedWant(tableNameParam, paramTableColumns)),
@@ -1193,7 +492,7 @@ func RunPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, user
 		},
 		{
 			name:           "invoke list_tables all tables simple output",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": "", "output_format": "simple"}`)),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s,%s]", getSimpleWant(tableNameAuth), getSimpleWant(tableNameParam)),
@@ -1201,49 +500,49 @@ func RunPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, user
 		},
 		{
 			name:           "invoke list_tables detailed output",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s"}`, tableNameAuth))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s]", getDetailedWant(tableNameAuth, authTableColumns)),
 		},
 		{
 			name:           "invoke list_tables simple output",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s", "output_format": "simple"}`, tableNameAuth))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s]", getSimpleWant(tableNameAuth)),
 		},
 		{
 			name:           "invoke list_tables with invalid output format",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": "", "output_format": "abcd"}`)),
 			wantStatusCode: http.StatusOK,
 			isAgentErr:     true,
 		},
 		{
 			name:           "invoke list_tables with malformed table_names parameter",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": 12345, "output_format": "detailed"}`)),
 			wantStatusCode: http.StatusOK,
 			isAgentErr:     true,
 		},
 		{
 			name:           "invoke list_tables with multiple table names",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s,%s"}`, tableNameParam, tableNameAuth))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s,%s]", getDetailedWant(tableNameAuth, authTableColumns), getDetailedWant(tableNameParam, paramTableColumns)),
 		},
 		{
 			name:           "invoke list_tables with non-existent table",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": "non_existent_table"}`)),
 			wantStatusCode: http.StatusOK,
 			want:           `[]`,
 		},
 		{
 			name:           "invoke list_tables with one existing and one non-existent table",
-			api:            "http://127.0.0.1:5000/api/tool/list_tables/invoke",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s,non_existent_table"}`, tableNameParam))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s]", getDetailedWant(tableNameParam, paramTableColumns)),
@@ -1251,7 +550,7 @@ func RunPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, user
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, respBytes := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, nil)
+			resp, respBytes := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBytes))
 			}
@@ -1360,8 +659,8 @@ func RunPostgresListViewsTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_views/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_views"
+			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
@@ -1440,8 +739,8 @@ func RunPostgresListSchemasTest(t *testing.T, ctx context.Context, pool *pgxpool
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_schemas/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_schemas"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -1491,10 +790,10 @@ func RunPostgresListSchemasTest(t *testing.T, ctx context.Context, pool *pgxpool
 }
 
 func RunPostgresDatabaseOverviewTest(t *testing.T, ctx context.Context, pool *pgxpool.Pool) {
-	const api = "http://127.0.0.1:5000/api/tool/database_overview/invoke"
+	toolName := "database_overview"
 	requestBody := bytes.NewBuffer([]byte(`{}`))
 
-	resp, respBody := RunRequest(t, http.MethodPost, api, requestBody, nil)
+	resp, respBody := RunLegacyApiRequestToMCP(t, toolName, requestBody)
 
 	if resp.StatusCode != http.StatusOK {
 		t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, http.StatusOK, string(respBody))
@@ -1702,8 +1001,8 @@ func RunPostgresListTriggersTest(t *testing.T, ctx context.Context, pool *pgxpoo
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_triggers/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_triggers"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -1872,9 +1171,9 @@ func RunPostgresListPublicationTablesTest(t *testing.T, ctx context.Context, poo
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_publication_tables/invoke"
+			toolName := "list_publication_tables"
 
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -1999,8 +1298,8 @@ func RunPostgresListActiveQueriesTest(t *testing.T, ctx context.Context, pool *p
 				time.Sleep(time.Duration(tc.waitSecsBeforeCheck) * time.Second)
 			}
 
-			const api = "http://127.0.0.1:5000/api/tool/list_active_queries/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_active_queries"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -2040,20 +1339,20 @@ func RunPostgresListActiveQueriesTest(t *testing.T, ctx context.Context, pool *p
 func RunPostgresListAvailableExtensionsTest(t *testing.T) {
 	invokeTcs := []struct {
 		name           string
-		api            string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 	}{
 		{
 			name:           "invoke list_available_extensions output",
-			api:            "http://127.0.0.1:5000/api/tool/list_available_extensions/invoke",
+			toolName:       "list_available_extensions",
 			wantStatusCode: http.StatusOK,
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
 		},
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, nil)
+			resp, respBody := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
 			}
@@ -2067,20 +1366,20 @@ func RunPostgresListAvailableExtensionsTest(t *testing.T) {
 func RunPostgresListInstalledExtensionsTest(t *testing.T) {
 	invokeTcs := []struct {
 		name           string
-		api            string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 	}{
 		{
 			name:           "invoke list_installed_extensions output",
-			api:            "http://127.0.0.1:5000/api/tool/list_installed_extensions/invoke",
+			toolName:       "list_installed_extensions",
 			wantStatusCode: http.StatusOK,
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
 		},
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, bodyBytes := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, nil)
+			resp, bodyBytes := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
@@ -2214,9 +1513,9 @@ func RunPostgresListIndexesTest(t *testing.T, ctx context.Context, pool *pgxpool
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_indexes/invoke"
+			toolName := "list_indexes"
 
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -2289,7 +1588,7 @@ func RunPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pgxpo
 
 	invokeTcs := []struct {
 		name           string
-		api            string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 		want           []map[string]any
@@ -2309,8 +1608,8 @@ func RunPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pgxpo
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_sequences/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_sequences"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -2345,20 +1644,20 @@ func RunPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pgxpo
 func RunPostgresListTableSpacesTest(t *testing.T) {
 	invokeTcs := []struct {
 		name           string
-		api            string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 	}{
 		{
 			name:           "invoke list_tablespaces output",
-			api:            "http://127.0.0.1:5000/api/tool/list_tablespaces/invoke",
+			toolName:       "list_tablespaces",
 			wantStatusCode: http.StatusOK,
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
 		},
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, respBody := RunRequest(t, http.MethodPost, tc.api, tc.requestBody, nil)
+			resp, respBody := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
 			}
@@ -2426,8 +1725,8 @@ func RunPostgresListPgSettingsTest(t *testing.T, ctx context.Context, pool *pgxp
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_pg_settings/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_pg_settings"
+			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
@@ -2531,8 +1830,8 @@ func RunPostgresListDatabaseStatsTest(t *testing.T, ctx context.Context, pool *p
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_database_stats/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_database_stats"
+			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
@@ -2716,9 +2015,9 @@ func RunPostgresListRolesTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_roles/invoke"
+			toolName := "list_roles"
 
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -2891,8 +2190,8 @@ func RunMySQLListTablesTest(t *testing.T, databaseName, tableNameParam, tableNam
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_tables/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_tables"
+			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
 			}
@@ -3068,8 +2367,8 @@ func RunMySQLListActiveQueriesTest(t *testing.T, ctx context.Context, pool *sql.
 				time.Sleep(time.Duration(tc.waitSecsBeforeCheck) * time.Second)
 			}
 
-			const api = "http://127.0.0.1:5000/api/tool/list_active_queries/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_active_queries"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -3289,8 +2588,8 @@ func RunMySQLListTablesMissingUniqueIndexes(t *testing.T, ctx context.Context, p
 				cleanups = append(cleanups, cleanup)
 			}
 
-			const api = "http://127.0.0.1:5000/api/tool/list_tables_missing_unique_indexes/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_tables_missing_unique_indexes"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -3404,8 +2703,8 @@ func RunMySQLListTableFragmentationTest(t *testing.T, databaseName, tableNamePar
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_table_fragmentation/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_table_fragmentation"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -3475,8 +2774,8 @@ func RunMySQLGetQueryPlanTest(t *testing.T, ctx context.Context, pool *sql.DB, d
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/get_query_plan/invoke"
-			resp, respBytes := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "get_query_plan"
+			resp, respBytes := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBytes))
 			}
@@ -3872,8 +3171,8 @@ func RunPostgresLongRunningTransactionsTest(t *testing.T, ctx context.Context, p
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/long_running_transactions/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "long_running_transactions"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -3944,8 +3243,8 @@ func RunPostgresReplicationStatsTest(t *testing.T, ctx context.Context, pool *pg
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/replication_stats/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "replication_stats"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -4062,8 +3361,8 @@ func RunPostgresGetColumnCardinalityTest(t *testing.T, ctx context.Context, pool
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/get_column_cardinality/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "get_column_cardinality"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -4196,8 +3495,8 @@ func RunPostgresListQueryStatsTest(t *testing.T, ctx context.Context, pool *pgxp
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_query_stats/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_query_stats"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -4401,8 +3700,8 @@ func RunPostgresListTableStatsTest(t *testing.T, ctx context.Context, pool *pgxp
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_table_stats/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_table_stats"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -4678,8 +3977,8 @@ func RunPostgresListStoredProcedureTest(t *testing.T, ctx context.Context, pool 
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_stored_procedure/invoke"
-			resp, respBody := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			toolName := "list_stored_procedure"
+			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
 			if resp.StatusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
 			}
@@ -5827,4 +5126,59 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 			}
 		})
 	}
+}
+
+func RunLegacyApiRequestToMCP(t *testing.T, toolName string, requestBody io.Reader) (*http.Response, []byte) {
+	params := map[string]any{
+		"name": toolName,
+	}
+	mcpReq := jsonrpc.JSONRPCRequest{
+		Jsonrpc: "2.0",
+		Id:      1,
+	}
+	if requestBody != nil {
+		reqBytesRaw, _ := io.ReadAll(requestBody)
+		if len(reqBytesRaw) > 0 && string(reqBytesRaw) != "{}" {
+			var args map[string]any
+			if err := json.Unmarshal(reqBytesRaw, &args); err == nil {
+				params["arguments"] = args
+			} else {
+				params["arguments"] = map[string]any{}
+			}
+		} else {
+			params["arguments"] = map[string]any{}
+		}
+	} else {
+		params["arguments"] = map[string]any{}
+	}
+	mcpReq.Params = params
+	reqMarshal, _ := json.Marshal(mcpReq)
+	resp, mcpBytes := RunRequest(t, http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqMarshal), nil)
+
+	var mcpResp struct {
+		Result struct {
+			Content []struct {
+				Text string `json:"text"`
+			} `json:"content"`
+			IsError bool `json:"isError"`
+		} `json:"result"`
+		Error any `json:"error"`
+	}
+	if err := json.Unmarshal(mcpBytes, &mcpResp); err != nil {
+		return resp, mcpBytes
+	}
+
+	if mcpResp.Result.IsError || mcpResp.Error != nil {
+		return resp, []byte(`{"error":"simulated agent error or framework error"}`)
+	}
+
+	textVal := ""
+	if len(mcpResp.Result.Content) > 0 {
+		textVal = mcpResp.Result.Content[0].Text
+	}
+
+	textBytes, _ := json.Marshal(textVal)
+	legacyBody := []byte(`{"result":` + string(textBytes) + `}`)
+
+	return resp, legacyBody
 }

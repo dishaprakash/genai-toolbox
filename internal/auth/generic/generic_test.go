@@ -100,7 +100,7 @@ func TestGetClaimsFromHeader(t *testing.T) {
 		Type:                   "generic",
 		Audience:               "my-audience",
 		McpEnabled:             false,
-		AuthorizationServerUrl: server.URL,
+		AuthorizationServer: server.URL,
 		ScopesRequired:         []string{"read:files"},
 	}
 

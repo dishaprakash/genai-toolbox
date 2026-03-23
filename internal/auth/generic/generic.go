@@ -19,6 +19,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -41,7 +42,7 @@ type Config struct {
 	Type                   string   `yaml:"type" validate:"required"`
 	Audience               string   `yaml:"audience" validate:"required"`
 	McpEnabled             bool     `yaml:"mcpEnabled"`
-	AuthorizationServerUrl string   `yaml:"AuthorizationServerUrl" validate:"required"`
+	AuthorizationServer string   `yaml:"authorizationServer" validate:"required"`
 	ScopesRequired         []string `yaml:"scopesRequired"`
 }
 
@@ -53,7 +54,7 @@ func (cfg Config) AuthServiceConfigType() string {
 // Initialize a generic auth service
 func (cfg Config) Initialize() (auth.AuthService, error) {
 	// Discover the JWKS URL from the OIDC configuration endpoint
-	jwksURL, err := discoverJWKSURL(cfg.AuthorizationServerUrl)
+	jwksURL, err := discoverJWKSURL(cfg.AuthorizationServer)
 	if err != nil {
 		return nil, fmt.Errorf("failed to discover JWKS URL: %w", err)
 	}
@@ -95,13 +96,16 @@ func safeDialer() *net.Dialer {
 
 var AllowInsecureForTest = false
 
-func discoverJWKSURL(AuthorizationServerUrl string) (string, error) {
-	u, err := url.Parse(AuthorizationServerUrl)
-	if err != nil || (u.Scheme != "https" && !AllowInsecureForTest) {
-		return "", fmt.Errorf("invalid or insecure auth URL: must be HTTPS")
+func discoverJWKSURL(AuthorizationServer string) (string, error) {
+	u, err := url.Parse(AuthorizationServer)
+	if err != nil {
+		return "", fmt.Errorf("invalid auth URL")
+	}
+	if u.Scheme != "https" {
+		log.Printf("WARNING: HTTP instead of HTTPS is being used for AuthorizationServer: %s", AuthorizationServer)
 	}
 
-	oidcConfigURL, err := url.JoinPath(AuthorizationServerUrl, ".well-known/openid-configuration")
+	oidcConfigURL, err := url.JoinPath(AuthorizationServer, ".well-known/openid-configuration")
 	if err != nil {
 		return "", err
 	}
@@ -156,8 +160,11 @@ func discoverJWKSURL(AuthorizationServerUrl string) (string, error) {
 
 	// Sanitize the resulting JWKS URI before returning it
 	parsedJWKS, err := url.Parse(config.JWKSURI)
-	if err != nil || (parsedJWKS.Scheme != "https" && !AllowInsecureForTest) {
-		return "", fmt.Errorf("malicious jwks_uri detected")
+	if err != nil {
+		return "", fmt.Errorf("invalid jwks_uri detected")
+	}
+	if parsedJWKS.Scheme != "https" {
+		log.Printf("WARNING: HTTP instead of HTTPS is being used for JWKS URI: %s", config.JWKSURI)
 	}
 
 	return config.JWKSURI, nil
@@ -229,11 +236,5 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 		return nil, fmt.Errorf("audience validation failed: expected %s, got %v", a.Audience, aud)
 	}
 
-	// Return claims dynamically
-	claimsMap := make(map[string]any)
-	for k, v := range claims {
-		claimsMap[k] = v
-	}
-
-	return claimsMap, nil
+	return claims, nil
 }

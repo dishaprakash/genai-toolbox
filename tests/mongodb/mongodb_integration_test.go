@@ -23,6 +23,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 	"testing"
 	"time"
 
@@ -51,6 +52,32 @@ func getMongoDBVars(t *testing.T) map[string]any {
 		"type": MongoDbSourceType,
 		"uri":  MongoDbUri,
 	}
+}
+
+func runMongodbMcpCall(t *testing.T, toolName string, argsRaw []byte) (*http.Response, []byte) {
+	var args map[string]any
+	if len(argsRaw) > 0 {
+		_ = json.Unmarshal(argsRaw, &args)
+	}
+	mcpReq := map[string]any{
+		"jsonrpc": "2.0",
+		"id":      "mongodb-test",
+		"method":  "tools/call",
+		"params": map[string]any{
+			"name":      toolName,
+			"arguments": args,
+		},
+	}
+	reqBytes, _ := json.Marshal(mcpReq)
+	req, _ := http.NewRequest(http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqBytes))
+	req.Header.Add("Content-type", "application/json")
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		t.Fatalf("unable to send request: %s", err)
+	}
+	bodyBytes, _ := io.ReadAll(resp.Body)
+	resp.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+	return resp, bodyBytes
 }
 
 func initMongoDbDatabase(ctx context.Context, uri, database string) (*mongo.Database, error) {
@@ -167,38 +194,34 @@ func runToolDeleteInvokeTest(t *testing.T, delete1Want, deleteManyWant string) {
 	for _, tc := range invokeTcs {
 
 		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			req, err := http.NewRequest(http.MethodPost, tc.api, tc.requestBody)
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
-			}
-			req.Header.Add("Content-type", "application/json")
-			for k, v := range tc.requestHeader {
-				req.Header.Add(k, v)
-			}
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
+			toolName := strings.TrimPrefix(tc.name, "invoke ")
+			resp, bodyBytes := runMongodbMcpCall(t, toolName, func() []byte { b, _ := io.ReadAll(tc.requestBody); return b }())
 
 			if resp.StatusCode != http.StatusOK {
 				if tc.isErr {
 					return
 				}
-				bodyBytes, _ := io.ReadAll(resp.Body)
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
 			// Check response body
 			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
+			err := json.Unmarshal(bodyBytes, &body)
 			if err != nil {
-				t.Fatalf("error parsing response body")
+				t.Fatalf("error parsing response body: %s", err)
 			}
 
 			resultObj, ok := body["result"].(map[string]interface{})
 			if !ok {
+				if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+					if tc.isErr {
+						errStr := fmt.Sprintf(`{"error":"%v"}`, errMap["message"])
+						if errStr == tc.want {
+							return
+						}
+					}
+					t.Fatalf("mcp returned error: %v", errMap)
+				}
 				t.Fatalf("unable to find result object in response body")
 			}
 			contentList, ok := resultObj["content"].([]interface{})
@@ -252,38 +275,34 @@ func runToolInsertInvokeTest(t *testing.T, insert1Want, insertManyWant string) {
 	for _, tc := range invokeTcs {
 
 		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			req, err := http.NewRequest(http.MethodPost, tc.api, tc.requestBody)
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
-			}
-			req.Header.Add("Content-type", "application/json")
-			for k, v := range tc.requestHeader {
-				req.Header.Add(k, v)
-			}
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
+			toolName := strings.TrimPrefix(tc.name, "invoke ")
+			resp, bodyBytes := runMongodbMcpCall(t, toolName, func() []byte { b, _ := io.ReadAll(tc.requestBody); return b }())
 
 			if resp.StatusCode != http.StatusOK {
 				if tc.isErr {
 					return
 				}
-				bodyBytes, _ := io.ReadAll(resp.Body)
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
 			// Check response body
 			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
+			err := json.Unmarshal(bodyBytes, &body)
 			if err != nil {
-				t.Fatalf("error parsing response body")
+				t.Fatalf("error parsing response body: %s", err)
 			}
 
 			resultObj, ok := body["result"].(map[string]interface{})
 			if !ok {
+				if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+					if tc.isErr {
+						errStr := fmt.Sprintf(`{"error":"%v"}`, errMap["message"])
+						if errStr == tc.want {
+							return
+						}
+					}
+					t.Fatalf("mcp returned error: %v", errMap)
+				}
 				t.Fatalf("unable to find result object in response body")
 			}
 			contentList, ok := resultObj["content"].([]interface{})
@@ -337,38 +356,34 @@ func runToolUpdateInvokeTest(t *testing.T, update1Want, updateManyWant string) {
 	for _, tc := range invokeTcs {
 
 		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			req, err := http.NewRequest(http.MethodPost, tc.api, tc.requestBody)
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
-			}
-			req.Header.Add("Content-type", "application/json")
-			for k, v := range tc.requestHeader {
-				req.Header.Add(k, v)
-			}
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
+			toolName := strings.TrimPrefix(tc.name, "invoke ")
+			resp, bodyBytes := runMongodbMcpCall(t, toolName, func() []byte { b, _ := io.ReadAll(tc.requestBody); return b }())
 
 			if resp.StatusCode != http.StatusOK {
 				if tc.isErr {
 					return
 				}
-				bodyBytes, _ := io.ReadAll(resp.Body)
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
 			// Check response body
 			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
+			err := json.Unmarshal(bodyBytes, &body)
 			if err != nil {
-				t.Fatalf("error parsing response body")
+				t.Fatalf("error parsing response body: %s", err)
 			}
 
 			resultObj, ok := body["result"].(map[string]interface{})
 			if !ok {
+				if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+					if tc.isErr {
+						errStr := fmt.Sprintf(`{"error":"%v"}`, errMap["message"])
+						if errStr == tc.want {
+							return
+						}
+					}
+					t.Fatalf("mcp returned error: %v", errMap)
+				}
 				t.Fatalf("unable to find result object in response body")
 			}
 			contentList, ok := resultObj["content"].([]interface{})
@@ -438,38 +453,34 @@ func runToolAggregateInvokeTest(t *testing.T, aggregate1Want string, aggregateMa
 	for _, tc := range invokeTcs {
 
 		t.Run(tc.name, func(t *testing.T) {
-			// Send Tool invocation request
-			req, err := http.NewRequest(http.MethodPost, tc.api, tc.requestBody)
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
-			}
-			req.Header.Add("Content-type", "application/json")
-			for k, v := range tc.requestHeader {
-				req.Header.Add(k, v)
-			}
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
+			toolName := strings.TrimPrefix(tc.name, "invoke ")
+			resp, bodyBytes := runMongodbMcpCall(t, toolName, func() []byte { b, _ := io.ReadAll(tc.requestBody); return b }())
 
 			if resp.StatusCode != http.StatusOK {
 				if tc.isErr {
 					return
 				}
-				bodyBytes, _ := io.ReadAll(resp.Body)
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
 
 			// Check response body
 			var body map[string]interface{}
-			err = json.NewDecoder(resp.Body).Decode(&body)
+			err := json.Unmarshal(bodyBytes, &body)
 			if err != nil {
-				t.Fatalf("error parsing response body")
+				t.Fatalf("error parsing response body: %s", err)
 			}
 
 			resultObj, ok := body["result"].(map[string]interface{})
 			if !ok {
+				if errMap, hasErr := body["error"].(map[string]interface{}); hasErr {
+					if tc.isErr {
+						errStr := fmt.Sprintf(`{"error":"%v"}`, errMap["message"])
+						if errStr == tc.want {
+							return
+						}
+					}
+					t.Fatalf("mcp returned error: %v", errMap)
+				}
 				t.Fatalf("unable to find result object in response body")
 			}
 			contentList, ok := resultObj["content"].([]interface{})

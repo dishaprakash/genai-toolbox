@@ -20,10 +20,8 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"net"
 	"net/http"
 	"net/url"
-	"syscall"
 	"time"
 
 	"github.com/MicahParks/keyfunc/v3"
@@ -72,29 +70,7 @@ func (cfg Config) Initialize() (auth.AuthService, error) {
 	return a, nil
 }
 
-func safeDialer() *net.Dialer {
-	return &net.Dialer{
-		Timeout:   5 * time.Second,
-		KeepAlive: 30 * time.Second,
-		Control: func(network, address string, c syscall.RawConn) error {
-			host, _, err := net.SplitHostPort(address)
-			if err != nil {
-				return err
-			}
-			ip := net.ParseIP(host)
-			if ip == nil {
-				return fmt.Errorf("invalid IP address")
-			}
-			// Block private, loopback, and link-local
-			if ip.IsLoopback() || ip.IsPrivate() || ip.IsLinkLocalUnicast() || ip.IsLinkLocalMulticast() || ip.IsUnspecified() {
-				return fmt.Errorf("connection to internal/private IP blocked: %s", ip)
-			}
-			return nil
-		},
-	}
-}
 
-var AllowInsecureForTest = false
 
 func discoverJWKSURL(AuthorizationServer string) (string, error) {
 	u, err := url.Parse(AuthorizationServer)
@@ -114,7 +90,6 @@ func discoverJWKSURL(AuthorizationServer string) (string, error) {
 	client := &http.Client{
 		Timeout: 10 * time.Second,
 		Transport: &http.Transport{
-			DialContext:           safeDialer().DialContext,
 			ForceAttemptHTTP2:     true,
 			MaxIdleConns:          10,
 			IdleConnTimeout:       90 * time.Second,
@@ -127,9 +102,6 @@ func discoverJWKSURL(AuthorizationServer string) (string, error) {
 		},
 	}
 
-	if AllowInsecureForTest {
-		client.Transport.(*http.Transport).DialContext = nil
-	}
 
 	resp, err := client.Get(oidcConfigURL)
 	if err != nil {

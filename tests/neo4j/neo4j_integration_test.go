@@ -467,7 +467,7 @@ func TestNeo4jToolEndpoints(t *testing.T) {
 				// Handle tool errors represented via MCP protocol first
 				if tc.wantErrorSubstring != "" {
 					var errMsg string
-					
+
 					// First, try standard protocol error
 					errMap, hasErr := body["error"].(map[string]interface{})
 					if hasErr {
@@ -486,11 +486,11 @@ func TestNeo4jToolEndpoints(t *testing.T) {
 							}
 						}
 					}
-					
+
 					if errMsg == "" {
 						t.Fatalf("expected error containing %q but no error found in body: %v", tc.wantErrorSubstring, body)
 					}
-					
+
 					if !strings.Contains(errMsg, tc.wantErrorSubstring) {
 						t.Fatalf("response payload %q does not contain expected error %q", errMsg, tc.wantErrorSubstring)
 					}

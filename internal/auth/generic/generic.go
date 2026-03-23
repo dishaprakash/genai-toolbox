@@ -121,16 +121,14 @@ func (a AuthService) GetName() string {
 
 // Verifies generic JWT access token inside the Authorization header
 func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (map[string]any, error) {
-	authHeader := h.Get("Authorization")
-	if authHeader == "" {
-		return nil, nil // Return nil, nil if no authorization header is found
+	if a.McpEnabled {
+		return nil, nil
 	}
 
-	parts := strings.Split(authHeader, " ")
-	if len(parts) != 2 || strings.ToLower(parts[0]) != "bearer" {
-		return nil, fmt.Errorf("authorization header format must be Bearer {token}")
+	tokenString := h.Get(a.Name + "_token")
+	if tokenString == "" {
+		return nil, nil
 	}
-	tokenString := parts[1]
 
 	// Parse and verify the token signature
 	token, err := jwt.Parse(tokenString, a.kf.Keyfunc)
@@ -161,45 +159,10 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 		}
 	}
 
-	// Some IDPs use 'client_id' instead of 'aud' or put it as a single string, checking that if aud not found or not matched
-	if !isAudValid {
-		if clientIDClaim, ok := claims["client_id"].(string); ok && clientIDClaim == a.Audience {
-			isAudValid = true
-		} else if audStr, ok := claims["aud"].(string); ok && audStr == a.Audience {
-			isAudValid = true
-		}
-	}
-
 	if !isAudValid {
 		return nil, fmt.Errorf("audience validation failed: expected %s, got %v", a.Audience, aud)
 	}
 
-	// Validate 'scope' claim against ScopesRequired
-	if len(a.ScopesRequired) > 0 {
-		var tokenScopes []string
-
-		switch s := claims["scope"].(type) {
-		case string:
-			tokenScopes = strings.Split(s, " ") // space-separated string is common
-		case []interface{}:
-			for _, v := range s {
-				if str, ok := v.(string); ok {
-					tokenScopes = append(tokenScopes, str)
-				}
-			}
-		}
-
-		scopeMap := make(map[string]bool)
-		for _, s := range tokenScopes {
-			scopeMap[s] = true
-		}
-
-		for _, requiredScope := range a.ScopesRequired {
-			if !scopeMap[requiredScope] {
-				return nil, fmt.Errorf("missing required scope: %s", requiredScope)
-			}
-		}
-	}
 
 	// Return claims dynamically
 	claimsMap := make(map[string]any)

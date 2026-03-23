@@ -401,7 +401,7 @@ func RunMCPToolCallMethod(t *testing.T, myFailToolWant, select1Want string, opti
 				headers[key] = value
 			}
 
-			httpResponse, respBody := RunLegacyApiRequestToMCP(t, tc.toolName, bytes.NewBuffer(reqMarshal))
+			httpResponse, respBody := RunRequest(t, http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqMarshal), headers)
 
 			// Check status code
 			if httpResponse.StatusCode != tc.wantStatusCode {
@@ -550,32 +550,8 @@ func RunPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, user
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, respBytes := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBytes))
-			}
-
+			resultString := RunNativeMCPAssertion(t, tc.toolName, tc.requestBody, tc.wantStatusCode, tc.isAgentErr)
 			if tc.wantStatusCode == http.StatusOK {
-
-				var bodyWrapper map[string]json.RawMessage
-
-				if err := json.Unmarshal(respBytes, &bodyWrapper); err != nil {
-					t.Fatalf("error parsing response wrapper: %s, body: %s", err, string(respBytes))
-				}
-
-				resultJSON, ok := bodyWrapper["result"]
-				if !ok {
-					t.Fatal("unable to find 'result' in response body")
-				}
-
-				if tc.isAgentErr {
-					return
-				}
-
-				var resultString string
-				if err := json.Unmarshal(resultJSON, &resultString); err != nil {
-					t.Fatalf("'result' is not a JSON-encoded string: %s", err)
-				}
 
 				var got, want []any
 
@@ -660,25 +636,12 @@ func RunPostgresListViewsTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_views"
-			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(body, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got, want any
@@ -740,24 +703,12 @@ func RunPostgresListSchemasTest(t *testing.T, ctx context.Context, pool *pgxpool
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_schemas"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -793,23 +744,7 @@ func RunPostgresDatabaseOverviewTest(t *testing.T, ctx context.Context, pool *pg
 	toolName := "database_overview"
 	requestBody := bytes.NewBuffer([]byte(`{}`))
 
-	resp, respBody := RunLegacyApiRequestToMCP(t, toolName, requestBody)
-
-	if resp.StatusCode != http.StatusOK {
-		t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, http.StatusOK, string(respBody))
-	}
-
-	var bodyWrapper struct {
-		Result json.RawMessage `json:"result"`
-	}
-	if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-		t.Fatalf("error decoding response wrapper: %v, body: %s", err, string(respBody))
-	}
-
-	var resultString string
-	if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-		resultString = string(bodyWrapper.Result)
-	}
+	resultString := RunNativeMCPAssertion(t, toolName, requestBody, http.StatusOK, false)
 
 	var got []map[string]any
 	if err := json.Unmarshal([]byte(resultString), &got); err != nil {
@@ -1002,24 +937,12 @@ func RunPostgresListTriggersTest(t *testing.T, ctx context.Context, pool *pgxpoo
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_triggers"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -1173,24 +1096,12 @@ func RunPostgresListPublicationTablesTest(t *testing.T, ctx context.Context, poo
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_publication_tables"
 
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -1299,24 +1210,12 @@ func RunPostgresListActiveQueriesTest(t *testing.T, ctx context.Context, pool *p
 			}
 
 			toolName := "list_active_queries"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got any
@@ -1352,11 +1251,8 @@ func RunPostgresListAvailableExtensionsTest(t *testing.T) {
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, respBody := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
-			}
-
+			resultString := RunNativeMCPAssertion(t, tc.toolName, tc.requestBody, tc.wantStatusCode, false)
+			_ = resultString
 			// Intentionally not adding the output check as output depends on the postgres instance used where the the functional test runs.
 			// Adding the check will make the test flaky.
 		})
@@ -1379,11 +1275,8 @@ func RunPostgresListInstalledExtensionsTest(t *testing.T) {
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, bodyBytes := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
-			}
-
+			resultString := RunNativeMCPAssertion(t, tc.toolName, tc.requestBody, tc.wantStatusCode, false)
+			_ = resultString
 			// Intentionally not adding the output check as output depends on the postgres instance used where the the functional test runs.
 			// Adding the check will make the test flaky.
 		})
@@ -1515,24 +1408,12 @@ func RunPostgresListIndexesTest(t *testing.T, ctx context.Context, pool *pgxpool
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_indexes"
 
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -1609,24 +1490,12 @@ func RunPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pgxpo
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_sequences"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -1657,11 +1526,8 @@ func RunPostgresListTableSpacesTest(t *testing.T) {
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			resp, respBody := RunLegacyApiRequestToMCP(t, tc.toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(respBody))
-			}
-
+			resultString := RunNativeMCPAssertion(t, tc.toolName, tc.requestBody, tc.wantStatusCode, false)
+			_ = resultString
 			// Intentionally not adding the output check as output depends on the postgres instance used where the the functional test runs.
 			// Adding the check will make the test flaky.
 		})
@@ -1726,25 +1592,12 @@ func RunPostgresListPgSettingsTest(t *testing.T, ctx context.Context, pool *pgxp
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_pg_settings"
-			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(body, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got, want any
@@ -1831,21 +1684,9 @@ func RunPostgresListDatabaseStatsTest(t *testing.T, ctx context.Context, pool *p
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_database_stats"
-			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
-			}
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(body, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 
 			var got []map[string]interface{}
@@ -2017,24 +1858,12 @@ func RunPostgresListRolesTest(t *testing.T, ctx context.Context, pool *pgxpool.P
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_roles"
 
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -2191,24 +2020,12 @@ func RunMySQLListTablesTest(t *testing.T, databaseName, tableNameParam, tableNam
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_tables"
-			resp, body := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(body))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(body, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got any
@@ -2368,24 +2185,12 @@ func RunMySQLListActiveQueriesTest(t *testing.T, ctx context.Context, pool *sql.
 			}
 
 			toolName := "list_active_queries"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got any
@@ -2589,24 +2394,12 @@ func RunMySQLListTablesMissingUniqueIndexes(t *testing.T, ctx context.Context, p
 			}
 
 			toolName := "list_tables_missing_unique_indexes"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got any
@@ -2704,24 +2497,12 @@ func RunMySQLListTableFragmentationTest(t *testing.T, databaseName, tableNamePar
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_table_fragmentation"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got any
@@ -2775,32 +2556,12 @@ func RunMySQLGetQueryPlanTest(t *testing.T, ctx context.Context, pool *sql.DB, d
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "get_query_plan"
-			resp, respBytes := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBytes))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper map[string]json.RawMessage
-
-			if err := json.Unmarshal(respBytes, &bodyWrapper); err != nil {
-				t.Fatalf("error parsing response wrapper: %s, body: %s", err, string(respBytes))
-			}
-
-			resultJSON, ok := bodyWrapper["result"]
-			if !ok {
-				t.Fatal("unable to find 'result' in response body")
-			}
-
-			var resultString string
-			if err := json.Unmarshal(resultJSON, &resultString); err != nil {
-				if string(resultJSON) == "null" {
-					resultString = "null"
-				} else {
-					t.Fatalf("'result' is not a JSON-encoded string: %s", err)
-				}
 			}
 
 			var got map[string]any
@@ -3172,24 +2933,12 @@ func RunPostgresLongRunningTransactionsTest(t *testing.T, ctx context.Context, p
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "long_running_transactions"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []transactionDetails
@@ -3244,24 +2993,12 @@ func RunPostgresReplicationStatsTest(t *testing.T, ctx context.Context, pool *pg
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "replication_stats"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []replicationStats
@@ -3362,24 +3099,12 @@ func RunPostgresGetColumnCardinalityTest(t *testing.T, ctx context.Context, pool
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "get_column_cardinality"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -3496,24 +3221,12 @@ func RunPostgresListQueryStatsTest(t *testing.T, ctx context.Context, pool *pgxp
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_query_stats"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []map[string]any
@@ -3701,24 +3414,12 @@ func RunPostgresListTableStatsTest(t *testing.T, ctx context.Context, pool *pgxp
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_table_stats"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []tableStatsDetails
@@ -3978,24 +3679,12 @@ func RunPostgresListStoredProcedureTest(t *testing.T, ctx context.Context, pool 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
 			toolName := "list_stored_procedure"
-			resp, respBody := RunLegacyApiRequestToMCP(t, toolName, tc.requestBody)
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("wrong status code: got %d, want %d, body: %s", resp.StatusCode, tc.wantStatusCode, string(respBody))
+			resultString := RunNativeMCPAssertion(t, toolName, tc.requestBody, tc.wantStatusCode, false)
+			if false {
+				return
 			}
 			if tc.wantStatusCode != http.StatusOK {
 				return
-			}
-
-			var bodyWrapper struct {
-				Result json.RawMessage `json:"result"`
-			}
-			if err := json.Unmarshal(respBody, &bodyWrapper); err != nil {
-				t.Fatalf("error decoding response wrapper: %v", err)
-			}
-
-			var resultString string
-			if err := json.Unmarshal(bodyWrapper.Result, &resultString); err != nil {
-				resultString = string(bodyWrapper.Result)
 			}
 
 			var got []storedProcedureDetails
@@ -5126,61 +4815,6 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 			}
 		})
 	}
-}
-
-func RunLegacyApiRequestToMCP(t *testing.T, toolName string, requestBody io.Reader) (*http.Response, []byte) {
-	params := map[string]any{
-		"name": toolName,
-	}
-	mcpReq := jsonrpc.JSONRPCRequest{
-		Jsonrpc: "2.0",
-		Id:      1,
-	}
-	if requestBody != nil {
-		reqBytesRaw, _ := io.ReadAll(requestBody)
-		if len(reqBytesRaw) > 0 && string(reqBytesRaw) != "{}" {
-			var args map[string]any
-			if err := json.Unmarshal(reqBytesRaw, &args); err == nil {
-				params["arguments"] = args
-			} else {
-				params["arguments"] = map[string]any{}
-			}
-		} else {
-			params["arguments"] = map[string]any{}
-		}
-	} else {
-		params["arguments"] = map[string]any{}
-	}
-	mcpReq.Params = params
-	reqMarshal, _ := json.Marshal(mcpReq)
-	resp, mcpBytes := RunRequest(t, http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqMarshal), nil)
-
-	var mcpResp struct {
-		Result struct {
-			Content []struct {
-				Text string `json:"text"`
-			} `json:"content"`
-			IsError bool `json:"isError"`
-		} `json:"result"`
-		Error any `json:"error"`
-	}
-	if err := json.Unmarshal(mcpBytes, &mcpResp); err != nil {
-		return resp, mcpBytes
-	}
-
-	if mcpResp.Result.IsError || mcpResp.Error != nil {
-		return resp, []byte(`{"error":"simulated agent error or framework error"}`)
-	}
-
-	textVal := ""
-	if len(mcpResp.Result.Content) > 0 {
-		textVal = mcpResp.Result.Content[0].Text
-	}
-
-	textBytes, _ := json.Marshal(textVal)
-	legacyBody := []byte(`{"result":` + string(textBytes) + `}`)
-
-	return resp, legacyBody
 }
 
 // RunNativeMCPAssertion invokes the MCP transport with native arguments, unpacks McpResponse, and enforces agent error validity.

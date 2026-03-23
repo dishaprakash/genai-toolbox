@@ -1007,8 +1007,6 @@ The Public API includes the Toolbox Server (CLI, configuration manifests, and pr
 
 For more details, see our [Full Versioning Policy](https://googleapis.github.io/genai-toolbox/about/versioning/).
 
----
-
 ## Contributing
 
 Contributions are welcome. Please, see the [CONTRIBUTING](CONTRIBUTING.md) guide to get started. For technical details on setting up your development environment, see the [DEVELOPER](DEVELOPER.md) guide.

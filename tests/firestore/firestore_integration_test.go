@@ -796,7 +796,7 @@ func runFirestoreUpdateDocumentTest(t *testing.T, collectionName string, docID s
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			got := tests.RunNativeMCPAssertion(t, "firestore-update-document", tc.requestBody, http.StatusOK, tc.isErr)
+			got := tests.RunNativeMCPAssertion(t, "firestore-update-doc", tc.requestBody, http.StatusOK, tc.isErr)
 			if tc.isErr {
 				return
 			}

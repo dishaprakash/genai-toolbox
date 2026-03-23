@@ -85,7 +85,7 @@ func safeDialer() *net.Dialer {
 				return fmt.Errorf("invalid IP address")
 			}
 			// Block private, loopback, and link-local
-			if ip.IsLoopback() || ip.IsPrivate() || ip.IsLinkLocalUnicast() || ip.IsLinkLocalMulticast() {
+			if ip.IsLoopback() || ip.IsPrivate() || ip.IsLinkLocalUnicast() || ip.IsLinkLocalMulticast() || ip.IsUnspecified() {
 				return fmt.Errorf("connection to internal/private IP blocked: %s", ip)
 			}
 			return nil

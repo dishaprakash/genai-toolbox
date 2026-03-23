@@ -398,8 +398,9 @@ func runGenericAuthInvokeTest(t *testing.T, privateKey *rsa.PrivateKey) {
 
 		var body map[string]interface{}
 		_ = json.NewDecoder(resp.Body).Decode(&body)
-		resultStr, _ := body["result"].(string)
-		if !strings.Contains(resultStr, "unauthorized") && !strings.Contains(resultStr, "missing") {
+		errorStr, _ := body["error"].(string)
+		statusStr, _ := body["status"].(string)
+		if !strings.Contains(strings.ToLower(errorStr), "not authorized") && !strings.Contains(strings.ToLower(statusStr), "unauthorized") {
 			bodyBytes, _ := json.Marshal(body)
 			t.Fatalf("expected unauthorized error, got: %s", string(bodyBytes))
 		}

@@ -4812,7 +4812,17 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 
 			got := "null" // default when no content is present (like dropping tables)
 			if len(mcpResp.Result.Content) > 0 {
-				got = mcpResp.Result.Content[0].Text
+				var combined []string
+				for _, c := range mcpResp.Result.Content {
+					combined = append(combined, c.Text)
+				}
+				joined := strings.Join(combined, ",")
+				joined = strings.TrimSpace(joined)
+				if len(combined) == 1 && strings.HasPrefix(joined, "[") && strings.HasSuffix(joined, "]") {
+					got = joined
+				} else {
+					got = "[" + joined + "]"
+				}
 			}
 
 			if got != tc.want {
@@ -4877,9 +4887,14 @@ func RunNativeMCPAssertion(t *testing.T, toolName string, requestBody io.Reader,
 		t.Fatalf("no content returned by MCP")
 	}
 
-	var allContent string
+	var combined []string
 	for _, c := range mcpResp.Result.Content {
-		allContent += c.Text
+		combined = append(combined, c.Text)
 	}
-	return allContent
+	joined := strings.Join(combined, ",")
+	joined = strings.TrimSpace(joined)
+	if len(combined) == 1 && strings.HasPrefix(joined, "[") && strings.HasSuffix(joined, "]") {
+		return joined
+	}
+	return "[" + joined + "]"
 }

@@ -41,7 +41,7 @@ type Config struct {
 	Type                   string   `yaml:"type" validate:"required"`
 	Audience               string   `yaml:"audience" validate:"required"`
 	McpEnabled             bool     `yaml:"mcpEnabled"`
-	AuthorizationServerURL string   `yaml:"authorizationServerUrl" validate:"required"`
+	AuthorizationServerUrl string   `yaml:"AuthorizationServerUrl" validate:"required"`
 	ScopesRequired         []string `yaml:"scopesRequired"`
 }
 
@@ -52,20 +52,16 @@ func (cfg Config) AuthServiceConfigType() string {
 
 // Initialize a generic auth service
 func (cfg Config) Initialize() (auth.AuthService, error) {
-	var kf keyfunc.Keyfunc
+	// Discover the JWKS URL from the OIDC configuration endpoint
+	jwksURL, err := discoverJWKSURL(cfg.AuthorizationServerUrl)
+	if err != nil {
+		return nil, fmt.Errorf("failed to discover JWKS URL: %w", err)
+	}
 
-	if cfg.AuthorizationServerURL != "" {
-		// Discover the JWKS URL from the OIDC configuration endpoint
-		jwksURL, err := discoverJWKSURL(cfg.AuthorizationServerURL)
-		if err != nil {
-			return nil, fmt.Errorf("failed to discover JWKS URL: %w", err)
-		}
-
-		// Create the keyfunc to fetch and cache the JWKS in the background
-		kf, err = keyfunc.NewDefault([]string{jwksURL})
-		if err != nil {
-			return nil, fmt.Errorf("failed to create keyfunc from JWKS URL %s: %w", jwksURL, err)
-		}
+	// Create the keyfunc to fetch and cache the JWKS in the background
+	kf, err := keyfunc.NewDefault([]string{jwksURL})
+	if err != nil {
+		return nil, fmt.Errorf("failed to create keyfunc from JWKS URL %s: %w", jwksURL, err)
 	}
 
 	a := &AuthService{
@@ -99,13 +95,13 @@ func safeDialer() *net.Dialer {
 
 var AllowInsecureForTest = false
 
-func discoverJWKSURL(authorizationServerURL string) (string, error) {
-	u, err := url.Parse(authorizationServerURL)
+func discoverJWKSURL(AuthorizationServerUrl string) (string, error) {
+	u, err := url.Parse(AuthorizationServerUrl)
 	if err != nil || (u.Scheme != "https" && !AllowInsecureForTest) {
 		return "", fmt.Errorf("invalid or insecure auth URL: must be HTTPS")
 	}
 
-	oidcConfigURL, err := url.JoinPath(authorizationServerURL, ".well-known/openid-configuration")
+	oidcConfigURL, err := url.JoinPath(AuthorizationServerUrl, ".well-known/openid-configuration")
 	if err != nil {
 		return "", err
 	}
@@ -201,21 +197,12 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 	}
 
 	// Parse and verify the token signature
-	var token *jwt.Token
-	var err error
-
-	if a.kf != nil {
-		token, err = jwt.Parse(tokenString, a.kf.Keyfunc)
-	} else {
-		// If no keyfunc is configured (AuthURL was empty), we parse without verifying signature
-		token, _, err = new(jwt.Parser).ParseUnverified(tokenString, jwt.MapClaims{})
-	}
-
+	token, err := jwt.Parse(tokenString, a.kf.Keyfunc)
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse JWT token: %w", err)
+		return nil, fmt.Errorf("failed to parse and verify JWT token: %w", err)
 	}
 
-	if a.kf != nil && !token.Valid {
+	if !token.Valid {
 		return nil, fmt.Errorf("invalid JWT token")
 	}
 

@@ -57,7 +57,9 @@ func getMongoDBVars(t *testing.T) map[string]any {
 func runMongodbMcpCall(t *testing.T, toolName string, argsRaw []byte) (*http.Response, []byte) {
 	var args map[string]any
 	if len(argsRaw) > 0 {
-		_ = json.Unmarshal(argsRaw, &args)
+		if err := json.Unmarshal(argsRaw, &args); err != nil {
+			t.Fatalf("failed to decode JSON arguments for tool %q: %v\nRaw args: %q", toolName, err, string(argsRaw))
+		}
 	}
 	mcpReq := map[string]any{
 		"jsonrpc": "2.0",
@@ -228,20 +230,40 @@ func runToolDeleteInvokeTest(t *testing.T, delete1Want, deleteManyWant string) {
 			if !ok || len(contentList) == 0 {
 				t.Fatalf("unable to find content array in result")
 			}
-			firstContent, ok := contentList[0].(map[string]interface{})
-			if !ok {
-				t.Fatalf("content is not an object")
-			}
-			got, ok := firstContent["text"].(string)
-			if !ok {
-				t.Fatalf("unable to find text in content")
-			}
+			got := extractGotFromContentList(t, contentList)
 
 			if got != tc.want {
 				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
 			}
 		})
 	}
+}
+
+func extractGotFromContentList(t *testing.T, contentList []interface{}) string {
+	var got string
+	if len(contentList) == 1 {
+		firstContent, ok := contentList[0].(map[string]interface{})
+		if !ok {
+			t.Fatalf("content is not an object")
+		}
+		var o bool
+		got, o = firstContent["text"].(string)
+		if !o {
+			t.Fatalf("unable to find text in content")
+		}
+	} else {
+		var texts []string
+		for _, cRaw := range contentList {
+			cm, ok := cRaw.(map[string]interface{})
+			if ok {
+				if txt, isStr := cm["text"].(string); isStr {
+					texts = append(texts, txt)
+				}
+			}
+		}
+		got = "[" + strings.Join(texts, ",") + "]"
+	}
+	return got
 }
 
 func runToolInsertInvokeTest(t *testing.T, insert1Want, insertManyWant string) {
@@ -258,7 +280,7 @@ func runToolInsertInvokeTest(t *testing.T, insert1Want, insertManyWant string) {
 			name:          "invoke my-insert-one-tool",
 			api:           "http://127.0.0.1:5000/mcp",
 			requestHeader: map[string]string{},
-			requestBody:   bytes.NewBuffer([]byte(`{ "data" : "{ \"_id\": { \"$oid\": \"68666e1035bb36bf1b4d47fb\" },  \"id\" : 200 }" }"`)),
+			requestBody:   bytes.NewBuffer([]byte(`{ "data" : "{ \"_id\": { \"$oid\": \"68666e1035bb36bf1b4d47fb\" },  \"id\" : 200 }" }`)),
 			want:          insert1Want,
 			isErr:         false,
 		},
@@ -284,6 +306,7 @@ func runToolInsertInvokeTest(t *testing.T, insert1Want, insertManyWant string) {
 				}
 				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
 			}
+			t.Logf("RAW MCP RESPONSE: %s", string(bodyBytes))
 
 			// Check response body
 			var body map[string]interface{}
@@ -309,17 +332,10 @@ func runToolInsertInvokeTest(t *testing.T, insert1Want, insertManyWant string) {
 			if !ok || len(contentList) == 0 {
 				t.Fatalf("unable to find content array in result")
 			}
-			firstContent, ok := contentList[0].(map[string]interface{})
-			if !ok {
-				t.Fatalf("content is not an object")
-			}
-			got, ok := firstContent["text"].(string)
-			if !ok {
-				t.Fatalf("unable to find text in content")
-			}
+			got := extractGotFromContentList(t, contentList)
 
 			if got != tc.want {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
+				t.Fatalf("unexpected value for %s:\ngot:  `%s`\nwant: `%s`", tc.name, got, tc.want)
 			}
 		})
 	}
@@ -390,14 +406,7 @@ func runToolUpdateInvokeTest(t *testing.T, update1Want, updateManyWant string) {
 			if !ok || len(contentList) == 0 {
 				t.Fatalf("unable to find content array in result")
 			}
-			firstContent, ok := contentList[0].(map[string]interface{})
-			if !ok {
-				t.Fatalf("content is not an object")
-			}
-			got, ok := firstContent["text"].(string)
-			if !ok {
-				t.Fatalf("unable to find text in content")
-			}
+			got := extractGotFromContentList(t, contentList)
 
 			if got != tc.want {
 				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
@@ -487,14 +496,7 @@ func runToolAggregateInvokeTest(t *testing.T, aggregate1Want string, aggregateMa
 			if !ok || len(contentList) == 0 {
 				t.Fatalf("unable to find content array in result")
 			}
-			firstContent, ok := contentList[0].(map[string]interface{})
-			if !ok {
-				t.Fatalf("content is not an object")
-			}
-			got, ok := firstContent["text"].(string)
-			if !ok {
-				t.Fatalf("unable to find text in content")
-			}
+			got := extractGotFromContentList(t, contentList)
 
 			if got != tc.want {
 				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)

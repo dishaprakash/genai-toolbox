@@ -781,7 +781,7 @@ func runFirestoreUpdateDocumentTest(t *testing.T, collectionName string, docID s
 			isErr:    false,
 		},
 		{
-			name: "invalid field in updateMask",
+			name: "delete field via updateMask when omitted in documentData",
 			api:  "http://127.0.0.1:5000/mcp",
 			requestBody: bytes.NewBuffer([]byte(fmt.Sprintf(`{
 				"documentPath": "%s",
@@ -790,7 +790,8 @@ func runFirestoreUpdateDocumentTest(t *testing.T, collectionName string, docID s
 				},
 				"updateMask": ["field1", "nonExistentField"]
 			}`, docPath))),
-			isErr: true, // Should fail because nonExistentField is not in documentData
+			wantKeys: []string{"documentPath", "updateTime"}, // Succeeded by deleting nonExistentField
+			isErr: false, // Should succeed because omitting from documentData means delete
 		},
 	}
 

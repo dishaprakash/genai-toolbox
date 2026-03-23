@@ -5182,3 +5182,61 @@ func RunLegacyApiRequestToMCP(t *testing.T, toolName string, requestBody io.Read
 
 	return resp, legacyBody
 }
+
+// RunNativeMCPAssertion invokes the MCP transport with native arguments, unpacks McpResponse, and enforces agent error validity.
+func RunNativeMCPAssertion(t *testing.T, toolName string, requestBody io.Reader, wantStatusCode int, isAgentErr bool) string {
+	mcpReq := jsonrpc.JSONRPCRequest{
+		Jsonrpc: "2.0",
+		Id:      1,
+		Request: jsonrpc.Request{
+			Method: "tools/call",
+		},
+	}
+	params := map[string]any{
+		"name": toolName,
+	}
+	if requestBody != nil {
+		reqBytesRaw, _ := io.ReadAll(requestBody)
+		if len(reqBytesRaw) > 0 {
+			var args map[string]any
+			if err := json.Unmarshal(reqBytesRaw, &args); err == nil {
+				params["arguments"] = args
+			} else {
+				params["arguments"] = map[string]any{}
+			}
+		} else {
+			params["arguments"] = map[string]any{}
+		}
+	} else {
+		params["arguments"] = map[string]any{}
+	}
+	mcpReq.Params = params
+	reqMarshal, _ := json.Marshal(mcpReq)
+	resp, mcpBytes := RunRequest(t, http.MethodPost, "http://127.0.0.1:5000/mcp", bytes.NewBuffer(reqMarshal), nil)
+
+	if resp.StatusCode != wantStatusCode {
+		t.Fatalf("response status code is not %v, got %d: %s", wantStatusCode, resp.StatusCode, string(mcpBytes))
+	}
+
+	var mcpResp McpResponse
+	if err := json.Unmarshal(mcpBytes, &mcpResp); err != nil {
+		t.Fatalf("error parsing mcp response: %v, payload: %s", err, string(mcpBytes))
+	}
+
+	if isAgentErr {
+		if !mcpResp.Result.IsError && mcpResp.Error == nil {
+			t.Fatalf("expected agent error, got successful response: %s", string(mcpBytes))
+		}
+		return ""
+	}
+
+	if mcpResp.Result.IsError || mcpResp.Error != nil {
+		t.Fatalf("unexpected agent error or framework error: %v, %v", mcpResp.Error, string(mcpBytes))
+	}
+
+	if len(mcpResp.Result.Content) == 0 {
+		t.Fatalf("no content returned by MCP")
+	}
+
+	return mcpResp.Result.Content[0].Text
+}

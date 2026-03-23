@@ -22,6 +22,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
 
 	"github.com/MicahParks/keyfunc/v3"
@@ -36,12 +37,12 @@ var _ auth.AuthServiceConfig = Config{}
 
 // Auth service configuration
 type Config struct {
-	Name                   string   `yaml:"name" validate:"required"`
-	Type                   string   `yaml:"type" validate:"required"`
-	Audience               string   `yaml:"audience" validate:"required"`
-	McpEnabled             bool     `yaml:"mcpEnabled"`
+	Name                string   `yaml:"name" validate:"required"`
+	Type                string   `yaml:"type" validate:"required"`
+	Audience            string   `yaml:"audience" validate:"required"`
+	McpEnabled          bool     `yaml:"mcpEnabled"`
 	AuthorizationServer string   `yaml:"authorizationServer" validate:"required"`
-	ScopesRequired         []string `yaml:"scopesRequired"`
+	ScopesRequired      []string `yaml:"scopesRequired"`
 }
 
 // Returns the auth service type
@@ -69,8 +70,6 @@ func (cfg Config) Initialize() (auth.AuthService, error) {
 	}
 	return a, nil
 }
-
-
 
 func discoverJWKSURL(AuthorizationServer string) (string, error) {
 	u, err := url.Parse(AuthorizationServer)
@@ -101,7 +100,6 @@ func discoverJWKSURL(AuthorizationServer string) (string, error) {
 			return http.ErrUseLastResponse
 		},
 	}
-
 
 	resp, err := client.Get(oidcConfigURL)
 	if err != nil {
@@ -209,4 +207,76 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 	}
 
 	return claims, nil
+}
+
+// MCPAuthError represents an error during MCP authentication validation.
+type MCPAuthError struct {
+	Code           int
+	Message        string
+	ScopesRequired []string
+}
+
+func (e *MCPAuthError) Error() string { return e.Message }
+
+// ValidateMCPAuth handles MCP auth token validation
+func (a AuthService) ValidateMCPAuth(ctx context.Context, h http.Header) error {
+	tokenString := h.Get("Authorization")
+	if tokenString == "" {
+		return &MCPAuthError{Code: http.StatusUnauthorized, Message: "missing access token", ScopesRequired: a.ScopesRequired}
+	}
+
+	headerParts := strings.Split(tokenString, " ")
+	if len(headerParts) != 2 || strings.ToLower(headerParts[0]) != "bearer" {
+		return &MCPAuthError{Code: http.StatusUnauthorized, Message: "authorization header must be in the format 'Bearer <token>'", ScopesRequired: a.ScopesRequired}
+	}
+
+	token, err := jwt.Parse(headerParts[1], a.kf.Keyfunc)
+	if err != nil || !token.Valid {
+		return &MCPAuthError{Code: http.StatusUnauthorized, Message: "invalid or expired token", ScopesRequired: a.ScopesRequired}
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		return &MCPAuthError{Code: http.StatusUnauthorized, Message: "invalid JWT claims format", ScopesRequired: a.ScopesRequired}
+	}
+
+	// Validate audience
+	aud, err := claims.GetAudience()
+	if err != nil {
+		return &MCPAuthError{Code: http.StatusUnauthorized, Message: "could not parse audience from token", ScopesRequired: a.ScopesRequired}
+	}
+
+	isAudValid := false
+	for _, audItem := range aud {
+		if audItem == a.Audience {
+			isAudValid = true
+			break
+		}
+	}
+
+	if !isAudValid {
+		return &MCPAuthError{Code: http.StatusUnauthorized, Message: "audience validation failed", ScopesRequired: a.ScopesRequired}
+	}
+
+	// Check scopes
+	if len(a.ScopesRequired) > 0 {
+		scopeClaim, ok := claims["scope"].(string)
+		if !ok {
+			return &MCPAuthError{Code: http.StatusForbidden, Message: "insufficient scopes", ScopesRequired: a.ScopesRequired}
+		}
+
+		tokenScopes := strings.Split(scopeClaim, " ")
+		scopeMap := make(map[string]bool)
+		for _, s := range tokenScopes {
+			scopeMap[s] = true
+		}
+
+		for _, requiredScope := range a.ScopesRequired {
+			if !scopeMap[requiredScope] {
+				return &MCPAuthError{Code: http.StatusForbidden, Message: "insufficient scopes", ScopesRequired: a.ScopesRequired}
+			}
+		}
+	}
+
+	return nil
 }

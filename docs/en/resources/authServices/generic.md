@@ -12,12 +12,12 @@ description: >
 The Generic Auth Service allows you to integrate with any OpenID Connect (OIDC)
 compliant identity provider (IDP). It discovers the JWKS (JSON Web Key Set) URL
 either through the provider's `/.well-known/openid-configuration` endpoint or
-directly via the provided `authUrl`.
+directly via the provided `authorizationServer`.
 
 To configure this auth service, you need to provide the `audience` (typically
-your client ID or the intended audience for the token), the `authUrl` of your
-identity provider, and optionally a list of `scopesRequired` that must be
-present in the token's claims.
+your client ID or the intended audience for the token), the
+`authorizationServer` of your identity provider, and optionally a list of
+`scopesRequired` that must be present in the token's claims.
 
 ## Behavior
 
@@ -25,14 +25,14 @@ present in the token's claims.
 
 When a request is received, the service will:
 
-1. Extract the `Bearer` token from the `Authorization` header.
-2. Fetch the JWKS from the configured `authUrl` (caching it in the background)
-   to verify the token's signature.
+1. Extract the token from the `<name>_token` header (e.g.,
+   `my-generic-auth_token`).
+2. Fetch the JWKS from the configured `authorizationServer` (caching it in the
+   background) to verify the token's signature.
 3. Validate that the token is not expired and its signature is valid.
 4. Verify that the `aud` (audience) claim matches the configured `audience`.
-5. (Optional) If `scopesRequired` is provided, verify that the token's `scope`
    claim contains all required scopes.
-6. Return the validated claims to be used for [Authenticated
+5. Return the validated claims to be used for [Authenticated
    Parameters][auth-params] or [Authorized Invocations][auth-invoke].
 
 [auth-invoke]: ../tools/#authorized-invocations
@@ -45,7 +45,8 @@ kind: authServices
 name: my-generic-auth
 type: generic
 audience: ${YOUR_OIDC_AUDIENCE}
-authUrl: https://your-idp.example.com
+authorizationServer: https://your-idp.example.com
+mcpEnabled: false
 scopesRequired:
   - read
   - write
@@ -57,9 +58,10 @@ ${ENV_NAME} instead of hardcoding your secrets into the configuration file.
 
 ## Reference
 
-| **field**      | **type** | **required** | **description**                                                                                                                               |
-| -------------- | :------: | :----------: | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| type           |  string  |     true     | Must be "generic".                                                                                                                            |
-| audience       |  string  |     true     | The expected audience (`aud` claim) in the JWT token. This ensures the token was minted specifically for your application.                    |
-| authUrl        |  string  |     true     | The base URL of your OIDC provider. The service will append `/.well-known/openid-configuration` to discover the JWKS URI, or use it directly. |
-| scopesRequired | []string |    false     | A list of required scopes that must be present in the token's `scope` claim to be considered valid.                                           |
+| **field**           | **type** | **required** | **description**                                                                                                                                               |
+| ------------------- | :------: | :----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type                |  string  |     true     | Must be "generic".                                                                                                                                            |
+| audience            |  string  |     true     | The expected audience (`aud` claim) in the JWT token. This ensures the token was minted specifically for your application.                                    |
+| authorizationServer |  string  |     true     | The base URL of your OIDC provider. The service will append `/.well-known/openid-configuration` to discover the JWKS URI. HTTP is allowed but logs a warning. |
+| mcpEnabled          |   bool   |    false     | Indicates if MCP endpoint authentication should be applied. Defaults to false.                                                                                |
+| scopesRequired      | []string |    false     | A list of required scopes that must be present in the token's `scope` claim to be considered valid.                                                           |

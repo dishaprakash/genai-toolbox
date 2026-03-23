@@ -4365,7 +4365,12 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...MCPToolIn
 			if len(combined) == 0 {
 				got = "null"
 			} else if strings.HasPrefix(wantStr, "[") && strings.HasSuffix(wantStr, "]") {
-				got = "[" + strings.Join(combined, ",") + "]"
+				joined := strings.Join(combined, ",")
+				if len(combined) == 1 && strings.HasPrefix(joined, "[") && strings.HasSuffix(joined, "]") {
+					got = joined
+				} else {
+					got = "[" + joined + "]"
+				}
 			} else {
 				got = combined[0]
 			}

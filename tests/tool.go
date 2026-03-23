@@ -4858,19 +4858,23 @@ func RunNativeMCPAssertion(t *testing.T, toolName string, requestBody io.Reader,
 	}
 
 	if isAgentErr {
-		if !mcpResp.Result.IsError && mcpResp.Error == nil {
+		if (mcpResp.Result != nil && !mcpResp.Result.IsError) && mcpResp.Error == nil {
 			t.Fatalf("expected agent error, got successful response: %s", string(mcpBytes))
 		}
 		return ""
 	}
 
-	if mcpResp.Result.IsError || mcpResp.Error != nil {
+	if (mcpResp.Result != nil && mcpResp.Result.IsError) || mcpResp.Error != nil {
 		t.Fatalf("unexpected agent error or framework error: %v, %v", mcpResp.Error, string(mcpBytes))
 	}
 
-	if len(mcpResp.Result.Content) == 0 {
+	if mcpResp.Result == nil || len(mcpResp.Result.Content) == 0 {
 		t.Fatalf("no content returned by MCP")
 	}
 
-	return mcpResp.Result.Content[0].Text
+	var allContent string
+	for _, c := range mcpResp.Result.Content {
+		allContent += c.Text
+	}
+	return allContent
 }

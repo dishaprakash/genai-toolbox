@@ -30,14 +30,13 @@ const EmbeddingModelType string = "gemini"
 var _ embeddingmodels.EmbeddingModelConfig = Config{}
 
 type Config struct {
-	Name        string `yaml:"name" validate:"required"`
-	Type        string `yaml:"type" validate:"required"`
-	Model       string `yaml:"model" validate:"required"`
-	UseVertexAI bool   `yaml:"useVertexAI"`
-	ApiKey      string `yaml:"apiKey"`
-	Project     string `yaml:"project"`
-	Location    string `yaml:"location"`
-	Dimension   int32  `yaml:"dimension"`
+	Name      string `yaml:"name" validate:"required"`
+	Type      string `yaml:"type" validate:"required"`
+	Model     string `yaml:"model" validate:"required"`
+	ApiKey    string `yaml:"apiKey"`
+	Project   string `yaml:"project"`
+	Location  string `yaml:"location"`
+	Dimension int32  `yaml:"dimension"`
 }
 
 // Returns the embedding model type
@@ -58,29 +57,24 @@ func (cfg Config) Initialize(ctx context.Context) (embeddingmodels.EmbeddingMode
 		apiKey = os.Getenv("GEMINI_API_KEY")
 	}
 
+	// Try to resolve Project and Location
+	project := cfg.Project
+	if project == "" {
+		project = os.Getenv("GOOGLE_CLOUD_PROJECT")
+	}
+
+	location := cfg.Location
+	if location == "" {
+		location = os.Getenv("GOOGLE_CLOUD_LOCATION")
+	}
+
 	// Determine the Backend
-	if cfg.UseVertexAI {
+	if project != "" && location != "" {
 		// VertexAI API uses ADC for authentication.
 		// ADC requires `Project` and `Location` to be set.
 		configs.Backend = genai.BackendVertexAI
-
-		configs.Project = cfg.Project
-		if configs.Project == "" {
-			configs.Project = os.Getenv("GOOGLE_CLOUD_PROJECT")
-		}
-
-		configs.Location = cfg.Location
-		if configs.Location == "" {
-			configs.Location = os.Getenv("GOOGLE_CLOUD_LOCATION")
-		}
-
-		if configs.Project == "" {
-			return nil, fmt.Errorf("vertex AI mode forced, but no project ID found in YAML or GOOGLE_CLOUD_PROJECT")
-		}
-
-		if configs.Location == "" {
-			return nil, fmt.Errorf("vertex AI mode forced, but no location found in YAML or GOOGLE_CLOUD_LOCATION")
-		}
+		configs.Project = project
+		configs.Location = location
 
 	} else if apiKey != "" {
 		// Using Gemini API, which uses API Key for authentication.
@@ -88,10 +82,10 @@ func (cfg Config) Initialize(ctx context.Context) (embeddingmodels.EmbeddingMode
 		configs.APIKey = apiKey
 
 	} else {
-		// Missing both credentials
+		// Missing credentials
 		return nil, fmt.Errorf("missing credentials for Gemini embedding: " +
 			"For Google AI: Provide 'apiKey' in YAML or set GOOGLE_API_KEY/GEMINI_API_KEY env vars. " +
-			"For Vertex AI: Set 'useVertexAI: true' and provide 'project'/'location' in YAML or via GOOGLE_CLOUD_PROJECT/GOOGLE_CLOUD_LOCATION env vars. " +
+			"For Vertex AI: Provide 'project'/'location' in YAML or via GOOGLE_CLOUD_PROJECT/GOOGLE_CLOUD_LOCATION env vars. " +
 			"See documentation for details: https://googleapis.github.io/genai-toolbox/resources/embeddingmodels/gemini/")
 	}
 

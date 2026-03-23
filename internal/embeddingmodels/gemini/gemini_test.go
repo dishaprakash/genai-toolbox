@@ -74,20 +74,18 @@ func TestParseFromYamlGemini(t *testing.T) {
             name: vertex-gemini
             type: gemini
             model: text-embedding-004
-            useVertexAI: true
             project: "my-project"
             location: "us-central1"
             dimension: 512
             `,
 			want: map[string]embeddingmodels.EmbeddingModelConfig{
 				"vertex-gemini": gemini.Config{
-					Name:        "vertex-gemini",
-					Type:        gemini.EmbeddingModelType,
-					Model:       "text-embedding-004",
-					UseVertexAI: true,
-					Project:     "my-project",
-					Location:    "us-central1",
-					Dimension:   512,
+					Name:      "vertex-gemini",
+					Type:      gemini.EmbeddingModelType,
+					Model:     "text-embedding-004",
+					Project:   "my-project",
+					Location:  "us-central1",
+					Dimension: 512,
 				},
 			},
 		},

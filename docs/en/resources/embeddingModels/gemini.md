@@ -16,13 +16,12 @@ high-dimensional vectors.
 
 Toolbox supports two authentication modes:
 
-1.  **Google AI (API Key):** Used if `useVertexAI` is `false` or unset. You must
-    provide `apiKey` (or set `GOOGLE_API_KEY`/`GEMINI_API_KEY` environment
-    variables). This uses the [Google AI Studio][ai-studio] backend.
-2.  **Vertex AI (ADC):** Used if `useVertexAI` is `true`. This uses [Application
-    Default Credentials (ADC)][adc]. When using this mode, you **must** specify
-    `project` and `location` (or set
-    `GOOGLE_CLOUD_PROJECT`/`GOOGLE_CLOUD_LOCATION` environment variables).
+1.  **Vertex AI (ADC):** Selected automatically if `project` and `location` parameters
+    are set (or via `GOOGLE_CLOUD_PROJECT`/`GOOGLE_CLOUD_LOCATION` environment
+    variables). This mode uses [Application Default Credentials (ADC)][adc].
+2.  **Google AI (API Key):** Followed as a fallback if `project` and `location` are
+    not set. You must provide `apiKey` (or set `GOOGLE_API_KEY`/`GEMINI_API_KEY`
+    environment variables). This uses the [Google AI Studio][ai-studio] backend.
 
 We recommend using an API key for quick testing and using Vertex AI with ADC for
 production environments.
@@ -77,7 +76,6 @@ kind: embeddingModels
 name: gemini-model
 type: gemini
 model: text-embedding-004
-useVertexAI: true
 project: ${GOOGLE_CLOUD_PROJECT}
 location: us-central1
 dimension: 768
@@ -95,8 +93,7 @@ ${ENV_NAME} instead of hardcoding your secrets into the configuration file.
 | ----------- | :------: | :----------: | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | type        |  string  |     true     | Must be `gemini`.                                                                                                                                    |
 | model       |  string  |     true     | The Gemini model ID to use (e.g., `text-embedding-004`).                                                                                             |
-| useVertexAI | boolean  |    false     | Set to `true` to use Vertex AI. Default is false (Google AI).                                                                                        |
-| project     |  string  |    false     | GCP Project ID (required if `useVertexAI` is `true`).                                                                                                |
-| location    |  string  |    false     | GCP Location (required if `useVertexAI` is `true`).                                                                                                  |
-| apiKey      |  string  |    false     | Your API Key from Google AI Studio. Required if `useVertexAI` is `false` and not set via `GOOGLE_API_KEY` or `GEMINI_API_KEY` environment variables. |
+| project     |  string  |    false     | GCP Project ID (used to configure Vertex AI backend).                                                                                                |
+| location    |  string  |    false     | GCP Location (used to configure Vertex AI backend).                                                                                                  |
+| apiKey      |  string  |    false     | Your API Key from Google AI Studio. Required if Vertex AI relies on GCP details are not properly provided.                                           |
 | dimension   | integer  |    false     | The number of dimensions in the output vector (e.g., `768`).                                                                                         |

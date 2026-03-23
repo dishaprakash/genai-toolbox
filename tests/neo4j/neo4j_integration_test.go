@@ -466,16 +466,35 @@ func TestNeo4jToolEndpoints(t *testing.T) {
 
 				// Handle tool errors represented via MCP protocol first
 				if tc.wantErrorSubstring != "" {
+					var errMsg string
+					
+					// First, try standard protocol error
 					errMap, hasErr := body["error"].(map[string]interface{})
 					if hasErr {
-						errMsg, _ := errMap["message"].(string)
-						if !strings.Contains(errMsg, tc.wantErrorSubstring) {
-							t.Fatalf("response payload %q does not contain expected error %q", errMsg, tc.wantErrorSubstring)
-						}
-						return
+						errMsg, _ = errMap["message"].(string)
 					} else {
+						// Then try tool-level error in result
+						resultMap, hasResult := body["result"].(map[string]interface{})
+						if hasResult {
+							isError, _ := resultMap["isError"].(bool)
+							if isError {
+								contentList, ok := resultMap["content"].([]interface{})
+								if ok && len(contentList) > 0 {
+									contentItem, _ := contentList[0].(map[string]interface{})
+									errMsg, _ = contentItem["text"].(string)
+								}
+							}
+						}
+					}
+					
+					if errMsg == "" {
 						t.Fatalf("expected error containing %q but no error found in body: %v", tc.wantErrorSubstring, body)
 					}
+					
+					if !strings.Contains(errMsg, tc.wantErrorSubstring) {
+						t.Fatalf("response payload %q does not contain expected error %q", errMsg, tc.wantErrorSubstring)
+					}
+					return
 				}
 
 				resultMap, hasResult := body["result"].(map[string]interface{})

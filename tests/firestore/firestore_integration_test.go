@@ -286,12 +286,18 @@ func runFirestoreToolGetTest(t *testing.T) {
 				got[name] = toolEntry
 			}
 
-			// Compare as JSON strings to handle any ordering differences
-			gotJSON, _ := json.Marshal(got)
-			wantJSON, _ := json.Marshal(tc.want)
-			if string(gotJSON) != string(wantJSON) {
-				t.Logf("got %v, want %v", string(gotJSON), string(wantJSON))
-				t.Fatalf("tools mismatch")
+			for wantToolName, wantToolSpecs := range tc.want {
+				gotToolSpecs, ok := got[wantToolName]
+				if !ok {
+					t.Fatalf("tool %q missing in response", wantToolName)
+				}
+
+				gotJSON, _ := json.Marshal(gotToolSpecs)
+				wantJSON, _ := json.Marshal(wantToolSpecs)
+				if string(gotJSON) != string(wantJSON) {
+					t.Logf("for tool %s: got %v, want %v", wantToolName, string(gotJSON), string(wantJSON))
+					t.Fatalf("tools mismatch")
+				}
 			}
 		})
 	}

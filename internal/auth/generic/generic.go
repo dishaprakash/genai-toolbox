@@ -52,16 +52,20 @@ func (cfg Config) AuthServiceConfigType() string {
 
 // Initialize a generic auth service
 func (cfg Config) Initialize() (auth.AuthService, error) {
-	// Discover the JWKS URL from the OIDC configuration endpoint
-	jwksURL, err := discoverJWKSURL(cfg.AuthorizationServerURL)
-	if err != nil {
-		return nil, fmt.Errorf("failed to discover JWKS URL: %w", err)
-	}
+	var kf keyfunc.Keyfunc
 
-	// Create the keyfunc to fetch and cache the JWKS in the background
-	kf, err := keyfunc.NewDefault([]string{jwksURL})
-	if err != nil {
-		return nil, fmt.Errorf("failed to create keyfunc from JWKS URL %s: %w", jwksURL, err)
+	if cfg.AuthorizationServerURL != "" {
+		// Discover the JWKS URL from the OIDC configuration endpoint
+		jwksURL, err := discoverJWKSURL(cfg.AuthorizationServerURL)
+		if err != nil {
+			return nil, fmt.Errorf("failed to discover JWKS URL: %w", err)
+		}
+
+		// Create the keyfunc to fetch and cache the JWKS in the background
+		kf, err = keyfunc.NewDefault([]string{jwksURL})
+		if err != nil {
+			return nil, fmt.Errorf("failed to create keyfunc from JWKS URL %s: %w", jwksURL, err)
+		}
 	}
 
 	a := &AuthService{
@@ -110,6 +114,7 @@ func discoverJWKSURL(authorizationServerURL string) (string, error) {
 	client := &http.Client{
 		Timeout: 10 * time.Second,
 		Transport: &http.Transport{
+			DialContext:           safeDialer().DialContext,
 			ForceAttemptHTTP2:     true,
 			MaxIdleConns:          10,
 			IdleConnTimeout:       90 * time.Second,
@@ -122,8 +127,8 @@ func discoverJWKSURL(authorizationServerURL string) (string, error) {
 		},
 	}
 
-	if !AllowInsecureForTest {
-		client.Transport.(*http.Transport).DialContext = safeDialer().DialContext
+	if AllowInsecureForTest {
+		client.Transport.(*http.Transport).DialContext = nil
 	}
 
 	resp, err := client.Get(oidcConfigURL)
@@ -196,12 +201,21 @@ func (a AuthService) GetClaimsFromHeader(ctx context.Context, h http.Header) (ma
 	}
 
 	// Parse and verify the token signature
-	token, err := jwt.Parse(tokenString, a.kf.Keyfunc)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse and verify JWT token: %w", err)
+	var token *jwt.Token
+	var err error
+
+	if a.kf != nil {
+		token, err = jwt.Parse(tokenString, a.kf.Keyfunc)
+	} else {
+		// If no keyfunc is configured (AuthURL was empty), we parse without verifying signature
+		token, _, err = new(jwt.Parser).ParseUnverified(tokenString, jwt.MapClaims{})
 	}
 
-	if !token.Valid {
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse JWT token: %w", err)
+	}
+
+	if a.kf != nil && !token.Valid {
 		return nil, fmt.Errorf("invalid JWT token")
 	}
 

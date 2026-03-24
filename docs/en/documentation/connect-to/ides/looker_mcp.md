@@ -85,6 +85,15 @@ After you install Looker in the MCP Store, resources and tools from the server a
       }
     }
     ```
+    If you want to access tools to develop LookML as well as query data
+   and create content, change the following line
+   ```json
+          "args": ["-y", "@toolbox-sdk/server", "--prebuilt", "looker", "--stdio"],
+   ```
+   to
+   ```json
+          "args": ["-y", "@toolbox-sdk/server", "--prebuilt", "looker,looker-dev", "--stdio"],
+   ```
 
 {{% /tab %}}
 {{< /tabpane >}}

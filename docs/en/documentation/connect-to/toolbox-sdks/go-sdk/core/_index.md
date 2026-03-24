@@ -95,20 +95,13 @@ The SDK supports multiple transport protocols for communicating with the Toolbox
 You can explicitly select a protocol using the `core.WithProtocol` option during client initialization. This is useful if you need to pin the client to a specific legacy version of MCP.
 
 {{< notice note >}}
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/core/_index.md
 * **MCP Transports**: These options use the **Model Context Protocol over HTTP**.
-========
-* **MCP Transports**: These options use **Model Context Protocol over HTTP**.
->>>>>>>> main:docs/en/sdks/Go/core/_index.md
 {{< /notice >}}
 
 ### Supported Protocols
 
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/core/_index.md
 We currently support different versions of the MCP protocol.
 
-========
->>>>>>>> main:docs/en/sdks/Go/core/_index.md
 | Constant | Description |
 | :--- | :--- |
 | `core.MCP` | **(Default)** Alias for the latest supported MCP version (currently `v2025-06-18`). |
@@ -367,7 +360,7 @@ client, err := core.NewToolboxClient("http://127.0.0.1:5000")
 tool, err := client.LoadTool("my-tool", ctx)
 
 AuthTool, err := tool.ToolFrom(
-  core.WithAuthTokenSource("my-auth", headerTokenSource),
+  core.WithAuthTokenSource("my-auth", erTokenSource),
   core.WithAuthTokenString("my-auth-1", "value"),
   )
 ```
@@ -424,7 +417,7 @@ func main() {
 ```
 
 {{< notice note >}}
-An auth token getter for a specific name (e.g., "GOOGLE_ID") will replace any client header with the same name followed by "_token" (e.g., "GOOGLE_ID_token").
+An auth token getter for a specific name (e.g., "GOOGLE_ID") will replace any client er with the same name followed by "_token" (e.g., "GOOGLE_ID_token").
 {{< /notice >}}
 
 ## Binding Parameter Values

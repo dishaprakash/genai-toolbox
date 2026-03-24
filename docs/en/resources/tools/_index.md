@@ -365,4 +365,4 @@ Annotations appear in the `tools/list` MCP response:
 }
 ```
 
-## Kinds of tools
+## Types of tools

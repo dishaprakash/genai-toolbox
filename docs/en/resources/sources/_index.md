@@ -31,4 +31,4 @@ password: ${PASSWORD}
 In implementation, each source is a different connection pool or client that used
 to connect to the database and execute the tool.
 
-## Available Sources
+## Types of Sources

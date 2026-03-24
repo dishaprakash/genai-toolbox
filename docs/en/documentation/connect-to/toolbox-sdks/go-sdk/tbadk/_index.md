@@ -246,7 +246,7 @@ client, err := tbadk.NewToolboxClient(
 
 For Toolbox servers hosted on Google Cloud (e.g., Cloud Run) and requiring
 `Google ID token` authentication, the helper module
-[auth_methods](../core/_index.md#authenticating-with-google-cloud-servers) provides utility functions.
+[auth](https://github.com/googleapis/mcp-toolbox-sdk-go/blob/main/core/auth.go) provides utility functions.
 
 ### Step by Step Guide for Cloud Run
 

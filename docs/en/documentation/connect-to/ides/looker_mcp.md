@@ -168,6 +168,16 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
     }
     ```
 
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
+
 1. Start Gemini-CLI with the `gemini` command and use the command `/mcp` to see
    the configured MCP tools.
 {{% /tab %}}
@@ -197,6 +207,16 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
     }
     ```
 
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
+
 1. Restart Claude Code to apply the new configuration.
 {{% /tab %}}
 
@@ -222,6 +242,16 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
         }
       }
     }
+    ```
+
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
     ```
 
 1. Restart Claude desktop.
@@ -254,6 +284,16 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
     }
     ```
 
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
+
 1. You should see a green active status after the server is successfully
    connected.
 {{% /tab %}}
@@ -280,6 +320,16 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
         }
       }
     }
+    ```
+
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
     ```
 
 1. Open [Cursor](https://www.cursor.com/) and navigate to **Settings > Cursor
@@ -312,6 +362,16 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
     }
     ```
 
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
+
 {{% /tab %}}
 
 {{% tab header="Windsurf" lang="en" %}}
@@ -339,6 +399,17 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/windows/amd64/toolb
     }
 
     ```
+    
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
+    
 
 {{% /tab %}}
 {{< /tabpane >}}

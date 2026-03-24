@@ -477,12 +477,19 @@ as well as get the database schema needed to write LookML effectively.
 1. **create_project_file**: Create a file in a project
 1. **update_project_file**: Update the contents of a file in a project
 1. **delete_project_file**: Delete a file in a project
+1. **get_project_directories**: Retrieves a list of project directories for a given LookML project.
+1. **create_project_directory**: Creates a new directory within a specified LookML project.
+1. **delete_project_directory**: Deletes a directory from a specified LookML project.
+1. **validate_project**: Check the syntax of a LookML project.
 1. **get_connections**: Get the list of connections
 1. **get_connection_schemas**: Get the list of schemas for a connection
 1. **get_connection_databases**: Get the list of databases for a connection
 1. **get_connection_tables**: Get the list of tables for a connection
-1. **get_connection_table_columns**: Get the list of columns for a table in a
-   connection
+1. **get_connection_table_columns**: Get the list of columns for a table in a connection
+1. **get_lookml_tests**: Retrieves a list of available LookML tests for a project.
+1. **run_lookml_tests**: Executes specific LookML tests within a project.
+1. **create_view_from_table**: Generates boilerplate LookML views directly from the database schema.
+1. **project_git_branch**: Fetch and manipulate the git branch of a LookML project.
 
 {{< notice note >}}
 Prebuilt tools are pre-1.0, so expect some tool changes between versions. LLMs

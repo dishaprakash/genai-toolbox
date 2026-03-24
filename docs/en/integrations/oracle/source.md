@@ -18,7 +18,6 @@ DW) database workloads.
 [oracle-docs]: https://www.oracle.com/database/
 
 
-
 ## Available Tools
 
 {{< list-tools >}}
@@ -168,3 +167,4 @@ instead of hardcoding your secrets into the configuration file.
 | tnsAlias         |  string  |    false     | A TNS alias from a `tnsnames.ora` file. Use as an alternative to `host`/`port` or `connectionString`.                                                                                   |
 | tnsAdmin         |  string  |    false     | Path to the directory containing the `tnsnames.ora` file. This overrides the `TNS_ADMIN` environment variable if it is set.                                                             |
 | useOCI           |   bool   |    false     | If true, uses the OCI-based driver (godror) which supports Oracle Wallet/Kerberos but requires the Oracle Instant Client libraries to be installed. Defaults to false (pure Go driver). |
+| walletLocation   |  string  |    false     | Path to the directory containing the wallet files for the pure Go driver (`useOCI: false`). |

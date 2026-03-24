@@ -1,7 +1,7 @@
 ---
 title: "Style Guide"
 type: docs
-weight: 3
+weight: 9
 description: >
   Style guidelines and best practices for developers building MCP tools using MCP Toolbox.
 ---

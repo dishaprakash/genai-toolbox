@@ -27,7 +27,7 @@ SQL instance.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: create-cloud-sql-database
 type: cloud-sql-create-database
 source: my-cloud-sql-admin-source

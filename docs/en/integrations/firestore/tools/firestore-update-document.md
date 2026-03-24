@@ -70,7 +70,7 @@ deleted. To delete a field, include it in the `updateMask` but omit it from
 ### Basic Document Update (Full Merge)
 
 ```yaml
-kind: tools
+kind: tool
 name: update-user-doc
 type: firestore-update-document
 source: my-firestore
@@ -305,7 +305,7 @@ The tool returns a map containing:
 The tool can be configured to require authentication:
 
 ```yaml
-kind: tools
+kind: tool
 name: secure-update-doc
 type: firestore-update-document
 source: prod-firestore

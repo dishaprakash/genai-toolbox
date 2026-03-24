@@ -63,7 +63,7 @@ the `bigquery` source:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: contribution_analyzer
 type: bigquery-analyze-contribution
 source: my-bigquery-source

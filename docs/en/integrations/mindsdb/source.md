@@ -148,7 +148,7 @@ can omit the password field.
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-mindsdb-source
 type: mindsdb
 host: 127.0.0.1
@@ -164,7 +164,7 @@ queryTimeout: 30s # Optional: query timeout duration
 Here's a working configuration that has been tested:
 
 ```yaml
-kind: sources
+kind: source
 name: my-pg-source
 type: mindsdb
 host: 127.0.0.1

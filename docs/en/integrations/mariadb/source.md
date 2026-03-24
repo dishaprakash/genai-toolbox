@@ -31,7 +31,7 @@ MariaDB user][mariadb-users] to log in to the database.
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my_mariadb_db
 type: mysql
 host: 127.0.0.1

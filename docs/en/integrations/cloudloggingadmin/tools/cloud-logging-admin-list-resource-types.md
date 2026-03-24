@@ -17,7 +17,7 @@ The `cloud-logging-admin-list-resource-types` tool lists the monitored resource 
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_resource_types
 type: cloud-logging-admin-list-resource-types
 source: my-cloud-logging

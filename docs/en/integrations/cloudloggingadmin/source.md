@@ -30,7 +30,7 @@ Authentication can be handled in two ways:
 Initialize a Cloud Logging Admin source that uses ADC:
 
 ```yaml
-kind: sources
+kind: source
 name: my-cloud-logging
 type: cloud-logging-admin
 project: my-project-id
@@ -39,7 +39,7 @@ project: my-project-id
 Initialize a Cloud Logging Admin source that uses client-side OAuth:
 
 ```yaml
-kind: sources
+kind: source
 name: my-oauth-cloud-logging
 type: cloud-logging-admin
 project: my-project-id
@@ -49,7 +49,7 @@ useClientOAuth: true
 Initialize a Cloud Logging Admin source that uses service account impersonation:
 
 ```yaml
-kind: sources
+kind: source
 name: my-impersonated-cloud-logging
 type: cloud-logging-admin
 project: my-project-id

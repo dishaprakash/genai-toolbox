@@ -31,7 +31,7 @@ of the prepared statement.
 > names, or other parts of the query.
 
 ```yaml
-kind: tools
+kind: tool
 name: search_flights_by_number
 type: postgres-sql
 source: my-pg-instance
@@ -77,7 +77,7 @@ parameters:
 > [templateParameters](..#template-parameters).
 
 ```yaml
-kind: tools
+kind: tool
 name: list_table
 type: postgres-sql
 source: my-pg-instance

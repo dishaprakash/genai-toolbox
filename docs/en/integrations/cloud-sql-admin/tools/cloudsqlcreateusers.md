@@ -18,7 +18,7 @@ instance. It can create both built-in and IAM users.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: create-cloud-sql-user
 type: cloud-sql-create-users
 source: my-cloud-sql-admin-source

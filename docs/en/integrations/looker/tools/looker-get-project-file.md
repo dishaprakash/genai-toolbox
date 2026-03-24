@@ -19,7 +19,7 @@ A `looker-get-project-file` tool returns the contents of a LookML file.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_project_file
 type: looker-get-project-file
 source: looker-source

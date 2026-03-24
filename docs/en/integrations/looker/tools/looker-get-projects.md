@@ -19,7 +19,7 @@ A `looker-get-projects` tool returns all the projects in the source.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_projects
 type: looker-get-projects
 source: looker-source

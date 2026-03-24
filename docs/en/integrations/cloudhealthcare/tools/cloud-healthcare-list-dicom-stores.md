@@ -23,7 +23,7 @@ stores in the dataset of the healthcare source. It takes no extra parameters.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_dicom_stores
 type: cloud-healthcare-list-dicom-stores
 source: my-healthcare-source

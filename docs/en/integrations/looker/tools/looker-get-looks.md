@@ -27,7 +27,7 @@ default to 100 and 0.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_looks
 type: looker-get-looks
 source: looker-source

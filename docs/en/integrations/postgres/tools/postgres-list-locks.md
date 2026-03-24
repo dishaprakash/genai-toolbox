@@ -19,7 +19,7 @@ This tool identifies all locks held by active processes showing the process ID, 
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_locks
 type: postgres-list-locks
 source: postgres-source

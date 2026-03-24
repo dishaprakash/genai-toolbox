@@ -42,7 +42,7 @@ The tool takes the following input parameters:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: create_user
 type: alloydb-create-user
 source: alloydb-admin-source

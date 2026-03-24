@@ -38,7 +38,7 @@ This tool enables you to:
 > names, or other parts of the query.
 
 ```yaml
-kind: tools
+kind: tool
 name: search_flights_by_number
 type: mindsdb-sql
 source: my-mindsdb-instance
@@ -84,7 +84,7 @@ parameters:
 > [templateParameters](../#template-parameters).
 
 ```yaml
-kind: tools
+kind: tool
 name: list_table
 type: mindsdb-sql
 source: my-mindsdb-instance

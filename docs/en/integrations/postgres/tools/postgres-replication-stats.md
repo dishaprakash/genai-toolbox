@@ -19,7 +19,7 @@ This tool takes no parameters. It returns a JSON array; each element represents 
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: replication_stats
 type: postgres-replication-stats
 source: postgres-source

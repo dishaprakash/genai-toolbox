@@ -20,7 +20,7 @@ A `looker-get-connection-table-columns` tool returns all the columnes for each t
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_connection_table_columns
 type: looker-get-connection-table-columns
 source: looker-source

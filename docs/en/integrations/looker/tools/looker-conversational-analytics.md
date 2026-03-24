@@ -28,7 +28,7 @@ Looker data.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: ask_data_insights
 type: looker-conversational-analytics
 source: looker-source

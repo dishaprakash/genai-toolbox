@@ -25,7 +25,7 @@ tool takes the following input parameters:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_schemas
 type: postgres-list-schemas
 source: postgres-source

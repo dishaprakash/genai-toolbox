@@ -17,7 +17,7 @@ A `looker-delete-project-directory` tool deletes a directory from a specified Lo
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: looker-delete-project-directory
 type: looker-delete-project-directory
 source: looker-source

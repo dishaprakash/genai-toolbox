@@ -34,7 +34,7 @@ The return type is an array of maps, each map is formatted like:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_explores
 type: looker-get-explores
 source: looker-source

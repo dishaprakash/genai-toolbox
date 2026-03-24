@@ -21,7 +21,7 @@ store.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_dicom_store_metrics
 type: cloud-healthcare-get-dicom-store-metrics
 source: my-healthcare-source

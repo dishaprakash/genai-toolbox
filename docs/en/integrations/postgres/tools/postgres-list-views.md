@@ -27,7 +27,7 @@ parameters:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_views
 type: postgres-list-views
 source: cloudsql-pg-source

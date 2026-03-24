@@ -27,7 +27,7 @@ The `cloud-sql-create-backup` tool creates an on-demand backup on a Cloud SQL in
 Basic backup creation (current state)
 
 ```yaml
-kind: tools
+kind: tool
 name: backup-creation-basic
 type: cloud-sql-create-backup
 source: cloud-sql-admin-source

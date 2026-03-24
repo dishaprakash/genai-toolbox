@@ -29,7 +29,7 @@ and takes around a minute to begin executing; status can be polled using the
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: serverless-spark-create-pyspark-batch
 type: serverless-spark-create-pyspark-batch
 source: "my-serverless-spark-source"

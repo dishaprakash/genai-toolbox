@@ -20,7 +20,7 @@ A `looker-get-connection-databases` tool returns all the databases in a connecti
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_connection_databases
 type: looker-get-connection-databases
 source: looker-source

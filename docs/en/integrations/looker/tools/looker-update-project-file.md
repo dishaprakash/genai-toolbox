@@ -20,7 +20,7 @@ as well as the new file content.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: update_project_file
 type: looker-update-project-file
 source: looker-source

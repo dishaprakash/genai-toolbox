@@ -33,7 +33,7 @@ identifying slow queries and understanding query performance patterns.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_query_stats
 type: postgres-list-query-stats
 source: postgres-source

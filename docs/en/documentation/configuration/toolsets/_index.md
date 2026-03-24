@@ -19,13 +19,13 @@ Try organizing your toolsets by the agent's persona or app feature (e.g., `data_
 In your configuration file, define each toolset by providing a unique `name` and a list of `tools` that belong to that group..
 
 ```yaml
-kind: toolsets
+kind: toolset
 name: my_first_toolset
 tools:
   - my_first_tool
   - my_second_tool
 ---
-kind: toolsets
+kind: toolset
 name: my_second_toolset
 tools:
   - my_second_tool

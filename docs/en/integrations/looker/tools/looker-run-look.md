@@ -20,7 +20,7 @@ saved Look.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: run_look
 type: looker-run-look
 source: looker-source

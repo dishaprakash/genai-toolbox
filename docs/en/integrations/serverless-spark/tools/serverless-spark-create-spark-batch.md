@@ -35,7 +35,7 @@ polled using the [get batch](serverless-spark-get-batch.md) tool.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: "serverless-spark-create-spark-batch"
 type: "serverless-spark-create-spark-batch"
 source: "my-serverless-spark-source"

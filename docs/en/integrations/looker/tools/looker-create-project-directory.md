@@ -17,7 +17,7 @@ A `looker-create-project-directory` tool creates a new directory within a specif
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: looker-create-project-directory
 type: looker-create-project-directory
 source: looker-source

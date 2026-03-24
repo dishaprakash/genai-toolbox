@@ -68,7 +68,7 @@ database named `(default)` will be used.
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-firestore-source
 type: "firestore"
 project: "my-project-id"

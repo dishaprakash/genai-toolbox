@@ -44,7 +44,7 @@ Parameters:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: long_running_transactions
 type: postgres-long-running-transactions
 source: postgres-source

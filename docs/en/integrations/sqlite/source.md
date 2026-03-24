@@ -47,7 +47,7 @@ You need a SQLite database file. This can be:
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-sqlite-db
 type: "sqlite"
 database: "/path/to/database.db"
@@ -56,7 +56,7 @@ database: "/path/to/database.db"
 For an in-memory database:
 
 ```yaml
-kind: sources
+kind: source
 name: my-sqlite-memory-db
 type: "sqlite"
 database: ":memory:"

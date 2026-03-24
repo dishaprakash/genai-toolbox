@@ -28,7 +28,7 @@ The `cloud-sql-restore-backup` tool restores a backup on a Cloud SQL instance us
 Basic backup restore
 
 ```yaml
-kind: tools
+kind: tool
 name: backup-restore-basic
 type: cloud-sql-restore-backup
 source: cloud-sql-admin-source

@@ -7,11 +7,11 @@
     <ul class="mb-0">
         <li class="mb-2">
             <strong>Prevent DNS Rebinding:</strong> Use the <code>--allowed-hosts</code> flag to specify a list of hosts for validation.
-            <div class="mt-1"><small><em>Example:</em></small> <code>command: ["--tools-file", "/config/tools.yaml", "--address", "0.0.0.0", "--allowed-hosts", "localhost:5000"]</code></div>
+            <div class="mt-1"><small><em>Example:</em></small> <code>command: ["--config", "/config/tools.yaml", "--address", "0.0.0.0", "--allowed-hosts", "localhost:5000"]</code></div>
         </li>
         <li>
             <strong>Implement CORS:</strong> Use the <code>--allowed-origins</code> flag to specify a list of origins permitted to access the server.
-            <div class="mt-1"><small><em>Example:</em></small> <code>command: ["--tools-file", "/config/tools.yaml", "--address", "0.0.0.0", "--allowed-origins", "https://foo.bar"]</code></div>
+            <div class="mt-1"><small><em>Example:</em></small> <code>command: ["--config", "/config/tools.yaml", "--address", "0.0.0.0", "--allowed-origins", "https://foo.bar"]</code></div>
         </li>
     </ul>
 

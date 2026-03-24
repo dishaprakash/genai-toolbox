@@ -18,7 +18,7 @@ the Cloud SQL Admin API.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get-sql-instance
 type: cloud-sql-get-instance
 source: my-cloud-sql-admin-source

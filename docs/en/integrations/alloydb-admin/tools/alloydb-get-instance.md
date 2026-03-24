@@ -25,7 +25,7 @@ specified AlloyDB instance.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_specific_instance
 type: alloydb-get-instance
 source: my-alloydb-admin-source

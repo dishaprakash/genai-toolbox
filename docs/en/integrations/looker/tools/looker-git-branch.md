@@ -36,7 +36,7 @@ on the branch.
 
 ## Example
 ```yaml
-kind: tools
+kind: tool
 name: project_git_branch
 type: looker-git-branch
 source: looker-source

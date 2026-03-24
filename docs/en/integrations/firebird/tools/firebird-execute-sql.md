@@ -26,7 +26,7 @@ statement against the `source`.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: execute_sql_tool
 type: firebird-execute-sql
 source: my_firebird_db

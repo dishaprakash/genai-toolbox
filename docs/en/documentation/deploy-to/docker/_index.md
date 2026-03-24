@@ -34,7 +34,7 @@ services:
       - "5000:5000"
     volumes:
       - ./config:/config
-    command: [ "--tools-file", "/config/tools.yaml", "--address", "0.0.0.0"]
+    command: [ "--config", "/config/tools.yaml", "--address", "0.0.0.0"]
     depends_on:
       db:
         condition: service_healthy

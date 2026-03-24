@@ -17,7 +17,7 @@ A `looker-get-project-directories` tool retrieves the directories within a speci
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: looker-get-project-directories
 type: looker-get-project-directories
 source: looker-source

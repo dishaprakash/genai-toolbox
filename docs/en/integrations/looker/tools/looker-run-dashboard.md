@@ -20,7 +20,7 @@ dashboard.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: run_dashboard
 type: looker-run-dashboard
 source: looker-source

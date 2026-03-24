@@ -17,7 +17,7 @@ The `cloud-logging-admin-list-log-names` tool lists the log names available in t
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_log_names
 type: cloud-logging-admin-list-log-names
 source: my-cloud-logging

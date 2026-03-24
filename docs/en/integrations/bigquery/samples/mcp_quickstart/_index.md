@@ -100,7 +100,7 @@ In this section, we will download Toolbox, configure our tools in a
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    curl -O https://storage.googleapis.com/genai-toolbox/v0.28.0/$OS/toolbox
+    curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
 
@@ -122,13 +122,13 @@ In this section, we will download Toolbox, configure our tools in a
     {{< /notice >}}
 
     ```yaml
-    kind: sources
+    kind: source
     name: my-bigquery-source
     type: bigquery
     project: YOUR_PROJECT_ID
     location: us
     ---
-    kind: tools
+    kind: tool
     name: search-hotels-by-name
     type: bigquery-sql
     source: my-bigquery-source
@@ -139,7 +139,7 @@ In this section, we will download Toolbox, configure our tools in a
         description: The name of the hotel.
     statement: SELECT * FROM `YOUR_DATASET_NAME.hotels` WHERE LOWER(name) LIKE LOWER(CONCAT('%', @name, '%'));
     ---
-    kind: tools
+    kind: tool
     name: search-hotels-by-location
     type: bigquery-sql
     source: my-bigquery-source
@@ -150,7 +150,7 @@ In this section, we will download Toolbox, configure our tools in a
         description: The location of the hotel.
     statement: SELECT * FROM `YOUR_DATASET_NAME.hotels` WHERE LOWER(location) LIKE LOWER(CONCAT('%', @location, '%'));
     ---
-    kind: tools
+    kind: tool
     name: book-hotel
     type: bigquery-sql
     source: my-bigquery-source
@@ -162,7 +162,7 @@ In this section, we will download Toolbox, configure our tools in a
         description: The ID of the hotel to book.
     statement: UPDATE `YOUR_DATASET_NAME.hotels` SET booked = TRUE WHERE id = @hotel_id;
     ---
-    kind: tools
+    kind: tool
     name: update-hotel
     type: bigquery-sql
     source: my-bigquery-source
@@ -181,7 +181,7 @@ In this section, we will download Toolbox, configure our tools in a
     statement: >-
       UPDATE `YOUR_DATASET_NAME.hotels` SET checkin_date = PARSE_DATE('%Y-%m-%d', @checkin_date), checkout_date = PARSE_DATE('%Y-%m-%d', @checkout_date) WHERE id = @hotel_id;
     ---
-    kind: tools
+    kind: tool
     name: cancel-hotel
     type: bigquery-sql
     source: my-bigquery-source
@@ -192,7 +192,7 @@ In this section, we will download Toolbox, configure our tools in a
         description: The ID of the hotel to cancel.
     statement: UPDATE `YOUR_DATASET_NAME.hotels` SET booked = FALSE WHERE id = @hotel_id;
     ---
-    kind: toolsets
+    kind: toolset
     name: my-toolset
     tools:
       - search-hotels-by-name
@@ -208,7 +208,7 @@ In this section, we will download Toolbox, configure our tools in a
 1. Run the Toolbox server, pointing to the `tools.yaml` file created earlier:
 
     ```bash
-    ./toolbox --tools-file "tools.yaml"
+    ./toolbox --config "tools.yaml"
     ```
 
 ## Step 3: Connect to MCP Inspector

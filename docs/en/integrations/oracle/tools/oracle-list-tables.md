@@ -4,8 +4,6 @@ type: docs
 weight: 1
 description: > 
    Lists all tables in the current user's schema
-aliases:
-- /resources/tools/oracle-sql
 ---
 
 ## About

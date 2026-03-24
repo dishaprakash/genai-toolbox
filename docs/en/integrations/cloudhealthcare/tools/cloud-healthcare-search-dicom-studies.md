@@ -21,7 +21,7 @@ set of criteria.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: search_dicom_studies
 type: cloud-healthcare-search-dicom-studies
 source: my-healthcare-source

@@ -27,7 +27,7 @@ The specified SQL statement is executed as a [prepared statement][trino-prepare]
 > names, or other parts of the query.
 
 ```yaml
-kind: tools
+kind: tool
 name: search_orders_by_region
 type: trino-sql
 source: my-trino-instance
@@ -73,7 +73,7 @@ parameters:
 > [templateParameters](..#template-parameters).
 
 ```yaml
-kind: tools
+kind: tool
 name: list_table
 type: trino-sql
 source: my-trino-instance

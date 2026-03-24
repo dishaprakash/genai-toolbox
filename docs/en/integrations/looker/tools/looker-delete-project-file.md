@@ -20,7 +20,7 @@ A `looker-delete-project-file` tool deletes a LookML file in a project
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: delete_project_file
 type: looker-delete-project-file
 source: looker-source

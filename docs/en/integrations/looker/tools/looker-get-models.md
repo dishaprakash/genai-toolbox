@@ -19,7 +19,7 @@ A `looker-get-models` tool returns all the models in the source.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_models
 type: looker-get-models
 source: looker-source

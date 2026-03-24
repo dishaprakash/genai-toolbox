@@ -34,7 +34,7 @@ Looker personal folder.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: make_look
 type: looker-make-look
 source: looker-source

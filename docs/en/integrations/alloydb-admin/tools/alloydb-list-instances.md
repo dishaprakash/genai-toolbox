@@ -29,7 +29,7 @@ parameters:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: list_instances
 type: alloydb-list-instances
 source: alloydb-admin-source

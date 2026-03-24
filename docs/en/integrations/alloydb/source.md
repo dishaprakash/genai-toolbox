@@ -103,7 +103,7 @@ To connect using IAM authentication:
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-alloydb-pg-source
 type: alloydb-postgres
 project: my-project-id

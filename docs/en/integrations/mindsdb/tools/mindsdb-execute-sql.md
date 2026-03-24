@@ -35,7 +35,7 @@ statement against the `source`. This tool enables you to:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: execute_sql_tool
 type: mindsdb-execute-sql
 source: my-mindsdb-instance
@@ -110,7 +110,7 @@ ORDER BY created_at DESC;
 Here's a working configuration that has been tested:
 
 ```yaml
-kind: sources
+kind: source
 name: my-pg-source
 type: mindsdb
 host: 127.0.0.1
@@ -118,7 +118,7 @@ port: 47335
 database: files
 user: mindsdb
 ---
-kind: tools
+kind: tool
 name: mindsdb-execute-sql
 type: mindsdb-execute-sql
 source: my-pg-source

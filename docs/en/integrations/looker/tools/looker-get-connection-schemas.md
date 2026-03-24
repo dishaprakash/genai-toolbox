@@ -20,7 +20,7 @@ A `looker-get-connection-schemas` tool returns all the schemas in a connection.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_connection_schemas
 type: looker-get-connection-schemas
 source: looker-source

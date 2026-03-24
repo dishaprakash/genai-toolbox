@@ -4,8 +4,6 @@ type: docs
 weight: 1
 description: >
   A "serverless-spark-get-session-template" tool retrieves a specific Spark session template from the source.
-aliases:
-  - /resources/tools/serverless-spark-get-session-template
 ---
 
 ## About
@@ -26,7 +24,7 @@ The tool gets the `project` and `location` from the source configuration.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_spark_session_template
 type: serverless-spark-get-session-template
 source: my-serverless-spark-source

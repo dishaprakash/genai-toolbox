@@ -20,7 +20,7 @@ A `looker-get-connections` tool returns all the connections in the source.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_connections
 type: looker-get-connections
 source: looker-source

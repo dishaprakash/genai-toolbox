@@ -57,7 +57,7 @@ The tool accepts two optional parameters:
 ### Basic Usage - List All Graphs
 
 ```yaml
-kind: sources
+kind: source
 name: my-spanner-db
 type: spanner
 project: ${SPANNER_PROJECT}
@@ -65,7 +65,7 @@ instance: ${SPANNER_INSTANCE}
 database: ${SPANNER_DATABASE}
 dialect: googlesql  # wont work for postgresql
 ---
-kind: tools
+kind: tool
 name: list_all_graphs
 type: spanner-list-graphs
 source: my-spanner-db
@@ -75,7 +75,7 @@ description: Lists all graphs with their complete schema information
 ### List Specific Graphs
 
 ```yaml
-kind: tools
+kind: tool
 name: list_specific_graphs
 type: spanner-list-graphs
 source: my-spanner-db
@@ -249,7 +249,7 @@ comprehensive schema information:
 ### Example with Agent Integration
 
 ```yaml
-kind: sources
+kind: source
 name: spanner-db
 type: spanner
 project: my-project
@@ -257,7 +257,7 @@ instance: my-instance
 database: my-database
 dialect: googlesql
 ---
-kind: tools
+kind: tool
 name: schema_inspector
 type: spanner-list-graphs
 source: spanner-db

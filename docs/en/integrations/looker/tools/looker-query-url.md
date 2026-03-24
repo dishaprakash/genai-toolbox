@@ -30,7 +30,7 @@ Looker so the query can be investigated further.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: query_url
 type: looker-query-url
 source: looker-source

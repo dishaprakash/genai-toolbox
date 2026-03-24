@@ -125,7 +125,7 @@ In this section, we will download and install the Toolbox binary.
     <!-- {x-release-please-start-version} -->
     ```bash
     export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
-    export VERSION="0.28.0"
+    export VERSION="0.30.0"
     curl -O https://storage.googleapis.com/genai-toolbox/v$VERSION/$OS/toolbox
     ```
     <!-- {x-release-please-end} -->
@@ -145,7 +145,7 @@ First, define the data source for your tools. This tells Toolbox how to connect
 to your AlloyDB instance.
 
 ```yaml
-kind: sources
+kind: source
 name: alloydb-pg-source
 type: alloydb-postgres
 project: YOUR_PROJECT_ID
@@ -167,7 +167,7 @@ structured queries like managing a shopping cart. Add the following to your
 `tools.yaml` file:
 
 ```yaml
-kind: tools
+kind: tool
 name: access-cart-information
 type: postgres-sql
 source: alloydb-pg-source
@@ -192,7 +192,7 @@ statement: |
   WHERE
     c.cart_id = $1;
 ---
-kind: tools
+kind: tool
 name: add-to-cart
 type: postgres-sql
 source: alloydb-pg-source
@@ -218,7 +218,7 @@ statement: |
     cart_items (cart_id, product_id, quantity, price)
   VALUES($1,$2,$3,$4);
 ---
-kind: tools
+kind: tool
 name: delete-from-cart
 type: postgres-sql
 source: alloydb-pg-source
@@ -243,11 +243,11 @@ statement: |
 ### 2. Semantic Search Tools
 
 These tools use vector embeddings to find the most relevant results based on the
-meaning of a user's query, rather than just keywords. Append the following tools
-to the `tools` section in your `tools.yaml`:
+meaning of a user's query, rather than just keywords. Append the following tool
+with the `tool` kind in your `tools.yaml`:
 
 ```yaml
-kind: tools
+kind: tool
 name: search-product-recommendations
 type: postgres-sql
 source: alloydb-pg-source
@@ -286,11 +286,10 @@ statement: |
 
 2. Configure your NL2SQL tool to use your configuration. These tools translate
    natural language questions into SQL queries, allowing users to interact with
-   the database conversationally. Append the following tool to the `tools`
-   section:
+   the database conversationally. Append the following tool with the `tool` kind:
 
 ```yaml
-kind: tools
+kind: tool
 name: ask-questions-about-products
 type: alloydb-ai-nl
 source: alloydb-pg-source
@@ -305,7 +304,7 @@ Finally, group the tools into a `toolset` to make them available to the model.
 Add the following to the end of your `tools.yaml` file:
 
 ```yaml
-kind: toolsets
+kind: toolset
 name: flower_shop
 tools:
   - access-cart-information
@@ -323,7 +322,7 @@ For more info on tools, check out the
 Run the Toolbox server, pointing to the `tools.yaml` file created earlier:
 
 ```bash
-./toolbox --tools-file "tools.yaml"
+./toolbox --config "tools.yaml"
 ```
 
 ## Step 5: Connect to MCP Inspector

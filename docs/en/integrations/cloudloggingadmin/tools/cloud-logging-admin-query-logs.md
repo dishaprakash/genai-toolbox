@@ -18,7 +18,7 @@ The `cloud-logging-admin-query-logs` tool allows you to query log entries from G
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: query_logs
 type: cloud-logging-admin-query-logs
 source: my-cloud-logging

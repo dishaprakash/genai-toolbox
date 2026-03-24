@@ -21,7 +21,7 @@ in a given model in the source.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_parameters
 type: looker-get-parameters
 source: looker-source

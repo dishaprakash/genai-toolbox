@@ -34,7 +34,7 @@ user if available.
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-neo4j-source
 type: neo4j
 uri: neo4j+s://xxxx.databases.neo4j.io:7687

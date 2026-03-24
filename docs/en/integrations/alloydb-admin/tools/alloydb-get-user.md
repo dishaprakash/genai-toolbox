@@ -25,7 +25,7 @@ specified AlloyDB user.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_specific_user
 type: alloydb-get-user
 source: my-alloydb-admin-source

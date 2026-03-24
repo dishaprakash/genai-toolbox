@@ -20,7 +20,7 @@ A `cloud-healthcare-get-fhir-store-metrics` tool retrieves metrics for a FHIR st
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_fhir_store_metrics
 type: cloud-healthcare-get-fhir-store-metrics
 source: my-healthcare-source

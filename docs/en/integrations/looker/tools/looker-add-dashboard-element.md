@@ -23,7 +23,7 @@ CRITICAL ORDER OF OPERATIONS:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: add_dashboard_element
 type: looker-add-dashboard-element
 source: looker-source

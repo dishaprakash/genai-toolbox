@@ -29,7 +29,7 @@ applying artificial intelligence and machine learning.
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-dataplex-source
 type: "dataplex"
 project: "my-project-id"

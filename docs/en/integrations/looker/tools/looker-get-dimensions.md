@@ -22,7 +22,7 @@ in a given model in the source.
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_dimensions
 type: looker-get-dimensions
 source: looker-source

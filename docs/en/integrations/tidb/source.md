@@ -39,7 +39,7 @@ console.
 - TiDB Cloud
 
     ```yaml
-    kind: sources
+    kind: source
     name: my-tidb-cloud-source
     type: tidb
     host: gateway01.us-west-2.prod.aws.tidbcloud.com
@@ -53,7 +53,7 @@ console.
 - Self-Hosted TiDB
 
     ```yaml
-    kind: sources
+    kind: source
     name: my-tidb-source
     type: tidb
     host: 127.0.0.1

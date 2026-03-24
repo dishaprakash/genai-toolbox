@@ -20,7 +20,7 @@ A `cloud-healthcare-get-dicom-store` tool retrieves information about a DICOM st
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: get_dicom_store
 type: cloud-healthcare-get-dicom-store
 source: my-healthcare-source

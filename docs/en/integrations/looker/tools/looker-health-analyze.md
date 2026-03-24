@@ -39,7 +39,7 @@ instance. The `action` parameter selects the type of analysis to perform:
 ## Example
 
 ```yaml
-kind: tools
+kind: tool
 name: health_analyze
 type: looker-health-analyze
 source: looker-source

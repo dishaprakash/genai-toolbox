@@ -51,7 +51,7 @@ must be wrapped with its type indicator:
 ### Basic Document Creation
 
 ```yaml
-kind: tools
+kind: tool
 name: add-company-doc
 type: firestore-add-documents
 source: my-firestore
@@ -251,7 +251,7 @@ The tool returns a map containing:
 The tool can be configured to require authentication:
 
 ```yaml
-kind: tools
+kind: tool
 name: secure-add-docs
 type: firestore-add-documents
 source: prod-firestore

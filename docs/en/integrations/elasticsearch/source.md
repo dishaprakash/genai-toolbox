@@ -62,7 +62,7 @@ applying permissions to an API key.
 ## Example
 
 ```yaml
-kind: sources
+kind: source
 name: my-elasticsearch-source
 type: "elasticsearch"
 addresses:

@@ -18,7 +18,7 @@ The `cloud-sql-clone-instance` tool clones a Cloud SQL instance using the Cloud 
 Basic clone (current state)
 
 ```yaml
-kind: tools
+kind: tool
 name: clone-instance-basic
 type: cloud-sql-clone-instance
 source: cloud-sql-admin-source
@@ -28,7 +28,7 @@ description: "Creates an exact copy of a Cloud SQL instance. Supports configurin
 Point-in-time recovery (PITR) clone
 
 ```yaml
-kind: tools
+kind: tool
 name: clone-instance-pitr
 type: cloud-sql-clone-instance
 source: cloud-sql-admin-source

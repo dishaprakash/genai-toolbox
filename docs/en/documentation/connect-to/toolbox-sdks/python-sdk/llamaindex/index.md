@@ -49,11 +49,7 @@ asyncio.run(run_agent())
 ```
 
 {{< notice tip >}}
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/llamaindex/index.md
 For a complete, end-to-end example including setting up the service and using an SDK, see the full tutorial: [Toolbox Quickstart Tutorial](../../../../getting-started/local_quickstart.md)
-========
-For a complete, end-to-end example including setting up the service and using an SDK, see the full tutorial: [Toolbox Quickstart Tutorial](../../../getting-started/local_quickstart.md)
->>>>>>>> main:docs/en/sdks/python/llamaindex/index.md
 {{< /notice >}}
 
 ## Usage
@@ -89,10 +85,6 @@ We currently support different versions of the MCP protocol.
 | `Protocol.MCP_v20250326` | MCP Protocol version 2025-03-26. |
 | `Protocol.MCP_v20241105` | MCP Protocol version 2024-11-05. |
 
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/llamaindex/index.md
-
-========
->>>>>>>> main:docs/en/sdks/python/llamaindex/index.md
 ### Example
 
 ```py
@@ -457,8 +449,4 @@ with ToolboxClient("http://127.0.0.1:5000", telemetry_enabled=True) as toolbox:
     result = tool(param="value")
 ```
 
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/llamaindex/index.md
 Configure your OpenTelemetry `TracerProvider` and `MeterProvider` before creating the client. See the [toolbox-core OpenTelemetry documentation](https://googleapis.github.io/genai-toolbox/sdks/python-sdk/core/#opentelemetry) for a full setup example.
-========
-Configure your OpenTelemetry `TracerProvider` and `MeterProvider` before creating the client. See the [toolbox-core OpenTelemetry documentation](https://googleapis.github.io/genai-toolbox/sdks/python-sdk/core/#opentelemetry) for a full setup example.
->>>>>>>> main:docs/en/sdks/python/llamaindex/index.md

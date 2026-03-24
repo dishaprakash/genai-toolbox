@@ -92,20 +92,13 @@ The SDK supports multiple transport protocols for communicating with the Toolbox
 You can explicitly select a protocol using the `core.WithProtocol` option during client initialization. This is useful if you need to pin the client to a specific legacy version of MCP.
 
 {{< notice note >}}
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/tbadk/_index.md
 * **MCP Transports**: These options use the **Model Context Protocol over HTTP**.
-========
-* MCP Transport options use **Model Context Protocol over HTTP**.
->>>>>>>> main:docs/en/sdks/Go/tbadk/_index.md
 {{< /notice >}}
 
 ### Supported Protocols
 
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/tbadk/_index.md
 We currently support different versions of the MCP protocol.
 
-========
->>>>>>>> main:docs/en/sdks/Go/tbadk/_index.md
 | Constant | Description |
 | :--- | :--- |
 | `core.MCP` | **(Default)** Alias for the latest supported MCP version (currently `v2025-06-18`). |
@@ -125,10 +118,6 @@ import (
 // Initialize with the default MCP protocol (2025-06-18)
 client, err := tbadk.NewToolboxClient(
     "http://localhost:5000",
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/tbadk/_index.md
-
-========
->>>>>>>> main:docs/en/sdks/Go/tbadk/_index.md
 )
 
 // Initialize with the MCP Protocol 2025-03-26

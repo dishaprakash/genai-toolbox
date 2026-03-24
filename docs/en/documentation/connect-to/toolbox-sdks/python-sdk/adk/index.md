@@ -194,11 +194,7 @@ creds = CredentialStrategy.from_adk_credentials(auth_credential, scheme)
 ### 8. Tool-Specific Authentication
 *Resolve authentication tokens dynamically for specific tools.*
 
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/adk/index.md
 Some tools may define their own authentication requirements (e.g., Salesforce OAuth, GitHub PAT) via `authSource` in their schema. You can provide a mapping of getters to resolve these tokens at runtime.
-========
-Some tools may define their own authentication requirements (e.g., Salesforce OAuth, GitHub PAT) via `authServices` in their schema. You can provide a mapping of getters to resolve these tokens at runtime.
->>>>>>>> main:docs/en/sdks/python/adk/index.md
 
 {{< notice tip >}}
 Getters can optionally accept the ADK `ToolContext` as a single argument. This enables seamless integration of dynamic, end-user tokens that are tied to the current agent execution state.
@@ -274,8 +270,5 @@ toolset = ToolboxToolset(
 )
 ```
 
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/adk/index.md
 Configure your OpenTelemetry `TracerProvider` and `MeterProvider` before creating the client. See the [toolbox-core OpenTelemetry documentation](https://googleapis.github.io/genai-toolbox/sdks/python-sdk/core/#opentelemetry) for a full setup example.
-========
-Configure your OpenTelemetry `TracerProvider` and `MeterProvider` before creating the client. See the [toolbox-core OpenTelemetry documentation](https://googleapis.github.io/genai-toolbox/sdks/python-sdk/core/#opentelemetry) for a full setup example.
->>>>>>>> main:docs/en/sdks/python/adk/index.md
+

@@ -360,7 +360,7 @@ client, err := core.NewToolboxClient("http://127.0.0.1:5000")
 tool, err := client.LoadTool("my-tool", ctx)
 
 AuthTool, err := tool.ToolFrom(
-  core.WithAuthTokenSource("my-auth", erTokenSource),
+  core.WithAuthTokenSource("my-auth", headerTokenSource),
   core.WithAuthTokenString("my-auth-1", "value"),
   )
 ```
@@ -417,7 +417,7 @@ func main() {
 ```
 
 {{< notice note >}}
-An auth token getter for a specific name (e.g., "GOOGLE_ID") will replace any client er with the same name followed by "_token" (e.g., "GOOGLE_ID_token").
+An auth token getter for a specific name (e.g., "GOOGLE_ID") will replace any client header with the same name followed by "_token" (e.g., "GOOGLE_ID_token").
 {{< /notice >}}
 
 ## Binding Parameter Values

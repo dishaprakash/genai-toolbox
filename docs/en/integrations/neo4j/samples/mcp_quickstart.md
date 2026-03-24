@@ -5,6 +5,7 @@ weight: 1
 description: >
   How to get started running Toolbox with MCP Inspector and Neo4j as the source.
 sample_filters: ["Neo4j", "MCP Inspector"]
+is_sample: true
 ---
 
 ## Overview

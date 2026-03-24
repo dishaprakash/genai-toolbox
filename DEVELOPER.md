@@ -271,7 +271,7 @@ When updating documentation, you must adhere to the structural constraints enfor
     1. **Quickstarts:** Place in `docs/en/documentation/getting-started/quickstart/`.
     2. **Database-Specific samples:** Place in `docs/en/integrations/<newdb>/samples/`. Make sure to include a `samples/_index.md` wrapper that contains **only frontmatter**.
     3. **General/Cross- samples:** Place directly in `docs/en/samples/`.
-  * Ensure appropriate **frontmatter tags (`sample_filters`)** are added so the UI Gallery filters can index them.
+  * Ensure appropriate **frontmatter tags (`sample_filters`, `is_sample`)** are added so the UI Gallery filters can index them.
 * **Adding Top-Level Sections:** If you add a completely new top-level documentation directory (e.g., a new section alongside `integrations`, `documentation`), you **must** update the AI documentation layout files located at `.hugo/layouts/index.llms.txt` and `.hugo/layouts/index.llms-full.txt`. Specifically, update the "Diátaxis Narrative Framework" preamble so AI models understand the purpose of your new section.
 
 #### Adding Prebuilt Tools

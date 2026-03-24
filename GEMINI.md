@@ -161,7 +161,7 @@ When generating or editing documentation for this repository, you must strictly 
 5.  **Shortcode Placement:** If you generate the `## Compatible Sources` section, you must include the `{{< compatible-sources >}}` shortcode beneath it.
 
 ##### Samples Architecture Constraints
-Sample code is aggregated visually in the UI via the "Samples Hub", but the physical markdown files are distributed logically based on their scope. When adding samples, use the correct location and apply proper frontmatter tags for the gallery filtering:
+Sample code is aggregated visually in the UI via the Samples section, but the physical markdown files are distributed logically based on their scope. When adding samples, use the correct location and apply proper frontmatter tags (`sample_filters`, `is_sample`) are added so the UI Gallery filters can index them.for the gallery filtering:
 1.  **Quickstarts:** `docs/en/documentation/getting-started/`
 2.  **Integration-Specific Samples:** `docs/en/integrations/<source_name>/samples/`. (The `samples/_index.md` wrapper must contain **strictly only frontmatter**).
 3.  **General/Cross-Category Samples:** `docs/en/samples/`

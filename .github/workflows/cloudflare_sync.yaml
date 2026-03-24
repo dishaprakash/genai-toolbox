@@ -14,6 +14,9 @@
 
 name: "Sync v1 docsite to Cloudflare"
 
+permissions:
+  contents: read
+
 concurrency:
   group: cloudflare-sync
   cancel-in-progress: true

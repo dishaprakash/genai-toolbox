@@ -63,6 +63,10 @@ jobs:
           else
             PR_NUMBER=$(cat downloaded-artifact/pr_number.txt)
           fi
+          if ! [[ "$PR_NUMBER" =~ ^[0-9]+$ ]]; then
+            echo "Error: PR number [$PR_NUMBER] is invalid."
+            exit 1
+          fi
           echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
 
       - name: Deploy to Cloudflare Pages

@@ -96,7 +96,9 @@ document.addEventListener("DOMContentLoaded", function() {
   links.forEach(link => {
     if (!link.name || !link.url) return;
 
-    let finalUrl = (link.isRight ? link.redirect : link.url).replace(/\/+/g, '/');
+    let rawUrl = link.isRight ? link.redirect : link.url;
+    // Only strip double slashes if it is an internal relative link
+    let finalUrl = rawUrl.startsWith('http') ? rawUrl : rawUrl.replace(/\/+/g, '/');
 
     // Apply active version prefix mapping
     if (!link.isRight && activePrefix !== '/' && !finalUrl.startsWith(activePrefix)) {

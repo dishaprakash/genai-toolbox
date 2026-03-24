@@ -449,14 +449,8 @@ func mcpAuthMiddleware(s *Server) func(http.Handler) http.Handler {
 				}
 			}
 
+			// MCP Auth not enabled
 			if mcpSvc == nil {
-				next.ServeHTTP(w, r)
-				return
-			}
-
-			// Exclude common unauthenticated paths
-			path := r.URL.Path
-			if path == "/.well-known/oauth-protected-resource" || path == "/" || strings.HasPrefix(path, "/ui") {
 				next.ServeHTTP(w, r)
 				return
 			}

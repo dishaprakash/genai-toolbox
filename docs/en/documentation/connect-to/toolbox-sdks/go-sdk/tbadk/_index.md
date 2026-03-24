@@ -184,12 +184,7 @@ result, err := tool.Run(ctx, inputs)
 ```
 
 {{< notice tip >}}For a more comprehensive guide on setting up the Toolbox service itself, which
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/tbadk/_index.md
 you'll need running to use this SDK, please refer to the [Toolbox Quickstart Guide](../../../../getting-started/local_quickstart_go.md).
-========
-you'll need running to use this SDK, please refer to the [Toolbox Quickstart
-Guide](../../../getting-started/local_quickstart.md).
->>>>>>>> main:docs/en/sdks/Go/tbadk/_index.md
 {{< /notice >}}
 
 ## Client to Server Authentication
@@ -257,11 +252,7 @@ client, err := tbadk.NewToolboxClient(
 
 For Toolbox servers hosted on Google Cloud (e.g., Cloud Run) and requiring
 `Google ID token` authentication, the helper module
-<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/tbadk/_index.md
-[auth](https://github.com/googleapis/mcp-toolbox-sdk-go/blob/main/core/auth.go) provides utility functions.
-========
 [auth_methods](https://github.com/googleapis/mcp-toolbox-sdk-go/blob/main/core/auth.go) provides utility functions.
->>>>>>>> main:docs/en/sdks/Go/tbadk/_index.md
 
 ### Step by Step Guide for Cloud Run
 

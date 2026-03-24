@@ -20,7 +20,7 @@ This file (symlinked as `CLAUDE.md` and `AGENTS.md`) provides context and guidel
 -   `internal/sources/`: Implementations of database sources (e.g., Postgres, BigQuery).
 -   `internal/tools/`: Implementations of specific tools for each source.
 -   `tests/`: Integration tests.
--   `docs/`: Project documentation. Separated logically into:
+-   `docs/en`: Project documentation. Separated logically into:
     - `documentation/`: Documentation and concepts (Section I).
     - `integrations/`: Reference architectures for DB connectivity and tools (Section II).
     - `samples/`: Tutorials and code samples (Section III).

@@ -269,4 +269,8 @@ import (
 	_ "github.com/googleapis/genai-toolbox/internal/sources/trino"
 	_ "github.com/googleapis/genai-toolbox/internal/sources/valkey"
 	_ "github.com/googleapis/genai-toolbox/internal/sources/yugabytedb"
+
+	_ "github.com/googleapis/genai-toolbox/internal/auth/google"
+
+	_ "github.com/googleapis/genai-toolbox/internal/embeddingmodels/gemini"
 )

@@ -28,7 +28,11 @@ npm install @toolbox-sdk/adk
 
 
 1. **Start the Toolbox Service**
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/javascript-sdk/adk/index.md
    - Make sure the MCP Toolbox service is running. See the [Toolbox Getting Started Guide](../../../../introduction/_index.md#getting-started).
+========
+   - Make sure the MCP Toolbox service is running. See the [Toolbox Getting Started Guide](../../../getting-started/introduction/_index.md#getting-started).
+>>>>>>>> main:docs/en/sdks/Js/adk/index.md
 
 2. **Minimal Example**
 
@@ -88,7 +92,10 @@ The SDK supports multiple transport protocols to communicate with the Toolbox se
 ### Available Protocols
 
 We currently support different versions of the MCP protocol.
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/javascript-sdk/adk/index.md
 
+========
+>>>>>>>> main:docs/en/sdks/Js/adk/index.md
 - `Protocol.MCP`: The default protocol version (currently aliases to `MCP_v20250618`).
 - `Protocol.MCP_v20241105`: Use this for compatibility with older MCP servers (November 2024 version).
 - `Protocol.MCP_v20250326`: March 2025 version.
@@ -144,7 +151,11 @@ const result = await tool.runAsync(args: {a: 5, b: 2})
 ```
 
 {{< notice tip>}}
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/javascript-sdk/adk/index.md
 For a more comprehensive guide on setting up the Toolbox service itself, which you'll need running to use this SDK, please refer to the [Toolbox Quickstart Guide](../../../../getting-started/local_quickstart_js.md).
+========
+For a more comprehensive guide on setting up the Toolbox service itself, which you'll need running to use this SDK, please refer to the [Toolbox Quickstart Guide](../../../getting-started/local_quickstart.md).
+>>>>>>>> main:docs/en/sdks/Js/adk/index.md
 {{< /notice >}}
 
 ## Client to Server Authentication
@@ -204,6 +215,10 @@ const client = new ToolboxClient(URL, null, {"Authorization": getGoogleIdTokenGe
 For Toolbox servers hosted on Google Cloud (e.g., Cloud Run) and requiring
 `Google ID token` authentication, the helper module
 [auth_methods](https://github.com/googleapis/mcp-toolbox-sdk-js/blob/main/packages/toolbox-core/src/toolbox_core/authMethods.ts) provides utility functions.
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/javascript-sdk/adk/index.md
+========
+
+>>>>>>>> main:docs/en/sdks/Js/adk/index.md
 
 ### Step by Step Guide for Cloud Run
 
@@ -248,14 +263,22 @@ Oauth2 tokens) when invoking that specific tool.
 
 ### Supported Authentication Mechanisms
 
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/javascript-sdk/adk/index.md
 The Toolbox service enables secure tool usage through **Authenticated Parameters**. For detailed information on how these mechanisms work within the Toolbox service and how to configure them, please refer to [Toolbox Service Documentation - Authenticated Parameters](../../../../configuration/tools/_index.md#authenticated-parameters)
 
+========
+The Toolbox service enables secure tool usage through **Authenticated Parameters**. For detailed information on how these mechanisms work within the Toolbox service and how to configure them, please refer to [Toolbox Service Documentation - Authenticated Parameters](../../../resources/tools/_index.md#authenticated-parameters)
+>>>>>>>> main:docs/en/sdks/Js/adk/index.md
 ### Step 1: Configure Tools in Toolbox Service
 
 First, ensure the target tool(s) are configured correctly in the Toolbox service
 to require authentication. Refer to the [Toolbox Service Documentation -
 Authenticated
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/javascript-sdk/adk/index.md
 Parameters](../../../../configuration/tools/_index.md#authenticated-parameters)
+========
+Parameters](../../../resources/tools/_index.md#authenticated-parameters)
+>>>>>>>> main:docs/en/sdks/Js/adk/index.md
 for instructions.
 
 ### Step 2: Configure SDK Client

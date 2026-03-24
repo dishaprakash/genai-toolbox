@@ -33,6 +33,15 @@ typically involves:
 
 *   **Prepared Statements:** Writing a SQL query ahead of time and letting the
     agent only fill in specific [basic parameters](../configuration/tools/_index.md#basic-parameters).
+*   [**Bound Parameters:**](../connect-to/toolbox-sdks/python-sdk/core/index.md#option-a-binding-parameters-to-a-loaded-tool)
+    Passing parameters directly to the underlying engine as bound variables
+    rather than allowing the LLM to provide them.
+*   **Secure Parameters:** Using mechanisms like [authenticated
+    parameters](../configuration/tools/_index.md#authenticated-parameters) to restrict what data the agent can
+    access based on the logged-in user.
+
+By creating custom tools, you significantly reduce the attack surface and ensure
+the agent operates within defined, safe boundaries.
 
 ---
 

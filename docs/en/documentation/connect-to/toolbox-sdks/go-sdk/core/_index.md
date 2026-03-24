@@ -95,13 +95,20 @@ The SDK supports multiple transport protocols for communicating with the Toolbox
 You can explicitly select a protocol using the `core.WithProtocol` option during client initialization. This is useful if you need to pin the client to a specific legacy version of MCP.
 
 {{< notice note >}}
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/core/_index.md
 * **MCP Transports**: These options use the **Model Context Protocol over HTTP**.
+========
+* **MCP Transports**: These options use **Model Context Protocol over HTTP**.
+>>>>>>>> main:docs/en/sdks/Go/core/_index.md
 {{< /notice >}}
 
 ### Supported Protocols
 
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/go-sdk/core/_index.md
 We currently support different versions of the MCP protocol.
 
+========
+>>>>>>>> main:docs/en/sdks/Go/core/_index.md
 | Constant | Description |
 | :--- | :--- |
 | `core.MCP` | **(Default)** Alias for the latest supported MCP version (currently `v2025-06-18`). |

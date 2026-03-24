@@ -282,7 +282,6 @@ to use BigQuery, and then run the Toolbox server.
 
     ```yaml
     # Add this to your tools.yaml if using load_toolset("my-toolset")
-    # Ensure it's at the same indentation level as 'sources:' and 'tools:'
     kind: toolset
     name: my-toolset
     tools:

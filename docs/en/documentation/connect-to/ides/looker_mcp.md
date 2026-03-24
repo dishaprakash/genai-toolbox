@@ -85,7 +85,7 @@ After you install Looker in the MCP Store, resources and tools from the server a
       }
     }
     ```
-    If you want to access tools to develop LookML as well as query data
+   If you want to access tools to develop LookML as well as query data
    and create content, change the following line
    ```json
           "args": ["-y", "@toolbox-sdk/server", "--prebuilt", "looker", "--stdio"],
@@ -167,6 +167,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
       }
     }
     ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
 
     If you want to access tools to develop LookML as well as query data
     and create content, change the following line
@@ -206,6 +215,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
       }
     }
     ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
 
     If you want to access tools to develop LookML as well as query data
     and create content, change the following line
@@ -242,6 +260,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
         }
       }
     }
+    ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
     ```
 
     If you want to access tools to develop LookML as well as query data
@@ -283,6 +310,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
       }
     }
     ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
 
     If you want to access tools to develop LookML as well as query data
     and create content, change the following line
@@ -320,6 +356,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
         }
       }
     }
+    ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
     ```
 
     If you want to access tools to develop LookML as well as query data
@@ -361,6 +406,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
       }
     }
     ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
+    ```
 
     If you want to access tools to develop LookML as well as query data
     and create content, change the following line
@@ -397,7 +451,15 @@ curl -O https://storage.googleapis.com/genai-toolbox/v0.30.0/windows/amd64/toolb
         }
       }
     }
-
+    ```
+    If you want to access tools to develop LookML as well as query data
+    and create content, change the following line
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker"],
+    ```
+    to
+    ```json
+          "args": ["--stdio", "--prebuilt", "looker,looker-dev"],
     ```
     
     If you want to access tools to develop LookML as well as query data

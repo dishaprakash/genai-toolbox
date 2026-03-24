@@ -372,5 +372,4 @@ result, err := tool.Invoke(ctx, inputs)
 ```
 
 
-
 To see all supported sources and the specific tools they unlock, explore the full list of our [Integrations](../../../integrations/_index.md).

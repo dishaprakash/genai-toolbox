@@ -29,7 +29,11 @@ The `ToolboxClient` (and its synchronous counterpart `ToolboxSyncClient`) intera
 ## Quickstart
 
 1. **Start the Toolbox Service**
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/core/index.md
    - Make sure the MCP Toolbox service is running on port `5000` of your local machine. See the [Toolbox Getting Started Guide](../../../../introduction/_index.md#getting-started).
+========
+   - Make sure the MCP Toolbox service is running on port `5000` of your local machine. See the [Toolbox Getting Started Guide](../../../getting-started/introduction/_index.md#getting-started).
+>>>>>>>> main:docs/en/sdks/python/core/index.md
 
 2. **Minimal Example**
 
@@ -50,7 +54,11 @@ if __name__ == "__main__":
 
 
 {{< notice tip>}}
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/core/index.md
 For a complete, end-to-end example including setting up the service and using an SDK, see the full tutorial: [**Toolbox Quickstart Tutorial**](../../../../getting-started/local_quickstart.md)
+========
+For a complete, end-to-end example including setting up the service and using an SDK, see the full tutorial: [**Toolbox Quickstart Tutorial**](../../../getting-started/local_quickstart.md)
+>>>>>>>> main:docs/en/sdks/python/core/index.md
 {{< /notice >}}
 
 {{< notice note>}}
@@ -108,7 +116,10 @@ We currently support different versions of the MCP protocol.
 | `Protocol.MCP_v20250618` | MCP Protocol version 2025-06-18. |
 | `Protocol.MCP_v20241105` | MCP Protocol version 2024-11-05. |
 
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/core/index.md
 
+========
+>>>>>>>> main:docs/en/sdks/python/core/index.md
 ### Example
 
 ```py
@@ -171,7 +182,11 @@ result = await tool("foo", bar="baz")
 ```
 
 {{< notice tip>}}
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/core/index.md
 For a more comprehensive guide on setting up the Toolbox service itself, which you'll need running to use this SDK, please refer to the [Toolbox Quickstart Guide](../../../../getting-started/local_quickstart.md).
+========
+For a more comprehensive guide on setting up the Toolbox service itself, which you'll need running to use this SDK, please refer to the [Toolbox Quickstart Guide](../../../getting-started/local_quickstart.md).
+>>>>>>>> main:docs/en/sdks/python/core/index.md
 {{< /notice >}}
 
 ## Synchronous Usage
@@ -375,12 +390,20 @@ Oauth2 tokens) when invoking that specific tool.
 
 ### Supported Authentication Mechanisms
 
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/core/index.md
 The Toolbox service enables secure tool usage through **Authenticated Parameters**. For detailed information on how these mechanisms work within the Toolbox service and how to configure them, please refer to [Authenticated Parameters](../../../../configuration/tools/_index.md#authenticated-parameters)
 
 ### Step 1: Configure Tools in Toolbox Service
 
 First, ensure the target tool(s) are configured correctly in the Toolbox service
 to require authentication. Refer to the [Authenticated Parameters](../../../../configuration/tools/_index.md#authenticated-parameters)
+========
+The Toolbox service enables secure tool usage through **Authenticated Parameters**. For detailed information on how these mechanisms work within the Toolbox service and how to configure them, please refer to [Authenticated Parameters](../../../resources/tools/_index.md#authenticated-parameters)
+### Step 1: Configure Tools in Toolbox Service
+
+First, ensure the target tool(s) are configured correctly in the Toolbox service
+to require authentication. Refer to the [Authenticated Parameters](../../../resources/tools/_index.md#authenticated-parameters)
+>>>>>>>> main:docs/en/sdks/python/core/index.md
 for instructions.
 
 ### Step 2: Configure SDK Client
@@ -594,4 +617,8 @@ async with ToolboxClient("http://127.0.0.1:5000", telemetry_enabled=True) as too
 
 {{< notice note >}}
 If `telemetry_enabled=True` but no provider is configured, OpenTelemetry's no-op implementation is used — no data is exported and there is zero overhead. The optional `[telemetry]` extra must be installed for `telemetry_enabled=True` to have any effect; if it is not installed the flag is silently ignored.
+<<<<<<<< HEAD:docs/en/documentation/connect-to/toolbox-sdks/python-sdk/core/index.md
 {{< /notice >}}
+========
+{{< /notice >}}
+>>>>>>>> main:docs/en/sdks/python/core/index.md

@@ -1,5 +1,5 @@
 ---
-title: "serverless-spark-get-session-template Tool"
+title: "serverless-spark-get-session-template"
 type: docs
 weight: 1
 description: >

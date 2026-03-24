@@ -76,10 +76,15 @@ Common scopes include `https://www.googleapis.com/auth/bigquery` or
 ### Authentication via User's OAuth Access Token
 
 If the `useClientOAuth` parameter is set to `true`, Toolbox will instead use the
-OAuth access token for authentication. This token is parsed from the
-`Authorization` header passed in with the tool invocation request. This method
-allows Toolbox to make queries to [BigQuery][bigquery-docs] on behalf of the
-client or the end-user.
+OAuth access token for authentication. By default, this token is parsed from the
+`Authorization` header passed in with the tool invocation request.
+
+If you need to use a non-standard header for the access token (e.g., to avoid
+conflicts with other services like Cloud Run), you can specify the header name
+in the `useClientOAuth` field (e.g., `useClientOAuth: X-BigQuery-Auth`).
+
+This method allows Toolbox to make queries to [BigQuery][bigquery-docs] on behalf
+of the client or the end-user.
 
 When using this on-behalf-of authentication, you must ensure that the
 identity used has been granted the correct IAM permissions.

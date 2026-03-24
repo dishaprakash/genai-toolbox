@@ -1,6 +1,7 @@
 ---
 title: "Discord"
 icon: "fab fa-discord"
+type: docs
 weight: 2
 description: Join the MCP Toolbox community
 manualLink: "https://discord.gg/Dmm69peqjh"

@@ -455,7 +455,7 @@ func run(cmd *cobra.Command, opts *internal.ToolboxOptions) error {
 	}
 
 	// start server
-	s, err := server.NewServer(ctx, opts.Cfg)
+	s, err := server.NewServer(ctx, opts.Cfg, false)
 	if err != nil {
 		errMsg := fmt.Errorf("toolbox failed to initialize: %w", err)
 		opts.Logger.ErrorContext(ctx, errMsg.Error())

@@ -324,7 +324,7 @@ func hostCheck(allowedHosts map[string]struct{}) func(http.Handler) http.Handler
 }
 
 // NewServer returns a Server object based on provided Config.
-func NewServer(ctx context.Context, cfg ServerConfig) (*Server, error) {
+func NewServer(ctx context.Context, cfg ServerConfig, enableAdmin bool) (*Server, error) {
 	instrumentation, err := util.InstrumentationFromContext(ctx)
 	if err != nil {
 		return nil, err
@@ -425,6 +425,15 @@ func NewServer(ctx context.Context, cfg ServerConfig) (*Server, error) {
 		}
 		r.Mount("/ui", webR)
 	}
+
+	if enableAdmin {
+		adminR, err := adminRouter(s)
+		if err != nil {
+			return nil, err
+		}
+		r.Mount("/admin", adminR)
+	}
+
 	// default endpoint for validating server is running
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte("🧰 Hello, World! 🧰"))

@@ -1,25 +1,50 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package tests
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"reflect"
+	"sort"
 	"strings"
+	"sync"
 	"testing"
+	"time"
+
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/google/uuid"
+	"github.com/googleapis/genai-toolbox/internal/sources"
+	"github.com/googleapis/genai-toolbox/internal/tools"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func RunMCPToolGetTest(t *testing.T) {
 	// Test tool get endpoint
 	tcs := []struct {
-		name string
+		name     string
 		toolName string
-		want map[string]any
+		want     map[string]any
 	}{
 		{
-			name: "get my-simple-tool",
+			name:     "get my-simple-tool",
 			toolName: "my-simple-tool",
 			want: map[string]any{
 				"my-simple-tool": map[string]any{
@@ -32,7 +57,7 @@ func RunMCPToolGetTest(t *testing.T) {
 	}
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			
+
 			statusCode, mcpResp, err := GetMCPToolsList(t, nil)
 			if err != nil {
 				t.Fatalf("error when sending tools/list request: %s", err)
@@ -41,13 +66,23 @@ func RunMCPToolGetTest(t *testing.T) {
 				t.Fatalf("response status code is not 200, got %d", statusCode)
 			}
 
+			var resultList struct {
+				Tools []struct {
+					Name        string `json:"name"`
+					Description string `json:"description"`
+					InputSchema struct {
+						Type       string         `json:"type"`
+						Properties map[string]any `json:"properties"`
+						Required   []string       `json:"required"`
+					} `json:"inputSchema"`
+				} `json:"tools"`
+			}
+			jsonData, _ := json.Marshal(mcpResp.Result)
+			_ = json.Unmarshal(jsonData, &resultList)
+
 			// Natively convert the MCP list into a legacy map format to support the 77 assertions
 			got := make(map[string]any)
-			for _, tool := range mcpResp.Result.Tools {
-				params := tool.InputSchema.Properties
-				if params == nil {
-					params = map[string]any{}
-				}
+			for _, tool := range resultList.Tools {
 
 				got[tool.Name] = map[string]any{
 					"description":  tool.Description,
@@ -61,32 +96,32 @@ func RunMCPToolGetTest(t *testing.T) {
 			if !ok {
 				t.Fatalf("unable to find tool %q in response body", tc.toolName)
 			}
-			
+
 			// Compare against the expected mapped dictionary
 			wantDict := tc.want[tc.toolName].(map[string]any)
 			if wantDict["description"] != val.(map[string]any)["description"] {
 				t.Fatalf("got %v, want %v", val, tc.want)
 			}
-})
+		})
 	}
 }
 
 func RunMCPToolGetTestByName(t *testing.T, name string, want map[string]any) {
 	// Test tool get endpoint
 	tcs := []struct {
-		name string
+		name     string
 		toolName string
-		want map[string]any
+		want     map[string]any
 	}{
 		{
-			name: fmt.Sprintf("get %s", name),
+			name:     fmt.Sprintf("get %s", name),
 			toolName: name,
-			want: want,
+			want:     want,
 		},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			
+
 			statusCode, mcpResp, err := GetMCPToolsList(t, nil)
 			if err != nil {
 				t.Fatalf("error when sending tools/list request: %s", err)
@@ -95,13 +130,15 @@ func RunMCPToolGetTestByName(t *testing.T, name string, want map[string]any) {
 				t.Fatalf("response status code is not 200, got %d", statusCode)
 			}
 
+			var resultList struct {
+				Tools []tools.McpManifest `json:"tools"`
+			}
+			jsonData, _ := json.Marshal(mcpResp.Result)
+			_ = json.Unmarshal(jsonData, &resultList)
+
 			// Natively convert the MCP list into a legacy map format to support the 77 assertions
 			got := make(map[string]any)
-			for _, tool := range mcpResp.Result.Tools {
-				params := tool.InputSchema.Properties
-				if params == nil {
-					params = map[string]any{}
-				}
+			for _, tool := range resultList.Tools {
 
 				got[tool.Name] = map[string]any{
 					"description":  tool.Description,
@@ -115,13 +152,13 @@ func RunMCPToolGetTestByName(t *testing.T, name string, want map[string]any) {
 			if !ok {
 				t.Fatalf("unable to find tool %q in response body", tc.toolName)
 			}
-			
+
 			// Compare against the expected mapped dictionary
 			wantDict := tc.want[tc.toolName].(map[string]any)
 			if wantDict["description"] != val.(map[string]any)["description"] {
 				t.Fatalf("got %v, want %v", val, tc.want)
 			}
-})
+		})
 	}
 }
 
@@ -161,7 +198,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 	// Test tool invoke endpoint
 	invokeTcs := []struct {
 		name           string
-		toolName string
+		toolName       string
 		enabled        bool
 		requestHeader  map[string]string
 		requestBody    io.Reader
@@ -170,7 +207,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 	}{
 		{
 			name:           "invoke my-simple-tool",
-			toolName: "my-simple-tool",
+			toolName:       "my-simple-tool",
 			enabled:        configs.supportSelect1Want,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -179,7 +216,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "invoke my-tool",
-			toolName: "my-tool",
+			toolName:       "my-tool",
 			enabled:        true,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{"id": 3, "name": "Alice"}`)),
@@ -188,7 +225,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "invoke my-tool-by-id with nil response",
-			toolName: "my-tool-by-id",
+			toolName:       "my-tool-by-id",
 			enabled:        true,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{"id": 4}`)),
@@ -197,7 +234,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "invoke my-tool-by-name with nil response",
-			toolName: "my-tool-by-name",
+			toolName:       "my-tool-by-name",
 			enabled:        configs.supportOptionalNullParam,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -206,7 +243,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-tool without parameters",
-			toolName: "my-tool",
+			toolName:       "my-tool",
 			enabled:        true,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -215,7 +252,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-tool with insufficient parameters",
-			toolName: "my-tool",
+			toolName:       "my-tool",
 			enabled:        true,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{"id": 1}`)),
@@ -224,7 +261,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "invoke my-array-tool",
-			toolName: "my-array-tool",
+			toolName:       "my-array-tool",
 			enabled:        configs.supportArrayParam,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{"idArray": [1,2,3], "nameArray": ["Alice", "Sid", "RandomName"], "cmdArray": ["HGETALL", "row3"]}`)),
@@ -233,7 +270,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-auth-tool with auth token",
-			toolName: "my-auth-tool",
+			toolName:       "my-auth-tool",
 			enabled:        configs.supportSelect1Auth,
 			requestHeader:  map[string]string{"my-google-auth_token": idToken},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -242,7 +279,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-auth-tool with invalid auth token",
-			toolName: "my-auth-tool",
+			toolName:       "my-auth-tool",
 			enabled:        configs.supportSelect1Auth,
 			requestHeader:  map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -251,7 +288,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-auth-tool without auth token",
-			toolName: "my-auth-tool",
+			toolName:       "my-auth-tool",
 			enabled:        true,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -260,7 +297,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-auth-required-tool with auth token",
-			toolName: "my-auth-required-tool",
+			toolName:       "my-auth-required-tool",
 			enabled:        configs.supportSelect1Auth,
 			requestHeader:  map[string]string{"my-google-auth_token": idToken},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -269,7 +306,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-auth-required-tool with invalid auth token",
-			toolName: "my-auth-required-tool",
+			toolName:       "my-auth-required-tool",
 			enabled:        true,
 			requestHeader:  map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -278,7 +315,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-auth-required-tool without auth token",
-			toolName: "my-auth-tool",
+			toolName:       "my-auth-tool",
 			enabled:        true,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -287,7 +324,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-client-auth-tool with auth token",
-			toolName: "my-client-auth-tool",
+			toolName:       "my-client-auth-tool",
 			enabled:        configs.supportClientAuth,
 			requestHeader:  map[string]string{"Authorization": accessToken},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -296,7 +333,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		},
 		{
 			name:           "Invoke my-client-auth-tool without auth token",
-			toolName: "my-client-auth-tool",
+			toolName:       "my-client-auth-tool",
 			enabled:        configs.supportClientAuth,
 			requestHeader:  map[string]string{},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -305,7 +342,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 		{
 
 			name:           "Invoke my-client-auth-tool with invalid auth token",
-			toolName: "my-client-auth-tool",
+			toolName:       "my-client-auth-tool",
 			enabled:        configs.supportClientAuth,
 			requestHeader:  map[string]string{"Authorization": "Bearer invalid-token"},
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
@@ -327,9 +364,9 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 
 			// Check status code
 			if statusCode != tc.wantStatusCode {
@@ -343,7 +380,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 
 			// Check response body
 			var body map[string]interface{}
-			err = json.Unmarshal(resultStr, &body)
+			err = json.Unmarshal([]byte(resultStr), &body)
 			if err != nil {
 				t.Fatalf("error parsing response body: %s", err)
 			}
@@ -361,7 +398,7 @@ func RunMCPToolInvokeParametersTest(t *testing.T, name string, params []byte, si
 	// Test tool invoke endpoint
 	invokeTcs := []struct {
 		name          string
-		toolName string
+		toolName      string
 		requestHeader map[string]string
 		requestBody   io.Reader
 		want          string
@@ -369,7 +406,7 @@ func RunMCPToolInvokeParametersTest(t *testing.T, name string, params []byte, si
 	}{
 		{
 			name:          fmt.Sprintf("invoke %s", name),
-			toolName: name,
+			toolName:      name,
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer(params),
 			want:          simpleWant,
@@ -388,9 +425,9 @@ func RunMCPToolInvokeParametersTest(t *testing.T, name string, params []byte, si
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != http.StatusOK {
 				if tc.isErr {
 					return
@@ -400,8 +437,7 @@ func RunMCPToolInvokeParametersTest(t *testing.T, name string, params []byte, si
 
 			// Check response body
 			var body map[string]interface{}
-			// Unmarshaling result if JSON block)
-			if err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &body); err != nil {
 				t.Fatalf("error parsing response body")
 			}
 
@@ -418,7 +454,7 @@ func RunMCPToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
 	// Test tool invoke endpoint
 	invokeTcs := []struct {
 		name          string
-		toolName string
+		toolName      string
 		requestHeader map[string]string
 		requestBody   io.Reader
 		want          string
@@ -426,7 +462,7 @@ func RunMCPToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
 	}{
 		{
 			name:          fmt.Sprintf("invoke %s", name),
-			toolName: name,
+			toolName:      name,
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(`{}`)),
 			want:          simpleWant,
@@ -445,9 +481,9 @@ func RunMCPToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != http.StatusOK {
 				if tc.isErr {
 					return
@@ -457,8 +493,7 @@ func RunMCPToolInvokeSimpleTest(t *testing.T, name string, simpleWant string) {
 
 			// Check response body
 			var body map[string]interface{}
-			// Unmarshaling result if JSON block)
-			if err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &body); err != nil {
 				t.Fatalf("error parsing response body")
 			}
 
@@ -495,7 +530,7 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 	// Test tool invoke endpoint
 	invokeTcs := []struct {
 		name          string
-		toolName string
+		toolName      string
 		requestHeader map[string]string
 		requestBody   io.Reader
 		want          string
@@ -504,7 +539,7 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 	}{
 		{
 			name:          "invoke my-exec-sql-tool",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
 			want:          select1Want,
@@ -512,7 +547,7 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 		},
 		{
 			name:          "invoke my-exec-sql-tool create table",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, createTableStatement))),
 			want:          configs.createWant,
@@ -520,7 +555,7 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 		},
 		{
 			name:          "invoke my-exec-sql-tool select table",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(`{"sql":"SELECT * FROM t"}`)),
 			want:          configs.selectEmptyWant,
@@ -528,7 +563,7 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 		},
 		{
 			name:          "invoke my-exec-sql-tool drop table",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(`{"sql":"DROP TABLE t"}`)),
 			want:          configs.dropWant,
@@ -536,14 +571,14 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 		},
 		{
 			name:          "invoke my-exec-sql-tool without body",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(`{}`)),
 			isAgentErr:    true,
 		},
 		{
 			name:          "Invoke my-auth-exec-sql-tool with auth token",
-			toolName: "my-auth-exec-sql-tool",
+			toolName:      "my-auth-exec-sql-tool",
 			requestHeader: map[string]string{"my-google-auth_token": idToken},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
 			isErr:         false,
@@ -551,28 +586,28 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 		},
 		{
 			name:          "Invoke my-auth-exec-sql-tool with invalid auth token",
-			toolName: "my-auth-exec-sql-tool",
+			toolName:      "my-auth-exec-sql-tool",
 			requestHeader: map[string]string{"my-google-auth_token": "INVALID_TOKEN"},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
 			isErr:         true,
 		},
 		{
 			name:          "Invoke my-auth-exec-sql-tool without auth token",
-			toolName: "my-auth-exec-sql-tool",
+			toolName:      "my-auth-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"sql": %s}`, configs.select1Statement))),
 			isErr:         true,
 		},
 		{
 			name:          "invoke my-exec-sql-tool with invalid SELECT SQL",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(`{"sql":"SELECT * FROM non_existent_table"}`)),
 			isAgentErr:    true,
 		},
 		{
 			name:          "invoke my-exec-sql-tool with invalid ALTER SQL",
-			toolName: "my-exec-sql-tool",
+			toolName:      "my-exec-sql-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(`{"sql":"ALTER TALE t ALTER COLUMN id DROP NOT NULL"}`)),
 			isAgentErr:    true,
@@ -590,9 +625,9 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != http.StatusOK {
 				if tc.isErr {
 					return
@@ -605,7 +640,7 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 
 			// Check response body
 			var body map[string]interface{}
-			err = json.Unmarshal(resultStr, &body)
+			err = json.Unmarshal([]byte(resultStr), &body)
 			if err != nil {
 				t.Fatalf("error parsing response body")
 			}
@@ -651,7 +686,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		enabled       bool
 		ddl           bool
 		insert        bool
-		toolName string
+		toolName      string
 		requestHeader map[string]string
 		requestBody   io.Reader
 		want          string
@@ -660,7 +695,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		{
 			name:          "invoke create-table-templateParams-tool",
 			ddl:           true,
-			toolName: "create-table-templateParams-tool",
+			toolName:      "create-table-templateParams-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":%s}`, tableName, configs.createColArray))),
 			want:          configs.ddlWant,
@@ -669,7 +704,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		{
 			name:          "invoke insert-table-templateParams-tool",
 			insert:        true,
-			toolName: "insert-table-templateParams-tool",
+			toolName:      "insert-table-templateParams-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":["id","name","age"], "values":"1, 'Alex', 21"}`, tableName))),
 			want:          configs.insert1Want,
@@ -678,7 +713,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		{
 			name:          "invoke insert-table-templateParams-tool",
 			insert:        true,
-			toolName: "insert-table-templateParams-tool",
+			toolName:      "insert-table-templateParams-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "columns":["id","name","age"], "values":"2, 'Alice', 100"}`, tableName))),
 			want:          configs.insert1Want,
@@ -686,7 +721,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		},
 		{
 			name:          "invoke select-templateParams-tool",
-			toolName: "select-templateParams-tool",
+			toolName:      "select-templateParams-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s"}`, tableName))),
 			want:          configs.selectAllWant,
@@ -694,7 +729,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		},
 		{
 			name:          "invoke select-templateParams-combined-tool",
-			toolName: "select-templateParams-combined-tool",
+			toolName:      "select-templateParams-combined-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"id": 1, "tableName": "%s"}`, tableName))),
 			want:          configs.selectId1Want,
@@ -702,7 +737,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		},
 		{
 			name:          "invoke select-templateParams-combined-tool with no results",
-			toolName: "select-templateParams-combined-tool",
+			toolName:      "select-templateParams-combined-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"id": 999, "tableName": "%s"}`, tableName))),
 			want:          configs.selectEmptyWant,
@@ -711,7 +746,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		{
 			name:          "invoke select-fields-templateParams-tool",
 			enabled:       configs.supportSelectFields,
-			toolName: "select-fields-templateParams-tool",
+			toolName:      "select-fields-templateParams-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s", "fields":%s}`, tableName, configs.nameFieldArray))),
 			want:          selectOnlyNamesWant,
@@ -719,7 +754,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		},
 		{
 			name:          "invoke select-filter-templateParams-combined-tool",
-			toolName: "select-filter-templateParams-combined-tool",
+			toolName:      "select-filter-templateParams-combined-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"name": "Alex", "tableName": "%s", "columnFilter": "%s"}`, tableName, configs.nameColFilter))),
 			want:          configs.selectNameWant,
@@ -728,7 +763,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 		{
 			name:          "invoke drop-table-templateParams-tool",
 			ddl:           true,
-			toolName: "drop-table-templateParams-tool",
+			toolName:      "drop-table-templateParams-tool",
 			requestHeader: map[string]string{},
 			requestBody:   bytes.NewBuffer([]byte(fmt.Sprintf(`{"tableName": "%s"}`, tableName))),
 			want:          configs.ddlWant,
@@ -747,17 +782,17 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 			if ddlAllow && insertAllow {
 				// Send Tool invocation request
 				var args map[string]any
-			if tc.requestBody != nil {
-				bodyBytes, _ := io.ReadAll(tc.requestBody)
-				if len(bodyBytes) > 0 {
-					if err := json.Unmarshal(bodyBytes, &args); err != nil {
-						t.Fatalf("error parsing body to args: %v", err)
+				if tc.requestBody != nil {
+					bodyBytes, _ := io.ReadAll(tc.requestBody)
+					if len(bodyBytes) > 0 {
+						if err := json.Unmarshal(bodyBytes, &args); err != nil {
+							t.Fatalf("error parsing body to args: %v", err)
+						}
 					}
 				}
-			}
-			
-			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+
+				// Send Tool invocation request
+				statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 				if statusCode != http.StatusOK {
 					if tc.isErr {
 						return
@@ -767,8 +802,7 @@ func RunMCPToolInvokeWithTemplateParameters(t *testing.T, tableName string, opti
 
 				// Check response body
 				var body map[string]interface{}
-				// Unmarshaling result if JSON block)
-				if err != nil {
+				if err := json.Unmarshal([]byte(resultStr), &body); err != nil {
 					t.Fatalf("error parsing response body")
 				}
 
@@ -824,7 +858,7 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 
 	invokeTcs := []struct {
 		name           string
-		toolName string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 		want           string
@@ -833,7 +867,7 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 	}{
 		{
 			name:           "invoke list_tables all tables detailed output",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": ""}`)),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s,%s]", getDetailedWant(tableNameAuth, authTableColumns), getDetailedWant(tableNameParam, paramTableColumns)),
@@ -841,7 +875,7 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 		},
 		{
 			name:           "invoke list_tables all tables simple output",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": "", "output_format": "simple"}`)),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s,%s]", getSimpleWant(tableNameAuth), getSimpleWant(tableNameParam)),
@@ -849,49 +883,49 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 		},
 		{
 			name:           "invoke list_tables detailed output",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s"}`, tableNameAuth))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s]", getDetailedWant(tableNameAuth, authTableColumns)),
 		},
 		{
 			name:           "invoke list_tables simple output",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s", "output_format": "simple"}`, tableNameAuth))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s]", getSimpleWant(tableNameAuth)),
 		},
 		{
 			name:           "invoke list_tables with invalid output format",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": "", "output_format": "abcd"}`)),
 			wantStatusCode: http.StatusOK,
 			isAgentErr:     true,
 		},
 		{
 			name:           "invoke list_tables with malformed table_names parameter",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": 12345, "output_format": "detailed"}`)),
 			wantStatusCode: http.StatusOK,
 			isAgentErr:     true,
 		},
 		{
 			name:           "invoke list_tables with multiple table names",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s,%s"}`, tableNameParam, tableNameAuth))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s,%s]", getDetailedWant(tableNameAuth, authTableColumns), getDetailedWant(tableNameParam, paramTableColumns)),
 		},
 		{
 			name:           "invoke list_tables with non-existent table",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(`{"table_names": "non_existent_table"}`)),
 			wantStatusCode: http.StatusOK,
 			want:           `[]`,
 		},
 		{
 			name:           "invoke list_tables with one existing and one non-existent table",
-			toolName: "list_tables",
+			toolName:       "list_tables",
 			requestBody:    bytes.NewBuffer([]byte(fmt.Sprintf(`{"table_names": "%s,non_existent_table"}`, tableNameParam))),
 			wantStatusCode: http.StatusOK,
 			want:           fmt.Sprintf("[%s]", getDetailedWant(tableNameParam, paramTableColumns)),
@@ -908,9 +942,9 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", statusCode, resultStr)
 			}
@@ -919,7 +953,7 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 
 				var bodyWrapper map[string]json.RawMessage
 
-				if // Unmarshaling result if JSON blockWrapper); err != nil {
+				if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 					t.Fatalf("error parsing response wrapper: %s, body: %s", err, resultStr)
 				}
 
@@ -1004,8 +1038,15 @@ func RunMCPPostgresListViewsTest(t *testing.T, ctx context.Context, pool *pgxpoo
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_views/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_views", args, nil)
+			body := []byte(resultStr)
 
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(body))
@@ -1017,7 +1058,7 @@ func RunMCPPostgresListViewsTest(t *testing.T, ctx context.Context, pool *pgxpoo
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1084,8 +1125,14 @@ func RunMCPPostgresListSchemasTest(t *testing.T, ctx context.Context, pool *pgxp
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_schemas/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -1096,7 +1143,7 @@ func RunMCPPostgresListSchemasTest(t *testing.T, ctx context.Context, pool *pgxp
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1135,10 +1182,8 @@ func RunMCPPostgresListSchemasTest(t *testing.T, ctx context.Context, pool *pgxp
 }
 
 func RunMCPPostgresDatabaseOverviewTest(t *testing.T, ctx context.Context, pool *pgxpool.Pool) {
-	const api = "http://127.0.0.1:5000/api/tool/database_overview/invoke"
-	requestBody := bytes.NewBuffer([]byte(`{}`))
-
-	resp, resultStr := RunRequest(t, http.MethodPost, api, requestBody, nil)
+	var args map[string]any
+	statusCode, resultStr, _ := ExecuteMCPToolCall(t, "database_overview", args, nil)
 
 	if statusCode != http.StatusOK {
 		t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, http.StatusOK, string(resultStr))
@@ -1147,7 +1192,7 @@ func RunMCPPostgresDatabaseOverviewTest(t *testing.T, ctx context.Context, pool 
 	var bodyWrapper struct {
 		Result json.RawMessage `json:"result"`
 	}
-	if // Unmarshaling result if JSON blockWrapper); err != nil {
+	if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 		t.Fatalf("error decoding response wrapper: %v, body: %s", err, string(resultStr))
 	}
 
@@ -1304,8 +1349,14 @@ func RunMCPPostgresListTriggersTest(t *testing.T, ctx context.Context, pool *pgx
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_triggers/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -1316,7 +1367,7 @@ func RunMCPPostgresListTriggersTest(t *testing.T, ctx context.Context, pool *pgx
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1442,9 +1493,14 @@ func RunMCPPostgresListPublicationTablesTest(t *testing.T, ctx context.Context, 
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_publication_tables/invoke"
-
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -1455,7 +1511,7 @@ func RunMCPPostgresListPublicationTablesTest(t *testing.T, ctx context.Context, 
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1569,8 +1625,14 @@ func RunMCPPostgresListActiveQueriesTest(t *testing.T, ctx context.Context, pool
 				time.Sleep(time.Duration(tc.waitSecsBeforeCheck) * time.Second)
 			}
 
-			const api = "http://127.0.0.1:5000/api/tool/list_active_queries/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -1581,7 +1643,7 @@ func RunMCPPostgresListActiveQueriesTest(t *testing.T, ctx context.Context, pool
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1610,13 +1672,13 @@ func RunMCPPostgresListActiveQueriesTest(t *testing.T, ctx context.Context, pool
 func RunMCPPostgresListAvailableExtensionsTest(t *testing.T) {
 	invokeTcs := []struct {
 		name           string
-		toolName string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 	}{
 		{
 			name:           "invoke list_available_extensions output",
-			toolName: "list_available_extensions",
+			toolName:       "list_available_extensions",
 			wantStatusCode: http.StatusOK,
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
 		},
@@ -1632,9 +1694,9 @@ func RunMCPPostgresListAvailableExtensionsTest(t *testing.T) {
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", statusCode, string(resultStr))
 			}
@@ -1648,13 +1710,13 @@ func RunMCPPostgresListAvailableExtensionsTest(t *testing.T) {
 func RunMCPPostgresListInstalledExtensionsTest(t *testing.T) {
 	invokeTcs := []struct {
 		name           string
-		toolName string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 	}{
 		{
 			name:           "invoke list_installed_extensions output",
-			toolName: "list_installed_extensions",
+			toolName:       "list_installed_extensions",
 			wantStatusCode: http.StatusOK,
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
 		},
@@ -1670,9 +1732,9 @@ func RunMCPPostgresListInstalledExtensionsTest(t *testing.T) {
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", statusCode, resultStr)
 			}
@@ -1773,9 +1835,14 @@ func RunMCPPostgresListIndexesTest(t *testing.T, ctx context.Context, pool *pgxp
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_indexes/invoke"
-
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -1786,7 +1853,7 @@ func RunMCPPostgresListIndexesTest(t *testing.T, ctx context.Context, pool *pgxp
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1832,7 +1899,7 @@ func RunMCPPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pg
 
 	invokeTcs := []struct {
 		name           string
-		toolName string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 		want           []map[string]any
@@ -1852,8 +1919,14 @@ func RunMCPPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pg
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_sequences/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -1864,7 +1937,7 @@ func RunMCPPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pg
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -1888,13 +1961,13 @@ func RunMCPPostgresListSequencesTest(t *testing.T, ctx context.Context, pool *pg
 func RunMCPPostgresListTableSpacesTest(t *testing.T) {
 	invokeTcs := []struct {
 		name           string
-		toolName string
+		toolName       string
 		requestBody    io.Reader
 		wantStatusCode int
 	}{
 		{
 			name:           "invoke list_tablespaces output",
-			toolName: "list_tablespaces",
+			toolName:       "list_tablespaces",
 			wantStatusCode: http.StatusOK,
 			requestBody:    bytes.NewBuffer([]byte(`{}`)),
 		},
@@ -1910,9 +1983,9 @@ func RunMCPPostgresListTableSpacesTest(t *testing.T) {
 					}
 				}
 			}
-			
+
 			// Send Tool invocation request
-			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("response status code is not 200, got %d: %s", statusCode, string(resultStr))
 			}
@@ -1980,8 +2053,15 @@ func RunMCPPostgresListPgSettingsTest(t *testing.T, ctx context.Context, pool *p
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_pg_settings/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_views", args, nil)
+			body := []byte(resultStr)
 
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(body))
@@ -1993,7 +2073,7 @@ func RunMCPPostgresListPgSettingsTest(t *testing.T, ctx context.Context, pool *p
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2083,8 +2163,15 @@ func RunMCPPostgresListDatabaseStatsTest(t *testing.T, ctx context.Context, pool
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_database_stats/invoke"
-			resp, body := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_views", args, nil)
+			body := []byte(resultStr)
 
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(body))
@@ -2092,7 +2179,7 @@ func RunMCPPostgresListDatabaseStatsTest(t *testing.T, ctx context.Context, pool
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2209,9 +2296,14 @@ func RunMCPPostgresListRolesTest(t *testing.T, ctx context.Context, pool *pgxpoo
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_roles/invoke"
-
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2222,7 +2314,7 @@ func RunMCPPostgresListRolesTest(t *testing.T, ctx context.Context, pool *pgxpoo
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2299,8 +2391,14 @@ func RunMCPPostgresListLocksTest(t *testing.T, ctx context.Context, pool *pgxpoo
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_locks/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2311,7 +2409,7 @@ func RunMCPPostgresListLocksTest(t *testing.T, ctx context.Context, pool *pgxpoo
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2364,8 +2462,14 @@ func RunMCPPostgresLongRunningTransactionsTest(t *testing.T, ctx context.Context
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/long_running_transactions/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2376,7 +2480,7 @@ func RunMCPPostgresLongRunningTransactionsTest(t *testing.T, ctx context.Context
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2435,8 +2539,14 @@ func RunMCPPostgresReplicationStatsTest(t *testing.T, ctx context.Context, pool 
 	}
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/replication_stats/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2447,7 +2557,7 @@ func RunMCPPostgresReplicationStatsTest(t *testing.T, ctx context.Context, pool 
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2553,8 +2663,14 @@ func RunMCPPostgresGetColumnCardinalityTest(t *testing.T, ctx context.Context, p
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/get_column_cardinality/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2565,7 +2681,7 @@ func RunMCPPostgresGetColumnCardinalityTest(t *testing.T, ctx context.Context, p
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2672,8 +2788,14 @@ func RunMCPPostgresListQueryStatsTest(t *testing.T, ctx context.Context, pool *p
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_query_stats/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2684,7 +2806,7 @@ func RunMCPPostgresListQueryStatsTest(t *testing.T, ctx context.Context, pool *p
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -2876,8 +2998,14 @@ func RunMCPPostgresListTableStatsTest(t *testing.T, ctx context.Context, pool *p
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_table_stats/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -2888,7 +3016,7 @@ func RunMCPPostgresListTableStatsTest(t *testing.T, ctx context.Context, pool *p
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -3117,8 +3245,14 @@ func RunMCPPostgresListStoredProcedureTest(t *testing.T, ctx context.Context, po
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			const api = "http://127.0.0.1:5000/api/tool/list_stored_procedure/invoke"
-			resp, resultStr := RunRequest(t, http.MethodPost, api, tc.requestBody, nil)
+			var args map[string]any
+			if tc.requestBody != nil {
+				bodyBytes, _ := io.ReadAll(tc.requestBody)
+				if len(bodyBytes) > 0 {
+					_ = json.Unmarshal(bodyBytes, &args)
+				}
+			}
+			statusCode, resultStr, _ := ExecuteMCPToolCall(t, "list_schemas", args, nil)
 			if statusCode != tc.wantStatusCode {
 				t.Fatalf("wrong status code: got %d, want %d, body: %s", statusCode, tc.wantStatusCode, string(resultStr))
 			}
@@ -3129,7 +3263,7 @@ func RunMCPPostgresListStoredProcedureTest(t *testing.T, ctx context.Context, po
 			var bodyWrapper struct {
 				Result json.RawMessage `json:"result"`
 			}
-			if // Unmarshaling result if JSON blockWrapper); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
 				t.Fatalf("error decoding response wrapper: %v", err)
 			}
 
@@ -3226,4 +3360,3 @@ func RunMCPPostgresListStoredProcedureTest(t *testing.T, ctx context.Context, po
 		})
 	}
 }
-

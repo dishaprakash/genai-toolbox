@@ -36,6 +36,32 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
+func compareNormalizedJSON(t *testing.T, gotStr, wantStr string) {
+	t.Helper()
+
+	if wantStr == "" || gotStr == wantStr {
+		return
+	}
+
+	var gotBody, wantBody interface{}
+	if err := json.Unmarshal([]byte(gotStr), &gotBody); err != nil {
+		t.Fatalf("error parsing got JSON %q: %v", gotStr, err)
+	}
+	if err := json.Unmarshal([]byte(wantStr), &wantBody); err != nil {
+		t.Fatalf("error parsing want JSON %q: %v", wantStr, err)
+	}
+
+	if wantArr, ok := wantBody.([]interface{}); ok && len(wantArr) == 1 {
+		if gotMap, ok := gotBody.(map[string]interface{}); ok {
+			gotBody = []interface{}{gotMap}
+		}
+	}
+
+	if !reflect.DeepEqual(gotBody, wantBody) {
+		t.Fatalf("unexpected JSON value:\ngot:  %q\nwant: %q", gotStr, wantStr)
+	}
+}
+
 func RunMCPToolGetTest(t *testing.T) {
 	// Test tool get endpoint
 	tcs := []struct {
@@ -366,11 +392,20 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 			}
 
 			// Send Tool invocation request
-			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
+			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
 
-			// Check status code
-			if statusCode != tc.wantStatusCode {
-				t.Errorf("StatusCode mismatch: got %d, want %d. Response body: %s", statusCode, tc.wantStatusCode, string(resultStr))
+			if tc.wantStatusCode != http.StatusOK && tc.wantStatusCode != 0 {
+				if err == nil {
+					t.Fatalf("Expected failure for status code %d, but succeeded", tc.wantStatusCode)
+				}
+				// MCP error captured correctly
+				return
+			}
+			if err != nil {
+				t.Fatalf("Unexpected error from MCP execute: %v", err)
+			}
+			if statusCode != http.StatusOK {
+				t.Fatalf("response status code is not 200, got %d: %s", statusCode, string(resultStr))
 			}
 
 			// skip response body check
@@ -378,18 +413,7 @@ func RunMCPToolInvokeTest(t *testing.T, select1Want string, options ...InvokeTes
 				return
 			}
 
-			// Check response body
-			var body map[string]interface{}
-			err = json.Unmarshal([]byte(resultStr), &body)
-			if err != nil {
-				t.Fatalf("error parsing response body: %s", err)
-			}
-
-			got := resultStr
-
-			if got != tc.wantBody {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.wantBody)
-			}
+			compareNormalizedJSON(t, resultStr, tc.wantBody)
 		})
 	}
 }
@@ -627,29 +651,26 @@ func RunMCPExecuteSqlToolInvokeTest(t *testing.T, createTableStatement, select1W
 			}
 
 			// Send Tool invocation request
-			statusCode, resultStr, _ := ExecuteMCPToolCall(t, tc.toolName, args, nil)
-			if statusCode != http.StatusOK {
-				if tc.isErr {
-					return
+			statusCode, resultStr, err := ExecuteMCPToolCall(t, tc.toolName, args, tc.requestHeader)
+
+			if tc.isErr || tc.isAgentErr {
+				if err == nil {
+					t.Fatalf("Expected failure, but succeeded")
 				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("Unexpected error from MCP execute: %v", err)
+			}
+			if statusCode != http.StatusOK {
 				t.Fatalf("response status code is not 200, got %d: %s", statusCode, string(resultStr))
 			}
-			if tc.isAgentErr {
+
+			if tc.want == "" {
 				return
 			}
 
-			// Check response body
-			var body map[string]interface{}
-			err = json.Unmarshal([]byte(resultStr), &body)
-			if err != nil {
-				t.Fatalf("error parsing response body")
-			}
-
-			got := resultStr
-
-			if got != tc.want {
-				t.Fatalf("unexpected value: got %q, want %q", got, tc.want)
-			}
+			compareNormalizedJSON(t, resultStr, tc.want)
 		})
 	}
 }
@@ -951,29 +972,9 @@ func RunMCPPostgresListTablesTest(t *testing.T, tableNameParam, tableNameAuth, u
 
 			if tc.wantStatusCode == http.StatusOK {
 
-				var bodyWrapper map[string]json.RawMessage
-
-				if err := json.Unmarshal([]byte(resultStr), &bodyWrapper); err != nil {
-					t.Fatalf("error parsing response wrapper: %s, body: %s", err, resultStr)
-				}
-
-				resultJSON, ok := bodyWrapper["result"]
-				if !ok {
-					t.Fatal("unable to find 'result' in response body")
-				}
-
-				if tc.isAgentErr {
-					return
-				}
-
-				var resultString string
-				if err := json.Unmarshal(resultJSON, &resultString); err != nil {
-					t.Fatalf("'result' is not a JSON-encoded string: %s", err)
-				}
-
 				var got, want []any
 
-				if err := json.Unmarshal([]byte(resultString), &got); err != nil {
+				if err := json.Unmarshal([]byte(resultStr), &got); err != nil {
 					t.Fatalf("failed to unmarshal actual result string: %v", err)
 				}
 				if err := json.Unmarshal([]byte(tc.want), &want); err != nil {

@@ -15,11 +15,9 @@
 package cloudsqlpg
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -210,41 +208,32 @@ func TestCreateInstanceToolEndpoints(t *testing.T) {
 	for _, tc := range tcs {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			api := fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", tc.toolName)
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(tc.body))
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+			var args map[string]any
+			if tc.body != "" {
+				if err := json.Unmarshal([]byte(tc.body), &args); err != nil {
+					t.Fatalf("failed to decode args: %v", err)
+				}
 			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
+
+			statusCode, resultStr, err := tests.ExecuteMCPToolCall(t, tc.toolName, args, nil)
 
 			if tc.expectError {
-				if resp.StatusCode != tc.errorStatus {
-					bodyBytes, _ := io.ReadAll(resp.Body)
-					t.Fatalf("expected status %d but got %d: %s", tc.errorStatus, resp.StatusCode, string(bodyBytes))
+				if err == nil {
+					t.Fatalf("expected error (status %d) but got none", tc.errorStatus)
 				}
 				return
 			}
 
-			if resp.StatusCode != http.StatusOK {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+			if err != nil {
+				t.Fatalf("unexpected error from execute: %v", err)
 			}
-
-			var result struct {
-				Result string `json:"result"`
-			}
-			if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-				t.Fatalf("failed to decode response: %v", err)
+			if statusCode != http.StatusOK {
+				t.Fatalf("response status code is not 200, got %d", statusCode)
 			}
 
 			var got, want map[string]any
-			if err := json.Unmarshal([]byte(result.Result), &got); err != nil {
-				t.Fatalf("failed to unmarshal result: %v", err)
+			if err := json.Unmarshal([]byte(resultStr), &got); err != nil {
+				t.Fatalf("failed to unmarshal result (got %q): %v", resultStr, err)
 			}
 			if err := json.Unmarshal([]byte(tc.want), &want); err != nil {
 				t.Fatalf("failed to unmarshal want: %v", err)

@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/genai-toolbox/compare/v0.30.0...v1.0.0) (2026-03-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* removing deprecations and update tools-file flag ([#2806](https://github.com/googleapis/genai-toolbox/issues/2806))
+
+### Features
+
+* Added java SDK docs ([#2675](https://github.com/googleapis/genai-toolbox/issues/2675)) ([8cf1c52](https://github.com/googleapis/genai-toolbox/commit/8cf1c52d67ac1a445c2943ba998780633a4a1ada))
+* **dataplex:** Add support for lookup context tool. ([#2744](https://github.com/googleapis/genai-toolbox/issues/2744)) ([facb69d](https://github.com/googleapis/genai-toolbox/commit/facb69d01fe0c7ff9e2e1c40804dd00762e508a6))
+* Removing deprecations and update tools-file flag ([#2806](https://github.com/googleapis/genai-toolbox/issues/2806)) ([ab64c95](https://github.com/googleapis/genai-toolbox/commit/ab64c9514a467d92a4547eda5a4ecdd08f86b0c9))
+
 ## [0.30.0](https://github.com/googleapis/genai-toolbox/compare/v0.29.0...v0.30.0) (2026-03-20)
 
 

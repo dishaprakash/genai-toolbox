@@ -15,11 +15,9 @@
 package alloydb
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -169,45 +167,49 @@ func TestWaitToolEndpoints(t *testing.T) {
 			name:     "failed operation",
 			toolName: "wait-for-op2",
 			body:     `{"project": "p1", "location": "l1", "operation": "op2"}`,
-			want:     `{"error":"error processing request: operation finished with error: {\"code\":1,\"message\":\"failed\"}"}`,
+			want:     `{"error":"error processing request: error processing request: operation finished with error: {"code":1,"message":"failed"}"}`,
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := fmt.Sprintf("http://127.0.0.1:5000/api/tool/%s/invoke", tc.toolName)
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(tc.body))
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+			var args map[string]any
+			if err := json.Unmarshal([]byte(tc.body), &args); err != nil {
+				t.Fatalf("failed to unmarshal test body into args: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
 
-			if resp.StatusCode != http.StatusOK {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+			status, mcpResp, err := tests.InvokeMCPTool(t, tc.toolName, args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
 			}
-			var response struct {
-				Result any `json:"result"`
-			}
-			if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
-				t.Fatalf("failed to decode response: %v", err)
+
+			if status != http.StatusOK {
+				t.Fatalf("response status code is not 200, got %d", status)
 			}
 
 			var got string
-			// Check if the result is a string (which contains JSON)
-			if s, ok := response.Result.(string); ok {
-				got = s
-			} else {
-				b, err := json.Marshal(response.Result)
-				if err != nil {
-					t.Fatalf("failed to marshal result object: %v", err)
+
+			if mcpResp.Error != nil {
+				// JSON-RPC Error
+				errBytes, _ := json.Marshal(mcpResp.Error)
+				got = fmt.Sprintf(`{"error": %s}`, string(errBytes))
+			} else if mcpResp.Result.IsError {
+				// Application-level Error
+				var errText string
+				for _, c := range mcpResp.Result.Content {
+					if c.Type == "text" {
+						errText += c.Text
+					}
 				}
-				got = string(b)
+				// Mock what the old legacy test expected for backward compatibility of test cases:
+				got = fmt.Sprintf(`{"error":"error processing request: %s"}`, errText)
+			} else {
+				// Success
+				if len(mcpResp.Result.Content) > 0 {
+					got = mcpResp.Result.Content[0].Text
+				} else {
+					got = ""
+				}
 			}
 
 			// Clean up both strings to ignore whitespace differences

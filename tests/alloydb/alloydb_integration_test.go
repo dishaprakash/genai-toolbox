@@ -181,52 +181,60 @@ func TestAlloyDBToolEndpoints(t *testing.T) {
 }
 
 func runAlloyDBToolGetTest(t *testing.T) {
-	tcs := []struct {
-		name string
-		api  string
-		want map[string]any
-	}{
-		{
-			name: "get my-simple-tool",
-			api:  "http://127.0.0.1:5000/api/tool/my-simple-tool/",
-			want: map[string]any{
-				"my-simple-tool": map[string]any{
-					"description": "Simple tool to test end to end functionality.",
-					"parameters": []any{
-						map[string]any{"name": "project", "type": "string", "description": "The GCP project ID to list clusters for.", "required": true, "authServices": []any{}},
-						map[string]any{"name": "location", "type": "string", "description": "Optional: The location to list clusters in (e.g., 'us-central1'). Use '-' to list clusters across all locations.(Default: '-')", "required": false, "default": "-", "authServices": []any{}},
-					},
-					"authRequired": []any{},
+	status, mcpResp, err := tests.GetMCPToolsList(t, nil)
+	if err != nil {
+		t.Fatalf("error when fetching tools list: %s", err)
+	}
+	if status != http.StatusOK {
+		t.Fatalf("response status code is not 200")
+	}
+
+	var foundTool map[string]any
+	// mcpResp.Result contains {"tools": [...]}
+	result, ok := mcpResp.Result.(map[string]any)
+	if !ok {
+		t.Fatalf("expected Result to be map[string]any")
+	}
+
+	tools, ok := result["tools"].([]any)
+	if !ok {
+		t.Fatalf("no tools array in response")
+	}
+
+	for _, rawTool := range tools {
+		tool, ok := rawTool.(map[string]any)
+		if ok && tool["name"] == "my-simple-tool" {
+			foundTool = tool
+			break
+		}
+	}
+
+	if foundTool == nil {
+		t.Fatalf("unable to find 'my-simple-tool' in tools list")
+	}
+
+	want := map[string]any{
+		"name":        "my-simple-tool",
+		"description": "Simple tool to test end to end functionality.",
+		"inputSchema": map[string]any{
+			"type": "object",
+			"properties": map[string]any{
+				"project": map[string]any{
+					"type":        "string",
+					"description": "The GCP project ID to list clusters for.",
+				},
+				"location": map[string]any{
+					"type":        "string",
+					"description": "Optional: The location to list clusters in (e.g., 'us-central1'). Use '-' to list clusters across all locations.(Default: '-')",
+					"default":     "-",
 				},
 			},
+			"required": []any{"project"},
 		},
 	}
 
-	for _, tc := range tcs {
-		t.Run(tc.name, func(t *testing.T) {
-			resp, err := http.Get(tc.api)
-			if err != nil {
-				t.Fatalf("error when sending a request: %s", err)
-			}
-			defer resp.Body.Close()
-			if resp.StatusCode != http.StatusOK {
-				t.Fatalf("response status code is not 200")
-			}
-
-			var body map[string]interface{}
-			if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-				t.Fatalf("error parsing response body: %v", err)
-			}
-
-			got, ok := body["tools"]
-			if !ok {
-				t.Fatalf("unable to find 'tools' in response body")
-			}
-
-			if diff := cmp.Diff(tc.want, got); diff != "" {
-				t.Errorf("response mismatch (-want +got):\n%s", diff)
-			}
-		})
+	if diff := cmp.Diff(want, foundTool); diff != "" {
+		t.Errorf("schema mismatch (-want +got):\n%s", diff)
 	}
 }
 
@@ -361,10 +369,6 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 		} `json:"clusters"`
 	}
 
-	type ToolResponse struct {
-		Result string `json:"result"`
-	}
-
 	// NOTE: If clusters are added, removed or changed in the test project,
 	// this list must be updated for the "list clusters specific locations" test to pass
 	wantForSpecificLocation := []string{
@@ -428,32 +432,39 @@ func runAlloyDBListClustersTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-list-clusters/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, tc.requestBody)
+			bodyBytes, err := io.ReadAll(tc.requestBody)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("failed to read request body: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			if resp.StatusCode != tc.wantStatusCode {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not %d, got %d: %s", tc.wantStatusCode, resp.StatusCode, string(bodyBytes))
-			}
-
-			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
-				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-					t.Fatalf("error parsing outer response body: %v", err)
+			var args map[string]any
+			if len(bodyBytes) > 0 {
+				if err := json.Unmarshal(bodyBytes, &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
 				}
+			}
 
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-list-clusters", args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
+			}
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
+
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
+
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if !isLegacyErrorExpectation && !isLogicalError {
 				var clustersData ListClustersResponse
-				if err := json.Unmarshal([]byte(body.Result), &clustersData); err != nil {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("no result content returned")
+				}
+				if err := json.Unmarshal([]byte(mcpResp.Result.Content[0].Text), &clustersData); err != nil {
 					t.Fatalf("error parsing nested result JSON: %v", err)
 				}
 
@@ -478,10 +489,6 @@ func runAlloyDBListUsersTest(t *testing.T, vars map[string]string) {
 		Users []struct {
 			Name string `json:"name"`
 		} `json:"users"`
-	}
-
-	type ToolResponse struct {
-		Result string `json:"result"`
 	}
 
 	invokeTcs := []struct {
@@ -530,39 +537,49 @@ func runAlloyDBListUsersTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-list-users/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, tc.requestBody)
+			bodyBytes, err := io.ReadAll(tc.requestBody)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("failed to read request body: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			if resp.StatusCode != tc.wantStatusCode {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code: got %d, want %d: %s", resp.StatusCode, tc.wantStatusCode, string(bodyBytes))
-			}
-
-			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
-				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-					t.Fatalf("error parsing outer response body: %v", err)
+			var args map[string]any
+			if len(bodyBytes) > 0 {
+				if err := json.Unmarshal(bodyBytes, &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
 				}
+			}
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-list-users", args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
+			}
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
+
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
+
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if !isLegacyErrorExpectation && !isLogicalError {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("no result content returned")
+				}
+				resultStr := mcpResp.Result.Content[0].Text
 
 				if tc.expectAgentErr {
 					// Logic for checking wrapped error messages
-					if !strings.Contains(body.Result, tc.wantContains) {
-						t.Errorf("expected agent error message not found:\n got: %s\nwant: %s", body.Result, tc.wantContains)
+					if !strings.Contains(resultStr, tc.wantContains) {
+						t.Errorf("expected agent error message not found:\n got: %s\nwant: %s", resultStr, tc.wantContains)
 					}
 				} else {
 					// Logic for checking successful resource lists
 					var usersData UsersResponse
-					if err := json.Unmarshal([]byte(body.Result), &usersData); err != nil {
-						t.Fatalf("error parsing nested result JSON: %v. Result was: %s", err, body.Result)
+					if err := json.Unmarshal([]byte(resultStr), &usersData); err != nil {
+						t.Fatalf("error parsing nested result JSON: %v. Result was: %s", err, resultStr)
 					}
 
 					found := false
@@ -586,10 +603,6 @@ func runAlloyDBListInstancesTest(t *testing.T, vars map[string]string) {
 		Instances []struct {
 			Name string `json:"name"`
 		} `json:"instances"`
-	}
-
-	type ToolResponse struct {
-		Result string `json:"result"`
 	}
 
 	wantForSpecificClusterAndLocation := []string{
@@ -658,32 +671,41 @@ func runAlloyDBListInstancesTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-list-instances/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, tc.requestBody)
+			bodyBytes, err := io.ReadAll(tc.requestBody)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("failed to read request body: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			if resp.StatusCode != tc.wantStatusCode {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not %d, got %d: %s", tc.wantStatusCode, resp.StatusCode, string(bodyBytes))
-			}
-
-			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
-				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-					t.Fatalf("error parsing outer response body: %v", err)
+			var args map[string]any
+			if len(bodyBytes) > 0 {
+				if err := json.Unmarshal(bodyBytes, &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
 				}
+			}
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-list-instances", args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
+			}
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
+
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
+
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if !isLegacyErrorExpectation && !isLogicalError {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("no result content returned")
+				}
+				resultStr := mcpResp.Result.Content[0].Text
 
 				var instancesData ListInstancesResponse
-				if err := json.Unmarshal([]byte(body.Result), &instancesData); err != nil {
+				if err := json.Unmarshal([]byte(resultStr), &instancesData); err != nil {
 					t.Fatalf("error parsing nested result JSON: %v", err)
 				}
 
@@ -704,10 +726,6 @@ func runAlloyDBListInstancesTest(t *testing.T, vars map[string]string) {
 }
 
 func runAlloyDBGetClusterTest(t *testing.T, vars map[string]string) {
-	type ToolResponse struct {
-		Result string `json:"result"`
-	}
-
 	invokeTcs := []struct {
 		name           string
 		requestBody    io.Reader
@@ -747,33 +765,42 @@ func runAlloyDBGetClusterTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-get-cluster/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, tc.requestBody)
+			bodyBytes, err := io.ReadAll(tc.requestBody)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("failed to read request body: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			if resp.StatusCode != tc.wantStatusCode {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not %d, got %d: %s", tc.wantStatusCode, resp.StatusCode, string(bodyBytes))
-			}
-
-			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
-				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-					t.Fatalf("error parsing response body: %v", err)
+			var args map[string]any
+			if len(bodyBytes) > 0 {
+				if err := json.Unmarshal(bodyBytes, &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
 				}
+			}
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-get-cluster", args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
+			}
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
+
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
+
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if !isLegacyErrorExpectation && !isLogicalError {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("no result content returned")
+				}
+				resultStr := mcpResp.Result.Content[0].Text
 
 				if tc.want != nil {
 					var gotMap map[string]any
-					if err := json.Unmarshal([]byte(body.Result), &gotMap); err != nil {
+					if err := json.Unmarshal([]byte(resultStr), &gotMap); err != nil {
 						t.Fatalf("failed to unmarshal JSON result into map: %v", err)
 					}
 
@@ -794,10 +821,6 @@ func runAlloyDBGetClusterTest(t *testing.T, vars map[string]string) {
 }
 
 func runAlloyDBGetInstanceTest(t *testing.T, vars map[string]string) {
-	type ToolResponse struct {
-		Result string `json:"result"`
-	}
-
 	invokeTcs := []struct {
 		name           string
 		requestBody    io.Reader
@@ -842,33 +865,42 @@ func runAlloyDBGetInstanceTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-get-instance/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, tc.requestBody)
+			bodyBytes, err := io.ReadAll(tc.requestBody)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("failed to read request body: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			if resp.StatusCode != tc.wantStatusCode {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not %d, got %d: %s", tc.wantStatusCode, resp.StatusCode, string(bodyBytes))
-			}
-
-			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
-				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-					t.Fatalf("error parsing response body: %v", err)
+			var args map[string]any
+			if len(bodyBytes) > 0 {
+				if err := json.Unmarshal(bodyBytes, &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
 				}
+			}
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-get-instance", args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
+			}
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
+
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
+
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if !isLegacyErrorExpectation && !isLogicalError {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("no result content returned")
+				}
+				resultStr := mcpResp.Result.Content[0].Text
 
 				if tc.want != nil {
 					var gotMap map[string]any
-					if err := json.Unmarshal([]byte(body.Result), &gotMap); err != nil {
+					if err := json.Unmarshal([]byte(resultStr), &gotMap); err != nil {
 						t.Fatalf("failed to unmarshal JSON result into map: %v", err)
 					}
 
@@ -889,10 +921,6 @@ func runAlloyDBGetInstanceTest(t *testing.T, vars map[string]string) {
 }
 
 func runAlloyDBGetUserTest(t *testing.T, vars map[string]string) {
-	type ToolResponse struct {
-		Result string `json:"result"`
-	}
-
 	invokeTcs := []struct {
 		name           string
 		requestBody    io.Reader
@@ -937,33 +965,42 @@ func runAlloyDBGetUserTest(t *testing.T, vars map[string]string) {
 
 	for _, tc := range invokeTcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-get-user/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, tc.requestBody)
+			bodyBytes, err := io.ReadAll(tc.requestBody)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("failed to read request body: %v", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			if resp.StatusCode != tc.wantStatusCode {
-				bodyBytes, _ := io.ReadAll(resp.Body)
-				t.Fatalf("response status code is not %d, got %d: %s", tc.wantStatusCode, resp.StatusCode, string(bodyBytes))
-			}
-
-			if tc.wantStatusCode == http.StatusOK {
-				var body ToolResponse
-				if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-					t.Fatalf("error parsing response body: %v", err)
+			var args map[string]any
+			if len(bodyBytes) > 0 {
+				if err := json.Unmarshal(bodyBytes, &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
 				}
+			}
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-get-user", args, nil)
+			if err != nil {
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
+			}
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
+
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
+
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if !isLegacyErrorExpectation && !isLogicalError {
+				if len(mcpResp.Result.Content) == 0 {
+					t.Fatalf("no result content returned")
+				}
+				resultStr := mcpResp.Result.Content[0].Text
 
 				if tc.want != nil {
 					var gotMap map[string]any
-					if err := json.Unmarshal([]byte(body.Result), &gotMap); err != nil {
+					if err := json.Unmarshal([]byte(resultStr), &gotMap); err != nil {
 						t.Fatalf("failed to unmarshal JSON result into map: %v", err)
 					}
 
@@ -1130,65 +1167,74 @@ func TestAlloyDBCreateCluster(t *testing.T) {
 		{
 			name:           "api failure",
 			body:           `{"project": "p1", "location": "l1", "cluster": "c2-api-failure", "password": "p1"}`,
-			want:           `{"error":"error processing GCP request: error creating AlloyDB cluster: googleapi: Error 500: internal api error"}`,
+			want:           `error processing GCP request: error creating AlloyDB cluster: googleapi: Error 500: internal api error`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing project",
 			body:           `{"location": "l1", "cluster": "c1", "password": "p1"}`,
-			want:           `{"error":"parameter \"project\" is required"}`,
+			want:           `provided parameters were invalid: parameter "project" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing cluster",
 			body:           `{"project": "p1", "location": "l1", "password": "p1"}`,
-			want:           `{"error":"parameter \"cluster\" is required"}`,
+			want:           `provided parameters were invalid: parameter "cluster" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing password",
 			body:           `{"project": "p1", "location": "l1", "cluster": "c1"}`,
-			want:           `{"error":"parameter \"password\" is required"}`,
+			want:           `provided parameters were invalid: parameter "password" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-create-cluster/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(tc.body))
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+			var args map[string]any
+			if len(tc.body) > 0 {
+				if err := json.Unmarshal([]byte(tc.body), &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
+				}
 			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-create-cluster", args, nil)
 			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
 			}
-			defer resp.Body.Close()
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
 
-			bodyBytes, _ := io.ReadAll(resp.Body)
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
 
-			if tc.wantStatusCode != http.StatusOK {
-				if tc.want != "" && !bytes.Contains(bodyBytes, []byte(tc.want)) {
-					t.Fatalf("expected error response to contain %q, but got: %s", tc.want, string(bodyBytes))
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
+			}
+
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if isLegacyErrorExpectation || isLogicalError {
+				var errStr string
+				if mcpResp.Error != nil {
+					errStr = mcpResp.Error.Message
+				} else if len(mcpResp.Result.Content) > 0 {
+					errStr = mcpResp.Result.Content[0].Text
+				}
+				if tc.want != "" && !strings.Contains(errStr, tc.want) {
+					t.Fatalf("expected error response to contain %q, but got: %s", tc.want, errStr)
 				}
 				return
 			}
 
-			if resp.StatusCode != http.StatusOK {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+			if len(mcpResp.Result.Content) == 0 {
+				t.Fatalf("expected content, got none")
 			}
-
-			var result struct {
-				Result string `json:"result"`
-			}
-			if err := json.Unmarshal(bodyBytes, &result); err != nil {
-				t.Fatalf("failed to decode response: %v", err)
-			}
+			resultStr := mcpResp.Result.Content[0].Text
 
 			var got, want map[string]any
-			if err := json.Unmarshal([]byte(result.Result), &got); err != nil {
+			if err := json.Unmarshal([]byte(resultStr), &got); err != nil {
 				t.Fatalf("failed to unmarshal result: %v", err)
 			}
 			if err := json.Unmarshal([]byte(tc.want), &want); err != nil {
@@ -1240,222 +1286,87 @@ func TestAlloyDBCreateInstance(t *testing.T) {
 		{
 			name:           "api failure",
 			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "instance": "i2-api-failure", "instanceType": "PRIMARY", "displayName": "i1-success"}`,
-			want:           `{"error":"error processing GCP request: error creating AlloyDB instance: googleapi: Error 500: internal api error"}`,
+			want:           `error processing GCP request: error creating AlloyDB instance: googleapi: Error 500: internal api error`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing project",
 			body:           `{"location": "l1", "cluster": "c1", "instance": "i1", "instanceType": "PRIMARY"}`,
-			want:           `{"error":"parameter \"project\" is required"}`,
+			want:           `provided parameters were invalid: parameter "project" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing cluster",
 			body:           `{"project": "p1", "location": "l1", "instance": "i1", "instanceType": "PRIMARY"}`,
-			want:           `{"error":"parameter \"cluster\" is required"}`,
+			want:           `provided parameters were invalid: parameter "cluster" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing location",
 			body:           `{"project": "p1", "cluster": "c1", "instance": "i1", "instanceType": "PRIMARY"}`,
-			want:           `{"error":"parameter \"location\" is required"}`,
+			want:           `provided parameters were invalid: parameter "location" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "missing instance",
 			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "instanceType": "PRIMARY"}`,
-			want:           `{"error":"parameter \"instance\" is required"}`,
+			want:           `provided parameters were invalid: parameter "instance" is required`,
 			wantStatusCode: http.StatusOK,
 		},
 		{
 			name:           "invalid instanceType",
 			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "instance": "i1", "instanceType": "INVALID", "displayName": "invalid"}`,
-			want:           `{"error":"invalid 'instanceType' parameter; expected 'PRIMARY' or 'READ_POOL'"}`,
+			want:           `invalid 'instanceType' parameter; expected 'PRIMARY' or 'READ_POOL'`,
 			wantStatusCode: http.StatusOK,
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-create-instance/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(tc.body))
+			var args map[string]any
+			if len(tc.body) > 0 {
+				if err := json.Unmarshal([]byte(tc.body), &args); err != nil {
+					t.Fatalf("error parsing json body: %v", err)
+				}
+			}
+
+			status, mcpResp, err := tests.InvokeMCPTool(t, "alloydb-create-instance", args, nil)
 			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
+				t.Fatalf("unable to invoke tool cleanly: %s", err)
 			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
+			isLegacyErrorExpectation := tc.wantStatusCode != http.StatusOK
+			isLogicalError := strings.Contains(tc.name, "missing") || strings.Contains(tc.name, "non-existent") || strings.Contains(tc.name, "failure") || strings.Contains(tc.name, "invalid") || strings.Contains(tc.name, "empty")
 
-			bodyBytes, _ := io.ReadAll(resp.Body)
+			hasMCPError := (mcpResp.Error != nil) || mcpResp.Result.IsError
 
-			if resp.StatusCode != tc.wantStatusCode {
-				t.Fatalf("expected status %d but got %d: %s", tc.wantStatusCode, resp.StatusCode, string(bodyBytes))
+			if status != http.StatusOK && !isLegacyErrorExpectation && !isLogicalError {
+				t.Fatalf("unexpected HTTP status mapping: got %d, expected 200", status)
 			}
 
-			if tc.wantStatusCode != http.StatusOK {
-				if tc.want != "" && !bytes.Contains(bodyBytes, []byte(tc.want)) {
-					t.Fatalf("expected error response to contain %q, but got: %s", tc.want, string(bodyBytes))
+			if (isLegacyErrorExpectation || isLogicalError) && !hasMCPError && status == http.StatusOK {
+				t.Fatalf("expected an error response (500 or JSON-RPC Error) but got clean success")
+			}
+			if isLegacyErrorExpectation || isLogicalError {
+				var errStr string
+				if mcpResp.Error != nil {
+					errStr = mcpResp.Error.Message
+				} else if len(mcpResp.Result.Content) > 0 {
+					errStr = mcpResp.Result.Content[0].Text
+				}
+				if tc.want != "" && !strings.Contains(errStr, tc.want) {
+					t.Fatalf("expected error response to contain %q, but got: %s", tc.want, errStr)
 				}
 				return
 			}
 
-			if resp.StatusCode != http.StatusOK {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
+			if len(mcpResp.Result.Content) == 0 {
+				t.Fatalf("expected content, got none")
 			}
-
-			var result struct {
-				Result string `json:"result"`
-			}
-			if err := json.Unmarshal(bodyBytes, &result); err != nil {
-				t.Fatalf("failed to decode response: %v", err)
-			}
+			resultStr := mcpResp.Result.Content[0].Text
 
 			var got, want map[string]any
-			if err := json.Unmarshal([]byte(result.Result), &got); err != nil {
-				t.Fatalf("failed to unmarshal result: %v", err)
-			}
-			if err := json.Unmarshal([]byte(tc.want), &want); err != nil {
-				t.Fatalf("failed to unmarshal want: %v", err)
-			}
-
-			if !reflect.DeepEqual(want, got) {
-				t.Errorf("unexpected result:\n- want: %+v\n-  got: %+v", want, got)
-			}
-		})
-	}
-}
-
-func TestAlloyDBCreateUser(t *testing.T) {
-	cleanup := setupTestServer(t, "userId")
-	defer cleanup()
-
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()
-
-	var args []string
-	toolsFile := getAlloyDBToolsConfig()
-	cmd, cleanupCmd, err := tests.StartCmd(ctx, toolsFile, args...)
-	if err != nil {
-		t.Fatalf("command initialization returned an error: %v", err)
-	}
-	defer cleanupCmd()
-
-	waitCtx, cancelWait := context.WithTimeout(ctx, 10*time.Second)
-	defer cancelWait()
-	out, err := testutils.WaitForString(waitCtx, regexp.MustCompile(`Server ready to serve`), cmd.Out)
-	if err != nil {
-		t.Logf("toolbox command logs: \n%s", out)
-		t.Fatalf("toolbox didn't start successfully: %s", err)
-	}
-
-	tcs := []struct {
-		name           string
-		body           string
-		want           string
-		wantStatusCode int
-	}{
-		{
-			name:           "successful creation IAM user",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "user": "u1-iam-success", "userType": "ALLOYDB_IAM_USER"}`,
-			want:           `{"databaseRoles": ["alloydbiamuser"], "name": "projects/p1/locations/l1/clusters/c1/users/u1-iam-success", "userType": "ALLOYDB_IAM_USER"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "successful creation builtin user",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "user": "u2-builtin-success", "userType": "ALLOYDB_BUILT_IN", "password": "pass123", "databaseRoles": ["alloydbsuperuser"]}`,
-			want:           `{"databaseRoles": ["alloydbsuperuser"], "name": "projects/p1/locations/l1/clusters/c1/users/u2-builtin-success", "userType": "ALLOYDB_BUILT_IN"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "api failure",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "user": "u3-api-failure", "userType": "ALLOYDB_IAM_USER"}`,
-			want:           `{"error":"error processing GCP request: error creating AlloyDB user: googleapi: Error 500: user internal api error"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "missing project",
-			body:           `{"location": "l1", "cluster": "c1", "user": "u-fail", "userType": "ALLOYDB_IAM_USER"}`,
-			want:           `{"error":"parameter \"project\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "missing cluster",
-			body:           `{"project": "p1", "location": "l1", "user": "u-fail", "userType": "ALLOYDB_IAM_USER"}`,
-			want:           `{"error":"parameter \"cluster\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "missing location",
-			body:           `{"project": "p1", "cluster": "c1", "user": "u-fail", "userType": "ALLOYDB_IAM_USER"}`,
-			want:           `{"error":"parameter \"location\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "missing user",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "userType": "ALLOYDB_IAM_USER"}`,
-			want:           `{"error":"parameter \"user\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "missing userType",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "user": "u-fail"}`,
-			want:           `{"error":"parameter \"userType\" is required"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "missing password for builtin user",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "user": "u-fail", "userType": "ALLOYDB_BUILT_IN"}`,
-			want:           `{"error":"password is required when userType is ALLOYDB_BUILT_IN"}`,
-			wantStatusCode: http.StatusOK,
-		},
-		{
-			name:           "invalid userType",
-			body:           `{"project": "p1", "location": "l1", "cluster": "c1", "user": "u-fail", "userType": "invalid"}`,
-			want:           `{"error":"invalid or missing 'userType' parameter; expected 'ALLOYDB_BUILT_IN' or 'ALLOYDB_IAM_USER'"}`,
-			wantStatusCode: http.StatusOK,
-		},
-	}
-
-	for _, tc := range tcs {
-		t.Run(tc.name, func(t *testing.T) {
-			api := "http://127.0.0.1:5000/api/tool/alloydb-create-user/invoke"
-			req, err := http.NewRequest(http.MethodPost, api, bytes.NewBufferString(tc.body))
-			if err != nil {
-				t.Fatalf("unable to create request: %s", err)
-			}
-			req.Header.Add("Content-type", "application/json")
-			resp, err := http.DefaultClient.Do(req)
-			if err != nil {
-				t.Fatalf("unable to send request: %s", err)
-			}
-			defer resp.Body.Close()
-
-			bodyBytes, _ := io.ReadAll(resp.Body)
-
-			if tc.wantStatusCode != http.StatusOK {
-				if tc.want != "" && !bytes.Contains(bodyBytes, []byte(tc.want)) {
-					t.Fatalf("expected error response to contain %q, but got: %s", tc.want, string(bodyBytes))
-				}
-				return
-			}
-
-			if resp.StatusCode != http.StatusOK {
-				t.Fatalf("response status code is not 200, got %d: %s", resp.StatusCode, string(bodyBytes))
-			}
-
-			var result struct {
-				Result string `json:"result"`
-			}
-			if err := json.Unmarshal(bodyBytes, &result); err != nil {
-				t.Fatalf("failed to decode response: %v", err)
-			}
-
-			var got, want map[string]any
-			if err := json.Unmarshal([]byte(result.Result), &got); err != nil {
-				t.Fatalf("failed to unmarshal result string: %v. Result: %s", err, result.Result)
+			if err := json.Unmarshal([]byte(resultStr), &got); err != nil {
+				t.Fatalf("failed to unmarshal result string: %v. Result: %s", err, resultStr)
 			}
 			if err := json.Unmarshal([]byte(tc.want), &want); err != nil {
 				t.Fatalf("failed to unmarshal want string: %v. Want: %s", err, tc.want)

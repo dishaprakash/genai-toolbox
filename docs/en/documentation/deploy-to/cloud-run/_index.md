@@ -140,7 +140,7 @@ deployment will time out.
         # --allow-unauthenticated # https://cloud.google.com/run/docs/authenticating/public#gcloud
     ```
 
-### Update deployed server to be 
+### Update deployed server to be secure
 
 {{< production-security-warning >}}
 

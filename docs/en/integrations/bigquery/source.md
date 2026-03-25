@@ -1,5 +1,6 @@
 ---
 title: "BigQuery Source"
+type: docs
 linkTitle: "Source"
 weight: 1
 description: >

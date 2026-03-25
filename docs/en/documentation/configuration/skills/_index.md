@@ -1,5 +1,5 @@
 ---
-title: "Generate Agent Skills"
+title: "Agent Skills"
 type: docs
 weight: 10
 description: >
@@ -32,7 +32,7 @@ toolbox <tool-source> skills-generate \
   --additional-notes <additional-notes>
 ```
 
-- `<tool-source>`: Can be `--config`, `--configs`, `--config-folder`, and `--prebuilt`. See the [CLI Reference](../reference/cli.md) for details.
+- `<tool-source>`: Can be `--config`, `--configs`, `--config-folder`, and `--prebuilt`. See the [CLI Reference](../../../reference/cli.md) for details.
 - `--name`: Name of the generated skill. When multiple toolsets are generated because `--toolset` is omitted, this name acts as a prefix for each skill folder (e.g., `<name>-<toolset>`).
 - `--description`: Description of the generated skill.
 - `--toolset`: (Optional) Name of the toolset to convert into a skill. If not provided, one skill will be generated for every custom toolset defined. If no custom toolsets are defined, it defaults to a single skill containing all tools.

@@ -1,7 +1,7 @@
 ---
 title: "Go: Pre & Post Processing"
 type: docs
-weight: 4
+weight: 3
 description: >
   How to add pre- and post- processing to your Agents using Go.
 sample_filters: ["Pre & Post Processing", "Go", "ADK"]
@@ -20,7 +20,7 @@ This guide demonstrates how to implement these patterns in your Toolbox applicat
 {{% tab header="ADK" text=true %}}
 The following example demonstrates how to use the `beforeToolCallback` and `afterToolCallback` hooks in the ADK `LlmAgent` to implement pre and post processing logic.
 
-{{< include "go/adk/agent.go" "go" >}}
+{{< include "adk/agent.go" "go" >}}
 
 You can also add model-level (`beforeModelCallback`, `afterModelCallback`) and agent-level (`beforeAgentCallback`, `afterAgentCallback`) hooks to intercept messages at different stages of the execution loop.
 

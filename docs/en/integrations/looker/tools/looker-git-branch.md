@@ -12,10 +12,6 @@ description: >
 A `looker-git-branch` tool is used to retrieve and manipulate the git branch
 of a LookML project.
 
-It's compatible with the following sources:
-
-- [looker](../../sources/looker.md)
-
 `looker-git-branch` requires two parameters, the LookML `project_id` and the
 `operation`. The operation must be one of `list`, `get`, `create`, `switch`,
 or `delete`.
@@ -33,6 +29,10 @@ the git ref that the branch should be at. If it isn't specified, `create`
 will start with the ref of the current branch. `switch` will start with the
 HEAD of that branch. Specifying `ref` will do the equivalent of `reset --hard`
 on the branch.
+
+## Compatible Sources
+
+{{< compatible-sources >}}
 
 ## Example
 ```yaml

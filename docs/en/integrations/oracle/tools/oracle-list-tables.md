@@ -9,9 +9,7 @@ description: >
 ## About
 
 An `oracle-sql` tool executes a pre-defined SQL statement against an
-Oracle database. It's compatible with the following source:
-
-- [oracle](../../sources/oracle.md)
+Oracle database.
 
 The specified SQL statement is executed using [prepared statements][oracle-stmt]
 for security and performance. It expects parameter placeholders in the SQL query
@@ -22,6 +20,10 @@ statements (INSERT, UPDATE, DELETE), you must explicitly set the `readOnly`
 field to `false`.
 
 [oracle-stmt]: https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html
+
+## Compatible Sources
+
+{{< compatible-sources >}}
 
 ## Example
 

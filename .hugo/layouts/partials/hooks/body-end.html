@@ -56,6 +56,21 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  // Add links to GitHub issues for documentation feedback and feature requests
+  const docIssueLink = document.querySelector('.td-page-meta__issue');
+    if (docIssueLink) {
+      const url = new URL(docIssueLink.href);
+      url.searchParams.set('template', 'feature_request.yml');
+      docIssueLink.href = url.toString();
+    }
+
+    const projIssueLink = document.querySelector('.td-page-meta__project-issue');
+    if (projIssueLink) {
+      const url = new URL(projIssueLink.href);
+      url.searchParams.set('template', 'bug_report.yml');
+      projIssueLink.href = url.toString();
+    }
+
   const container = document.getElementById('nav-data-container');
   const currentPath = window.location.pathname;
   const header = document.querySelector('header');

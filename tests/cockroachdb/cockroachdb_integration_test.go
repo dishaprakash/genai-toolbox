@@ -157,11 +157,11 @@ func TestCockroachDB(t *testing.T) {
 
 	// Run required integration test suites (per CONTRIBUTING.md)
 	t.Run("ToolGetTest", func(t *testing.T) {
-		tests.RunToolGetTest(t)
+		tests.RunMCPToolGetTest(t)
 	})
 
 	t.Run("ToolInvokeTest", func(t *testing.T) {
-		tests.RunToolInvokeTest(t, select1Want)
+		tests.RunMCPToolInvokeTest(t, select1Want)
 	})
 
 	t.Run("MCPToolCallMethod", func(t *testing.T) {
@@ -169,11 +169,11 @@ func TestCockroachDB(t *testing.T) {
 	})
 
 	t.Run("ExecuteSqlToolInvokeTest", func(t *testing.T) {
-		tests.RunExecuteSqlToolInvokeTest(t, createTableStatement, select1Want)
+		tests.RunMCPExecuteSqlToolInvokeTest(t, createTableStatement, select1Want)
 	})
 
 	t.Run("ToolInvokeWithTemplateParameters", func(t *testing.T) {
-		tests.RunToolInvokeWithTemplateParameters(t, tableNameTemplateParam)
+		tests.RunMCPToolInvokeWithTemplateParameters(t, tableNameTemplateParam)
 	})
 
 	t.Logf("✅✅✅ All CockroachDB integration tests passed!")
